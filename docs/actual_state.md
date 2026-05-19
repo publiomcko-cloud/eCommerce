@@ -114,7 +114,8 @@ Repository state:
 
 - the DataPulse BI application code has been copied into this repository
 - the DataPulse Commerce documentation package is present in `docs/`
-- the repository directory is not yet initialized as a Git repository, so the planned Git checkpoint is still pending
+- the repository directory is initialized as a Git repository
+- a Stage 0 checkpoint commit exists before commerce implementation proceeds
 
 Validated baseline checks:
 
@@ -135,9 +136,25 @@ Current local baseline behavior after smoke validation:
 - `/metrics/summary` returns non-empty demo values
 - `/ingestion/runs/latest` returns a successful `transform_orders` run
 
-Known Stage 0 note:
+## 4.5 Stage 1 identity foundation snapshot
 
-- a Git checkpoint has not been created yet because this working directory does not currently have a `.git` repository
+The first commerce stage is now implemented on top of the BI baseline.
+
+Implemented Stage 1 capabilities:
+
+- `commerce_users`, `commerce_customers`, and `commerce_customer_addresses` tables
+- password hashing utility
+- stateless bearer token strategy
+- `/auth/register`
+- `/auth/login`
+- `/auth/me`
+- `/auth/logout`
+- admin-only route guard utility with a protected auth check route
+- frontend login page
+- frontend registration page
+- frontend account shell page
+- auth-aware top navigation
+- backend auth test coverage
 
 ## 5. What Changes in the New Product
 
@@ -343,12 +360,10 @@ The implementation must preserve:
 - existing Docker validation approach
 - existing documentation discipline
 
-## 9. Known Gaps Before Commerce Implementation
+## 9. Known Gaps After Stage 1
 
-The current foundation does not yet include:
+The current foundation still does not yet include:
 
-- authentication
-- customer accounts
 - product administration
 - real catalog model
 - cart persistence

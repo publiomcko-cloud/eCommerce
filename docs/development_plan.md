@@ -63,7 +63,7 @@ Tasks:
 - [x] Run smoke checks
 - [x] Confirm existing dashboard works
 - [x] Confirm manual order page still works
-- [ ] Create Git checkpoint before commerce changes
+- [x] Create Git checkpoint before commerce changes
 - [x] Document baseline version in `actual_state.md`
 
 Agent command:
@@ -89,21 +89,21 @@ Deliverables:
 
 Tasks:
 
-- [ ] Add `commerce_users`
-- [ ] Add `commerce_customers`
-- [ ] Add `commerce_customer_addresses`
-- [ ] Add password hashing utility
-- [ ] Add token/session strategy
-- [ ] Implement `/auth/register`
-- [ ] Implement `/auth/login`
-- [ ] Implement `/auth/me`
-- [ ] Implement logout behavior
-- [ ] Add role-based guard for admin endpoints
-- [ ] Add frontend auth state handling
-- [ ] Add login page
-- [ ] Add registration page
-- [ ] Add account shell page
-- [ ] Add tests for auth flow
+- [x] Add `commerce_users`
+- [x] Add `commerce_customers`
+- [x] Add `commerce_customer_addresses`
+- [x] Add password hashing utility
+- [x] Add token/session strategy
+- [x] Implement `/auth/register`
+- [x] Implement `/auth/login`
+- [x] Implement `/auth/me`
+- [x] Implement logout behavior
+- [x] Add role-based guard for admin endpoints
+- [x] Add frontend auth state handling
+- [x] Add login page
+- [x] Add registration page
+- [x] Add account shell page
+- [x] Add tests for auth flow
 
 Agent command:
 

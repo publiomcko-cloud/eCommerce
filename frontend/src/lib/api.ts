@@ -107,6 +107,59 @@ export type CreateOrderResponse = {
   created_order: OrderListItem | null;
 };
 
+export type CustomerAddressResponse = {
+  id: string;
+  type: string;
+  recipient_name: string;
+  phone: string | null;
+  line1: string;
+  line2: string | null;
+  city: string;
+  region: string;
+  postal_code: string;
+  country: string;
+  is_default: boolean;
+};
+
+export type CustomerProfileResponse = {
+  id: string;
+  first_name: string | null;
+  last_name: string | null;
+  phone: string | null;
+  marketing_opt_in: boolean;
+  addresses: CustomerAddressResponse[];
+};
+
+export type AuthUserResponse = {
+  id: string;
+  email: string;
+  role: string;
+  is_active: boolean;
+  created_at: string;
+  last_login_at: string | null;
+  customer: CustomerProfileResponse | null;
+};
+
+export type AuthTokenResponse = {
+  access_token: string;
+  token_type: string;
+  user: AuthUserResponse;
+};
+
+export type RegisterInput = {
+  email: string;
+  password: string;
+  first_name?: string;
+  last_name?: string;
+  phone?: string;
+  marketing_opt_in?: boolean;
+};
+
+export type LoginInput = {
+  email: string;
+  password: string;
+};
+
 type OrdersParams = DashboardFilters & {
   limit?: number;
   offset?: number;
@@ -179,6 +232,43 @@ async function postJson<T>(path: string, body: object): Promise<T> {
   return (await response.json()) as T;
 }
 
+async function fetchJsonWithToken<T>(path: string, token: string): Promise<T> {
+  const response = await fetch(`${API_URL}${path}`, {
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    const detail = await response.text();
+    throw new Error(detail || `API request failed with status ${response.status}`);
+  }
+
+  return (await response.json()) as T;
+}
+
+async function postJsonWithToken<T>(path: string, token: string): Promise<T> {
+  const response = await fetch(`${API_URL}${path}`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    const detail = await response.text();
+    throw new Error(detail || `API request failed with status ${response.status}`);
+  }
+
+  if (response.status === 204) {
+    return undefined as T;
+  }
+
+  return (await response.json()) as T;
+}
+
 export function getApiDocsUrl() {
   return `${API_URL}/docs`;
 }
@@ -220,4 +310,20 @@ export async function fetchLatestIngestionRun() {
 
 export async function createOrder(payload: CreateOrderInput) {
   return postJson<CreateOrderResponse>("/orders", payload);
+}
+
+export async function register(payload: RegisterInput) {
+  return postJson<AuthTokenResponse>("/auth/register", payload);
+}
+
+export async function login(payload: LoginInput) {
+  return postJson<AuthTokenResponse>("/auth/login", payload);
+}
+
+export async function fetchCurrentUser(token: string) {
+  return fetchJsonWithToken<AuthUserResponse>("/auth/me", token);
+}
+
+export async function logout(token: string) {
+  return postJsonWithToken<void>("/auth/logout", token);
 }

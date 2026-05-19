@@ -1,5 +1,8 @@
 from app.db.base_class import Base
 from app.models.data_quality_issue import DataQualityIssue
+from app.models.commerce_customer import CommerceCustomer
+from app.models.commerce_customer_address import CommerceCustomerAddress
+from app.models.commerce_user import CommerceUser
 from app.models.dim_channel import DimChannel
 from app.models.dim_customer import DimCustomer
 from app.models.dim_product import DimProduct
@@ -11,6 +14,9 @@ from app.models.staging_order import StagingOrder
 
 __all__ = [
     "Base",
+    "CommerceCustomer",
+    "CommerceCustomerAddress",
+    "CommerceUser",
     "DataQualityIssue",
     "DimChannel",
     "DimCustomer",

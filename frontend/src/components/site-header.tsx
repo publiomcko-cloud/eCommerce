@@ -3,13 +3,17 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const NAV_ITEMS = [
-  { href: "/", label: "Dashboard" },
-  { href: "/orders/new", label: "Add Test Order" },
-];
+import { useAuth } from "@/app/providers";
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const { isAuthenticated, isLoading, logout, user } = useAuth();
+  const navItems = [
+    { href: "/", label: "Dashboard" },
+    { href: "/orders/new", label: "Add Test Order" },
+    ...(isAuthenticated ? [{ href: "/account", label: "Account" }] : []),
+    ...(!isAuthenticated ? [{ href: "/login", label: "Login" }, { href: "/register", label: "Register" }] : []),
+  ];
 
   return (
     <header className="sticky top-0 z-30 px-4 pt-4 sm:px-6 lg:px-8">
@@ -19,12 +23,12 @@ export function SiteHeader() {
             DataPulse BI
           </Link>
           <p className="mt-1 text-sm" style={{ color: "var(--muted)" }}>
-            Analytics dashboard and manual order sandbox for pipeline testing.
+            Analytics dashboard, manual order sandbox, and the first commerce identity foundation.
           </p>
         </div>
 
         <nav className="flex flex-wrap gap-2">
-          {NAV_ITEMS.map((item) => {
+          {navItems.map((item) => {
             const isActive = pathname === item.href;
 
             return (
@@ -42,6 +46,24 @@ export function SiteHeader() {
               </Link>
             );
           })}
+          {isAuthenticated ? (
+            <button
+              type="button"
+              onClick={() => void logout()}
+              className="rounded-full border border-[var(--line)] px-4 py-2 text-sm font-semibold transition-colors hover:bg-white/50"
+            >
+              Logout
+            </button>
+          ) : null}
+          {isLoading ? (
+            <span className="self-center px-2 text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>
+              Loading auth
+            </span>
+          ) : user ? (
+            <span className="self-center px-2 text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>
+              {user.role}
+            </span>
+          ) : null}
         </nav>
       </div>
     </header>

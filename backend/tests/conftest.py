@@ -19,6 +19,9 @@ SAMPLE_CSV_PATH = ROOT_DIR / "data" / "sample_orders.csv"
 
 TRUNCATE_ALL_TABLES_SQL = """
 TRUNCATE TABLE
+    commerce_customer_addresses,
+    commerce_customers,
+    commerce_users,
     data_quality_issues,
     fact_orders,
     stg_orders,

@@ -21,6 +21,8 @@ class Settings(BaseSettings):
     postgres_password: str = "datapulse"
     postgres_db: str = "datapulse"
     database_url: str = "postgresql+psycopg://datapulse:datapulse@localhost:5432/datapulse"
+    secret_key: str = "local-dev-change-me"
+    access_token_expire_minutes: int = 30
 
     model_config = SettingsConfigDict(
         env_file=str(ROOT_DIR / ".env"),

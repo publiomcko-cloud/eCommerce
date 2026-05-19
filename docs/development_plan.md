@@ -1,0 +1,471 @@
+# DataPulse Commerce Development Plan
+
+## 1. Project Summary
+
+DataPulse Commerce is the next stage of the completed DataPulse BI project.
+
+The objective is to build a complete e-commerce platform on top of the existing analytics foundation.
+
+The completed BI foundation already demonstrates:
+
+- data ingestion
+- validation
+- transformation
+- PostgreSQL modeling
+- FastAPI API
+- Next.js dashboard
+- revenue and order metrics
+- local reproducibility
+- tests
+- deployment preparation
+
+The new commerce project must add:
+
+- storefront
+- product catalog
+- customer accounts
+- cart
+- checkout
+- payment abstraction
+- order lifecycle
+- inventory control
+- admin back office
+- commerce analytics integration
+
+## 2. Development Strategy
+
+The project should be implemented incrementally without breaking the existing BI dashboard.
+
+Guiding rule:
+
+> Build the transactional commerce system first, then project its events and orders into the analytics layer.
+
+The existing dashboard should remain functional during implementation. New commerce metrics may gradually replace synthetic or manual order metrics.
+
+## 3. Stages
+
+### Stage 0 — Preserve and Freeze BI Baseline
+
+Objective: ensure the existing DataPulse BI foundation remains stable before commerce work starts.
+
+Deliverables:
+
+- baseline tests passing
+- current dashboard still loading
+- current migrations working
+- current Docker validation documented
+- new branch or checkpoint created
+
+Tasks:
+
+- [x] Run backend tests
+- [x] Run frontend lint and build
+- [x] Run smoke checks
+- [x] Confirm existing dashboard works
+- [x] Confirm manual order page still works
+- [ ] Create Git checkpoint before commerce changes
+- [x] Document baseline version in `actual_state.md`
+
+Agent command:
+
+```text
+Validate the existing DataPulse BI baseline before adding commerce features. Do not refactor unrelated code. Confirm tests, dashboard, API, migrations, and smoke checks still work.
+```
+
+### Stage 1 — Commerce Foundation and Identity
+
+Objective: add the security and user foundation required for e-commerce.
+
+Deliverables:
+
+- user model
+- customer profile model
+- admin role
+- authentication endpoints
+- password hashing
+- protected route utilities
+- frontend login/register screens
+- auth-aware navigation
+
+Tasks:
+
+- [ ] Add `commerce_users`
+- [ ] Add `commerce_customers`
+- [ ] Add `commerce_customer_addresses`
+- [ ] Add password hashing utility
+- [ ] Add token/session strategy
+- [ ] Implement `/auth/register`
+- [ ] Implement `/auth/login`
+- [ ] Implement `/auth/me`
+- [ ] Implement logout behavior
+- [ ] Add role-based guard for admin endpoints
+- [ ] Add frontend auth state handling
+- [ ] Add login page
+- [ ] Add registration page
+- [ ] Add account shell page
+- [ ] Add tests for auth flow
+
+Agent command:
+
+```text
+Implement the commerce identity foundation using the existing FastAPI, SQLAlchemy, Alembic, Next.js, and TanStack Query structure. Add user, customer, address, authentication, and role-based authorization without breaking existing DataPulse BI endpoints.
+```
+
+### Stage 2 — Catalog and Inventory Foundation
+
+Objective: create a real product catalog with variants and stock tracking.
+
+Deliverables:
+
+- category model
+- product model
+- product image model
+- product variant model
+- inventory item model
+- inventory movement model
+- public catalog API
+- admin catalog API
+- seed commerce catalog
+
+Tasks:
+
+- [ ] Add category tables
+- [ ] Add product tables
+- [ ] Add product variant tables
+- [ ] Add product image tables
+- [ ] Add inventory tables
+- [ ] Add inventory movement table
+- [ ] Implement product listing endpoint
+- [ ] Implement product detail endpoint by slug
+- [ ] Implement category endpoint
+- [ ] Implement admin product create/update endpoints
+- [ ] Implement admin inventory adjustment endpoint
+- [ ] Add demo product seed script
+- [ ] Add product card UI
+- [ ] Add product listing page
+- [ ] Add product detail page
+- [ ] Add admin product list page
+- [ ] Add admin product editor page
+- [ ] Add tests for catalog and inventory rules
+
+Agent command:
+
+```text
+Implement catalog and inventory foundations for DataPulse Commerce. Products must support categories, slugs, variants, images, active/draft status, prices, SKUs, stock on hand, reserved stock, and inventory movement history.
+```
+
+### Stage 3 — Cart
+
+Objective: allow guests and customers to build carts safely.
+
+Deliverables:
+
+- cart model
+- cart item model
+- anonymous cart support
+- customer cart support
+- cart API
+- cart UI
+- server-side total calculation
+- stock validation before checkout
+
+Tasks:
+
+- [ ] Add `commerce_carts`
+- [ ] Add `commerce_cart_items`
+- [ ] Implement cart creation/retrieval
+- [ ] Implement add item
+- [ ] Implement update quantity
+- [ ] Implement remove item
+- [ ] Implement cart totals service
+- [ ] Validate variant status and stock availability
+- [ ] Merge duplicate cart items
+- [ ] Support customer cart association after login
+- [ ] Add cart page
+- [ ] Add mini cart or cart summary
+- [ ] Add tests for cart operations
+
+Agent command:
+
+```text
+Implement cart persistence and cart UI. Cart totals must be calculated server-side, duplicate variant lines should merge, inactive variants cannot be added, and stock availability must be checked before checkout.
+```
+
+### Stage 4 — Checkout and Order Creation
+
+Objective: convert a valid cart into a transactional order.
+
+Deliverables:
+
+- checkout session model
+- order model
+- order item model
+- status history model
+- checkout API
+- order placement service
+- inventory reservation
+- idempotency handling
+- checkout UI
+- order confirmation page
+
+Tasks:
+
+- [ ] Add checkout session table
+- [ ] Add order table
+- [ ] Add order item table
+- [ ] Add order status history table
+- [ ] Add idempotency key support
+- [ ] Implement checkout session creation
+- [ ] Implement shipping and billing address snapshots
+- [ ] Implement totals snapshot
+- [ ] Implement order number generation
+- [ ] Implement inventory reservation
+- [ ] Implement order creation from cart
+- [ ] Mark cart as converted
+- [ ] Add checkout page
+- [ ] Add order confirmation page
+- [ ] Add tests for idempotent order placement
+- [ ] Add tests for inventory reservation
+
+Agent command:
+
+```text
+Implement checkout and order creation as a transactional workflow. Placing an order must be idempotent, must reserve inventory, must snapshot addresses and prices, must create order items, and must not duplicate orders on retry.
+```
+
+### Stage 5 — Payment Abstraction and Mock Provider
+
+Objective: represent payment flow safely without requiring real payment credentials.
+
+Deliverables:
+
+- payment model
+- payment service
+- provider adapter interface
+- mock payment provider
+- webhook endpoint structure
+- payment status updates
+- checkout integration
+
+Tasks:
+
+- [ ] Add payment table
+- [ ] Add payment adapter interface
+- [ ] Add mock provider
+- [ ] Implement payment intent/session creation
+- [ ] Implement payment success simulation
+- [ ] Implement payment failure simulation
+- [ ] Implement webhook endpoint skeleton
+- [ ] Update order status on payment success
+- [ ] Release reservation on payment failure where appropriate
+- [ ] Add payment state to order confirmation
+- [ ] Add tests for payment success
+- [ ] Add tests for payment failure
+- [ ] Add tests for idempotent webhook handling
+
+Agent command:
+
+```text
+Implement payment abstraction with a safe mock provider. Do not add real payment credentials. The payment service must update payment and order statuses through a clear adapter boundary and support idempotent webhook-style updates.
+```
+
+### Stage 6 — Customer Account and Order History
+
+Objective: allow customers to manage their account and view past orders.
+
+Deliverables:
+
+- account overview page
+- address management
+- customer order list
+- customer order detail
+- ownership checks
+
+Tasks:
+
+- [ ] Implement customer profile endpoint
+- [ ] Implement address CRUD endpoints
+- [ ] Implement customer order list endpoint
+- [ ] Implement customer order detail endpoint
+- [ ] Protect customer data by ownership
+- [ ] Add account overview UI
+- [ ] Add address UI
+- [ ] Add order history UI
+- [ ] Add order detail UI
+- [ ] Add tests for customer ownership restrictions
+
+Agent command:
+
+```text
+Implement customer account screens and APIs. Customers must only see their own profile, addresses, and orders. Existing admin and dashboard functionality must continue to work.
+```
+
+### Stage 7 — Admin Back Office
+
+Objective: provide operational management screens.
+
+Deliverables:
+
+- admin dashboard
+- product management
+- inventory management
+- order management
+- order status update
+- payment/refund status visibility
+- shipment status representation
+
+Tasks:
+
+- [ ] Add admin overview API
+- [ ] Add admin order list API
+- [ ] Add admin order detail API
+- [ ] Add admin status update API
+- [ ] Add inventory adjustment API
+- [ ] Add shipment table and API if not already added
+- [ ] Add refund table and API if implementing refunds
+- [ ] Add admin dashboard page
+- [ ] Add admin order list page
+- [ ] Add admin order detail page
+- [ ] Add admin inventory page
+- [ ] Add tests for admin authorization
+- [ ] Add tests for order status transitions
+
+Agent command:
+
+```text
+Implement the admin back office for product, inventory, and order operations. Admin actions must be protected by role checks, important changes must be auditable, and order status transitions must follow allowed business rules.
+```
+
+### Stage 8 — Commerce Analytics Integration
+
+Objective: connect live commerce records to the existing BI layer.
+
+Deliverables:
+
+- commerce event log
+- projection service
+- updated metrics endpoints
+- updated dashboard widgets
+- operational commerce metrics
+
+Tasks:
+
+- [ ] Add `commerce_events`
+- [ ] Emit events for cart, checkout, order, payment, shipment, and refund actions
+- [ ] Create projection script or service from commerce orders into analytics tables
+- [ ] Map products to dimensions
+- [ ] Map customers safely to dimensions
+- [ ] Map channels and regions
+- [ ] Add conversion funnel metric
+- [ ] Add cart abandonment metric
+- [ ] Add payment health metric
+- [ ] Add inventory risk metric
+- [ ] Update dashboard UI
+- [ ] Preserve existing summary metrics
+- [ ] Add tests for analytics projection correctness
+
+Agent command:
+
+```text
+Integrate commerce data into the existing DataPulse BI analytics layer. Use commerce orders and events as source-of-truth records, project them into analytics tables, and update dashboard metrics without breaking existing metric endpoints.
+```
+
+### Stage 9 — Testing, Hardening, and Validation
+
+Objective: make the product credible and safe to modify.
+
+Deliverables:
+
+- backend test suite covering commerce flows
+- frontend lint/build passing
+- smoke checks
+- seed validation
+- checkout retry validation
+- security validation
+
+Tasks:
+
+- [ ] Add auth tests
+- [ ] Add catalog tests
+- [ ] Add cart tests
+- [ ] Add checkout tests
+- [ ] Add inventory tests
+- [ ] Add payment tests
+- [ ] Add order lifecycle tests
+- [ ] Add admin authorization tests
+- [ ] Add analytics projection tests
+- [ ] Add smoke script for commerce flow
+- [ ] Run frontend lint
+- [ ] Run frontend build
+- [ ] Update testing documentation
+
+Agent command:
+
+```text
+Expand the test suite to protect the full commerce flow. The project cannot be considered complete until auth, catalog, cart, checkout, payments, inventory, orders, admin authorization, analytics projection, smoke checks, frontend lint, and frontend build all pass.
+```
+
+### Stage 10 — Deployment and Portfolio Polish
+
+Objective: publish a strong portfolio demo.
+
+Deliverables:
+
+- deployed storefront
+- deployed backend
+- hosted PostgreSQL
+- demo seed data
+- safe demo checkout
+- README case study
+- screenshots
+- demo instructions
+
+Tasks:
+
+- [ ] Update production environment variables
+- [ ] Validate production-like Docker stack
+- [ ] Deploy database
+- [ ] Deploy backend
+- [ ] Run migrations
+- [ ] Seed demo commerce data
+- [ ] Deploy frontend
+- [ ] Validate public checkout
+- [ ] Validate admin demo
+- [ ] Validate dashboard
+- [ ] Add screenshots
+- [ ] Add live links
+- [ ] Add known limitations
+- [ ] Add roadmap
+
+Agent command:
+
+```text
+Prepare DataPulse Commerce for public portfolio review. Deploy the storefront, backend, database, demo seed data, safe checkout, admin demo, and analytics dashboard. Update README with links, screenshots, demo instructions, limitations, and roadmap.
+```
+
+## 4. Completion Criteria
+
+The commerce project is complete when:
+
+- BI baseline remains functional
+- products can be browsed publicly
+- products can be added to cart
+- checkout creates orders idempotently
+- payment is represented through a mock or sandbox provider
+- inventory is reserved and updated correctly
+- customers can view order history
+- admins can manage products, inventory, and orders
+- analytics dashboard reflects commerce data
+- tests pass
+- frontend lint/build pass
+- deployment documentation is updated
+- public demo is safe and usable
+
+## 5. Recommendations
+
+- Do not add real payment processing before mock checkout works.
+- Do not allow dashboard analytics to create or mutate transactional order records.
+- Keep checkout logic in backend services, not frontend components.
+- Use database transactions for checkout, inventory reservation, and order creation.
+- Add tests before expanding business complexity.
+- Keep all demo data synthetic.

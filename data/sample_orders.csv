@@ -1,0 +1,13 @@
+source_record_id,order_date,customer_id,product_id,product_name,category,region,channel,quantity,unit_price,total_amount
+order-001,2026-01-05,cust-001,prod-001,Wireless Mouse,electronics,southeast,online,2,120.00,240.00
+order-002,2026-01-08,cust-002,prod-002,Desk Lamp,home,south,marketplace,1,85.50,85.50
+order-003,2026-01-15,cust-003,prod-003,Blender,home,northeast,physical_store,1,210.00,210.00
+order-004,2026-01-22,cust-004,prod-004,Notebook 14,electronics,southeast,online,1,3200.00,3200.00
+order-005,2026-02-03,cust-005,prod-005,Office Chair,home,south,partner,1,760.00,760.00
+order-006,2026-02-10,cust-006,prod-006,Protein Bars,food,midwest,marketplace,6,18.50,111.00
+order-007,2026-02-18,cust-007,prod-007,Consulting Session,services,north,phone_sales,3,450.00,1350.00
+order-008,2026-02-27,cust-008,prod-008,Smart Speaker,electronics,southeast,online,2,340.00,680.00
+order-009,2026-03-05,cust-009,prod-009,Air Fryer,home,northeast,physical_store,1,490.00,490.00
+order-010,2026-03-11,cust-010,prod-010,Coffee Maker,home,southeast,online,1,310.00,310.00
+order-011,2026-03-19,cust-011,prod-011,Trail Mix,food,midwest,marketplace,8,12.75,102.00
+order-012,2026-03-25,cust-012,prod-012,Marketing Audit,services,south,partner,1,980.00,980.00

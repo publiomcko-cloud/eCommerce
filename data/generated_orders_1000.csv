@@ -1,0 +1,1001 @@
+source_record_id,order_date,customer_id,product_id,product_name,category,region,channel,quantity,unit_price,total_amount
+generated-order-00001,2025-04-17,cust-rand-209,prod-101,Wireless Mouse,electronics,north,online,7,137.71,963.97
+generated-order-00002,2025-01-03,cust-rand-037,prod-102,Notebook 14,electronics,southeast,marketplace,2,2937.73,
+generated-order-00003,2025-08-27,cust-rand-235,prod-202,Desk Lamp,home,northeast,physical_store,3,100.35,
+generated-order-00004,2026-03-14,cust-rand-070,prod-402,Standing Desk,furniture,north,marketplace,5,2060.14,10300.70
+generated-order-00005,2025-09-30,cust-rand-060,prod-502,Travel Mug,accessories,south,physical_store,7,67.43,
+generated-order-00006,2025-12-20,cust-rand-126,prod-204,Blender,home,north,marketplace,1,339.16,339.16
+generated-order-00007,2025-11-18,cust-rand-109,prod-302,Adjustable Dumbbells,fitness,midwest,marketplace,2,850.68,
+generated-order-00008,2025-12-18,cust-rand-020,prod-403,Bookshelf,furniture,midwest,partner,4,470.96,1883.84
+generated-order-00009,2025-03-04,cust-rand-023,prod-302,Adjustable Dumbbells,fitness,north,physical_store,6,578.95,3473.70
+generated-order-00010,2026-02-25,cust-rand-178,prod-201,Coffee Maker,home,north,online,4,337.75,1351.00
+generated-order-00011,2025-07-13,cust-rand-324,prod-102,Notebook 14,electronics,northeast,online,5,4057.75,20288.75
+generated-order-00012,2025-04-15,cust-rand-139,prod-102,Notebook 14,electronics,midwest,physical_store,3,2341.14,7023.42
+generated-order-00013,2025-03-29,cust-rand-272,prod-202,Desk Lamp,home,midwest,partner,6,97.68,
+generated-order-00014,2025-05-20,cust-rand-196,prod-301,Yoga Mat,fitness,north,phone_sales,3,52.37,157.11
+generated-order-00015,2026-01-19,cust-rand-149,prod-105,Smart Speaker,electronics,midwest,marketplace,8,306.90,2455.20
+generated-order-00016,2025-01-21,cust-rand-184,prod-102,Notebook 14,electronics,northeast,physical_store,3,3567.37,10702.11
+generated-order-00017,2025-04-28,cust-rand-117,prod-301,Yoga Mat,fitness,northeast,marketplace,2,61.21,122.42
+generated-order-00018,2025-03-29,cust-rand-270,prod-403,Bookshelf,furniture,midwest,physical_store,2,566.76,1133.52
+generated-order-00019,2025-02-14,cust-rand-228,prod-204,Blender,home,midwest,online,5,317.42,
+generated-order-00020,2025-05-15,cust-rand-075,prod-103,Portable Projector,electronics,north,physical_store,7,737.28,5160.96
+generated-order-00021,2025-01-16,cust-rand-074,prod-503,Noise Cancelling Headphones,accessories,northeast,marketplace,7,1004.14,7028.98
+generated-order-00022,2026-02-06,cust-rand-313,prod-503,Noise Cancelling Headphones,accessories,midwest,online,4,1216.66,4866.64
+generated-order-00023,2025-11-01,cust-rand-009,prod-503,Noise Cancelling Headphones,accessories,southeast,marketplace,3,679.29,2037.87
+generated-order-00024,2026-02-07,cust-rand-133,prod-301,Yoga Mat,fitness,northeast,marketplace,7,99.21,694.47
+generated-order-00025,2026-01-23,cust-rand-280,prod-105,Smart Speaker,electronics,south,online,7,307.43,
+generated-order-00026,2026-04-21,cust-rand-291,prod-403,Bookshelf,furniture,north,marketplace,5,666.26,3331.30
+generated-order-00027,2025-03-26,cust-rand-245,prod-104,Mechanical Keyboard,electronics,southeast,online,4,407.57,1630.28
+generated-order-00028,2025-07-05,cust-rand-318,prod-402,Standing Desk,furniture,midwest,partner,6,733.21,4399.26
+generated-order-00029,2025-11-20,cust-rand-055,prod-203,Air Fryer,home,north,physical_store,5,588.36,2941.80
+generated-order-00030,2025-05-04,cust-rand-175,prod-104,Mechanical Keyboard,electronics,south,physical_store,8,196.60,1572.80
+generated-order-00031,2025-08-23,cust-rand-113,prod-204,Blender,home,northeast,partner,2,275.30,
+generated-order-00032,2025-11-16,cust-rand-023,prod-103,Portable Projector,electronics,northeast,physical_store,1,457.09,457.09
+generated-order-00033,2026-03-09,cust-rand-242,prod-301,Yoga Mat,fitness,midwest,online,2,144.58,289.16
+generated-order-00034,2025-12-07,cust-rand-271,prod-401,Office Chair,furniture,north,online,8,584.46,
+generated-order-00035,2026-02-14,cust-rand-285,prod-301,Yoga Mat,fitness,southeast,phone_sales,3,113.83,341.49
+generated-order-00036,2025-06-19,cust-rand-177,prod-303,Protein Blender Bottle,fitness,south,online,7,22.51,157.57
+generated-order-00037,2025-09-01,cust-rand-240,prod-103,Portable Projector,electronics,midwest,partner,2,779.15,1558.30
+generated-order-00038,2025-05-25,cust-rand-279,prod-504,Webcam,accessories,southeast,online,1,246.25,246.25
+generated-order-00039,2025-10-20,cust-rand-322,prod-101,Wireless Mouse,electronics,midwest,physical_store,4,140.97,563.88
+generated-order-00040,2025-08-20,cust-rand-029,prod-301,Yoga Mat,fitness,southeast,marketplace,8,108.24,865.92
+generated-order-00041,2026-03-07,cust-rand-276,prod-502,Travel Mug,accessories,southeast,marketplace,3,18.16,54.48
+generated-order-00042,2025-06-10,cust-rand-032,prod-403,Bookshelf,furniture,south,partner,1,248.89,248.89
+generated-order-00043,2026-02-01,cust-rand-162,prod-504,Webcam,accessories,northeast,partner,8,489.22,3913.76
+generated-order-00044,2025-07-09,cust-rand-153,prod-203,Air Fryer,home,southeast,marketplace,2,472.79,945.58
+generated-order-00045,2025-06-16,cust-rand-298,prod-303,Protein Blender Bottle,fitness,southeast,online,4,22.49,89.96
+generated-order-00046,2025-09-15,cust-rand-237,prod-101,Wireless Mouse,electronics,midwest,marketplace,8,153.45,1227.60
+generated-order-00047,2025-01-16,cust-rand-156,prod-403,Bookshelf,furniture,southeast,physical_store,7,418.04,2926.28
+generated-order-00048,2025-09-27,cust-rand-240,prod-103,Portable Projector,electronics,north,phone_sales,3,505.02,1515.06
+generated-order-00049,2025-05-18,cust-rand-084,prod-103,Portable Projector,electronics,southeast,marketplace,7,360.76,2525.32
+generated-order-00050,2025-07-22,cust-rand-062,prod-203,Air Fryer,home,northeast,online,1,319.09,
+generated-order-00051,2026-01-19,cust-rand-072,prod-503,Noise Cancelling Headphones,accessories,midwest,partner,4,888.10,3552.40
+generated-order-00052,2025-05-18,cust-rand-043,prod-205,Vacuum Cleaner,home,northeast,physical_store,6,734.34,4406.04
+generated-order-00053,2025-03-14,cust-rand-073,prod-102,Notebook 14,electronics,north,partner,8,3870.21,30961.68
+generated-order-00054,2026-04-01,cust-rand-035,prod-401,Office Chair,furniture,south,physical_store,1,695.98,
+generated-order-00055,2025-11-21,cust-rand-069,prod-202,Desk Lamp,home,north,marketplace,3,61.02,183.06
+generated-order-00056,2025-09-04,cust-rand-006,prod-103,Portable Projector,electronics,midwest,phone_sales,8,862.46,6899.68
+generated-order-00057,2025-08-03,cust-rand-064,prod-105,Smart Speaker,electronics,midwest,online,4,406.09,
+generated-order-00058,2025-04-26,cust-rand-115,prod-501,Backpack,accessories,northeast,partner,5,95.65,478.25
+generated-order-00059,2025-11-29,cust-rand-277,prod-402,Standing Desk,furniture,midwest,marketplace,2,780.30,1560.60
+generated-order-00060,2025-06-20,cust-rand-053,prod-103,Portable Projector,electronics,northeast,online,2,758.82,1517.64
+generated-order-00061,2025-06-21,cust-rand-220,prod-403,Bookshelf,furniture,northeast,phone_sales,2,661.40,1322.80
+generated-order-00062,2025-06-30,cust-rand-018,prod-201,Coffee Maker,home,northeast,physical_store,8,282.06,2256.48
+generated-order-00063,2025-11-14,cust-rand-172,prod-301,Yoga Mat,fitness,midwest,marketplace,8,67.36,538.88
+generated-order-00064,2025-02-27,cust-rand-290,prod-102,Notebook 14,electronics,midwest,partner,6,2477.49,14864.94
+generated-order-00065,2025-03-21,cust-rand-073,prod-302,Adjustable Dumbbells,fitness,north,physical_store,6,613.29,
+generated-order-00066,2025-03-31,cust-rand-243,prod-403,Bookshelf,furniture,northeast,online,7,331.17,2318.19
+generated-order-00067,2025-05-12,cust-rand-161,prod-105,Smart Speaker,electronics,southeast,marketplace,4,302.44,
+generated-order-00068,2025-02-16,cust-rand-264,prod-201,Coffee Maker,home,north,phone_sales,2,309.74,619.48
+generated-order-00069,2026-04-05,cust-rand-125,prod-105,Smart Speaker,electronics,north,online,5,222.96,1114.80
+generated-order-00070,2025-03-30,cust-rand-145,prod-102,Notebook 14,electronics,north,marketplace,2,3862.19,
+generated-order-00071,2025-12-29,cust-rand-239,prod-102,Notebook 14,electronics,northeast,online,6,3349.83,20098.98
+generated-order-00072,2025-06-24,cust-rand-139,prod-503,Noise Cancelling Headphones,accessories,southeast,online,4,1270.43,5081.72
+generated-order-00073,2026-02-03,cust-rand-103,prod-301,Yoga Mat,fitness,southeast,online,7,74.78,523.46
+generated-order-00074,2025-07-15,cust-rand-293,prod-302,Adjustable Dumbbells,fitness,north,physical_store,2,815.33,1630.66
+generated-order-00075,2025-03-05,cust-rand-038,prod-204,Blender,home,midwest,partner,6,336.94,2021.64
+generated-order-00076,2025-04-16,cust-rand-294,prod-403,Bookshelf,furniture,north,physical_store,6,432.65,2595.90
+generated-order-00077,2025-04-17,cust-rand-226,prod-302,Adjustable Dumbbells,fitness,midwest,partner,7,495.48,
+generated-order-00078,2025-12-07,cust-rand-318,prod-202,Desk Lamp,home,south,online,8,137.16,1097.28
+generated-order-00079,2025-05-13,cust-rand-196,prod-103,Portable Projector,electronics,north,physical_store,7,872.25,6105.75
+generated-order-00080,2025-07-11,cust-rand-222,prod-301,Yoga Mat,fitness,south,phone_sales,4,125.99,503.96
+generated-order-00081,2025-02-24,cust-rand-111,prod-205,Vacuum Cleaner,home,midwest,online,3,349.21,1047.63
+generated-order-00082,2026-01-01,cust-rand-054,prod-402,Standing Desk,furniture,northeast,partner,4,1826.27,7305.08
+generated-order-00083,2025-05-15,cust-rand-176,prod-303,Protein Blender Bottle,fitness,south,online,1,54.34,54.34
+generated-order-00084,2025-07-13,cust-rand-119,prod-504,Webcam,accessories,south,partner,5,138.24,691.20
+generated-order-00085,2025-03-21,cust-rand-177,prod-202,Desk Lamp,home,northeast,partner,5,99.97,
+generated-order-00086,2025-04-07,cust-rand-286,prod-201,Coffee Maker,home,midwest,phone_sales,2,278.18,
+generated-order-00087,2025-12-10,cust-rand-161,prod-205,Vacuum Cleaner,home,midwest,physical_store,4,802.29,3209.16
+generated-order-00088,2025-01-31,cust-rand-306,prod-401,Office Chair,furniture,south,marketplace,3,869.10,2607.30
+generated-order-00089,2025-12-06,cust-rand-083,prod-504,Webcam,accessories,midwest,marketplace,2,407.31,814.62
+generated-order-00090,2025-02-16,cust-rand-224,prod-501,Backpack,accessories,southeast,marketplace,3,132.47,397.41
+generated-order-00091,2025-08-23,cust-rand-291,prod-503,Noise Cancelling Headphones,accessories,midwest,physical_store,4,622.60,2490.40
+generated-order-00092,2025-09-13,cust-rand-116,prod-205,Vacuum Cleaner,home,northeast,marketplace,5,340.93,1704.65
+generated-order-00093,2025-10-15,cust-rand-347,prod-501,Backpack,accessories,south,phone_sales,8,167.06,1336.48
+generated-order-00094,2025-10-08,cust-rand-101,prod-204,Blender,home,midwest,online,8,160.74,1285.92
+generated-order-00095,2025-09-30,cust-rand-141,prod-403,Bookshelf,furniture,south,marketplace,5,335.56,1677.80
+generated-order-00096,2025-03-25,cust-rand-039,prod-504,Webcam,accessories,north,phone_sales,6,359.20,2155.20
+generated-order-00097,2025-07-26,cust-rand-067,prod-205,Vacuum Cleaner,home,southeast,online,7,497.30,3481.10
+generated-order-00098,2025-11-05,cust-rand-078,prod-103,Portable Projector,electronics,southeast,physical_store,5,724.93,3624.65
+generated-order-00099,2025-09-10,cust-rand-219,prod-301,Yoga Mat,fitness,south,phone_sales,8,52.00,416.00
+generated-order-00100,2025-05-17,cust-rand-319,prod-301,Yoga Mat,fitness,midwest,partner,4,140.60,562.40
+generated-order-00101,2025-07-02,cust-rand-211,prod-101,Wireless Mouse,electronics,southeast,phone_sales,4,97.94,391.76
+generated-order-00102,2025-01-04,cust-rand-078,prod-301,Yoga Mat,fitness,northeast,marketplace,8,87.69,701.52
+generated-order-00103,2025-05-26,cust-rand-047,prod-503,Noise Cancelling Headphones,accessories,southeast,phone_sales,6,608.83,3652.98
+generated-order-00104,2025-04-01,cust-rand-262,prod-302,Adjustable Dumbbells,fitness,south,partner,2,919.81,1839.62
+generated-order-00105,2025-01-30,cust-rand-053,prod-403,Bookshelf,furniture,southeast,partner,5,255.79,
+generated-order-00106,2025-03-10,cust-rand-057,prod-204,Blender,home,midwest,partner,1,300.55,
+generated-order-00107,2025-08-04,cust-rand-033,prod-501,Backpack,accessories,northeast,phone_sales,7,174.96,1224.72
+generated-order-00108,2025-12-19,cust-rand-187,prod-402,Standing Desk,furniture,southeast,marketplace,6,922.96,
+generated-order-00109,2025-06-02,cust-rand-325,prod-401,Office Chair,furniture,south,online,4,931.97,3727.88
+generated-order-00110,2026-01-25,cust-rand-092,prod-105,Smart Speaker,electronics,northeast,online,6,192.66,1155.96
+generated-order-00111,2025-07-15,cust-rand-056,prod-503,Noise Cancelling Headphones,accessories,south,marketplace,4,1252.18,
+generated-order-00112,2025-04-17,cust-rand-100,prod-103,Portable Projector,electronics,southeast,marketplace,5,433.34,2166.70
+generated-order-00113,2025-10-19,cust-rand-236,prod-101,Wireless Mouse,electronics,southeast,phone_sales,5,162.33,811.65
+generated-order-00114,2025-08-24,cust-rand-124,prod-201,Coffee Maker,home,midwest,online,5,252.90,1264.50
+generated-order-00115,2026-01-27,cust-rand-072,prod-401,Office Chair,furniture,northeast,phone_sales,3,690.72,2072.16
+generated-order-00116,2025-11-21,cust-rand-037,prod-504,Webcam,accessories,southeast,phone_sales,7,375.97,2631.79
+generated-order-00117,2026-01-27,cust-rand-287,prod-402,Standing Desk,furniture,northeast,marketplace,7,1374.41,9620.87
+generated-order-00118,2025-04-07,cust-rand-223,prod-403,Bookshelf,furniture,north,phone_sales,4,624.61,2498.44
+generated-order-00119,2026-02-12,cust-rand-063,prod-205,Vacuum Cleaner,home,southeast,physical_store,3,604.69,1814.07
+generated-order-00120,2026-04-14,cust-rand-323,prod-103,Portable Projector,electronics,south,marketplace,6,692.03,4152.18
+generated-order-00121,2025-07-25,cust-rand-225,prod-302,Adjustable Dumbbells,fitness,north,online,7,286.91,2008.37
+generated-order-00122,2026-03-10,cust-rand-329,prod-301,Yoga Mat,fitness,northeast,partner,8,96.12,768.96
+generated-order-00123,2025-12-30,cust-rand-288,prod-301,Yoga Mat,fitness,southeast,partner,2,53.89,107.78
+generated-order-00124,2025-05-26,cust-rand-257,prod-205,Vacuum Cleaner,home,northeast,partner,4,768.84,
+generated-order-00125,2025-03-01,cust-rand-291,prod-401,Office Chair,furniture,midwest,partner,2,1075.82,
+generated-order-00126,2025-01-07,cust-rand-342,prod-401,Office Chair,furniture,midwest,phone_sales,7,644.49,4511.43
+generated-order-00127,2025-02-16,cust-rand-157,prod-302,Adjustable Dumbbells,fitness,northeast,online,5,410.42,2052.10
+generated-order-00128,2025-11-07,cust-rand-234,prod-201,Coffee Maker,home,midwest,phone_sales,2,204.83,409.66
+generated-order-00129,2025-08-22,cust-rand-220,prod-104,Mechanical Keyboard,electronics,northeast,marketplace,8,302.34,
+generated-order-00130,2025-11-30,cust-rand-250,prod-403,Bookshelf,furniture,south,online,2,235.43,470.86
+generated-order-00131,2026-03-10,cust-rand-174,prod-201,Coffee Maker,home,south,phone_sales,3,359.40,1078.20
+generated-order-00132,2025-12-23,cust-rand-252,prod-301,Yoga Mat,fitness,north,marketplace,4,74.69,298.76
+generated-order-00133,2025-12-13,cust-rand-051,prod-402,Standing Desk,furniture,south,online,3,870.75,2612.25
+generated-order-00134,2025-05-20,cust-rand-177,prod-205,Vacuum Cleaner,home,midwest,partner,6,308.55,1851.30
+generated-order-00135,2025-12-16,cust-rand-142,prod-102,Notebook 14,electronics,north,marketplace,6,4078.68,24472.08
+generated-order-00136,2025-01-09,cust-rand-027,prod-402,Standing Desk,furniture,north,physical_store,5,1454.21,7271.05
+generated-order-00137,2025-12-31,cust-rand-040,prod-301,Yoga Mat,fitness,midwest,marketplace,5,136.72,683.60
+generated-order-00138,2025-11-17,cust-rand-241,prod-205,Vacuum Cleaner,home,southeast,online,7,656.41,4594.87
+generated-order-00139,2025-10-09,cust-rand-293,prod-302,Adjustable Dumbbells,fitness,northeast,partner,4,661.76,2647.04
+generated-order-00140,2025-04-29,cust-rand-164,prod-203,Air Fryer,home,northeast,partner,6,379.50,2277.00
+generated-order-00141,2025-04-04,cust-rand-059,prod-403,Bookshelf,furniture,northeast,marketplace,2,498.24,996.48
+generated-order-00142,2025-07-11,cust-rand-123,prod-104,Mechanical Keyboard,electronics,south,phone_sales,8,515.75,4126.00
+generated-order-00143,2026-04-07,cust-rand-262,prod-401,Office Chair,furniture,midwest,online,8,563.84,4510.72
+generated-order-00144,2025-05-15,cust-rand-306,prod-203,Air Fryer,home,south,partner,3,578.21,1734.63
+generated-order-00145,2025-04-10,cust-rand-143,prod-105,Smart Speaker,electronics,south,marketplace,7,318.51,2229.57
+generated-order-00146,2025-07-01,cust-rand-094,prod-501,Backpack,accessories,northeast,phone_sales,8,77.24,617.92
+generated-order-00147,2025-11-12,cust-rand-051,prod-503,Noise Cancelling Headphones,accessories,southeast,online,5,709.98,
+generated-order-00148,2026-01-01,cust-rand-135,prod-203,Air Fryer,home,midwest,online,5,538.56,2692.80
+generated-order-00149,2025-04-27,cust-rand-073,prod-301,Yoga Mat,fitness,south,online,1,123.54,123.54
+generated-order-00150,2026-04-07,cust-rand-119,prod-105,Smart Speaker,electronics,north,marketplace,6,367.73,2206.38
+generated-order-00151,2025-01-28,cust-rand-346,prod-503,Noise Cancelling Headphones,accessories,north,partner,5,562.77,2813.85
+generated-order-00152,2025-02-26,cust-rand-309,prod-105,Smart Speaker,electronics,northeast,physical_store,8,309.42,2475.36
+generated-order-00153,2026-02-06,cust-rand-079,prod-103,Portable Projector,electronics,northeast,physical_store,7,354.67,2482.69
+generated-order-00154,2025-01-01,cust-rand-068,prod-501,Backpack,accessories,north,physical_store,1,258.34,258.34
+generated-order-00155,2025-06-29,cust-rand-280,prod-104,Mechanical Keyboard,electronics,northeast,phone_sales,5,187.28,936.40
+generated-order-00156,2025-06-20,cust-rand-018,prod-302,Adjustable Dumbbells,fitness,southeast,physical_store,7,737.51,5162.57
+generated-order-00157,2025-01-28,cust-rand-194,prod-104,Mechanical Keyboard,electronics,southeast,online,6,184.04,
+generated-order-00158,2025-03-10,cust-rand-236,prod-501,Backpack,accessories,southeast,partner,8,224.51,1796.08
+generated-order-00159,2025-12-14,cust-rand-021,prod-101,Wireless Mouse,electronics,midwest,online,1,167.45,167.45
+generated-order-00160,2025-10-25,cust-rand-128,prod-502,Travel Mug,accessories,northeast,partner,7,53.01,371.07
+generated-order-00161,2025-11-09,cust-rand-211,prod-402,Standing Desk,furniture,midwest,online,2,1675.86,3351.72
+generated-order-00162,2025-07-13,cust-rand-268,prod-401,Office Chair,furniture,southeast,phone_sales,7,548.53,
+generated-order-00163,2026-04-15,cust-rand-215,prod-504,Webcam,accessories,northeast,partner,5,415.80,2079.00
+generated-order-00164,2025-05-14,cust-rand-269,prod-205,Vacuum Cleaner,home,northeast,phone_sales,4,324.93,1299.72
+generated-order-00165,2025-12-27,cust-rand-092,prod-303,Protein Blender Bottle,fitness,northeast,physical_store,4,21.88,87.52
+generated-order-00166,2025-06-12,cust-rand-195,prod-205,Vacuum Cleaner,home,southeast,online,4,901.91,3607.64
+generated-order-00167,2025-03-22,cust-rand-286,prod-105,Smart Speaker,electronics,north,physical_store,1,333.81,333.81
+generated-order-00168,2026-03-19,cust-rand-060,prod-103,Portable Projector,electronics,midwest,online,4,769.30,
+generated-order-00169,2025-12-12,cust-rand-106,prod-503,Noise Cancelling Headphones,accessories,midwest,marketplace,2,576.58,1153.16
+generated-order-00170,2026-01-28,cust-rand-132,prod-302,Adjustable Dumbbells,fitness,midwest,phone_sales,4,465.06,1860.24
+generated-order-00171,2025-02-17,cust-rand-053,prod-504,Webcam,accessories,northeast,marketplace,2,405.75,811.50
+generated-order-00172,2025-08-09,cust-rand-277,prod-301,Yoga Mat,fitness,north,marketplace,2,95.07,190.14
+generated-order-00173,2026-01-04,cust-rand-311,prod-301,Yoga Mat,fitness,south,phone_sales,7,41.53,290.71
+generated-order-00174,2025-04-08,cust-rand-099,prod-301,Yoga Mat,fitness,north,partner,1,115.39,115.39
+generated-order-00175,2025-02-06,cust-rand-228,prod-402,Standing Desk,furniture,southeast,phone_sales,7,1349.42,9445.94
+generated-order-00176,2025-01-29,cust-rand-062,prod-103,Portable Projector,electronics,south,marketplace,4,474.79,1899.16
+generated-order-00177,2026-04-24,cust-rand-174,prod-101,Wireless Mouse,electronics,northeast,online,2,133.73,267.46
+generated-order-00178,2025-09-19,cust-rand-065,prod-303,Protein Blender Bottle,fitness,south,online,8,45.60,364.80
+generated-order-00179,2025-12-24,cust-rand-181,prod-403,Bookshelf,furniture,northeast,phone_sales,5,263.87,1319.35
+generated-order-00180,2025-09-16,cust-rand-024,prod-103,Portable Projector,electronics,midwest,phone_sales,1,937.91,937.91
+generated-order-00181,2025-11-18,cust-rand-001,prod-102,Notebook 14,electronics,northeast,marketplace,3,3403.03,10209.09
+generated-order-00182,2026-04-10,cust-rand-293,prod-303,Protein Blender Bottle,fitness,north,marketplace,7,42.56,297.92
+generated-order-00183,2025-07-13,cust-rand-036,prod-201,Coffee Maker,home,south,phone_sales,3,226.40,
+generated-order-00184,2025-05-29,cust-rand-328,prod-102,Notebook 14,electronics,north,online,4,2462.57,
+generated-order-00185,2026-03-08,cust-rand-282,prod-102,Notebook 14,electronics,midwest,marketplace,4,2720.14,10880.56
+generated-order-00186,2025-12-13,cust-rand-049,prod-402,Standing Desk,furniture,south,online,4,968.73,3874.92
+generated-order-00187,2025-09-23,cust-rand-208,prod-401,Office Chair,furniture,north,partner,4,730.95,2923.80
+generated-order-00188,2025-06-18,cust-rand-189,prod-203,Air Fryer,home,south,physical_store,8,446.23,
+generated-order-00189,2026-04-24,cust-rand-152,prod-205,Vacuum Cleaner,home,southeast,phone_sales,5,514.82,
+generated-order-00190,2026-01-23,cust-rand-350,prod-302,Adjustable Dumbbells,fitness,north,online,6,848.42,5090.52
+generated-order-00191,2025-03-06,cust-rand-249,prod-401,Office Chair,furniture,north,physical_store,1,638.51,638.51
+generated-order-00192,2025-05-24,cust-rand-323,prod-303,Protein Blender Bottle,fitness,northeast,online,5,24.54,122.70
+generated-order-00193,2025-05-12,cust-rand-243,prod-105,Smart Speaker,electronics,midwest,phone_sales,3,217.99,
+generated-order-00194,2026-03-20,cust-rand-066,prod-204,Blender,home,northeast,partner,3,212.95,638.85
+generated-order-00195,2026-04-01,cust-rand-239,prod-105,Smart Speaker,electronics,northeast,physical_store,6,268.70,1612.20
+generated-order-00196,2025-08-12,cust-rand-295,prod-203,Air Fryer,home,southeast,online,7,558.49,3909.43
+generated-order-00197,2025-01-23,cust-rand-313,prod-402,Standing Desk,furniture,north,online,2,990.93,1981.86
+generated-order-00198,2026-02-26,cust-rand-162,prod-201,Coffee Maker,home,southeast,online,4,301.58,1206.32
+generated-order-00199,2026-03-08,cust-rand-240,prod-203,Air Fryer,home,north,physical_store,6,438.94,2633.64
+generated-order-00200,2025-02-21,cust-rand-223,prod-401,Office Chair,furniture,south,partner,5,836.31,4181.55
+generated-order-00201,2025-06-04,cust-rand-097,prod-101,Wireless Mouse,electronics,north,partner,1,179.32,179.32
+generated-order-00202,2025-08-30,cust-rand-275,prod-401,Office Chair,furniture,south,online,6,1172.65,7035.90
+generated-order-00203,2025-06-26,cust-rand-053,prod-202,Desk Lamp,home,midwest,phone_sales,4,48.58,
+generated-order-00204,2026-03-20,cust-rand-135,prod-402,Standing Desk,furniture,midwest,online,5,2148.18,10740.90
+generated-order-00205,2026-03-07,cust-rand-237,prod-401,Office Chair,furniture,northeast,phone_sales,7,1140.39,7982.73
+generated-order-00206,2025-06-10,cust-rand-207,prod-104,Mechanical Keyboard,electronics,south,partner,7,421.61,
+generated-order-00207,2026-04-15,cust-rand-048,prod-204,Blender,home,midwest,partner,5,323.46,
+generated-order-00208,2025-10-19,cust-rand-238,prod-202,Desk Lamp,home,south,physical_store,5,49.54,247.70
+generated-order-00209,2025-08-27,cust-rand-119,prod-301,Yoga Mat,fitness,northeast,physical_store,1,54.12,54.12
+generated-order-00210,2025-01-15,cust-rand-212,prod-201,Coffee Maker,home,north,marketplace,6,139.92,839.52
+generated-order-00211,2025-05-28,cust-rand-169,prod-502,Travel Mug,accessories,midwest,phone_sales,6,32.87,
+generated-order-00212,2025-11-05,cust-rand-080,prod-201,Coffee Maker,home,northeast,partner,8,329.34,
+generated-order-00213,2026-01-27,cust-rand-260,prod-103,Portable Projector,electronics,northeast,online,5,498.95,2494.75
+generated-order-00214,2025-02-25,cust-rand-322,prod-403,Bookshelf,furniture,north,online,4,339.03,1356.12
+generated-order-00215,2025-12-02,cust-rand-105,prod-202,Desk Lamp,home,southeast,partner,1,70.00,70.00
+generated-order-00216,2025-08-05,cust-rand-147,prod-301,Yoga Mat,fitness,midwest,online,3,57.48,
+generated-order-00217,2025-05-14,cust-rand-170,prod-503,Noise Cancelling Headphones,accessories,northeast,physical_store,5,1037.13,5185.65
+generated-order-00218,2025-08-05,cust-rand-310,prod-303,Protein Blender Bottle,fitness,southeast,online,3,32.89,
+generated-order-00219,2026-01-17,cust-rand-107,prod-403,Bookshelf,furniture,northeast,partner,4,432.72,1730.88
+generated-order-00220,2025-11-20,cust-rand-134,prod-202,Desk Lamp,home,south,partner,7,95.87,671.09
+generated-order-00221,2026-03-16,cust-rand-065,prod-202,Desk Lamp,home,northeast,online,5,45.46,227.30
+generated-order-00222,2026-02-28,cust-rand-210,prod-203,Air Fryer,home,northeast,marketplace,8,277.62,
+generated-order-00223,2025-12-22,cust-rand-049,prod-205,Vacuum Cleaner,home,northeast,partner,2,877.21,1754.42
+generated-order-00224,2025-05-06,cust-rand-339,prod-105,Smart Speaker,electronics,northeast,partner,7,381.68,2671.76
+generated-order-00225,2026-01-28,cust-rand-271,prod-104,Mechanical Keyboard,electronics,northeast,physical_store,5,274.00,1370.00
+generated-order-00226,2025-06-27,cust-rand-332,prod-205,Vacuum Cleaner,home,southeast,online,3,589.40,1768.20
+generated-order-00227,2025-04-12,cust-rand-294,prod-502,Travel Mug,accessories,southeast,partner,1,47.89,47.89
+generated-order-00228,2025-10-04,cust-rand-066,prod-504,Webcam,accessories,south,phone_sales,4,141.91,567.64
+generated-order-00229,2025-08-08,cust-rand-024,prod-203,Air Fryer,home,midwest,phone_sales,1,484.47,
+generated-order-00230,2025-07-30,cust-rand-128,prod-501,Backpack,accessories,south,physical_store,6,172.08,1032.48
+generated-order-00231,2025-04-13,cust-rand-114,prod-504,Webcam,accessories,north,physical_store,7,447.25,3130.75
+generated-order-00232,2025-09-08,cust-rand-141,prod-403,Bookshelf,furniture,south,partner,6,600.68,3604.08
+generated-order-00233,2025-04-21,cust-rand-269,prod-302,Adjustable Dumbbells,fitness,southeast,phone_sales,8,423.25,3386.00
+generated-order-00234,2025-11-21,cust-rand-113,prod-103,Portable Projector,electronics,north,online,1,577.03,
+generated-order-00235,2026-01-20,cust-rand-106,prod-303,Protein Blender Bottle,fitness,midwest,marketplace,2,36.61,73.22
+generated-order-00236,2025-11-24,cust-rand-239,prod-203,Air Fryer,home,midwest,phone_sales,6,596.27,3577.62
+generated-order-00237,2025-06-19,cust-rand-336,prod-504,Webcam,accessories,southeast,marketplace,5,138.96,694.80
+generated-order-00238,2026-04-02,cust-rand-207,prod-204,Blender,home,north,phone_sales,5,101.56,507.80
+generated-order-00239,2026-04-06,cust-rand-126,prod-501,Backpack,accessories,midwest,phone_sales,4,179.44,
+generated-order-00240,2025-12-20,cust-rand-291,prod-503,Noise Cancelling Headphones,accessories,midwest,phone_sales,6,791.56,4749.36
+generated-order-00241,2025-07-23,cust-rand-098,prod-503,Noise Cancelling Headphones,accessories,northeast,phone_sales,8,758.20,
+generated-order-00242,2025-01-30,cust-rand-181,prod-303,Protein Blender Bottle,fitness,north,phone_sales,2,31.95,
+generated-order-00243,2025-12-26,cust-rand-255,prod-403,Bookshelf,furniture,southeast,phone_sales,8,365.38,
+generated-order-00244,2025-03-30,cust-rand-180,prod-504,Webcam,accessories,south,online,7,297.65,2083.55
+generated-order-00245,2025-12-20,cust-rand-173,prod-202,Desk Lamp,home,northeast,partner,6,112.77,676.62
+generated-order-00246,2025-09-06,cust-rand-265,prod-302,Adjustable Dumbbells,fitness,north,physical_store,1,942.36,942.36
+generated-order-00247,2025-11-12,cust-rand-211,prod-201,Coffee Maker,home,midwest,phone_sales,4,151.47,
+generated-order-00248,2026-02-25,cust-rand-039,prod-501,Backpack,accessories,south,marketplace,2,223.73,447.46
+generated-order-00249,2026-04-23,cust-rand-198,prod-201,Coffee Maker,home,midwest,marketplace,2,248.39,496.78
+generated-order-00250,2026-03-15,cust-rand-062,prod-202,Desk Lamp,home,northeast,phone_sales,2,59.81,119.62
+generated-order-00251,2026-01-25,cust-rand-011,prod-302,Adjustable Dumbbells,fitness,south,online,4,780.74,3122.96
+generated-order-00252,2025-12-13,cust-rand-150,prod-301,Yoga Mat,fitness,south,partner,3,69.69,209.07
+generated-order-00253,2025-07-21,cust-rand-246,prod-201,Coffee Maker,home,midwest,marketplace,7,352.91,2470.37
+generated-order-00254,2025-06-14,cust-rand-176,prod-502,Travel Mug,accessories,north,phone_sales,5,45.01,
+generated-order-00255,2025-08-07,cust-rand-099,prod-202,Desk Lamp,home,northeast,marketplace,2,77.35,154.70
+generated-order-00256,2025-05-09,cust-rand-334,prod-403,Bookshelf,furniture,south,online,6,642.74,3856.44
+generated-order-00257,2026-04-12,cust-rand-065,prod-403,Bookshelf,furniture,south,partner,4,411.85,1647.40
+generated-order-00258,2025-03-29,cust-rand-297,prod-104,Mechanical Keyboard,electronics,northeast,phone_sales,7,210.46,
+generated-order-00259,2025-08-24,cust-rand-188,prod-302,Adjustable Dumbbells,fitness,midwest,online,1,921.05,921.05
+generated-order-00260,2025-03-09,cust-rand-066,prod-503,Noise Cancelling Headphones,accessories,north,partner,5,889.32,4446.60
+generated-order-00261,2026-01-28,cust-rand-230,prod-105,Smart Speaker,electronics,north,marketplace,6,315.86,1895.16
+generated-order-00262,2025-03-05,cust-rand-334,prod-103,Portable Projector,electronics,southeast,online,1,386.41,386.41
+generated-order-00263,2025-05-18,cust-rand-021,prod-403,Bookshelf,furniture,northeast,phone_sales,7,304.23,
+generated-order-00264,2025-06-12,cust-rand-206,prod-101,Wireless Mouse,electronics,midwest,phone_sales,6,113.42,680.52
+generated-order-00265,2026-01-09,cust-rand-094,prod-504,Webcam,accessories,north,physical_store,1,253.72,253.72
+generated-order-00266,2025-10-22,cust-rand-046,prod-504,Webcam,accessories,south,marketplace,5,260.73,
+generated-order-00267,2025-08-12,cust-rand-236,prod-401,Office Chair,furniture,southeast,marketplace,5,1326.54,6632.70
+generated-order-00268,2025-09-26,cust-rand-321,prod-401,Office Chair,furniture,south,phone_sales,7,1177.29,8241.03
+generated-order-00269,2025-06-01,cust-rand-310,prod-204,Blender,home,north,online,1,196.75,196.75
+generated-order-00270,2025-04-30,cust-rand-198,prod-401,Office Chair,furniture,north,partner,1,640.35,640.35
+generated-order-00271,2025-06-01,cust-rand-192,prod-201,Coffee Maker,home,southeast,physical_store,5,141.92,709.60
+generated-order-00272,2025-03-02,cust-rand-254,prod-104,Mechanical Keyboard,electronics,southeast,physical_store,3,216.74,650.22
+generated-order-00273,2025-01-28,cust-rand-006,prod-204,Blender,home,midwest,physical_store,8,179.40,1435.20
+generated-order-00274,2025-04-13,cust-rand-033,prod-105,Smart Speaker,electronics,north,physical_store,4,398.75,1595.00
+generated-order-00275,2025-07-06,cust-rand-002,prod-403,Bookshelf,furniture,midwest,marketplace,7,534.14,3738.98
+generated-order-00276,2025-12-04,cust-rand-147,prod-102,Notebook 14,electronics,midwest,partner,6,3802.53,22815.18
+generated-order-00277,2025-05-14,cust-rand-074,prod-205,Vacuum Cleaner,home,southeast,marketplace,2,584.92,1169.84
+generated-order-00278,2025-04-13,cust-rand-220,prod-301,Yoga Mat,fitness,north,physical_store,8,74.69,597.52
+generated-order-00279,2026-02-24,cust-rand-231,prod-502,Travel Mug,accessories,southeast,phone_sales,2,43.49,86.98
+generated-order-00280,2026-03-17,cust-rand-270,prod-201,Coffee Maker,home,south,phone_sales,1,312.06,312.06
+generated-order-00281,2026-02-06,cust-rand-176,prod-105,Smart Speaker,electronics,north,physical_store,5,279.23,1396.15
+generated-order-00282,2025-10-13,cust-rand-269,prod-503,Noise Cancelling Headphones,accessories,midwest,marketplace,2,1334.11,2668.22
+generated-order-00283,2025-06-01,cust-rand-345,prod-302,Adjustable Dumbbells,fitness,south,phone_sales,7,316.72,2217.04
+generated-order-00284,2025-09-08,cust-rand-153,prod-403,Bookshelf,furniture,north,marketplace,8,609.86,4878.88
+generated-order-00285,2026-01-21,cust-rand-197,prod-501,Backpack,accessories,south,phone_sales,4,160.05,
+generated-order-00286,2025-07-19,cust-rand-271,prod-502,Travel Mug,accessories,midwest,online,4,43.09,
+generated-order-00287,2025-10-12,cust-rand-106,prod-205,Vacuum Cleaner,home,northeast,online,4,645.35,2581.40
+generated-order-00288,2026-04-18,cust-rand-265,prod-205,Vacuum Cleaner,home,south,marketplace,7,822.28,5755.96
+generated-order-00289,2026-03-12,cust-rand-316,prod-104,Mechanical Keyboard,electronics,southeast,partner,7,416.30,2914.10
+generated-order-00290,2025-03-10,cust-rand-338,prod-205,Vacuum Cleaner,home,south,partner,7,500.80,3505.60
+generated-order-00291,2025-01-25,cust-rand-328,prod-101,Wireless Mouse,electronics,southeast,partner,6,157.91,947.46
+generated-order-00292,2025-03-23,cust-rand-271,prod-103,Portable Projector,electronics,southeast,physical_store,6,349.35,2096.10
+generated-order-00293,2025-03-03,cust-rand-195,prod-504,Webcam,accessories,midwest,marketplace,5,360.06,1800.30
+generated-order-00294,2025-12-30,cust-rand-121,prod-504,Webcam,accessories,southeast,phone_sales,8,410.02,3280.16
+generated-order-00295,2026-01-27,cust-rand-065,prod-502,Travel Mug,accessories,north,partner,1,44.94,44.94
+generated-order-00296,2025-11-13,cust-rand-241,prod-201,Coffee Maker,home,south,online,3,251.49,754.47
+generated-order-00297,2025-04-12,cust-rand-137,prod-501,Backpack,accessories,south,online,5,150.09,750.45
+generated-order-00298,2025-05-24,cust-rand-065,prod-403,Bookshelf,furniture,south,physical_store,5,607.33,3036.65
+generated-order-00299,2025-10-06,cust-rand-191,prod-103,Portable Projector,electronics,south,online,1,321.75,
+generated-order-00300,2026-03-14,cust-rand-092,prod-402,Standing Desk,furniture,north,phone_sales,4,707.72,2830.88
+generated-order-00301,2025-10-04,cust-rand-330,prod-401,Office Chair,furniture,south,phone_sales,1,983.29,983.29
+generated-order-00302,2026-02-12,cust-rand-044,prod-104,Mechanical Keyboard,electronics,midwest,marketplace,4,186.42,
+generated-order-00303,2025-04-28,cust-rand-021,prod-302,Adjustable Dumbbells,fitness,midwest,physical_store,5,442.25,2211.25
+generated-order-00304,2025-11-19,cust-rand-176,prod-201,Coffee Maker,home,southeast,partner,7,324.81,2273.67
+generated-order-00305,2025-12-11,cust-rand-327,prod-403,Bookshelf,furniture,south,marketplace,3,689.82,2069.46
+generated-order-00306,2025-09-24,cust-rand-091,prod-504,Webcam,accessories,north,physical_store,5,441.10,2205.50
+generated-order-00307,2025-08-06,cust-rand-301,prod-403,Bookshelf,furniture,north,online,7,679.10,
+generated-order-00308,2025-07-17,cust-rand-231,prod-101,Wireless Mouse,electronics,south,partner,6,125.19,751.14
+generated-order-00309,2026-01-23,cust-rand-049,prod-205,Vacuum Cleaner,home,northeast,online,8,399.30,3194.40
+generated-order-00310,2025-10-19,cust-rand-298,prod-202,Desk Lamp,home,northeast,partner,6,109.95,659.70
+generated-order-00311,2025-02-09,cust-rand-081,prod-201,Coffee Maker,home,north,partner,5,302.26,1511.30
+generated-order-00312,2025-08-21,cust-rand-048,prod-101,Wireless Mouse,electronics,north,online,6,102.85,617.10
+generated-order-00313,2025-10-01,cust-rand-247,prod-104,Mechanical Keyboard,electronics,northeast,physical_store,6,249.41,1496.46
+generated-order-00314,2026-03-23,cust-rand-009,prod-203,Air Fryer,home,northeast,marketplace,4,474.68,1898.72
+generated-order-00315,2025-08-24,cust-rand-155,prod-203,Air Fryer,home,north,physical_store,1,546.45,
+generated-order-00316,2025-01-25,cust-rand-029,prod-203,Air Fryer,home,south,phone_sales,3,441.15,
+generated-order-00317,2025-12-04,cust-rand-286,prod-503,Noise Cancelling Headphones,accessories,northeast,marketplace,2,485.53,971.06
+generated-order-00318,2025-04-10,cust-rand-038,prod-102,Notebook 14,electronics,south,phone_sales,7,3434.60,24042.20
+generated-order-00319,2026-02-17,cust-rand-107,prod-502,Travel Mug,accessories,southeast,phone_sales,8,74.27,594.16
+generated-order-00320,2025-06-12,cust-rand-271,prod-203,Air Fryer,home,northeast,phone_sales,4,415.05,1660.20
+generated-order-00321,2025-06-02,cust-rand-125,prod-101,Wireless Mouse,electronics,northeast,phone_sales,1,174.99,174.99
+generated-order-00322,2026-04-25,cust-rand-303,prod-205,Vacuum Cleaner,home,northeast,physical_store,4,542.22,2168.88
+generated-order-00323,2026-03-11,cust-rand-089,prod-101,Wireless Mouse,electronics,north,online,1,73.00,73.00
+generated-order-00324,2025-04-06,cust-rand-331,prod-302,Adjustable Dumbbells,fitness,southeast,physical_store,7,275.49,1928.43
+generated-order-00325,2025-03-05,cust-rand-288,prod-205,Vacuum Cleaner,home,northeast,marketplace,3,882.96,2648.88
+generated-order-00326,2025-11-10,cust-rand-092,prod-103,Portable Projector,electronics,north,phone_sales,6,853.97,5123.82
+generated-order-00327,2025-03-19,cust-rand-083,prod-401,Office Chair,furniture,southeast,phone_sales,1,1296.88,1296.88
+generated-order-00328,2025-07-25,cust-rand-043,prod-301,Yoga Mat,fitness,north,partner,7,109.19,764.33
+generated-order-00329,2026-02-10,cust-rand-253,prod-104,Mechanical Keyboard,electronics,south,physical_store,6,283.47,1700.82
+generated-order-00330,2026-02-23,cust-rand-045,prod-303,Protein Blender Bottle,fitness,northeast,online,3,45.26,
+generated-order-00331,2025-01-01,cust-rand-181,prod-502,Travel Mug,accessories,south,online,8,51.27,410.16
+generated-order-00332,2025-01-07,cust-rand-292,prod-202,Desk Lamp,home,north,online,1,158.76,158.76
+generated-order-00333,2025-07-21,cust-rand-141,prod-203,Air Fryer,home,midwest,online,1,675.99,675.99
+generated-order-00334,2025-12-04,cust-rand-320,prod-301,Yoga Mat,fitness,north,marketplace,7,104.51,731.57
+generated-order-00335,2026-01-23,cust-rand-265,prod-101,Wireless Mouse,electronics,southeast,phone_sales,3,174.86,524.58
+generated-order-00336,2026-02-17,cust-rand-028,prod-204,Blender,home,southeast,phone_sales,8,175.96,1407.68
+generated-order-00337,2025-08-07,cust-rand-157,prod-201,Coffee Maker,home,north,online,2,357.95,715.90
+generated-order-00338,2025-11-27,cust-rand-343,prod-401,Office Chair,furniture,midwest,marketplace,3,605.77,
+generated-order-00339,2025-07-02,cust-rand-294,prod-504,Webcam,accessories,north,partner,7,259.02,1813.14
+generated-order-00340,2026-04-06,cust-rand-304,prod-205,Vacuum Cleaner,home,south,online,5,582.87,2914.35
+generated-order-00341,2026-03-14,cust-rand-079,prod-202,Desk Lamp,home,southeast,partner,3,137.50,412.50
+generated-order-00342,2025-10-23,cust-rand-134,prod-101,Wireless Mouse,electronics,south,online,4,123.48,493.92
+generated-order-00343,2026-04-24,cust-rand-287,prod-201,Coffee Maker,home,southeast,online,8,282.43,2259.44
+generated-order-00344,2025-07-12,cust-rand-181,prod-102,Notebook 14,electronics,southeast,phone_sales,7,3031.78,21222.46
+generated-order-00345,2025-08-31,cust-rand-139,prod-301,Yoga Mat,fitness,midwest,marketplace,7,82.96,580.72
+generated-order-00346,2025-09-08,cust-rand-154,prod-201,Coffee Maker,home,southeast,partner,3,328.69,986.07
+generated-order-00347,2025-01-22,cust-rand-033,prod-403,Bookshelf,furniture,southeast,phone_sales,7,396.64,
+generated-order-00348,2025-07-22,cust-rand-011,prod-204,Blender,home,north,online,5,145.72,728.60
+generated-order-00349,2026-01-08,cust-rand-179,prod-303,Protein Blender Bottle,fitness,midwest,marketplace,8,40.40,323.20
+generated-order-00350,2025-07-18,cust-rand-048,prod-202,Desk Lamp,home,southeast,physical_store,1,121.43,121.43
+generated-order-00351,2025-02-09,cust-rand-061,prod-503,Noise Cancelling Headphones,accessories,northeast,partner,3,1137.44,3412.32
+generated-order-00352,2025-05-20,cust-rand-088,prod-403,Bookshelf,furniture,northeast,phone_sales,3,213.02,
+generated-order-00353,2025-02-06,cust-rand-032,prod-303,Protein Blender Bottle,fitness,north,partner,8,52.49,419.92
+generated-order-00354,2026-01-18,cust-rand-282,prod-403,Bookshelf,furniture,north,partner,6,634.77,
+generated-order-00355,2026-01-31,cust-rand-202,prod-403,Bookshelf,furniture,northeast,marketplace,2,508.59,1017.18
+generated-order-00356,2026-01-07,cust-rand-258,prod-401,Office Chair,furniture,southeast,marketplace,1,1165.30,1165.30
+generated-order-00357,2025-02-02,cust-rand-018,prod-104,Mechanical Keyboard,electronics,southeast,phone_sales,6,467.08,2802.48
+generated-order-00358,2025-08-16,cust-rand-234,prod-104,Mechanical Keyboard,electronics,midwest,online,2,209.35,418.70
+generated-order-00359,2026-03-06,cust-rand-035,prod-504,Webcam,accessories,southeast,physical_store,4,404.07,1616.28
+generated-order-00360,2025-01-03,cust-rand-129,prod-303,Protein Blender Bottle,fitness,northeast,phone_sales,8,40.76,326.08
+generated-order-00361,2025-09-13,cust-rand-039,prod-301,Yoga Mat,fitness,northeast,partner,7,84.79,593.53
+generated-order-00362,2025-07-07,cust-rand-324,prod-402,Standing Desk,furniture,northeast,physical_store,6,712.33,4273.98
+generated-order-00363,2025-06-27,cust-rand-065,prod-301,Yoga Mat,fitness,midwest,online,4,56.33,225.32
+generated-order-00364,2025-11-07,cust-rand-151,prod-303,Protein Blender Bottle,fitness,north,online,3,28.95,86.85
+generated-order-00365,2025-09-26,cust-rand-207,prod-502,Travel Mug,accessories,northeast,physical_store,8,37.85,302.80
+generated-order-00366,2025-12-16,cust-rand-211,prod-202,Desk Lamp,home,northeast,physical_store,8,158.30,1266.40
+generated-order-00367,2026-03-31,cust-rand-118,prod-402,Standing Desk,furniture,north,physical_store,3,1312.40,
+generated-order-00368,2025-08-17,cust-rand-321,prod-501,Backpack,accessories,northeast,phone_sales,3,156.63,469.89
+generated-order-00369,2026-04-23,cust-rand-023,prod-401,Office Chair,furniture,north,online,5,788.57,3942.85
+generated-order-00370,2025-04-13,cust-rand-180,prod-102,Notebook 14,electronics,southeast,online,1,3527.74,3527.74
+generated-order-00371,2025-05-17,cust-rand-246,prod-402,Standing Desk,furniture,northeast,marketplace,8,711.22,5689.76
+generated-order-00372,2026-04-11,cust-rand-114,prod-105,Smart Speaker,electronics,southeast,online,7,190.61,
+generated-order-00373,2025-12-25,cust-rand-182,prod-101,Wireless Mouse,electronics,south,physical_store,6,105.59,633.54
+generated-order-00374,2025-06-03,cust-rand-119,prod-203,Air Fryer,home,northeast,phone_sales,6,441.43,
+generated-order-00375,2026-02-15,cust-rand-309,prod-104,Mechanical Keyboard,electronics,south,online,2,446.50,893.00
+generated-order-00376,2026-01-09,cust-rand-083,prod-504,Webcam,accessories,southeast,partner,1,437.50,437.50
+generated-order-00377,2026-01-05,cust-rand-285,prod-503,Noise Cancelling Headphones,accessories,northeast,partner,2,687.19,1374.38
+generated-order-00378,2025-11-26,cust-rand-033,prod-504,Webcam,accessories,southeast,physical_store,2,220.87,441.74
+generated-order-00379,2025-06-27,cust-rand-133,prod-501,Backpack,accessories,midwest,online,8,154.58,1236.64
+generated-order-00380,2026-02-13,cust-rand-072,prod-401,Office Chair,furniture,south,phone_sales,4,594.71,2378.84
+generated-order-00381,2026-01-24,cust-rand-285,prod-202,Desk Lamp,home,southeast,physical_store,8,61.63,493.04
+generated-order-00382,2025-11-13,cust-rand-174,prod-205,Vacuum Cleaner,home,south,physical_store,8,587.64,4701.12
+generated-order-00383,2025-07-05,cust-rand-174,prod-402,Standing Desk,furniture,south,phone_sales,4,721.44,2885.76
+generated-order-00384,2025-02-18,cust-rand-158,prod-202,Desk Lamp,home,midwest,phone_sales,4,107.76,431.04
+generated-order-00385,2025-06-09,cust-rand-296,prod-104,Mechanical Keyboard,electronics,north,phone_sales,2,470.79,941.58
+generated-order-00386,2025-10-10,cust-rand-304,prod-204,Blender,home,north,phone_sales,2,178.57,357.14
+generated-order-00387,2025-08-28,cust-rand-185,prod-504,Webcam,accessories,north,marketplace,3,486.67,1460.01
+generated-order-00388,2025-01-03,cust-rand-300,prod-102,Notebook 14,electronics,southeast,phone_sales,4,2221.21,8884.84
+generated-order-00389,2025-11-11,cust-rand-179,prod-202,Desk Lamp,home,north,physical_store,6,157.58,
+generated-order-00390,2025-02-22,cust-rand-146,prod-204,Blender,home,northeast,partner,1,160.33,160.33
+generated-order-00391,2026-03-24,cust-rand-205,prod-101,Wireless Mouse,electronics,south,physical_store,4,59.39,237.56
+generated-order-00392,2025-03-07,cust-rand-171,prod-202,Desk Lamp,home,southeast,online,2,75.84,151.68
+generated-order-00393,2026-01-29,cust-rand-195,prod-201,Coffee Maker,home,southeast,partner,7,341.88,
+generated-order-00394,2025-06-13,cust-rand-259,prod-202,Desk Lamp,home,south,phone_sales,2,104.15,208.30
+generated-order-00395,2025-02-13,cust-rand-334,prod-105,Smart Speaker,electronics,midwest,online,6,283.95,1703.70
+generated-order-00396,2025-05-03,cust-rand-004,prod-402,Standing Desk,furniture,southeast,phone_sales,7,2143.31,15003.17
+generated-order-00397,2025-08-30,cust-rand-021,prod-504,Webcam,accessories,north,physical_store,7,157.65,1103.55
+generated-order-00398,2026-02-24,cust-rand-324,prod-502,Travel Mug,accessories,south,online,3,37.64,112.92
+generated-order-00399,2025-02-21,cust-rand-299,prod-504,Webcam,accessories,midwest,marketplace,6,362.11,2172.66
+generated-order-00400,2025-04-24,cust-rand-264,prod-203,Air Fryer,home,midwest,phone_sales,8,466.45,3731.60
+generated-order-00401,2026-01-24,cust-rand-057,prod-501,Backpack,accessories,midwest,online,2,161.87,323.74
+generated-order-00402,2026-01-15,cust-rand-334,prod-103,Portable Projector,electronics,midwest,phone_sales,6,655.15,3930.90
+generated-order-00403,2026-03-28,cust-rand-168,prod-203,Air Fryer,home,southeast,online,7,413.62,2895.34
+generated-order-00404,2025-02-15,cust-rand-038,prod-101,Wireless Mouse,electronics,midwest,online,8,163.95,1311.60
+generated-order-00405,2025-08-03,cust-rand-261,prod-501,Backpack,accessories,midwest,online,2,200.68,401.36
+generated-order-00406,2025-05-26,cust-rand-244,prod-103,Portable Projector,electronics,midwest,physical_store,2,782.82,
+generated-order-00407,2025-03-20,cust-rand-190,prod-401,Office Chair,furniture,midwest,phone_sales,5,547.01,2735.05
+generated-order-00408,2025-07-17,cust-rand-155,prod-302,Adjustable Dumbbells,fitness,midwest,physical_store,8,736.97,
+generated-order-00409,2025-03-27,cust-rand-047,prod-205,Vacuum Cleaner,home,northeast,partner,6,634.04,3804.24
+generated-order-00410,2025-08-29,cust-rand-016,prod-105,Smart Speaker,electronics,midwest,phone_sales,3,283.21,
+generated-order-00411,2025-07-05,cust-rand-213,prod-402,Standing Desk,furniture,midwest,partner,1,2090.72,2090.72
+generated-order-00412,2025-08-29,cust-rand-225,prod-103,Portable Projector,electronics,southeast,phone_sales,1,320.46,320.46
+generated-order-00413,2025-02-01,cust-rand-309,prod-201,Coffee Maker,home,north,physical_store,1,216.04,216.04
+generated-order-00414,2025-06-10,cust-rand-001,prod-203,Air Fryer,home,northeast,online,3,521.61,1564.83
+generated-order-00415,2025-04-24,cust-rand-057,prod-205,Vacuum Cleaner,home,northeast,phone_sales,3,640.36,
+generated-order-00416,2025-12-24,cust-rand-206,prod-501,Backpack,accessories,midwest,phone_sales,4,112.55,450.20
+generated-order-00417,2025-03-20,cust-rand-241,prod-104,Mechanical Keyboard,electronics,south,partner,2,308.29,616.58
+generated-order-00418,2025-09-01,cust-rand-311,prod-203,Air Fryer,home,south,physical_store,6,392.46,2354.76
+generated-order-00419,2025-02-03,cust-rand-187,prod-202,Desk Lamp,home,north,marketplace,8,45.57,364.56
+generated-order-00420,2025-08-31,cust-rand-103,prod-402,Standing Desk,furniture,northeast,physical_store,6,1125.15,6750.90
+generated-order-00421,2025-09-04,cust-rand-219,prod-205,Vacuum Cleaner,home,south,phone_sales,1,827.97,827.97
+generated-order-00422,2025-12-05,cust-rand-082,prod-502,Travel Mug,accessories,southeast,phone_sales,7,73.07,
+generated-order-00423,2025-04-08,cust-rand-021,prod-303,Protein Blender Bottle,fitness,southeast,online,5,32.65,163.25
+generated-order-00424,2026-04-08,cust-rand-142,prod-403,Bookshelf,furniture,south,phone_sales,7,207.89,
+generated-order-00425,2025-07-27,cust-rand-062,prod-203,Air Fryer,home,north,partner,2,360.05,720.10
+generated-order-00426,2025-09-16,cust-rand-184,prod-504,Webcam,accessories,midwest,marketplace,6,267.35,
+generated-order-00427,2026-03-20,cust-rand-277,prod-403,Bookshelf,furniture,north,online,2,438.44,876.88
+generated-order-00428,2025-09-25,cust-rand-197,prod-403,Bookshelf,furniture,south,phone_sales,3,617.56,1852.68
+generated-order-00429,2026-01-27,cust-rand-048,prod-301,Yoga Mat,fitness,northeast,partner,7,66.98,468.86
+generated-order-00430,2025-02-16,cust-rand-081,prod-503,Noise Cancelling Headphones,accessories,southeast,marketplace,5,819.98,4099.90
+generated-order-00431,2025-08-25,cust-rand-264,prod-403,Bookshelf,furniture,south,physical_store,6,292.72,
+generated-order-00432,2025-02-26,cust-rand-268,prod-301,Yoga Mat,fitness,southeast,physical_store,5,62.00,310.00
+generated-order-00433,2025-05-10,cust-rand-335,prod-102,Notebook 14,electronics,southeast,marketplace,4,3061.23,
+generated-order-00434,2025-09-08,cust-rand-252,prod-201,Coffee Maker,home,south,phone_sales,1,343.07,343.07
+generated-order-00435,2025-01-09,cust-rand-074,prod-401,Office Chair,furniture,midwest,marketplace,6,1375.01,
+generated-order-00436,2025-06-26,cust-rand-260,prod-402,Standing Desk,furniture,northeast,physical_store,5,1164.30,5821.50
+generated-order-00437,2025-08-28,cust-rand-065,prod-203,Air Fryer,home,southeast,partner,5,346.07,1730.35
+generated-order-00438,2025-10-27,cust-rand-032,prod-102,Notebook 14,electronics,northeast,marketplace,4,2724.73,10898.92
+generated-order-00439,2026-04-23,cust-rand-045,prod-403,Bookshelf,furniture,north,physical_store,2,671.51,1343.02
+generated-order-00440,2025-10-08,cust-rand-108,prod-201,Coffee Maker,home,southeast,partner,6,158.37,950.22
+generated-order-00441,2025-07-27,cust-rand-097,prod-203,Air Fryer,home,south,marketplace,4,535.81,2143.24
+generated-order-00442,2025-12-16,cust-rand-298,prod-302,Adjustable Dumbbells,fitness,south,phone_sales,2,620.61,1241.22
+generated-order-00443,2025-08-31,cust-rand-138,prod-501,Backpack,accessories,southeast,online,1,229.19,
+generated-order-00444,2026-01-31,cust-rand-337,prod-501,Backpack,accessories,southeast,online,2,122.10,244.20
+generated-order-00445,2026-03-02,cust-rand-021,prod-303,Protein Blender Bottle,fitness,southeast,online,8,49.58,
+generated-order-00446,2026-01-08,cust-rand-013,prod-201,Coffee Maker,home,southeast,partner,5,316.19,
+generated-order-00447,2025-10-06,cust-rand-110,prod-501,Backpack,accessories,southeast,online,2,211.63,423.26
+generated-order-00448,2026-02-25,cust-rand-206,prod-501,Backpack,accessories,south,physical_store,6,168.22,1009.32
+generated-order-00449,2025-04-18,cust-rand-024,prod-403,Bookshelf,furniture,midwest,phone_sales,6,460.14,2760.84
+generated-order-00450,2025-07-08,cust-rand-299,prod-402,Standing Desk,furniture,south,online,7,994.93,6964.51
+generated-order-00451,2025-06-22,cust-rand-323,prod-501,Backpack,accessories,midwest,phone_sales,1,121.37,121.37
+generated-order-00452,2025-11-10,cust-rand-148,prod-504,Webcam,accessories,north,physical_store,7,433.29,3033.03
+generated-order-00453,2026-01-04,cust-rand-322,prod-403,Bookshelf,furniture,north,physical_store,1,722.15,722.15
+generated-order-00454,2025-08-01,cust-rand-099,prod-204,Blender,home,southeast,phone_sales,4,129.87,519.48
+generated-order-00455,2025-07-20,cust-rand-176,prod-504,Webcam,accessories,north,online,7,377.01,2639.07
+generated-order-00456,2025-01-24,cust-rand-079,prod-201,Coffee Maker,home,midwest,partner,4,269.29,1077.16
+generated-order-00457,2025-08-26,cust-rand-199,prod-103,Portable Projector,electronics,south,marketplace,7,547.64,3833.48
+generated-order-00458,2025-03-16,cust-rand-075,prod-101,Wireless Mouse,electronics,midwest,online,2,125.57,251.14
+generated-order-00459,2025-06-30,cust-rand-036,prod-104,Mechanical Keyboard,electronics,midwest,marketplace,7,330.24,2311.68
+generated-order-00460,2025-10-13,cust-rand-170,prod-105,Smart Speaker,electronics,south,marketplace,8,246.44,1971.52
+generated-order-00461,2025-08-20,cust-rand-155,prod-501,Backpack,accessories,northeast,online,3,224.28,
+generated-order-00462,2026-04-07,cust-rand-088,prod-403,Bookshelf,furniture,midwest,phone_sales,5,339.91,1699.55
+generated-order-00463,2025-12-02,cust-rand-178,prod-105,Smart Speaker,electronics,northeast,physical_store,2,256.49,512.98
+generated-order-00464,2025-11-25,cust-rand-149,prod-403,Bookshelf,furniture,north,partner,1,283.58,283.58
+generated-order-00465,2026-02-12,cust-rand-003,prod-302,Adjustable Dumbbells,fitness,north,phone_sales,3,496.93,1490.79
+generated-order-00466,2025-01-22,cust-rand-162,prod-201,Coffee Maker,home,southeast,marketplace,6,262.40,1574.40
+generated-order-00467,2025-11-15,cust-rand-149,prod-302,Adjustable Dumbbells,fitness,north,online,6,404.20,2425.20
+generated-order-00468,2026-03-19,cust-rand-234,prod-103,Portable Projector,electronics,northeast,marketplace,4,786.75,
+generated-order-00469,2025-05-01,cust-rand-162,prod-502,Travel Mug,accessories,midwest,phone_sales,7,62.47,437.29
+generated-order-00470,2025-05-21,cust-rand-166,prod-301,Yoga Mat,fitness,southeast,physical_store,6,134.89,809.34
+generated-order-00471,2025-01-10,cust-rand-133,prod-103,Portable Projector,electronics,northeast,online,8,847.08,6776.64
+generated-order-00472,2025-03-08,cust-rand-200,prod-303,Protein Blender Bottle,fitness,midwest,marketplace,1,35.57,35.57
+generated-order-00473,2025-04-03,cust-rand-304,prod-504,Webcam,accessories,northeast,physical_store,1,240.31,240.31
+generated-order-00474,2025-09-05,cust-rand-281,prod-102,Notebook 14,electronics,south,partner,4,2774.84,11099.36
+generated-order-00475,2026-04-12,cust-rand-083,prod-204,Blender,home,north,online,4,313.65,1254.60
+generated-order-00476,2025-02-28,cust-rand-076,prod-503,Noise Cancelling Headphones,accessories,northeast,physical_store,6,668.97,4013.82
+generated-order-00477,2025-10-08,cust-rand-065,prod-403,Bookshelf,furniture,southeast,phone_sales,8,455.90,3647.20
+generated-order-00478,2026-01-17,cust-rand-086,prod-403,Bookshelf,furniture,north,marketplace,2,264.96,529.92
+generated-order-00479,2026-03-12,cust-rand-089,prod-504,Webcam,accessories,midwest,marketplace,6,185.64,
+generated-order-00480,2026-03-14,cust-rand-074,prod-301,Yoga Mat,fitness,northeast,phone_sales,6,82.28,493.68
+generated-order-00481,2025-04-05,cust-rand-013,prod-302,Adjustable Dumbbells,fitness,southeast,phone_sales,7,945.39,6617.73
+generated-order-00482,2025-05-04,cust-rand-347,prod-204,Blender,home,midwest,phone_sales,5,147.93,739.65
+generated-order-00483,2025-05-16,cust-rand-237,prod-403,Bookshelf,furniture,northeast,physical_store,4,677.13,2708.52
+generated-order-00484,2026-01-24,cust-rand-019,prod-201,Coffee Maker,home,northeast,physical_store,4,182.63,730.52
+generated-order-00485,2025-10-30,cust-rand-121,prod-301,Yoga Mat,fitness,north,phone_sales,3,106.62,
+generated-order-00486,2025-07-30,cust-rand-020,prod-302,Adjustable Dumbbells,fitness,midwest,partner,8,632.86,5062.88
+generated-order-00487,2026-04-20,cust-rand-283,prod-102,Notebook 14,electronics,northeast,marketplace,3,2237.13,6711.39
+generated-order-00488,2025-12-12,cust-rand-017,prod-403,Bookshelf,furniture,north,phone_sales,1,196.15,196.15
+generated-order-00489,2026-04-03,cust-rand-092,prod-502,Travel Mug,accessories,north,marketplace,7,54.84,383.88
+generated-order-00490,2025-06-11,cust-rand-239,prod-104,Mechanical Keyboard,electronics,midwest,online,1,388.45,388.45
+generated-order-00491,2025-02-16,cust-rand-329,prod-102,Notebook 14,electronics,south,marketplace,5,4062.76,20313.80
+generated-order-00492,2025-08-02,cust-rand-170,prod-202,Desk Lamp,home,southeast,marketplace,2,46.82,93.64
+generated-order-00493,2025-04-06,cust-rand-243,prod-101,Wireless Mouse,electronics,north,partner,4,60.88,243.52
+generated-order-00494,2025-05-09,cust-rand-017,prod-104,Mechanical Keyboard,electronics,south,phone_sales,8,202.30,1618.40
+generated-order-00495,2025-02-24,cust-rand-154,prod-205,Vacuum Cleaner,home,midwest,phone_sales,2,332.15,664.30
+generated-order-00496,2025-02-13,cust-rand-065,prod-203,Air Fryer,home,midwest,physical_store,3,536.53,
+generated-order-00497,2025-09-07,cust-rand-131,prod-402,Standing Desk,furniture,midwest,marketplace,8,1646.32,13170.56
+generated-order-00498,2025-05-12,cust-rand-142,prod-402,Standing Desk,furniture,southeast,online,1,2115.89,
+generated-order-00499,2025-05-21,cust-rand-049,prod-103,Portable Projector,electronics,midwest,physical_store,4,571.69,2286.76
+generated-order-00500,2026-02-21,cust-rand-205,prod-102,Notebook 14,electronics,northeast,physical_store,5,3763.15,18815.75
+generated-order-00501,2025-11-10,cust-rand-244,prod-202,Desk Lamp,home,north,phone_sales,3,54.69,
+generated-order-00502,2025-04-03,cust-rand-075,prod-503,Noise Cancelling Headphones,accessories,south,phone_sales,5,1211.32,6056.60
+generated-order-00503,2025-09-17,cust-rand-204,prod-502,Travel Mug,accessories,southeast,online,5,29.03,145.15
+generated-order-00504,2025-10-14,cust-rand-102,prod-202,Desk Lamp,home,southeast,marketplace,1,98.57,98.57
+generated-order-00505,2025-04-13,cust-rand-290,prod-503,Noise Cancelling Headphones,accessories,northeast,physical_store,2,1049.22,2098.44
+generated-order-00506,2025-07-30,cust-rand-058,prod-104,Mechanical Keyboard,electronics,north,phone_sales,8,417.86,3342.88
+generated-order-00507,2025-05-04,cust-rand-230,prod-205,Vacuum Cleaner,home,northeast,partner,8,576.43,4611.44
+generated-order-00508,2025-02-19,cust-rand-106,prod-102,Notebook 14,electronics,south,marketplace,1,2591.94,2591.94
+generated-order-00509,2025-03-11,cust-rand-339,prod-202,Desk Lamp,home,midwest,marketplace,5,129.10,645.50
+generated-order-00510,2025-05-12,cust-rand-098,prod-504,Webcam,accessories,midwest,marketplace,2,137.55,275.10
+generated-order-00511,2026-01-28,cust-rand-317,prod-202,Desk Lamp,home,north,marketplace,5,63.83,319.15
+generated-order-00512,2026-02-15,cust-rand-283,prod-202,Desk Lamp,home,midwest,physical_store,5,55.23,
+generated-order-00513,2025-06-24,cust-rand-148,prod-301,Yoga Mat,fitness,south,partner,5,63.57,317.85
+generated-order-00514,2025-01-20,cust-rand-005,prod-201,Coffee Maker,home,midwest,marketplace,3,131.32,393.96
+generated-order-00515,2025-03-05,cust-rand-232,prod-201,Coffee Maker,home,north,physical_store,8,185.17,1481.36
+generated-order-00516,2025-03-18,cust-rand-134,prod-203,Air Fryer,home,south,physical_store,1,272.93,272.93
+generated-order-00517,2026-03-17,cust-rand-102,prod-301,Yoga Mat,fitness,southeast,marketplace,4,73.26,293.04
+generated-order-00518,2025-06-24,cust-rand-199,prod-204,Blender,home,north,marketplace,1,160.87,
+generated-order-00519,2025-07-29,cust-rand-318,prod-104,Mechanical Keyboard,electronics,southeast,partner,1,503.66,503.66
+generated-order-00520,2025-03-23,cust-rand-178,prod-204,Blender,home,midwest,partner,1,115.71,115.71
+generated-order-00521,2025-12-24,cust-rand-237,prod-101,Wireless Mouse,electronics,south,physical_store,4,64.67,
+generated-order-00522,2026-01-30,cust-rand-128,prod-301,Yoga Mat,fitness,northeast,partner,3,116.83,350.49
+generated-order-00523,2026-03-14,cust-rand-129,prod-205,Vacuum Cleaner,home,south,physical_store,5,481.92,2409.60
+generated-order-00524,2025-02-04,cust-rand-202,prod-402,Standing Desk,furniture,northeast,physical_store,3,1265.53,3796.59
+generated-order-00525,2025-12-02,cust-rand-250,prod-105,Smart Speaker,electronics,midwest,partner,8,280.04,2240.32
+generated-order-00526,2025-10-30,cust-rand-312,prod-104,Mechanical Keyboard,electronics,southeast,marketplace,4,300.44,1201.76
+generated-order-00527,2025-04-02,cust-rand-057,prod-503,Noise Cancelling Headphones,accessories,southeast,online,6,373.18,2239.08
+generated-order-00528,2025-09-13,cust-rand-324,prod-503,Noise Cancelling Headphones,accessories,midwest,phone_sales,7,394.50,2761.50
+generated-order-00529,2026-01-22,cust-rand-201,prod-402,Standing Desk,furniture,southeast,phone_sales,6,1259.41,7556.46
+generated-order-00530,2025-03-04,cust-rand-101,prod-302,Adjustable Dumbbells,fitness,south,phone_sales,2,668.26,1336.52
+generated-order-00531,2026-01-04,cust-rand-174,prod-503,Noise Cancelling Headphones,accessories,southeast,phone_sales,8,1001.56,8012.48
+generated-order-00532,2025-01-24,cust-rand-006,prod-403,Bookshelf,furniture,south,partner,3,241.44,724.32
+generated-order-00533,2025-06-12,cust-rand-230,prod-501,Backpack,accessories,midwest,online,3,127.29,
+generated-order-00534,2026-04-11,cust-rand-338,prod-204,Blender,home,midwest,online,6,195.70,1174.20
+generated-order-00535,2025-12-21,cust-rand-075,prod-403,Bookshelf,furniture,southeast,online,1,597.25,597.25
+generated-order-00536,2025-05-24,cust-rand-066,prod-301,Yoga Mat,fitness,midwest,physical_store,2,122.42,244.84
+generated-order-00537,2026-04-17,cust-rand-320,prod-502,Travel Mug,accessories,northeast,partner,8,36.93,295.44
+generated-order-00538,2026-02-08,cust-rand-222,prod-501,Backpack,accessories,south,online,7,209.03,1463.21
+generated-order-00539,2025-12-26,cust-rand-035,prod-501,Backpack,accessories,northeast,physical_store,4,92.83,
+generated-order-00540,2025-08-01,cust-rand-121,prod-204,Blender,home,south,phone_sales,6,117.88,
+generated-order-00541,2025-07-12,cust-rand-172,prod-204,Blender,home,midwest,physical_store,6,289.81,1738.86
+generated-order-00542,2025-06-01,cust-rand-026,prod-502,Travel Mug,accessories,northeast,online,3,69.30,207.90
+generated-order-00543,2025-09-23,cust-rand-235,prod-203,Air Fryer,home,midwest,marketplace,3,276.08,828.24
+generated-order-00544,2025-12-02,cust-rand-254,prod-502,Travel Mug,accessories,midwest,marketplace,1,51.39,51.39
+generated-order-00545,2025-09-23,cust-rand-009,prod-203,Air Fryer,home,south,online,4,678.16,
+generated-order-00546,2025-12-15,cust-rand-149,prod-205,Vacuum Cleaner,home,north,partner,7,427.91,2995.37
+generated-order-00547,2025-11-06,cust-rand-018,prod-104,Mechanical Keyboard,electronics,midwest,partner,2,335.29,
+generated-order-00548,2025-04-14,cust-rand-166,prod-203,Air Fryer,home,midwest,physical_store,8,486.03,3888.24
+generated-order-00549,2025-04-09,cust-rand-250,prod-202,Desk Lamp,home,midwest,physical_store,5,75.09,
+generated-order-00550,2025-01-21,cust-rand-009,prod-102,Notebook 14,electronics,north,marketplace,5,2593.71,12968.55
+generated-order-00551,2025-08-10,cust-rand-172,prod-504,Webcam,accessories,northeast,online,7,325.02,2275.14
+generated-order-00552,2025-01-20,cust-rand-322,prod-302,Adjustable Dumbbells,fitness,south,physical_store,5,593.53,2967.65
+generated-order-00553,2025-01-31,cust-rand-146,prod-105,Smart Speaker,electronics,midwest,marketplace,5,207.59,
+generated-order-00554,2026-01-22,cust-rand-282,prod-102,Notebook 14,electronics,midwest,marketplace,6,4018.57,24111.42
+generated-order-00555,2025-08-14,cust-rand-153,prod-302,Adjustable Dumbbells,fitness,north,online,5,586.16,2930.80
+generated-order-00556,2025-06-09,cust-rand-158,prod-401,Office Chair,furniture,southeast,physical_store,7,829.38,5805.66
+generated-order-00557,2025-04-12,cust-rand-100,prod-101,Wireless Mouse,electronics,midwest,partner,1,130.61,130.61
+generated-order-00558,2025-01-09,cust-rand-240,prod-104,Mechanical Keyboard,electronics,midwest,marketplace,8,507.18,4057.44
+generated-order-00559,2025-03-30,cust-rand-158,prod-403,Bookshelf,furniture,midwest,online,2,523.32,1046.64
+generated-order-00560,2026-04-17,cust-rand-313,prod-502,Travel Mug,accessories,north,online,8,32.02,256.16
+generated-order-00561,2026-03-22,cust-rand-104,prod-103,Portable Projector,electronics,north,online,7,840.33,5882.31
+generated-order-00562,2025-03-18,cust-rand-309,prod-301,Yoga Mat,fitness,northeast,online,2,86.61,173.22
+generated-order-00563,2025-03-24,cust-rand-081,prod-203,Air Fryer,home,southeast,online,1,430.70,430.70
+generated-order-00564,2025-04-02,cust-rand-244,prod-504,Webcam,accessories,midwest,online,4,184.18,736.72
+generated-order-00565,2025-05-07,cust-rand-205,prod-205,Vacuum Cleaner,home,south,online,7,358.59,2510.13
+generated-order-00566,2025-04-28,cust-rand-042,prod-104,Mechanical Keyboard,electronics,midwest,physical_store,5,480.56,
+generated-order-00567,2025-04-23,cust-rand-204,prod-401,Office Chair,furniture,north,phone_sales,4,904.86,3619.44
+generated-order-00568,2025-03-07,cust-rand-179,prod-204,Blender,home,north,online,8,249.29,1994.32
+generated-order-00569,2026-04-25,cust-rand-114,prod-201,Coffee Maker,home,northeast,phone_sales,7,271.00,1897.00
+generated-order-00570,2025-01-20,cust-rand-176,prod-105,Smart Speaker,electronics,northeast,online,6,213.40,1280.40
+generated-order-00571,2025-01-11,cust-rand-048,prod-102,Notebook 14,electronics,northeast,physical_store,4,2244.66,8978.64
+generated-order-00572,2025-10-18,cust-rand-067,prod-203,Air Fryer,home,north,physical_store,7,619.44,4336.08
+generated-order-00573,2025-05-28,cust-rand-262,prod-105,Smart Speaker,electronics,southeast,partner,1,165.46,165.46
+generated-order-00574,2025-02-05,cust-rand-222,prod-104,Mechanical Keyboard,electronics,midwest,online,7,261.32,1829.24
+generated-order-00575,2025-10-14,cust-rand-098,prod-503,Noise Cancelling Headphones,accessories,southeast,online,6,594.91,
+generated-order-00576,2025-10-29,cust-rand-006,prod-104,Mechanical Keyboard,electronics,northeast,phone_sales,7,202.87,1420.09
+generated-order-00577,2025-07-11,cust-rand-068,prod-205,Vacuum Cleaner,home,north,partner,3,766.49,2299.47
+generated-order-00578,2026-04-01,cust-rand-063,prod-204,Blender,home,southeast,partner,7,260.49,1823.43
+generated-order-00579,2026-03-04,cust-rand-139,prod-103,Portable Projector,electronics,southeast,phone_sales,8,385.09,
+generated-order-00580,2025-08-25,cust-rand-086,prod-301,Yoga Mat,fitness,southeast,phone_sales,3,98.98,296.94
+generated-order-00581,2025-12-24,cust-rand-006,prod-205,Vacuum Cleaner,home,northeast,phone_sales,4,655.96,2623.84
+generated-order-00582,2025-07-29,cust-rand-221,prod-201,Coffee Maker,home,south,physical_store,4,199.43,797.72
+generated-order-00583,2026-04-19,cust-rand-217,prod-202,Desk Lamp,home,northeast,partner,1,92.64,92.64
+generated-order-00584,2025-04-16,cust-rand-026,prod-302,Adjustable Dumbbells,fitness,midwest,physical_store,2,789.89,1579.78
+generated-order-00585,2025-08-25,cust-rand-131,prod-403,Bookshelf,furniture,midwest,phone_sales,8,543.62,4348.96
+generated-order-00586,2025-04-18,cust-rand-155,prod-202,Desk Lamp,home,midwest,partner,5,54.61,273.05
+generated-order-00587,2025-01-13,cust-rand-266,prod-104,Mechanical Keyboard,electronics,southeast,phone_sales,6,357.15,2142.90
+generated-order-00588,2025-05-25,cust-rand-085,prod-504,Webcam,accessories,south,partner,8,334.37,2674.96
+generated-order-00589,2025-02-24,cust-rand-062,prod-401,Office Chair,furniture,north,marketplace,7,1160.49,8123.43
+generated-order-00590,2025-07-05,cust-rand-038,prod-202,Desk Lamp,home,southeast,online,8,141.47,1131.76
+generated-order-00591,2026-02-28,cust-rand-286,prod-101,Wireless Mouse,electronics,midwest,marketplace,5,78.23,391.15
+generated-order-00592,2026-02-12,cust-rand-093,prod-203,Air Fryer,home,midwest,marketplace,1,624.28,624.28
+generated-order-00593,2025-11-20,cust-rand-092,prod-302,Adjustable Dumbbells,fitness,southeast,physical_store,7,622.55,4357.85
+generated-order-00594,2025-02-06,cust-rand-016,prod-203,Air Fryer,home,north,partner,8,432.98,3463.84
+generated-order-00595,2025-10-13,cust-rand-023,prod-203,Air Fryer,home,south,marketplace,5,294.89,1474.45
+generated-order-00596,2025-06-03,cust-rand-217,prod-503,Noise Cancelling Headphones,accessories,south,phone_sales,1,452.87,452.87
+generated-order-00597,2025-01-24,cust-rand-317,prod-204,Blender,home,south,physical_store,2,117.53,235.06
+generated-order-00598,2026-03-31,cust-rand-040,prod-402,Standing Desk,furniture,northeast,partner,4,770.33,3081.32
+generated-order-00599,2025-04-15,cust-rand-263,prod-504,Webcam,accessories,midwest,marketplace,7,433.41,3033.87
+generated-order-00600,2025-06-05,cust-rand-206,prod-105,Smart Speaker,electronics,northeast,physical_store,2,171.05,342.10
+generated-order-00601,2025-03-27,cust-rand-320,prod-203,Air Fryer,home,north,online,8,527.33,4218.64
+generated-order-00602,2025-09-29,cust-rand-133,prod-103,Portable Projector,electronics,south,online,7,365.94,2561.58
+generated-order-00603,2025-01-29,cust-rand-115,prod-302,Adjustable Dumbbells,fitness,southeast,physical_store,5,367.54,1837.70
+generated-order-00604,2025-11-11,cust-rand-110,prod-101,Wireless Mouse,electronics,midwest,phone_sales,5,173.62,
+generated-order-00605,2025-05-16,cust-rand-231,prod-103,Portable Projector,electronics,southeast,phone_sales,3,568.86,1706.58
+generated-order-00606,2025-06-27,cust-rand-284,prod-105,Smart Speaker,electronics,northeast,online,8,233.26,
+generated-order-00607,2025-11-29,cust-rand-237,prod-205,Vacuum Cleaner,home,northeast,phone_sales,7,555.05,3885.35
+generated-order-00608,2025-11-04,cust-rand-223,prod-303,Protein Blender Bottle,fitness,north,partner,8,21.73,173.84
+generated-order-00609,2026-02-10,cust-rand-077,prod-402,Standing Desk,furniture,southeast,marketplace,7,1702.75,11919.25
+generated-order-00610,2025-07-11,cust-rand-052,prod-501,Backpack,accessories,north,marketplace,8,193.00,
+generated-order-00611,2025-11-07,cust-rand-117,prod-503,Noise Cancelling Headphones,accessories,south,phone_sales,8,1032.07,
+generated-order-00612,2025-04-13,cust-rand-308,prod-105,Smart Speaker,electronics,midwest,marketplace,5,290.08,1450.40
+generated-order-00613,2025-01-17,cust-rand-185,prod-502,Travel Mug,accessories,midwest,phone_sales,8,26.71,213.68
+generated-order-00614,2025-05-09,cust-rand-008,prod-502,Travel Mug,accessories,midwest,physical_store,3,35.11,105.33
+generated-order-00615,2025-07-22,cust-rand-181,prod-101,Wireless Mouse,electronics,northeast,phone_sales,7,129.44,
+generated-order-00616,2025-05-19,cust-rand-273,prod-102,Notebook 14,electronics,north,marketplace,7,3358.87,23512.09
+generated-order-00617,2025-02-04,cust-rand-162,prod-504,Webcam,accessories,north,online,8,324.94,
+generated-order-00618,2025-04-01,cust-rand-186,prod-401,Office Chair,furniture,northeast,phone_sales,6,1349.07,8094.42
+generated-order-00619,2026-03-20,cust-rand-026,prod-103,Portable Projector,electronics,northeast,phone_sales,4,816.31,3265.24
+generated-order-00620,2026-03-20,cust-rand-003,prod-504,Webcam,accessories,north,online,3,283.74,
+generated-order-00621,2026-01-27,cust-rand-115,prod-103,Portable Projector,electronics,south,marketplace,2,393.05,
+generated-order-00622,2026-03-10,cust-rand-249,prod-202,Desk Lamp,home,northeast,phone_sales,7,143.45,1004.15
+generated-order-00623,2025-06-01,cust-rand-088,prod-204,Blender,home,northeast,phone_sales,1,166.34,166.34
+generated-order-00624,2025-04-03,cust-rand-301,prod-402,Standing Desk,furniture,north,marketplace,4,1330.79,5323.16
+generated-order-00625,2026-03-31,cust-rand-025,prod-104,Mechanical Keyboard,electronics,northeast,marketplace,3,495.34,1486.02
+generated-order-00626,2025-06-30,cust-rand-293,prod-104,Mechanical Keyboard,electronics,north,online,8,265.56,2124.48
+generated-order-00627,2026-03-08,cust-rand-175,prod-102,Notebook 14,electronics,north,partner,1,3567.30,
+generated-order-00628,2025-09-26,cust-rand-134,prod-202,Desk Lamp,home,south,physical_store,7,109.55,766.85
+generated-order-00629,2025-01-11,cust-rand-221,prod-501,Backpack,accessories,northeast,online,4,139.58,
+generated-order-00630,2025-01-23,cust-rand-159,prod-102,Notebook 14,electronics,south,phone_sales,8,2234.13,17873.04
+generated-order-00631,2025-12-15,cust-rand-248,prod-204,Blender,home,south,online,6,147.10,882.60
+generated-order-00632,2025-01-16,cust-rand-344,prod-502,Travel Mug,accessories,southeast,marketplace,3,18.16,54.48
+generated-order-00633,2026-02-10,cust-rand-323,prod-205,Vacuum Cleaner,home,southeast,online,6,354.65,2127.90
+generated-order-00634,2026-03-02,cust-rand-121,prod-503,Noise Cancelling Headphones,accessories,north,marketplace,2,980.45,1960.90
+generated-order-00635,2026-04-16,cust-rand-290,prod-205,Vacuum Cleaner,home,northeast,phone_sales,1,351.22,351.22
+generated-order-00636,2025-04-27,cust-rand-130,prod-101,Wireless Mouse,electronics,southeast,marketplace,4,66.65,
+generated-order-00637,2025-12-02,cust-rand-111,prod-403,Bookshelf,furniture,south,partner,5,310.66,1553.30
+generated-order-00638,2025-06-25,cust-rand-157,prod-201,Coffee Maker,home,southeast,marketplace,6,326.49,1958.94
+generated-order-00639,2025-07-21,cust-rand-273,prod-504,Webcam,accessories,northeast,marketplace,3,412.60,1237.80
+generated-order-00640,2025-11-14,cust-rand-203,prod-103,Portable Projector,electronics,north,physical_store,7,527.22,3690.54
+generated-order-00641,2026-03-16,cust-rand-271,prod-205,Vacuum Cleaner,home,northeast,online,4,521.00,2084.00
+generated-order-00642,2025-02-06,cust-rand-198,prod-201,Coffee Maker,home,midwest,phone_sales,4,327.75,1311.00
+generated-order-00643,2025-07-25,cust-rand-105,prod-201,Coffee Maker,home,north,marketplace,4,300.24,1200.96
+generated-order-00644,2025-02-17,cust-rand-228,prod-301,Yoga Mat,fitness,south,online,5,109.37,546.85
+generated-order-00645,2025-12-21,cust-rand-251,prod-205,Vacuum Cleaner,home,southeast,online,3,674.07,
+generated-order-00646,2026-01-11,cust-rand-173,prod-104,Mechanical Keyboard,electronics,north,online,6,286.21,1717.26
+generated-order-00647,2026-02-26,cust-rand-105,prod-402,Standing Desk,furniture,south,partner,5,1448.89,7244.45
+generated-order-00648,2025-12-05,cust-rand-059,prod-103,Portable Projector,electronics,north,physical_store,7,864.64,
+generated-order-00649,2026-04-08,cust-rand-099,prod-303,Protein Blender Bottle,fitness,northeast,physical_store,6,47.00,282.00
+generated-order-00650,2025-09-17,cust-rand-148,prod-105,Smart Speaker,electronics,north,marketplace,3,276.76,830.28
+generated-order-00651,2025-10-31,cust-rand-102,prod-403,Bookshelf,furniture,southeast,phone_sales,2,606.09,1212.18
+generated-order-00652,2025-12-13,cust-rand-084,prod-201,Coffee Maker,home,northeast,phone_sales,1,280.96,280.96
+generated-order-00653,2025-06-20,cust-rand-323,prod-202,Desk Lamp,home,north,partner,2,71.08,142.16
+generated-order-00654,2025-04-27,cust-rand-176,prod-204,Blender,home,midwest,marketplace,4,166.65,666.60
+generated-order-00655,2025-06-28,cust-rand-258,prod-102,Notebook 14,electronics,midwest,online,4,3737.59,14950.36
+generated-order-00656,2025-03-11,cust-rand-335,prod-402,Standing Desk,furniture,northeast,physical_store,2,1326.32,2652.64
+generated-order-00657,2025-07-02,cust-rand-053,prod-204,Blender,home,north,phone_sales,4,275.36,1101.44
+generated-order-00658,2025-08-28,cust-rand-257,prod-303,Protein Blender Bottle,fitness,north,physical_store,5,36.87,
+generated-order-00659,2025-08-06,cust-rand-309,prod-104,Mechanical Keyboard,electronics,northeast,phone_sales,1,502.78,502.78
+generated-order-00660,2025-09-06,cust-rand-193,prod-401,Office Chair,furniture,midwest,phone_sales,3,867.23,2601.69
+generated-order-00661,2025-01-03,cust-rand-108,prod-503,Noise Cancelling Headphones,accessories,southeast,partner,5,882.51,4412.55
+generated-order-00662,2025-09-19,cust-rand-042,prod-502,Travel Mug,accessories,midwest,physical_store,7,26.22,183.54
+generated-order-00663,2025-11-28,cust-rand-247,prod-102,Notebook 14,electronics,south,physical_store,5,2841.00,14205.00
+generated-order-00664,2026-01-30,cust-rand-137,prod-301,Yoga Mat,fitness,midwest,partner,2,117.86,235.72
+generated-order-00665,2025-09-06,cust-rand-348,prod-102,Notebook 14,electronics,north,partner,6,3369.23,20215.38
+generated-order-00666,2026-02-22,cust-rand-033,prod-202,Desk Lamp,home,northeast,online,6,127.13,762.78
+generated-order-00667,2025-04-30,cust-rand-321,prod-201,Coffee Maker,home,midwest,marketplace,7,325.07,2275.49
+generated-order-00668,2025-09-05,cust-rand-001,prod-104,Mechanical Keyboard,electronics,northeast,physical_store,6,357.35,2144.10
+generated-order-00669,2026-01-03,cust-rand-165,prod-103,Portable Projector,electronics,midwest,physical_store,7,352.05,2464.35
+generated-order-00670,2025-12-08,cust-rand-298,prod-204,Blender,home,south,physical_store,4,184.51,738.04
+generated-order-00671,2025-05-28,cust-rand-173,prod-202,Desk Lamp,home,south,marketplace,4,132.27,
+generated-order-00672,2025-09-26,cust-rand-326,prod-204,Blender,home,northeast,partner,1,235.60,235.60
+generated-order-00673,2025-12-13,cust-rand-330,prod-503,Noise Cancelling Headphones,accessories,north,phone_sales,5,1152.81,5764.05
+generated-order-00674,2026-02-27,cust-rand-089,prod-302,Adjustable Dumbbells,fitness,southeast,marketplace,8,674.68,5397.44
+generated-order-00675,2025-09-06,cust-rand-020,prod-503,Noise Cancelling Headphones,accessories,northeast,partner,2,968.08,1936.16
+generated-order-00676,2025-03-31,cust-rand-160,prod-303,Protein Blender Bottle,fitness,south,phone_sales,7,45.51,318.57
+generated-order-00677,2025-08-15,cust-rand-185,prod-504,Webcam,accessories,midwest,marketplace,4,376.53,1506.12
+generated-order-00678,2025-03-06,cust-rand-205,prod-201,Coffee Maker,home,northeast,partner,2,183.57,
+generated-order-00679,2025-01-23,cust-rand-139,prod-104,Mechanical Keyboard,electronics,north,marketplace,6,394.67,2368.02
+generated-order-00680,2025-09-19,cust-rand-166,prod-103,Portable Projector,electronics,southeast,online,6,479.85,2879.10
+generated-order-00681,2026-01-19,cust-rand-192,prod-201,Coffee Maker,home,north,online,5,171.27,856.35
+generated-order-00682,2026-04-21,cust-rand-113,prod-302,Adjustable Dumbbells,fitness,south,online,5,930.84,
+generated-order-00683,2026-03-11,cust-rand-032,prod-503,Noise Cancelling Headphones,accessories,northeast,marketplace,4,813.72,3254.88
+generated-order-00684,2025-04-02,cust-rand-300,prod-101,Wireless Mouse,electronics,southeast,physical_store,7,120.15,841.05
+generated-order-00685,2025-04-17,cust-rand-164,prod-102,Notebook 14,electronics,north,online,7,3709.04,
+generated-order-00686,2025-05-29,cust-rand-135,prod-401,Office Chair,furniture,south,partner,8,476.51,3812.08
+generated-order-00687,2025-05-07,cust-rand-006,prod-302,Adjustable Dumbbells,fitness,southeast,physical_store,4,875.37,3501.48
+generated-order-00688,2025-09-06,cust-rand-146,prod-303,Protein Blender Bottle,fitness,north,physical_store,5,38.36,191.80
+generated-order-00689,2025-04-21,cust-rand-348,prod-104,Mechanical Keyboard,electronics,south,phone_sales,5,457.80,2289.00
+generated-order-00690,2025-09-25,cust-rand-280,prod-502,Travel Mug,accessories,southeast,partner,7,20.38,142.66
+generated-order-00691,2025-05-30,cust-rand-340,prod-105,Smart Speaker,electronics,north,phone_sales,7,240.65,1684.55
+generated-order-00692,2025-01-08,cust-rand-224,prod-103,Portable Projector,electronics,southeast,marketplace,4,941.61,3766.44
+generated-order-00693,2025-05-04,cust-rand-002,prod-102,Notebook 14,electronics,north,physical_store,8,3279.71,
+generated-order-00694,2025-09-08,cust-rand-314,prod-201,Coffee Maker,home,north,partner,4,244.43,977.72
+generated-order-00695,2025-02-18,cust-rand-075,prod-205,Vacuum Cleaner,home,midwest,partner,8,839.50,6716.00
+generated-order-00696,2025-11-05,cust-rand-059,prod-203,Air Fryer,home,south,phone_sales,6,302.71,1816.26
+generated-order-00697,2025-11-23,cust-rand-076,prod-104,Mechanical Keyboard,electronics,midwest,marketplace,7,279.04,1953.28
+generated-order-00698,2025-04-26,cust-rand-137,prod-202,Desk Lamp,home,southeast,phone_sales,1,156.40,156.40
+generated-order-00699,2026-01-28,cust-rand-173,prod-403,Bookshelf,furniture,south,marketplace,3,238.72,716.16
+generated-order-00700,2026-02-28,cust-rand-088,prod-101,Wireless Mouse,electronics,southeast,marketplace,2,61.62,
+generated-order-00701,2025-08-19,cust-rand-317,prod-105,Smart Speaker,electronics,southeast,partner,3,364.50,1093.50
+generated-order-00702,2026-03-01,cust-rand-274,prod-103,Portable Projector,electronics,southeast,phone_sales,8,929.69,7437.52
+generated-order-00703,2025-07-21,cust-rand-037,prod-303,Protein Blender Bottle,fitness,midwest,marketplace,7,23.58,165.06
+generated-order-00704,2025-10-07,cust-rand-020,prod-502,Travel Mug,accessories,northeast,online,3,31.37,94.11
+generated-order-00705,2026-04-21,cust-rand-264,prod-401,Office Chair,furniture,southeast,physical_store,5,1366.24,
+generated-order-00706,2026-01-12,cust-rand-304,prod-402,Standing Desk,furniture,northeast,partner,3,1619.10,4857.30
+generated-order-00707,2025-05-19,cust-rand-216,prod-105,Smart Speaker,electronics,southeast,partner,6,301.87,1811.22
+generated-order-00708,2025-08-14,cust-rand-042,prod-205,Vacuum Cleaner,home,southeast,partner,8,841.09,6728.72
+generated-order-00709,2026-02-02,cust-rand-341,prod-201,Coffee Maker,home,south,marketplace,4,180.37,721.48
+generated-order-00710,2026-03-29,cust-rand-017,prod-303,Protein Blender Bottle,fitness,north,physical_store,8,38.53,308.24
+generated-order-00711,2026-03-06,cust-rand-100,prod-204,Blender,home,north,phone_sales,4,304.21,1216.84
+generated-order-00712,2026-03-20,cust-rand-291,prod-401,Office Chair,furniture,southeast,phone_sales,7,990.96,
+generated-order-00713,2026-01-31,cust-rand-172,prod-205,Vacuum Cleaner,home,midwest,physical_store,4,538.27,2153.08
+generated-order-00714,2025-09-28,cust-rand-273,prod-103,Portable Projector,electronics,north,phone_sales,1,658.55,658.55
+generated-order-00715,2026-02-08,cust-rand-028,prod-301,Yoga Mat,fitness,north,marketplace,1,114.14,114.14
+generated-order-00716,2025-08-10,cust-rand-224,prod-205,Vacuum Cleaner,home,southeast,physical_store,4,389.33,1557.32
+generated-order-00717,2025-05-04,cust-rand-215,prod-102,Notebook 14,electronics,midwest,online,5,3482.20,17411.00
+generated-order-00718,2026-04-24,cust-rand-133,prod-202,Desk Lamp,home,north,marketplace,2,116.61,233.22
+generated-order-00719,2025-07-06,cust-rand-012,prod-301,Yoga Mat,fitness,southeast,marketplace,7,87.20,
+generated-order-00720,2025-04-26,cust-rand-260,prod-504,Webcam,accessories,north,online,2,142.94,285.88
+generated-order-00721,2025-01-10,cust-rand-144,prod-503,Noise Cancelling Headphones,accessories,midwest,online,5,710.00,3550.00
+generated-order-00722,2025-01-05,cust-rand-205,prod-203,Air Fryer,home,northeast,marketplace,7,269.89,1889.23
+generated-order-00723,2025-03-01,cust-rand-157,prod-103,Portable Projector,electronics,southeast,partner,7,796.62,5576.34
+generated-order-00724,2025-01-25,cust-rand-280,prod-201,Coffee Maker,home,southeast,physical_store,2,353.93,
+generated-order-00725,2025-12-04,cust-rand-011,prod-302,Adjustable Dumbbells,fitness,north,marketplace,7,962.81,6739.67
+generated-order-00726,2025-11-30,cust-rand-029,prod-501,Backpack,accessories,north,physical_store,2,104.08,
+generated-order-00727,2025-05-18,cust-rand-007,prod-402,Standing Desk,furniture,south,online,3,1440.02,4320.06
+generated-order-00728,2025-05-16,cust-rand-090,prod-402,Standing Desk,furniture,north,online,1,707.41,707.41
+generated-order-00729,2025-06-20,cust-rand-195,prod-402,Standing Desk,furniture,northeast,online,6,1945.42,11672.52
+generated-order-00730,2026-03-08,cust-rand-185,prod-202,Desk Lamp,home,north,online,4,157.96,631.84
+generated-order-00731,2025-11-05,cust-rand-333,prod-203,Air Fryer,home,midwest,partner,2,363.90,727.80
+generated-order-00732,2025-04-20,cust-rand-141,prod-503,Noise Cancelling Headphones,accessories,northeast,online,2,365.14,730.28
+generated-order-00733,2026-01-28,cust-rand-050,prod-103,Portable Projector,electronics,north,physical_store,2,699.60,1399.20
+generated-order-00734,2025-07-03,cust-rand-333,prod-105,Smart Speaker,electronics,northeast,marketplace,2,400.60,801.20
+generated-order-00735,2025-04-27,cust-rand-332,prod-205,Vacuum Cleaner,home,midwest,phone_sales,3,563.14,
+generated-order-00736,2026-01-11,cust-rand-022,prod-203,Air Fryer,home,southeast,online,5,499.64,2498.20
+generated-order-00737,2025-06-16,cust-rand-060,prod-205,Vacuum Cleaner,home,southeast,online,4,603.57,2414.28
+generated-order-00738,2026-01-27,cust-rand-021,prod-102,Notebook 14,electronics,north,marketplace,1,2995.48,2995.48
+generated-order-00739,2025-03-11,cust-rand-043,prod-205,Vacuum Cleaner,home,northeast,marketplace,5,572.05,2860.25
+generated-order-00740,2025-02-20,cust-rand-338,prod-105,Smart Speaker,electronics,northeast,online,2,158.01,316.02
+generated-order-00741,2025-04-19,cust-rand-213,prod-103,Portable Projector,electronics,north,physical_store,5,921.51,4607.55
+generated-order-00742,2025-05-05,cust-rand-318,prod-203,Air Fryer,home,northeast,online,7,300.29,
+generated-order-00743,2025-12-21,cust-rand-283,prod-201,Coffee Maker,home,northeast,phone_sales,5,318.22,
+generated-order-00744,2025-12-19,cust-rand-029,prod-302,Adjustable Dumbbells,fitness,southeast,online,7,895.75,6270.25
+generated-order-00745,2025-01-08,cust-rand-223,prod-402,Standing Desk,furniture,south,online,1,987.28,987.28
+generated-order-00746,2025-10-01,cust-rand-068,prod-302,Adjustable Dumbbells,fitness,midwest,online,3,337.75,1013.25
+generated-order-00747,2025-12-31,cust-rand-302,prod-501,Backpack,accessories,northeast,phone_sales,5,127.86,639.30
+generated-order-00748,2025-03-04,cust-rand-144,prod-203,Air Fryer,home,midwest,phone_sales,8,317.76,2542.08
+generated-order-00749,2025-08-05,cust-rand-233,prod-101,Wireless Mouse,electronics,midwest,partner,4,66.95,267.80
+generated-order-00750,2026-04-25,cust-rand-249,prod-103,Portable Projector,electronics,midwest,marketplace,2,370.83,741.66
+generated-order-00751,2025-06-05,cust-rand-282,prod-403,Bookshelf,furniture,midwest,online,6,285.44,1712.64
+generated-order-00752,2026-02-14,cust-rand-170,prod-504,Webcam,accessories,midwest,phone_sales,6,338.61,2031.66
+generated-order-00753,2026-04-02,cust-rand-157,prod-201,Coffee Maker,home,northeast,partner,4,226.24,
+generated-order-00754,2025-07-07,cust-rand-025,prod-403,Bookshelf,furniture,south,physical_store,7,511.22,3578.54
+generated-order-00755,2026-03-29,cust-rand-347,prod-105,Smart Speaker,electronics,north,online,6,316.03,1896.18
+generated-order-00756,2025-10-05,cust-rand-143,prod-501,Backpack,accessories,southeast,marketplace,6,218.46,1310.76
+generated-order-00757,2025-04-19,cust-rand-252,prod-203,Air Fryer,home,north,physical_store,5,427.23,2136.15
+generated-order-00758,2025-11-11,cust-rand-045,prod-302,Adjustable Dumbbells,fitness,south,marketplace,2,791.97,1583.94
+generated-order-00759,2025-09-25,cust-rand-243,prod-202,Desk Lamp,home,southeast,partner,5,95.19,475.95
+generated-order-00760,2026-02-10,cust-rand-012,prod-204,Blender,home,midwest,phone_sales,4,244.26,
+generated-order-00761,2025-04-06,cust-rand-242,prod-103,Portable Projector,electronics,north,phone_sales,8,974.84,7798.72
+generated-order-00762,2025-08-22,cust-rand-160,prod-203,Air Fryer,home,north,partner,6,564.21,3385.26
+generated-order-00763,2026-02-07,cust-rand-096,prod-403,Bookshelf,furniture,northeast,marketplace,4,320.31,1281.24
+generated-order-00764,2025-09-17,cust-rand-317,prod-502,Travel Mug,accessories,northeast,phone_sales,1,39.96,39.96
+generated-order-00765,2026-03-11,cust-rand-155,prod-104,Mechanical Keyboard,electronics,midwest,partner,3,441.16,1323.48
+generated-order-00766,2025-11-21,cust-rand-203,prod-401,Office Chair,furniture,midwest,partner,2,934.57,
+generated-order-00767,2026-04-21,cust-rand-183,prod-303,Protein Blender Bottle,fitness,south,marketplace,2,48.26,96.52
+generated-order-00768,2025-10-10,cust-rand-212,prod-403,Bookshelf,furniture,southeast,marketplace,8,366.83,
+generated-order-00769,2025-09-10,cust-rand-314,prod-101,Wireless Mouse,electronics,south,partner,7,127.23,890.61
+generated-order-00770,2025-05-03,cust-rand-207,prod-104,Mechanical Keyboard,electronics,midwest,partner,4,449.38,
+generated-order-00771,2025-11-03,cust-rand-227,prod-104,Mechanical Keyboard,electronics,southeast,phone_sales,8,328.35,2626.80
+generated-order-00772,2026-04-26,cust-rand-281,prod-401,Office Chair,furniture,southeast,online,8,511.60,4092.80
+generated-order-00773,2025-01-27,cust-rand-329,prod-403,Bookshelf,furniture,south,phone_sales,8,676.64,5413.12
+generated-order-00774,2025-03-08,cust-rand-146,prod-205,Vacuum Cleaner,home,southeast,phone_sales,8,292.62,2340.96
+generated-order-00775,2025-05-11,cust-rand-193,prod-201,Coffee Maker,home,midwest,physical_store,6,196.97,
+generated-order-00776,2025-09-11,cust-rand-280,prod-302,Adjustable Dumbbells,fitness,south,partner,4,468.60,1874.40
+generated-order-00777,2025-11-10,cust-rand-023,prod-501,Backpack,accessories,north,partner,7,195.58,1369.06
+generated-order-00778,2025-07-29,cust-rand-215,prod-105,Smart Speaker,electronics,north,phone_sales,8,150.74,1205.92
+generated-order-00779,2025-10-02,cust-rand-205,prod-502,Travel Mug,accessories,midwest,partner,5,33.09,165.45
+generated-order-00780,2025-05-16,cust-rand-205,prod-302,Adjustable Dumbbells,fitness,northeast,phone_sales,5,322.49,1612.45
+generated-order-00781,2025-03-11,cust-rand-148,prod-205,Vacuum Cleaner,home,southeast,partner,7,750.65,5254.55
+generated-order-00782,2025-12-18,cust-rand-235,prod-402,Standing Desk,furniture,south,physical_store,6,1739.47,10436.82
+generated-order-00783,2025-12-21,cust-rand-159,prod-205,Vacuum Cleaner,home,south,partner,7,334.25,2339.75
+generated-order-00784,2025-11-18,cust-rand-240,prod-302,Adjustable Dumbbells,fitness,midwest,online,5,336.70,1683.50
+generated-order-00785,2025-07-03,cust-rand-133,prod-203,Air Fryer,home,northeast,marketplace,4,277.87,1111.48
+generated-order-00786,2025-07-08,cust-rand-122,prod-203,Air Fryer,home,north,partner,3,613.49,1840.47
+generated-order-00787,2025-06-04,cust-rand-129,prod-501,Backpack,accessories,north,phone_sales,4,207.08,828.32
+generated-order-00788,2026-02-13,cust-rand-291,prod-103,Portable Projector,electronics,midwest,physical_store,1,333.14,333.14
+generated-order-00789,2025-09-26,cust-rand-114,prod-402,Standing Desk,furniture,north,marketplace,6,1644.32,
+generated-order-00790,2025-09-22,cust-rand-324,prod-402,Standing Desk,furniture,south,phone_sales,8,1732.54,13860.32
+generated-order-00791,2025-12-20,cust-rand-042,prod-201,Coffee Maker,home,south,phone_sales,5,188.90,944.50
+generated-order-00792,2026-01-16,cust-rand-047,prod-303,Protein Blender Bottle,fitness,north,marketplace,1,26.59,
+generated-order-00793,2025-11-16,cust-rand-003,prod-504,Webcam,accessories,north,online,5,338.25,1691.25
+generated-order-00794,2025-05-26,cust-rand-017,prod-302,Adjustable Dumbbells,fitness,southeast,phone_sales,1,650.29,650.29
+generated-order-00795,2025-12-10,cust-rand-176,prod-202,Desk Lamp,home,midwest,partner,4,125.65,
+generated-order-00796,2026-01-19,cust-rand-156,prod-501,Backpack,accessories,northeast,online,2,161.02,
+generated-order-00797,2025-08-17,cust-rand-318,prod-501,Backpack,accessories,south,physical_store,5,133.05,665.25
+generated-order-00798,2025-08-01,cust-rand-078,prod-504,Webcam,accessories,south,online,4,302.23,1208.92
+generated-order-00799,2025-11-03,cust-rand-089,prod-302,Adjustable Dumbbells,fitness,southeast,partner,3,426.79,1280.37
+generated-order-00800,2025-06-19,cust-rand-347,prod-101,Wireless Mouse,electronics,midwest,online,4,149.01,596.04
+generated-order-00801,2025-09-12,cust-rand-273,prod-102,Notebook 14,electronics,north,marketplace,5,3230.63,16153.15
+generated-order-00802,2025-05-12,cust-rand-209,prod-502,Travel Mug,accessories,northeast,marketplace,6,43.81,262.86
+generated-order-00803,2025-06-07,cust-rand-036,prod-403,Bookshelf,furniture,midwest,phone_sales,6,484.47,2906.82
+generated-order-00804,2025-08-23,cust-rand-154,prod-401,Office Chair,furniture,northeast,online,5,840.34,4201.70
+generated-order-00805,2025-06-13,cust-rand-127,prod-203,Air Fryer,home,northeast,marketplace,1,357.34,357.34
+generated-order-00806,2025-05-16,cust-rand-057,prod-303,Protein Blender Bottle,fitness,midwest,physical_store,5,34.55,
+generated-order-00807,2025-07-17,cust-rand-058,prod-401,Office Chair,furniture,northeast,physical_store,7,1204.73,8433.11
+generated-order-00808,2025-06-25,cust-rand-330,prod-402,Standing Desk,furniture,south,partner,1,2017.27,2017.27
+generated-order-00809,2025-03-06,cust-rand-145,prod-204,Blender,home,midwest,phone_sales,5,166.75,833.75
+generated-order-00810,2025-09-06,cust-rand-016,prod-302,Adjustable Dumbbells,fitness,southeast,physical_store,4,433.05,1732.20
+generated-order-00811,2025-12-10,cust-rand-026,prod-403,Bookshelf,furniture,southeast,partner,2,392.43,
+generated-order-00812,2025-02-03,cust-rand-002,prod-402,Standing Desk,furniture,northeast,physical_store,4,1151.95,4607.80
+generated-order-00813,2025-12-01,cust-rand-274,prod-501,Backpack,accessories,north,phone_sales,5,164.64,823.20
+generated-order-00814,2025-02-16,cust-rand-230,prod-205,Vacuum Cleaner,home,southeast,physical_store,6,405.32,
+generated-order-00815,2025-09-21,cust-rand-006,prod-101,Wireless Mouse,electronics,south,partner,8,87.20,697.60
+generated-order-00816,2025-08-27,cust-rand-074,prod-501,Backpack,accessories,southeast,marketplace,4,133.58,534.32
+generated-order-00817,2025-07-27,cust-rand-236,prod-401,Office Chair,furniture,south,marketplace,7,527.19,3690.33
+generated-order-00818,2025-08-07,cust-rand-227,prod-402,Standing Desk,furniture,north,online,1,2176.50,2176.50
+generated-order-00819,2025-09-10,cust-rand-040,prod-205,Vacuum Cleaner,home,south,partner,6,723.17,4339.02
+generated-order-00820,2025-02-05,cust-rand-245,prod-204,Blender,home,northeast,physical_store,5,315.80,1579.00
+generated-order-00821,2025-07-26,cust-rand-094,prod-301,Yoga Mat,fitness,southeast,marketplace,2,138.84,277.68
+generated-order-00822,2025-12-13,cust-rand-343,prod-301,Yoga Mat,fitness,northeast,partner,8,117.83,942.64
+generated-order-00823,2025-09-08,cust-rand-228,prod-203,Air Fryer,home,northeast,online,2,510.73,1021.46
+generated-order-00824,2026-02-14,cust-rand-137,prod-205,Vacuum Cleaner,home,midwest,marketplace,6,570.13,3420.78
+generated-order-00825,2025-03-20,cust-rand-037,prod-105,Smart Speaker,electronics,northeast,online,2,193.00,
+generated-order-00826,2025-10-19,cust-rand-022,prod-205,Vacuum Cleaner,home,southeast,marketplace,1,312.63,312.63
+generated-order-00827,2026-01-24,cust-rand-138,prod-103,Portable Projector,electronics,south,phone_sales,2,421.00,
+generated-order-00828,2026-03-24,cust-rand-339,prod-402,Standing Desk,furniture,southeast,physical_store,8,681.05,5448.40
+generated-order-00829,2025-12-27,cust-rand-309,prod-203,Air Fryer,home,north,online,1,289.04,289.04
+generated-order-00830,2025-12-26,cust-rand-138,prod-104,Mechanical Keyboard,electronics,midwest,marketplace,6,262.26,1573.56
+generated-order-00831,2025-06-11,cust-rand-017,prod-104,Mechanical Keyboard,electronics,midwest,online,2,376.42,752.84
+generated-order-00832,2025-02-02,cust-rand-005,prod-302,Adjustable Dumbbells,fitness,midwest,online,5,437.69,2188.45
+generated-order-00833,2025-03-13,cust-rand-073,prod-402,Standing Desk,furniture,south,phone_sales,4,1746.13,6984.52
+generated-order-00834,2025-12-29,cust-rand-151,prod-503,Noise Cancelling Headphones,accessories,northeast,marketplace,6,1107.03,
+generated-order-00835,2025-04-24,cust-rand-050,prod-401,Office Chair,furniture,midwest,marketplace,2,1291.35,2582.70
+generated-order-00836,2025-05-18,cust-rand-079,prod-101,Wireless Mouse,electronics,south,marketplace,2,107.33,214.66
+generated-order-00837,2025-08-03,cust-rand-137,prod-203,Air Fryer,home,southeast,physical_store,6,688.99,4133.94
+generated-order-00838,2025-01-11,cust-rand-061,prod-403,Bookshelf,furniture,south,phone_sales,1,241.31,241.31
+generated-order-00839,2025-10-25,cust-rand-275,prod-104,Mechanical Keyboard,electronics,midwest,phone_sales,6,210.26,1261.56
+generated-order-00840,2025-04-28,cust-rand-030,prod-301,Yoga Mat,fitness,north,physical_store,8,143.03,1144.24
+generated-order-00841,2025-03-31,cust-rand-198,prod-101,Wireless Mouse,electronics,southeast,physical_store,3,127.56,382.68
+generated-order-00842,2025-06-22,cust-rand-087,prod-205,Vacuum Cleaner,home,southeast,partner,3,339.85,1019.55
+generated-order-00843,2025-03-16,cust-rand-203,prod-302,Adjustable Dumbbells,fitness,south,partner,2,528.15,1056.30
+generated-order-00844,2025-12-20,cust-rand-248,prod-303,Protein Blender Bottle,fitness,northeast,phone_sales,8,49.44,395.52
+generated-order-00845,2025-12-16,cust-rand-080,prod-504,Webcam,accessories,south,physical_store,1,245.54,245.54
+generated-order-00846,2025-03-07,cust-rand-076,prod-301,Yoga Mat,fitness,southeast,online,1,79.62,79.62
+generated-order-00847,2025-01-08,cust-rand-141,prod-402,Standing Desk,furniture,southeast,phone_sales,8,1903.08,15224.64
+generated-order-00848,2025-10-06,cust-rand-072,prod-302,Adjustable Dumbbells,fitness,northeast,marketplace,4,928.70,3714.80
+generated-order-00849,2026-01-06,cust-rand-316,prod-105,Smart Speaker,electronics,northeast,partner,7,346.52,
+generated-order-00850,2025-08-03,cust-rand-229,prod-402,Standing Desk,furniture,northeast,online,8,1010.56,
+generated-order-00851,2026-03-19,cust-rand-242,prod-201,Coffee Maker,home,south,physical_store,7,165.98,1161.86
+generated-order-00852,2026-01-28,cust-rand-043,prod-402,Standing Desk,furniture,south,online,3,851.73,2555.19
+generated-order-00853,2025-09-26,cust-rand-332,prod-102,Notebook 14,electronics,north,partner,3,3345.30,10035.90
+generated-order-00854,2025-09-09,cust-rand-018,prod-403,Bookshelf,furniture,northeast,marketplace,1,323.23,323.23
+generated-order-00855,2025-04-05,cust-rand-089,prod-402,Standing Desk,furniture,south,marketplace,4,2139.58,8558.32
+generated-order-00856,2025-09-07,cust-rand-084,prod-303,Protein Blender Bottle,fitness,south,partner,6,52.41,
+generated-order-00857,2025-02-21,cust-rand-341,prod-301,Yoga Mat,fitness,south,physical_store,3,148.43,445.29
+generated-order-00858,2025-10-20,cust-rand-311,prod-102,Notebook 14,electronics,southeast,phone_sales,2,2944.50,5889.00
+generated-order-00859,2025-03-17,cust-rand-245,prod-403,Bookshelf,furniture,north,marketplace,8,475.39,3803.12
+generated-order-00860,2026-03-08,cust-rand-204,prod-503,Noise Cancelling Headphones,accessories,northeast,online,2,1033.63,2067.26
+generated-order-00861,2025-11-20,cust-rand-308,prod-303,Protein Blender Bottle,fitness,northeast,online,5,19.20,
+generated-order-00862,2026-04-25,cust-rand-216,prod-203,Air Fryer,home,north,online,7,638.36,4468.52
+generated-order-00863,2025-02-06,cust-rand-143,prod-102,Notebook 14,electronics,south,physical_store,1,3228.02,3228.02
+generated-order-00864,2026-01-09,cust-rand-108,prod-201,Coffee Maker,home,south,phone_sales,6,158.87,953.22
+generated-order-00865,2025-03-14,cust-rand-145,prod-201,Coffee Maker,home,north,marketplace,1,201.51,201.51
+generated-order-00866,2026-04-13,cust-rand-183,prod-105,Smart Speaker,electronics,south,partner,4,161.58,646.32
+generated-order-00867,2025-04-23,cust-rand-308,prod-504,Webcam,accessories,midwest,partner,6,178.39,1070.34
+generated-order-00868,2025-01-16,cust-rand-156,prod-205,Vacuum Cleaner,home,south,phone_sales,4,354.26,1417.04
+generated-order-00869,2025-05-10,cust-rand-318,prod-201,Coffee Maker,home,southeast,marketplace,1,217.42,217.42
+generated-order-00870,2026-02-13,cust-rand-339,prod-204,Blender,home,midwest,physical_store,4,226.82,907.28
+generated-order-00871,2025-11-18,cust-rand-244,prod-402,Standing Desk,furniture,southeast,online,6,1961.93,11771.58
+generated-order-00872,2025-05-06,cust-rand-206,prod-504,Webcam,accessories,south,partner,6,356.45,2138.70
+generated-order-00873,2025-03-22,cust-rand-097,prod-204,Blender,home,midwest,partner,5,215.00,1075.00
+generated-order-00874,2026-04-10,cust-rand-227,prod-103,Portable Projector,electronics,northeast,online,4,584.52,2338.08
+generated-order-00875,2026-03-07,cust-rand-035,prod-203,Air Fryer,home,north,online,3,299.08,897.24
+generated-order-00876,2025-04-10,cust-rand-117,prod-502,Travel Mug,accessories,north,partner,1,56.98,
+generated-order-00877,2025-01-16,cust-rand-089,prod-204,Blender,home,north,partner,6,134.93,809.58
+generated-order-00878,2025-06-29,cust-rand-199,prod-205,Vacuum Cleaner,home,southeast,phone_sales,4,329.27,
+generated-order-00879,2026-03-27,cust-rand-280,prod-105,Smart Speaker,electronics,southeast,phone_sales,1,182.12,182.12
+generated-order-00880,2026-03-19,cust-rand-171,prod-103,Portable Projector,electronics,north,partner,8,933.27,7466.16
+generated-order-00881,2025-07-15,cust-rand-335,prod-303,Protein Blender Bottle,fitness,north,partner,2,46.87,93.74
+generated-order-00882,2025-12-22,cust-rand-230,prod-503,Noise Cancelling Headphones,accessories,north,phone_sales,4,991.83,3967.32
+generated-order-00883,2026-01-20,cust-rand-044,prod-203,Air Fryer,home,southeast,partner,3,301.77,
+generated-order-00884,2026-04-26,cust-rand-061,prod-103,Portable Projector,electronics,northeast,phone_sales,2,524.55,1049.10
+generated-order-00885,2025-04-29,cust-rand-349,prod-203,Air Fryer,home,northeast,partner,2,452.93,905.86
+generated-order-00886,2025-09-23,cust-rand-231,prod-203,Air Fryer,home,southeast,phone_sales,6,607.05,3642.30
+generated-order-00887,2025-10-02,cust-rand-334,prod-502,Travel Mug,accessories,midwest,partner,2,33.88,67.76
+generated-order-00888,2025-06-27,cust-rand-158,prod-102,Notebook 14,electronics,midwest,marketplace,3,3517.52,10552.56
+generated-order-00889,2025-06-20,cust-rand-200,prod-403,Bookshelf,furniture,south,phone_sales,3,592.72,1778.16
+generated-order-00890,2025-07-23,cust-rand-349,prod-201,Coffee Maker,home,south,partner,1,199.39,199.39
+generated-order-00891,2025-11-04,cust-rand-301,prod-103,Portable Projector,electronics,northeast,marketplace,8,606.54,4852.32
+generated-order-00892,2025-01-17,cust-rand-216,prod-502,Travel Mug,accessories,midwest,physical_store,4,20.86,83.44
+generated-order-00893,2025-05-01,cust-rand-155,prod-501,Backpack,accessories,north,online,3,242.67,728.01
+generated-order-00894,2025-03-04,cust-rand-004,prod-504,Webcam,accessories,southeast,partner,7,285.69,
+generated-order-00895,2026-04-09,cust-rand-110,prod-102,Notebook 14,electronics,midwest,marketplace,7,2717.37,19021.59
+generated-order-00896,2025-11-12,cust-rand-235,prod-201,Coffee Maker,home,southeast,phone_sales,1,221.01,221.01
+generated-order-00897,2025-11-21,cust-rand-108,prod-103,Portable Projector,electronics,south,online,6,324.92,1949.52
+generated-order-00898,2025-04-06,cust-rand-215,prod-501,Backpack,accessories,northeast,partner,4,150.30,601.20
+generated-order-00899,2025-07-18,cust-rand-286,prod-101,Wireless Mouse,electronics,northeast,partner,5,108.34,
+generated-order-00900,2025-02-25,cust-rand-285,prod-203,Air Fryer,home,north,marketplace,6,353.31,2119.86
+generated-order-00901,2025-02-06,cust-rand-018,prod-103,Portable Projector,electronics,northeast,marketplace,5,848.45,4242.25
+generated-order-00902,2025-05-27,cust-rand-288,prod-501,Backpack,accessories,midwest,partner,8,249.36,1994.88
+generated-order-00903,2025-09-09,cust-rand-319,prod-102,Notebook 14,electronics,north,physical_store,8,3270.22,
+generated-order-00904,2025-06-06,cust-rand-014,prod-303,Protein Blender Bottle,fitness,northeast,partner,5,38.73,193.65
+generated-order-00905,2025-05-18,cust-rand-333,prod-401,Office Chair,furniture,midwest,online,8,1098.20,8785.60
+generated-order-00906,2025-11-02,cust-rand-334,prod-302,Adjustable Dumbbells,fitness,north,partner,7,371.23,
+generated-order-00907,2025-08-11,cust-rand-144,prod-503,Noise Cancelling Headphones,accessories,midwest,partner,2,883.84,1767.68
+generated-order-00908,2025-10-09,cust-rand-018,prod-301,Yoga Mat,fitness,north,partner,5,91.83,459.15
+generated-order-00909,2025-10-24,cust-rand-037,prod-503,Noise Cancelling Headphones,accessories,northeast,online,3,943.39,2830.17
+generated-order-00910,2025-08-04,cust-rand-144,prod-204,Blender,home,south,phone_sales,3,106.19,318.57
+generated-order-00911,2025-11-28,cust-rand-051,prod-501,Backpack,accessories,north,marketplace,7,90.21,631.47
+generated-order-00912,2026-01-05,cust-rand-212,prod-401,Office Chair,furniture,northeast,partner,3,1111.82,
+generated-order-00913,2026-04-22,cust-rand-300,prod-302,Adjustable Dumbbells,fitness,northeast,physical_store,6,680.63,4083.78
+generated-order-00914,2025-05-27,cust-rand-015,prod-301,Yoga Mat,fitness,southeast,physical_store,3,136.11,408.33
+generated-order-00915,2025-06-19,cust-rand-088,prod-202,Desk Lamp,home,south,phone_sales,6,115.04,690.24
+generated-order-00916,2025-07-17,cust-rand-180,prod-502,Travel Mug,accessories,midwest,partner,6,31.76,190.56
+generated-order-00917,2025-08-21,cust-rand-140,prod-101,Wireless Mouse,electronics,south,online,1,83.71,83.71
+generated-order-00918,2025-12-02,cust-rand-070,prod-401,Office Chair,furniture,southeast,phone_sales,2,485.09,970.18
+generated-order-00919,2025-12-20,cust-rand-300,prod-202,Desk Lamp,home,north,phone_sales,3,69.69,
+generated-order-00920,2026-01-04,cust-rand-342,prod-502,Travel Mug,accessories,south,partner,5,31.69,158.45
+generated-order-00921,2026-01-25,cust-rand-160,prod-105,Smart Speaker,electronics,south,marketplace,3,283.46,850.38
+generated-order-00922,2025-09-22,cust-rand-166,prod-202,Desk Lamp,home,north,online,8,142.91,1143.28
+generated-order-00923,2025-11-19,cust-rand-043,prod-501,Backpack,accessories,midwest,phone_sales,6,243.48,
+generated-order-00924,2026-03-22,cust-rand-005,prod-105,Smart Speaker,electronics,south,marketplace,4,328.70,1314.80
+generated-order-00925,2025-04-23,cust-rand-071,prod-401,Office Chair,furniture,northeast,online,5,1370.89,
+generated-order-00926,2025-04-07,cust-rand-220,prod-303,Protein Blender Bottle,fitness,north,physical_store,6,49.93,299.58
+generated-order-00927,2025-06-18,cust-rand-268,prod-504,Webcam,accessories,midwest,partner,1,219.01,
+generated-order-00928,2025-06-12,cust-rand-010,prod-203,Air Fryer,home,northeast,phone_sales,6,340.34,2042.04
+generated-order-00929,2025-01-25,cust-rand-003,prod-301,Yoga Mat,fitness,northeast,partner,4,50.52,202.08
+generated-order-00930,2025-07-03,cust-rand-284,prod-501,Backpack,accessories,south,phone_sales,3,106.13,318.39
+generated-order-00931,2025-07-28,cust-rand-282,prod-205,Vacuum Cleaner,home,northeast,partner,4,686.55,2746.20
+generated-order-00932,2025-06-19,cust-rand-293,prod-403,Bookshelf,furniture,southeast,partner,8,736.08,5888.64
+generated-order-00933,2026-02-15,cust-rand-229,prod-501,Backpack,accessories,south,partner,6,163.43,980.58
+generated-order-00934,2025-03-17,cust-rand-085,prod-104,Mechanical Keyboard,electronics,south,phone_sales,7,350.66,2454.62
+generated-order-00935,2025-08-16,cust-rand-160,prod-101,Wireless Mouse,electronics,south,physical_store,1,66.17,66.17
+generated-order-00936,2026-03-14,cust-rand-181,prod-503,Noise Cancelling Headphones,accessories,midwest,online,4,1143.59,
+generated-order-00937,2025-11-14,cust-rand-005,prod-103,Portable Projector,electronics,south,partner,1,395.75,395.75
+generated-order-00938,2025-08-15,cust-rand-271,prod-403,Bookshelf,furniture,southeast,marketplace,8,368.06,2944.48
+generated-order-00939,2025-01-05,cust-rand-202,prod-502,Travel Mug,accessories,southeast,physical_store,4,47.06,188.24
+generated-order-00940,2026-02-19,cust-rand-047,prod-502,Travel Mug,accessories,south,partner,5,40.67,
+generated-order-00941,2026-04-24,cust-rand-253,prod-303,Protein Blender Bottle,fitness,northeast,phone_sales,3,18.76,
+generated-order-00942,2025-06-01,cust-rand-245,prod-104,Mechanical Keyboard,electronics,north,marketplace,3,377.32,1131.96
+generated-order-00943,2025-07-14,cust-rand-215,prod-303,Protein Blender Bottle,fitness,north,partner,8,20.72,165.76
+generated-order-00944,2026-03-29,cust-rand-258,prod-101,Wireless Mouse,electronics,north,online,7,133.23,932.61
+generated-order-00945,2025-11-12,cust-rand-315,prod-403,Bookshelf,furniture,south,partner,2,693.57,1387.14
+generated-order-00946,2025-04-13,cust-rand-283,prod-202,Desk Lamp,home,northeast,marketplace,7,79.60,557.20
+generated-order-00947,2025-11-01,cust-rand-014,prod-401,Office Chair,furniture,north,partner,1,755.96,
+generated-order-00948,2026-02-25,cust-rand-311,prod-201,Coffee Maker,home,southeast,marketplace,1,181.97,181.97
+generated-order-00949,2025-09-24,cust-rand-095,prod-302,Adjustable Dumbbells,fitness,southeast,marketplace,8,704.85,5638.80
+generated-order-00950,2025-05-27,cust-rand-056,prod-205,Vacuum Cleaner,home,south,marketplace,5,569.89,2849.45
+generated-order-00951,2025-03-27,cust-rand-314,prod-105,Smart Speaker,electronics,midwest,partner,2,328.14,656.28
+generated-order-00952,2025-05-04,cust-rand-233,prod-101,Wireless Mouse,electronics,southeast,partner,4,118.13,472.52
+generated-order-00953,2025-03-28,cust-rand-044,prod-503,Noise Cancelling Headphones,accessories,southeast,phone_sales,2,1204.71,2409.42
+generated-order-00954,2026-03-02,cust-rand-348,prod-202,Desk Lamp,home,midwest,physical_store,6,109.44,
+generated-order-00955,2025-10-31,cust-rand-321,prod-205,Vacuum Cleaner,home,south,marketplace,8,349.47,2795.76
+generated-order-00956,2026-03-13,cust-rand-241,prod-203,Air Fryer,home,south,partner,1,313.25,313.25
+generated-order-00957,2026-04-21,cust-rand-337,prod-104,Mechanical Keyboard,electronics,southeast,phone_sales,2,454.17,
+generated-order-00958,2026-04-13,cust-rand-098,prod-503,Noise Cancelling Headphones,accessories,midwest,marketplace,3,1109.24,
+generated-order-00959,2025-12-13,cust-rand-047,prod-502,Travel Mug,accessories,north,partner,5,18.58,92.90
+generated-order-00960,2026-02-23,cust-rand-346,prod-202,Desk Lamp,home,north,marketplace,7,147.66,
+generated-order-00961,2025-06-17,cust-rand-251,prod-105,Smart Speaker,electronics,northeast,online,4,224.96,899.84
+generated-order-00962,2026-02-14,cust-rand-278,prod-301,Yoga Mat,fitness,southeast,online,7,71.46,500.22
+generated-order-00963,2025-03-30,cust-rand-140,prod-502,Travel Mug,accessories,south,online,3,56.03,168.09
+generated-order-00964,2026-04-19,cust-rand-003,prod-401,Office Chair,furniture,northeast,marketplace,1,596.07,596.07
+generated-order-00965,2025-08-03,cust-rand-319,prod-105,Smart Speaker,electronics,midwest,physical_store,1,302.32,302.32
+generated-order-00966,2026-03-30,cust-rand-296,prod-401,Office Chair,furniture,north,phone_sales,6,449.19,2695.14
+generated-order-00967,2025-07-19,cust-rand-114,prod-205,Vacuum Cleaner,home,north,partner,3,918.98,2756.94
+generated-order-00968,2025-12-05,cust-rand-334,prod-102,Notebook 14,electronics,southeast,marketplace,1,3529.96,
+generated-order-00969,2025-03-26,cust-rand-308,prod-502,Travel Mug,accessories,north,marketplace,3,31.34,94.02
+generated-order-00970,2025-05-16,cust-rand-203,prod-501,Backpack,accessories,south,physical_store,6,257.50,1545.00
+generated-order-00971,2026-02-23,cust-rand-317,prod-103,Portable Projector,electronics,north,partner,1,754.54,754.54
+generated-order-00972,2026-01-08,cust-rand-065,prod-502,Travel Mug,accessories,north,marketplace,2,48.40,
+generated-order-00973,2025-04-13,cust-rand-169,prod-205,Vacuum Cleaner,home,north,phone_sales,3,679.54,
+generated-order-00974,2026-04-01,cust-rand-109,prod-403,Bookshelf,furniture,midwest,marketplace,5,363.50,
+generated-order-00975,2026-01-26,cust-rand-323,prod-302,Adjustable Dumbbells,fitness,south,physical_store,6,759.34,4556.04
+generated-order-00976,2025-12-16,cust-rand-341,prod-102,Notebook 14,electronics,north,online,8,2475.66,19805.28
+generated-order-00977,2025-06-16,cust-rand-168,prod-302,Adjustable Dumbbells,fitness,south,marketplace,5,440.29,
+generated-order-00978,2025-07-09,cust-rand-108,prod-402,Standing Desk,furniture,midwest,physical_store,1,986.17,986.17
+generated-order-00979,2025-12-20,cust-rand-071,prod-101,Wireless Mouse,electronics,north,marketplace,3,92.72,278.16
+generated-order-00980,2026-01-27,cust-rand-138,prod-203,Air Fryer,home,southeast,physical_store,5,372.92,
+generated-order-00981,2025-11-17,cust-rand-227,prod-302,Adjustable Dumbbells,fitness,southeast,physical_store,2,787.05,1574.10
+generated-order-00982,2025-07-13,cust-rand-341,prod-101,Wireless Mouse,electronics,southeast,partner,1,83.22,83.22
+generated-order-00983,2025-02-11,cust-rand-281,prod-105,Smart Speaker,electronics,northeast,online,8,348.60,2788.80
+generated-order-00984,2026-03-16,cust-rand-232,prod-103,Portable Projector,electronics,south,phone_sales,5,501.43,2507.15
+generated-order-00985,2025-07-16,cust-rand-245,prod-205,Vacuum Cleaner,home,south,online,7,551.17,3858.19
+generated-order-00986,2025-07-06,cust-rand-225,prod-403,Bookshelf,furniture,southeast,physical_store,6,241.60,1449.60
+generated-order-00987,2025-02-25,cust-rand-218,prod-502,Travel Mug,accessories,north,phone_sales,2,46.64,93.28
+generated-order-00988,2025-09-09,cust-rand-200,prod-103,Portable Projector,electronics,northeast,marketplace,7,424.05,2968.35
+generated-order-00989,2025-02-20,cust-rand-081,prod-303,Protein Blender Bottle,fitness,south,partner,7,51.82,
+generated-order-00990,2025-07-22,cust-rand-293,prod-103,Portable Projector,electronics,south,online,6,357.41,
+generated-order-00991,2025-05-20,cust-rand-229,prod-301,Yoga Mat,fitness,midwest,online,7,146.64,1026.48
+generated-order-00992,2026-02-15,cust-rand-311,prod-302,Adjustable Dumbbells,fitness,southeast,marketplace,3,708.34,2125.02
+generated-order-00993,2025-05-12,cust-rand-091,prod-101,Wireless Mouse,electronics,south,phone_sales,5,125.53,
+generated-order-00994,2025-07-20,cust-rand-346,prod-303,Protein Blender Bottle,fitness,north,marketplace,2,26.95,
+generated-order-00995,2025-11-06,cust-rand-207,prod-201,Coffee Maker,home,northeast,physical_store,4,268.80,1075.20
+generated-order-00996,2025-09-18,cust-rand-295,prod-301,Yoga Mat,fitness,south,physical_store,4,59.67,238.68
+generated-order-00997,2025-03-08,cust-rand-298,prod-401,Office Chair,furniture,northeast,partner,6,924.34,5546.04
+generated-order-00998,2025-04-24,cust-rand-206,prod-204,Blender,home,southeast,partner,7,248.81,1741.67
+generated-order-00999,2025-05-01,cust-rand-331,prod-403,Bookshelf,furniture,northeast,partner,4,685.07,2740.28
+generated-order-01000,2025-11-02,cust-rand-161,prod-504,Webcam,accessories,south,phone_sales,7,361.25,2528.75

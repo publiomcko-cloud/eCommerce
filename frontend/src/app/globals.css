@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f5efe2;
+  --surface: rgba(255, 252, 244, 0.84);
+  --surface-strong: rgba(255, 250, 240, 0.94);
+  --foreground: #17313f;
+  --muted: #58717c;
+  --line: rgba(23, 49, 63, 0.12);
+  --teal: #0f766e;
+  --teal-soft: #dff3ef;
+  --brass: #b7791f;
+  --brass-soft: #fae6be;
+  --rose: #b4534f;
+  --shadow: 0 24px 80px rgba(40, 62, 71, 0.12);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-body);
+  --font-heading: var(--font-heading);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background:
+    radial-gradient(circle at top left, rgba(15, 118, 110, 0.18), transparent 28%),
+    radial-gradient(circle at top right, rgba(183, 121, 31, 0.18), transparent 24%),
+    linear-gradient(180deg, #f8f2e7 0%, #efe6d6 100%);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), sans-serif;
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: rgba(15, 118, 110, 0.18);
+}
+
+.glass-panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+}
+
+.dashboard-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(23, 49, 63, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(23, 49, 63, 0.04) 1px, transparent 1px);
+  background-position: center;
+  background-size: 48px 48px;
+}
+
+.recharts-cartesian-grid line {
+  stroke: rgba(23, 49, 63, 0.08);
+}
+
+.recharts-default-tooltip {
+  border-radius: 16px !important;
+  border: 1px solid rgba(23, 49, 63, 0.08) !important;
+  box-shadow: 0 16px 40px rgba(40, 62, 71, 0.14) !important;
+}
+
+@media (max-width: 640px) {
+  html {
+    background-size: auto;
+  }
+}

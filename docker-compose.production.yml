@@ -1,0 +1,62 @@
+services:
+  postgres_prod:
+    image: postgres:16
+    container_name: datapulse_postgres_prod
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: datapulse
+      POSTGRES_PASSWORD: datapulse
+      POSTGRES_DB: datapulse
+    ports:
+      - "5433:5432"
+    volumes:
+      - datapulse_postgres_prod_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U datapulse -d datapulse"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+    container_name: datapulse_backend_prod
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql+psycopg://datapulse:datapulse@postgres_prod:5432/datapulse
+      ENVIRONMENT: production
+      CORS_ORIGINS: http://localhost:3000
+    depends_on:
+      postgres_prod:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/data:ro
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health')",
+        ]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        NEXT_PUBLIC_API_URL: http://localhost:8000
+    container_name: datapulse_frontend_prod
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
+
+volumes:
+  datapulse_postgres_prod_data:

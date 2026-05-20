@@ -39,6 +39,76 @@ export type RevenueByChannelPoint = {
   order_count: number;
 };
 
+export type CatalogCategoryResponse = {
+  id: string;
+  name: string;
+  slug: string;
+  description: string | null;
+  sort_order: number;
+  product_count: number;
+};
+
+export type CatalogVariantResponse = {
+  id: string;
+  sku: string;
+  name: string;
+  attributes: Record<string, unknown>;
+  price: number | null;
+  effective_price: number;
+  weight_grams: number | null;
+  status: "active" | "inactive" | "archived";
+  available_stock: number;
+  allow_backorder: boolean;
+  is_in_stock: boolean;
+};
+
+export type ProductImageResponse = {
+  id: string;
+  url: string;
+  alt_text: string | null;
+  sort_order: number;
+  is_primary: boolean;
+};
+
+export type ProductCardResponse = {
+  id: string;
+  name: string;
+  slug: string;
+  short_description: string | null;
+  category_name: string;
+  category_slug: string;
+  brand: string | null;
+  price: number;
+  compare_at_price: number | null;
+  currency: string;
+  primary_image_url: string | null;
+  is_in_stock: boolean;
+  available_stock: number;
+  variant_count: number;
+};
+
+export type ProductListResponse = {
+  total: number;
+  limit: number;
+  offset: number;
+  items: ProductCardResponse[];
+};
+
+export type ProductDetailResponse = {
+  id: string;
+  name: string;
+  slug: string;
+  description: string | null;
+  short_description: string | null;
+  brand: string | null;
+  price: number;
+  compare_at_price: number | null;
+  currency: string;
+  category: CatalogCategoryResponse;
+  images: ProductImageResponse[];
+  variants: CatalogVariantResponse[];
+};
+
 export type OrderListItem = {
   source_record_id: string | null;
   order_date: string;
@@ -146,6 +216,124 @@ export type AuthTokenResponse = {
   user: AuthUserResponse;
 };
 
+export type AdminInventoryStateResponse = {
+  stock_on_hand: number;
+  stock_reserved: number;
+  available_stock: number;
+  low_stock_threshold: number;
+  allow_backorder: boolean;
+};
+
+export type AdminProductVariantResponse = {
+  id: string;
+  sku: string;
+  name: string;
+  attributes: Record<string, unknown>;
+  price: number | null;
+  effective_price: number;
+  weight_grams: number | null;
+  status: "active" | "inactive" | "archived";
+  inventory: AdminInventoryStateResponse;
+};
+
+export type AdminProductResponse = {
+  id: string;
+  category_id: string;
+  category_name: string;
+  category_slug: string;
+  name: string;
+  slug: string;
+  description: string | null;
+  short_description: string | null;
+  status: "draft" | "active" | "archived";
+  brand: string | null;
+  base_price: number;
+  compare_at_price: number | null;
+  currency: string;
+  seo_title: string | null;
+  seo_description: string | null;
+  created_at: string;
+  updated_at: string;
+  images: ProductImageResponse[];
+  variants: AdminProductVariantResponse[];
+};
+
+export type AdminProductListItemResponse = {
+  id: string;
+  name: string;
+  slug: string;
+  status: "draft" | "active" | "archived";
+  category_name: string;
+  variant_count: number;
+  total_available_stock: number;
+  updated_at: string;
+};
+
+export type AdminProductListResponse = {
+  total: number;
+  limit: number;
+  offset: number;
+  items: AdminProductListItemResponse[];
+};
+
+export type AdminProductImageInput = {
+  url: string;
+  alt_text?: string;
+  sort_order: number;
+  is_primary: boolean;
+};
+
+export type AdminProductVariantInput = {
+  id?: string;
+  sku: string;
+  name: string;
+  attributes: Record<string, unknown>;
+  price?: number | null;
+  weight_grams?: number | null;
+  status: "active" | "inactive" | "archived";
+  stock_on_hand: number;
+  stock_reserved: number;
+  low_stock_threshold: number;
+  allow_backorder: boolean;
+};
+
+export type AdminProductUpsertInput = {
+  category_id: string;
+  name: string;
+  slug: string;
+  description?: string;
+  short_description?: string;
+  status: "draft" | "active" | "archived";
+  brand?: string;
+  base_price: number;
+  compare_at_price?: number | null;
+  currency: string;
+  seo_title?: string;
+  seo_description?: string;
+  images: AdminProductImageInput[];
+  variants: AdminProductVariantInput[];
+};
+
+export type InventoryAdjustmentInput = {
+  variant_id: string;
+  quantity_delta: number;
+  reason?: string;
+};
+
+export type InventoryAdjustmentResponse = {
+  movement_id: string;
+  variant_id: string;
+  movement_type: "adjustment";
+  quantity_delta: number;
+  reason: string | null;
+  stock_on_hand: number;
+  stock_reserved: number;
+  available_stock: number;
+  low_stock_threshold: number;
+  allow_backorder: boolean;
+  created_at: string;
+};
+
 export type RegisterInput = {
   email: string;
   password: string;
@@ -248,13 +436,40 @@ async function fetchJsonWithToken<T>(path: string, token: string): Promise<T> {
   return (await response.json()) as T;
 }
 
-async function postJsonWithToken<T>(path: string, token: string): Promise<T> {
-  const response = await fetch(`${API_URL}${path}`, {
-    method: "POST",
+async function fetchJsonWithTokenParams<T>(
+  path: string,
+  token: string,
+  params?: Record<string, string | number | undefined>,
+): Promise<T> {
+  const response = await fetch(`${API_URL}${path}${buildQuery(params ?? {})}`, {
     headers: {
       Accept: "application/json",
       Authorization: `Bearer ${token}`,
     },
+  });
+
+  if (!response.ok) {
+    const detail = await response.text();
+    throw new Error(detail || `API request failed with status ${response.status}`);
+  }
+
+  return (await response.json()) as T;
+}
+
+async function sendJsonWithToken<T>(
+  path: string,
+  token: string,
+  method: "POST" | "PUT",
+  body?: object,
+): Promise<T> {
+  const response = await fetch(`${API_URL}${path}`, {
+    method,
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`,
+      ...(body ? { "Content-Type": "application/json" } : {}),
+    },
+    body: body ? JSON.stringify(body) : undefined,
   });
 
   if (!response.ok) {
@@ -325,5 +540,45 @@ export async function fetchCurrentUser(token: string) {
 }
 
 export async function logout(token: string) {
-  return postJsonWithToken<void>("/auth/logout", token);
+  return sendJsonWithToken<void>("/auth/logout", token, "POST");
+}
+
+export async function fetchCatalogCategories() {
+  return fetchJson<CatalogCategoryResponse[]>("/catalog/categories");
+}
+
+export async function fetchCatalogProducts(params: {
+  q?: string;
+  category?: string;
+  limit?: number;
+  offset?: number;
+}) {
+  return fetchJson<ProductListResponse>("/catalog/products", params);
+}
+
+export async function fetchCatalogProduct(slug: string) {
+  return fetchJson<ProductDetailResponse>(`/catalog/products/${slug}`);
+}
+
+export async function fetchAdminProducts(
+  token: string,
+  params?: { status?: string; category_id?: string; limit?: number; offset?: number },
+) {
+  return fetchJsonWithTokenParams<AdminProductListResponse>("/admin/products", token, params);
+}
+
+export async function fetchAdminProduct(token: string, productId: string) {
+  return fetchJsonWithToken<AdminProductResponse>(`/admin/products/${productId}`, token);
+}
+
+export async function createAdminProduct(token: string, payload: AdminProductUpsertInput) {
+  return sendJsonWithToken<AdminProductResponse>("/admin/products", token, "POST", payload);
+}
+
+export async function updateAdminProduct(token: string, productId: string, payload: AdminProductUpsertInput) {
+  return sendJsonWithToken<AdminProductResponse>(`/admin/products/${productId}`, token, "PUT", payload);
+}
+
+export async function adjustAdminInventory(token: string, payload: InventoryAdjustmentInput) {
+  return sendJsonWithToken<InventoryAdjustmentResponse>("/admin/inventory/adjustments", token, "POST", payload);
 }

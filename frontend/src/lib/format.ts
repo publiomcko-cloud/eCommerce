@@ -1,7 +1,9 @@
-export function formatCurrency(value: number) {
-  return new Intl.NumberFormat("en-US", {
+export function formatCurrency(value: number, currency = "USD") {
+  const locale = currency === "BRL" ? "pt-BR" : "en-US";
+
+  return new Intl.NumberFormat(locale, {
     style: "currency",
-    currency: "USD",
+    currency,
     maximumFractionDigits: 2,
   }).format(value);
 }

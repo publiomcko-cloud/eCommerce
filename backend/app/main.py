@@ -1,7 +1,9 @@
+from app.api.routes_admin import router as admin_router
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.routes_auth import router as auth_router
+from app.api.routes_catalog import router as catalog_router
 from app.api.routes_health import router as health_router
 from app.api.routes_ingestion import router as ingestion_router
 from app.api.routes_metrics import router as metrics_router
@@ -17,7 +19,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+app.include_router(admin_router)
 app.include_router(auth_router)
+app.include_router(catalog_router)
 app.include_router(health_router)
 app.include_router(ingestion_router)
 app.include_router(metrics_router)

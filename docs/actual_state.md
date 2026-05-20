@@ -156,6 +156,24 @@ Implemented Stage 1 capabilities:
 - auth-aware top navigation
 - backend auth test coverage
 
+## 4.6 Stage 2 catalog and inventory foundation snapshot
+
+The second commerce stage is now implemented on top of the identity layer.
+
+Implemented Stage 2 capabilities:
+
+- `commerce_categories`, `commerce_products`, `commerce_product_images`, `commerce_product_variants`, `commerce_inventory_items`, and `commerce_inventory_movements` tables
+- public catalog endpoints for categories, product listing, and product detail by slug
+- protected admin endpoints for product create, product update, product detail, product list, and inventory adjustments
+- catalog and inventory service layer with slug, SKU, stock, and status rules
+- demo catalog seed script with admin demo user bootstrap
+- frontend product listing page
+- frontend product detail page
+- frontend admin product list page
+- frontend admin product editor page
+- inventory adjustment controls in the admin editor
+- backend catalog and inventory tests
+
 ## 5. What Changes in the New Product
 
 DataPulse Commerce adds transactional commerce behavior in front of the existing analytics system.

@@ -129,24 +129,24 @@ Deliverables:
 
 Tasks:
 
-- [ ] Add category tables
-- [ ] Add product tables
-- [ ] Add product variant tables
-- [ ] Add product image tables
-- [ ] Add inventory tables
-- [ ] Add inventory movement table
-- [ ] Implement product listing endpoint
-- [ ] Implement product detail endpoint by slug
-- [ ] Implement category endpoint
-- [ ] Implement admin product create/update endpoints
-- [ ] Implement admin inventory adjustment endpoint
-- [ ] Add demo product seed script
-- [ ] Add product card UI
-- [ ] Add product listing page
-- [ ] Add product detail page
-- [ ] Add admin product list page
-- [ ] Add admin product editor page
-- [ ] Add tests for catalog and inventory rules
+- [x] Add category tables
+- [x] Add product tables
+- [x] Add product variant tables
+- [x] Add product image tables
+- [x] Add inventory tables
+- [x] Add inventory movement table
+- [x] Implement product listing endpoint
+- [x] Implement product detail endpoint by slug
+- [x] Implement category endpoint
+- [x] Implement admin product create/update endpoints
+- [x] Implement admin inventory adjustment endpoint
+- [x] Add demo product seed script
+- [x] Add product card UI
+- [x] Add product listing page
+- [x] Add product detail page
+- [x] Add admin product list page
+- [x] Add admin product editor page
+- [x] Add tests for catalog and inventory rules
 
 Agent command:
 

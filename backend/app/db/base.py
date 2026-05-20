@@ -2,6 +2,12 @@ from app.db.base_class import Base
 from app.models.data_quality_issue import DataQualityIssue
 from app.models.commerce_customer import CommerceCustomer
 from app.models.commerce_customer_address import CommerceCustomerAddress
+from app.models.commerce_category import CommerceCategory
+from app.models.commerce_inventory_item import CommerceInventoryItem
+from app.models.commerce_inventory_movement import CommerceInventoryMovement
+from app.models.commerce_product import CommerceProduct
+from app.models.commerce_product_image import CommerceProductImage
+from app.models.commerce_product_variant import CommerceProductVariant
 from app.models.commerce_user import CommerceUser
 from app.models.dim_channel import DimChannel
 from app.models.dim_customer import DimCustomer
@@ -14,8 +20,14 @@ from app.models.staging_order import StagingOrder
 
 __all__ = [
     "Base",
+    "CommerceCategory",
     "CommerceCustomer",
     "CommerceCustomerAddress",
+    "CommerceInventoryItem",
+    "CommerceInventoryMovement",
+    "CommerceProduct",
+    "CommerceProductImage",
+    "CommerceProductVariant",
     "CommerceUser",
     "DataQualityIssue",
     "DimChannel",

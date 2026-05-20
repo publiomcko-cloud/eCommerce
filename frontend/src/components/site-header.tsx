@@ -10,7 +10,9 @@ export function SiteHeader() {
   const { isAuthenticated, isLoading, logout, user } = useAuth();
   const navItems = [
     { href: "/", label: "Dashboard" },
+    { href: "/products", label: "Products" },
     { href: "/orders/new", label: "Add Test Order" },
+    ...(user?.role === "admin" ? [{ href: "/admin/products", label: "Admin Products" }] : []),
     ...(isAuthenticated ? [{ href: "/account", label: "Account" }] : []),
     ...(!isAuthenticated ? [{ href: "/login", label: "Login" }, { href: "/register", label: "Register" }] : []),
   ];
@@ -23,7 +25,7 @@ export function SiteHeader() {
             DataPulse BI
           </Link>
           <p className="mt-1 text-sm" style={{ color: "var(--muted)" }}>
-            Analytics dashboard, manual order sandbox, and the first commerce identity foundation.
+            Analytics dashboard, seeded catalog browsing, and the first commerce admin foundation.
           </p>
         </div>
 

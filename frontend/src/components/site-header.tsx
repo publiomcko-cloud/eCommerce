@@ -3,14 +3,16 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { useAuth } from "@/app/providers";
+import { useAuth, useCart } from "@/app/providers";
 
 export function SiteHeader() {
   const pathname = usePathname();
   const { isAuthenticated, isLoading, logout, user } = useAuth();
+  const { itemCount } = useCart();
   const navItems = [
     { href: "/", label: "Dashboard" },
     { href: "/products", label: "Products" },
+    { href: "/cart", label: `Cart${itemCount > 0 ? ` (${itemCount})` : ""}` },
     { href: "/orders/new", label: "Add Test Order" },
     ...(user?.role === "admin" ? [{ href: "/admin/products", label: "Admin Products" }] : []),
     ...(isAuthenticated ? [{ href: "/account", label: "Account" }] : []),

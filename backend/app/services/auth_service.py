@@ -150,8 +150,18 @@ def get_current_auth_context(
     credentials: HTTPAuthorizationCredentials | None = Depends(bearer_scheme),
     db: Session = Depends(get_db),
 ) -> AuthContext:
-    if credentials is None:
+    context = resolve_auth_context(credentials, db)
+    if context is None:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Authentication required.")
+    return context
+
+
+def resolve_auth_context(
+    credentials: HTTPAuthorizationCredentials | None,
+    db: Session,
+) -> AuthContext | None:
+    if credentials is None:
+        return None
 
     try:
         payload = decode_access_token(credentials.credentials)
@@ -165,6 +175,13 @@ def get_current_auth_context(
 
     customer = get_customer_by_user_id(db, user.id)
     return AuthContext(user=user, customer=customer)
+
+
+def get_optional_auth_context(
+    credentials: HTTPAuthorizationCredentials | None = Depends(bearer_scheme),
+    db: Session = Depends(get_db),
+) -> AuthContext | None:
+    return resolve_auth_context(credentials, db)
 
 
 def require_roles(*roles: str):

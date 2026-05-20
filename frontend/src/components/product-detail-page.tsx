@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
+import { useCart } from "@/app/providers";
 import { fetchCatalogProduct } from "@/lib/api";
 import { formatCurrency } from "@/lib/format";
 
@@ -19,7 +20,11 @@ function formatAttributes(attributes: Record<string, unknown>) {
 }
 
 export function ProductDetailPage({ slug }: ProductDetailPageProps) {
+  const { addItem } = useCart();
   const [selectedVariantId, setSelectedVariantId] = useState<string | null>(null);
+  const [quantity, setQuantity] = useState(1);
+  const [feedback, setFeedback] = useState<string | null>(null);
+  const [isAddingToCart, setIsAddingToCart] = useState(false);
   const productQuery = useQuery({
     queryKey: ["catalog-product", slug],
     queryFn: () => fetchCatalogProduct(slug),
@@ -32,6 +37,26 @@ export function ProductDetailPage({ slug }: ProductDetailPageProps) {
     }
     return product.variants.find((variant) => variant.id === selectedVariantId) ?? product.variants[0];
   }, [product, selectedVariantId]);
+
+  async function handleAddToCart() {
+    if (!selectedVariant) {
+      return;
+    }
+
+    setFeedback(null);
+    setIsAddingToCart(true);
+    try {
+      await addItem({
+        variant_id: selectedVariant.id,
+        quantity,
+      });
+      setFeedback("Added to cart.");
+    } catch (error) {
+      setFeedback(error instanceof Error ? error.message : "Unable to add this item to the cart.");
+    } finally {
+      setIsAddingToCart(false);
+    }
+  }
 
   if (productQuery.isLoading) {
     return (
@@ -184,13 +209,42 @@ export function ProductDetailPage({ slug }: ProductDetailPageProps) {
               </div>
 
               <div className="mt-8 rounded-[28px] border border-[var(--line)] bg-white/70 p-5">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>
-                  What comes next
-                </p>
-                <p className="mt-3 text-sm leading-6" style={{ color: "var(--muted)" }}>
-                  Stage 2 stops at browsing and admin management. Stage 3 adds carts, and Stage 4 turns a selected
-                  variant into a real transactional order.
-                </p>
+                <div className="grid gap-4 lg:grid-cols-[0.45fr_1fr] lg:items-end">
+                  <label className="grid gap-2">
+                    <span className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>
+                      Quantity
+                    </span>
+                    <input
+                      type="number"
+                      min="1"
+                      value={quantity}
+                      onChange={(event) => setQuantity(Math.max(1, Number(event.target.value) || 1))}
+                      className="rounded-[18px] border border-[var(--line)] bg-white/80 px-4 py-3 text-sm outline-none transition focus:border-[var(--teal)]"
+                    />
+                  </label>
+
+                  <div className="flex flex-col gap-3">
+                    <button
+                      type="button"
+                      onClick={() => void handleAddToCart()}
+                      disabled={isAddingToCart || (!selectedVariant?.is_in_stock && !selectedVariant?.allow_backorder)}
+                      className="inline-flex min-h-[52px] items-center justify-center rounded-full bg-[var(--foreground)] px-6 py-3 text-base font-semibold text-[var(--background)] transition hover:opacity-95 disabled:cursor-not-allowed disabled:opacity-60"
+                    >
+                      {isAddingToCart ? "Adding..." : "Add to cart"}
+                    </button>
+                    <div className="flex flex-wrap gap-3 text-sm" style={{ color: "var(--muted)" }}>
+                      <span>Stage 3 now supports guest and customer carts.</span>
+                      <Link href="/cart" className="font-semibold text-[var(--teal)]">
+                        Open cart
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+                {feedback ? (
+                  <p className="mt-4 text-sm leading-6" style={{ color: feedback === "Added to cart." ? "var(--teal)" : "var(--rose)" }}>
+                    {feedback}
+                  </p>
+                ) : null}
               </div>
             </div>
           </div>

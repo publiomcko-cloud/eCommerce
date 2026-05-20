@@ -1,5 +1,7 @@
 from app.db.base_class import Base
 from app.models.data_quality_issue import DataQualityIssue
+from app.models.commerce_cart import CommerceCart
+from app.models.commerce_cart_item import CommerceCartItem
 from app.models.commerce_customer import CommerceCustomer
 from app.models.commerce_customer_address import CommerceCustomerAddress
 from app.models.commerce_category import CommerceCategory
@@ -20,6 +22,8 @@ from app.models.staging_order import StagingOrder
 
 __all__ = [
     "Base",
+    "CommerceCart",
+    "CommerceCartItem",
     "CommerceCategory",
     "CommerceCustomer",
     "CommerceCustomerAddress",

@@ -109,6 +109,46 @@ export type ProductDetailResponse = {
   variants: CatalogVariantResponse[];
 };
 
+export type CartItemResponse = {
+  id: string;
+  variant_id: string;
+  product_id: string;
+  product_name: string;
+  product_slug: string;
+  variant_name: string;
+  sku: string;
+  quantity: number;
+  unit_price: number;
+  line_total: number;
+  currency: string;
+  primary_image_url: string | null;
+  available_stock: number;
+  allow_backorder: boolean;
+  is_in_stock: boolean;
+  created_at: string;
+  updated_at: string;
+};
+
+export type CartResponse = {
+  id: string;
+  cart_token: string | null;
+  customer_id: string | null;
+  item_count: number;
+  unique_item_count: number;
+  subtotal: number;
+  currency: string;
+  items: CartItemResponse[];
+};
+
+export type AddCartItemInput = {
+  variant_id: string;
+  quantity: number;
+};
+
+export type UpdateCartItemInput = {
+  quantity: number;
+};
+
 export type OrderListItem = {
   source_record_id: string | null;
   order_date: string;
@@ -334,6 +374,11 @@ export type InventoryAdjustmentResponse = {
   created_at: string;
 };
 
+type CartRequestOptions = {
+  token?: string | null;
+  cartToken?: string | null;
+};
+
 export type RegisterInput = {
   email: string;
   password: string;
@@ -459,7 +504,7 @@ async function fetchJsonWithTokenParams<T>(
 async function sendJsonWithToken<T>(
   path: string,
   token: string,
-  method: "POST" | "PUT",
+  method: "POST" | "PUT" | "DELETE",
   body?: object,
 ): Promise<T> {
   const response = await fetch(`${API_URL}${path}`, {
@@ -479,6 +524,33 @@ async function sendJsonWithToken<T>(
 
   if (response.status === 204) {
     return undefined as T;
+  }
+
+  return (await response.json()) as T;
+}
+
+async function requestCartJson<T>(
+  path: string,
+  options: CartRequestOptions,
+  init?: RequestInit,
+): Promise<T> {
+  const headers = new Headers(init?.headers);
+  headers.set("Accept", "application/json");
+  if (options.token) {
+    headers.set("Authorization", `Bearer ${options.token}`);
+  }
+  if (options.cartToken) {
+    headers.set("X-Cart-Token", options.cartToken);
+  }
+
+  const response = await fetch(`${API_URL}${path}`, {
+    ...init,
+    headers,
+  });
+
+  if (!response.ok) {
+    const detail = await response.text();
+    throw new Error(detail || `API request failed with status ${response.status}`);
   }
 
   return (await response.json()) as T;
@@ -558,6 +630,36 @@ export async function fetchCatalogProducts(params: {
 
 export async function fetchCatalogProduct(slug: string) {
   return fetchJson<ProductDetailResponse>(`/catalog/products/${slug}`);
+}
+
+export async function fetchCart(options: CartRequestOptions) {
+  return requestCartJson<CartResponse>("/cart", options);
+}
+
+export async function addCartItem(options: CartRequestOptions, payload: AddCartItemInput) {
+  return requestCartJson<CartResponse>("/cart/items", options, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+}
+
+export async function updateCartItem(options: CartRequestOptions, itemId: string, payload: UpdateCartItemInput) {
+  return requestCartJson<CartResponse>(`/cart/items/${itemId}`, options, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+}
+
+export async function removeCartItem(options: CartRequestOptions, itemId: string) {
+  return requestCartJson<CartResponse>(`/cart/items/${itemId}`, options, {
+    method: "DELETE",
+  });
 }
 
 export async function fetchAdminProducts(

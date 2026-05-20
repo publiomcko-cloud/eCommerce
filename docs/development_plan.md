@@ -171,19 +171,19 @@ Deliverables:
 
 Tasks:
 
-- [ ] Add `commerce_carts`
-- [ ] Add `commerce_cart_items`
-- [ ] Implement cart creation/retrieval
-- [ ] Implement add item
-- [ ] Implement update quantity
-- [ ] Implement remove item
-- [ ] Implement cart totals service
-- [ ] Validate variant status and stock availability
-- [ ] Merge duplicate cart items
-- [ ] Support customer cart association after login
-- [ ] Add cart page
-- [ ] Add mini cart or cart summary
-- [ ] Add tests for cart operations
+- [x] Add `commerce_carts`
+- [x] Add `commerce_cart_items`
+- [x] Implement cart creation/retrieval
+- [x] Implement add item
+- [x] Implement update quantity
+- [x] Implement remove item
+- [x] Implement cart totals service
+- [x] Validate variant status and stock availability
+- [x] Merge duplicate cart items
+- [x] Support customer cart association after login
+- [x] Add cart page
+- [x] Add mini cart or cart summary
+- [x] Add tests for cart operations
 
 Agent command:
 

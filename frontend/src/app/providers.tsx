@@ -12,10 +12,17 @@ import {
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import {
+  AddCartItemInput,
   AuthTokenResponse,
   AuthUserResponse,
+  CartResponse,
+  UpdateCartItemInput,
+  addCartItem as addCartItemRequest,
   fetchCurrentUser,
+  fetchCart,
   logout as logoutRequest,
+  removeCartItem,
+  updateCartItem,
 } from "@/lib/api";
 
 type ProvidersProps = {
@@ -23,6 +30,7 @@ type ProvidersProps = {
 };
 
 const AUTH_TOKEN_STORAGE_KEY = "datapulse-auth-token";
+const CART_TOKEN_STORAGE_KEY = "datapulse-cart-token";
 
 type AuthContextValue = {
   token: string | null;
@@ -33,7 +41,19 @@ type AuthContextValue = {
   logout: () => Promise<void>;
 };
 
+type CartContextValue = {
+  cart: CartResponse | null;
+  cartToken: string | null;
+  itemCount: number;
+  isLoading: boolean;
+  refreshCart: () => Promise<CartResponse>;
+  addItem: (payload: AddCartItemInput) => Promise<CartResponse>;
+  updateItem: (itemId: string, payload: UpdateCartItemInput) => Promise<CartResponse>;
+  removeItem: (itemId: string) => Promise<CartResponse>;
+};
+
 const AuthContext = createContext<AuthContextValue | null>(null);
+const CartContext = createContext<CartContextValue | null>(null);
 
 export function Providers({ children }: ProvidersProps) {
   const [queryClient] = useState(
@@ -61,6 +81,32 @@ export function Providers({ children }: ProvidersProps) {
     }
     return Boolean(window.localStorage.getItem(AUTH_TOKEN_STORAGE_KEY));
   });
+  const [cartToken, setCartToken] = useState<string | null>(() => {
+    if (typeof window === "undefined") {
+      return null;
+    }
+    return window.localStorage.getItem(CART_TOKEN_STORAGE_KEY);
+  });
+  const [cart, setCart] = useState<CartResponse | null>(null);
+  const [isCartLoading, setIsCartLoading] = useState(() => {
+    if (typeof window === "undefined") {
+      return true;
+    }
+    return Boolean(
+      window.localStorage.getItem(CART_TOKEN_STORAGE_KEY) || window.localStorage.getItem(AUTH_TOKEN_STORAGE_KEY),
+    );
+  });
+
+  const persistCart = useCallback((nextCart: CartResponse | null) => {
+    if (nextCart?.cart_token) {
+      window.localStorage.setItem(CART_TOKEN_STORAGE_KEY, nextCart.cart_token);
+      setCartToken(nextCart.cart_token);
+    } else {
+      window.localStorage.removeItem(CART_TOKEN_STORAGE_KEY);
+      setCartToken(null);
+    }
+    setCart(nextCart);
+  }, []);
 
   useEffect(() => {
     if (!token) {
@@ -97,6 +143,47 @@ export function Providers({ children }: ProvidersProps) {
     };
   }, [token]);
 
+  useEffect(() => {
+    let cancelled = false;
+
+    async function hydrateCart() {
+      if (!token && !cartToken) {
+        if (!cancelled) {
+          setCart(null);
+          setIsCartLoading(false);
+        }
+        return;
+      }
+
+      try {
+        const nextCart = await fetchCart({ token, cartToken });
+        if (cancelled) {
+          return;
+        }
+        persistCart(nextCart);
+      } catch {
+        if (cancelled) {
+          return;
+        }
+        if (!token) {
+          window.localStorage.removeItem(CART_TOKEN_STORAGE_KEY);
+          setCartToken(null);
+        }
+        setCart(null);
+      } finally {
+        if (!cancelled) {
+          setIsCartLoading(false);
+        }
+      }
+    }
+
+    void hydrateCart();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [cartToken, persistCart, token]);
+
   const applyAuth = useCallback((response: AuthTokenResponse) => {
     window.localStorage.setItem(AUTH_TOKEN_STORAGE_KEY, response.access_token);
     setToken(response.access_token);
@@ -110,6 +197,7 @@ export function Providers({ children }: ProvidersProps) {
     setToken(null);
     setUser(null);
     setIsLoading(false);
+    setCart(null);
     if (!activeToken) {
       return;
     }
@@ -119,6 +207,59 @@ export function Providers({ children }: ProvidersProps) {
       // Frontend logout still succeeds even if the stateless token endpoint cannot be reached.
     }
   }, [token]);
+
+  const refreshCart = useCallback(async () => {
+    setIsCartLoading(true);
+    try {
+      const nextCart = await fetchCart({ token, cartToken });
+      persistCart(nextCart);
+      return nextCart;
+    } finally {
+      setIsCartLoading(false);
+    }
+  }, [cartToken, persistCart, token]);
+
+  const addItem = useCallback(
+    async (payload: AddCartItemInput) => {
+      setIsCartLoading(true);
+      try {
+        const nextCart = await addCartItemRequest({ token, cartToken }, payload);
+        persistCart(nextCart);
+        return nextCart;
+      } finally {
+        setIsCartLoading(false);
+      }
+    },
+    [cartToken, persistCart, token],
+  );
+
+  const updateItem = useCallback(
+    async (itemId: string, payload: UpdateCartItemInput) => {
+      setIsCartLoading(true);
+      try {
+        const nextCart = await updateCartItem({ token, cartToken }, itemId, payload);
+        persistCart(nextCart);
+        return nextCart;
+      } finally {
+        setIsCartLoading(false);
+      }
+    },
+    [cartToken, persistCart, token],
+  );
+
+  const removeItemFromCart = useCallback(
+    async (itemId: string) => {
+      setIsCartLoading(true);
+      try {
+        const nextCart = await removeCartItem({ token, cartToken }, itemId);
+        persistCart(nextCart);
+        return nextCart;
+      } finally {
+        setIsCartLoading(false);
+      }
+    },
+    [cartToken, persistCart, token],
+  );
 
   const authValue = useMemo<AuthContextValue>(
     () => ({
@@ -131,10 +272,25 @@ export function Providers({ children }: ProvidersProps) {
     }),
     [token, user, isLoading, applyAuth, logout],
   );
+  const cartValue = useMemo<CartContextValue>(
+    () => ({
+      cart,
+      cartToken,
+      itemCount: cart?.item_count ?? 0,
+      isLoading: isCartLoading,
+      refreshCart,
+      addItem,
+      updateItem,
+      removeItem: removeItemFromCart,
+    }),
+    [addItem, cart, cartToken, isCartLoading, refreshCart, removeItemFromCart, updateItem],
+  );
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthContext.Provider value={authValue}>{children}</AuthContext.Provider>
+      <AuthContext.Provider value={authValue}>
+        <CartContext.Provider value={cartValue}>{children}</CartContext.Provider>
+      </AuthContext.Provider>
     </QueryClientProvider>
   );
 }
@@ -143,6 +299,14 @@ export function useAuth() {
   const value = useContext(AuthContext);
   if (value === null) {
     throw new Error("useAuth must be used inside Providers.");
+  }
+  return value;
+}
+
+export function useCart() {
+  const value = useContext(CartContext);
+  if (value === null) {
+    throw new Error("useCart must be used inside Providers.");
   }
   return value;
 }

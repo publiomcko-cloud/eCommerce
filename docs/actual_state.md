@@ -174,6 +174,26 @@ Implemented Stage 2 capabilities:
 - inventory adjustment controls in the admin editor
 - backend catalog and inventory tests
 
+## 4.7 Stage 3 cart foundation snapshot
+
+The third commerce stage is now implemented on top of the catalog layer.
+
+Implemented Stage 3 capabilities:
+
+- `commerce_carts` and `commerce_cart_items` tables
+- guest cart persistence through an anonymous cart token
+- customer cart persistence linked to the authenticated customer profile
+- automatic guest-cart-to-customer-cart merge after login or registration
+- cart API for retrieval, add item, update quantity, and remove item
+- server-side cart totals and line totals
+- cart validation against active product and variant status
+- cart validation against available stock with backorder awareness
+- duplicate variant line merge behavior
+- frontend cart page
+- header cart summary and cart count
+- product detail add-to-cart flow
+- backend cart test coverage
+
 ## 5. What Changes in the New Product
 
 DataPulse Commerce adds transactional commerce behavior in front of the existing analytics system.

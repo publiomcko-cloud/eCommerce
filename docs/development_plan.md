@@ -210,22 +210,22 @@ Deliverables:
 
 Tasks:
 
-- [ ] Add checkout session table
-- [ ] Add order table
-- [ ] Add order item table
-- [ ] Add order status history table
-- [ ] Add idempotency key support
-- [ ] Implement checkout session creation
-- [ ] Implement shipping and billing address snapshots
-- [ ] Implement totals snapshot
-- [ ] Implement order number generation
-- [ ] Implement inventory reservation
-- [ ] Implement order creation from cart
-- [ ] Mark cart as converted
-- [ ] Add checkout page
-- [ ] Add order confirmation page
-- [ ] Add tests for idempotent order placement
-- [ ] Add tests for inventory reservation
+- [x] Add checkout session table
+- [x] Add order table
+- [x] Add order item table
+- [x] Add order status history table
+- [x] Add idempotency key support
+- [x] Implement checkout session creation
+- [x] Implement shipping and billing address snapshots
+- [x] Implement totals snapshot
+- [x] Implement order number generation
+- [x] Implement inventory reservation
+- [x] Implement order creation from cart
+- [x] Mark cart as converted
+- [x] Add checkout page
+- [x] Add order confirmation page
+- [x] Add tests for idempotent order placement
+- [x] Add tests for inventory reservation
 
 Agent command:
 

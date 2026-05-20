@@ -194,6 +194,24 @@ Implemented Stage 3 capabilities:
 - product detail add-to-cart flow
 - backend cart test coverage
 
+## 4.8 Stage 4 checkout and order creation snapshot
+
+The fourth commerce stage is now implemented on top of the cart foundation.
+
+Implemented Stage 4 capabilities:
+
+- `commerce_checkout_sessions`, `commerce_orders`, `commerce_order_items`, and `commerce_order_status_history` tables
+- checkout session creation with shipping and billing address snapshots
+- server-side totals snapshots captured on checkout sessions and orders
+- idempotent order placement keyed by a client-supplied idempotency key
+- order number generation for placed orders
+- inventory reservation through `stock_reserved` updates and reservation movement records
+- cart conversion after order placement
+- checkout API for session creation, order placement, and order retrieval
+- frontend checkout page for authenticated customers
+- frontend order confirmation page
+- backend checkout and reservation test coverage
+
 ## 5. What Changes in the New Product
 
 DataPulse Commerce adds transactional commerce behavior in front of the existing analytics system.

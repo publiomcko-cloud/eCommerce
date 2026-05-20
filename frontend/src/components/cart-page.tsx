@@ -210,11 +210,10 @@ export function CartPage() {
 
           <div className="mt-6 rounded-[28px] border border-[var(--line)] bg-white/65 p-5">
             <p className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>
-              Next milestone
+              Checkout path
             </p>
             <p className="mt-3 text-sm leading-6" style={{ color: "var(--muted)" }}>
-              Stage 4 will turn this cart into a checkout session and an order with inventory reservation and idempotent
-              placement rules.
+              Stage 4 now snapshots addresses and totals, creates idempotent orders, and reserves inventory from this cart.
             </p>
           </div>
 
@@ -226,8 +225,18 @@ export function CartPage() {
               <p className="mt-3 text-sm leading-6" style={{ color: "var(--muted)" }}>
                 Sign in later and the current guest cart will merge into your customer cart automatically.
               </p>
+              <Link href="/login" className="mt-4 inline-flex rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-[var(--background)]">
+                Login to continue
+              </Link>
             </div>
-          ) : null}
+          ) : (
+            <Link
+              href="/checkout"
+              className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-[var(--foreground)] px-6 py-3 text-sm font-semibold text-[var(--background)]"
+            >
+              Continue to checkout
+            </Link>
+          )}
         </aside>
       </div>
     </main>

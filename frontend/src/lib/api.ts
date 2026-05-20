@@ -149,6 +149,81 @@ export type UpdateCartItemInput = {
   quantity: number;
 };
 
+export type CheckoutAddressInput = {
+  recipient_name: string;
+  phone?: string;
+  line1: string;
+  line2?: string;
+  city: string;
+  region: string;
+  postal_code: string;
+  country: string;
+};
+
+export type CheckoutTotalsResponse = {
+  item_count: number;
+  unique_item_count: number;
+  subtotal: number;
+  total: number;
+  currency: string;
+};
+
+export type CheckoutSessionResponse = {
+  id: string;
+  cart_id: string;
+  customer_id: string;
+  email: string;
+  status: string;
+  shipping_address: CheckoutAddressInput;
+  billing_address: CheckoutAddressInput;
+  totals: CheckoutTotalsResponse;
+  created_at: string;
+  updated_at: string;
+};
+
+export type CreateCheckoutSessionInput = {
+  email: string;
+  shipping_address: CheckoutAddressInput;
+  billing_address: CheckoutAddressInput;
+};
+
+export type PlaceOrderInput = {
+  checkout_session_id: string;
+  idempotency_key: string;
+};
+
+export type OrderItemResponse = {
+  id: string;
+  variant_id: string;
+  product_name: string;
+  product_slug: string;
+  variant_name: string;
+  sku: string;
+  quantity: number;
+  unit_price: number;
+  line_total: number;
+  attributes_snapshot: Record<string, unknown>;
+};
+
+export type CheckoutOrderResponse = {
+  id: string;
+  checkout_session_id: string;
+  cart_id: string;
+  customer_id: string;
+  order_number: string;
+  status: string;
+  email: string;
+  currency: string;
+  subtotal_amount: number;
+  total_amount: number;
+  shipping_address: CheckoutAddressInput;
+  billing_address: CheckoutAddressInput;
+  totals: CheckoutTotalsResponse;
+  items: OrderItemResponse[];
+  created_at: string;
+  updated_at: string;
+};
+
 export type OrderListItem = {
   source_record_id: string | null;
   order_date: string;
@@ -660,6 +735,28 @@ export async function removeCartItem(options: CartRequestOptions, itemId: string
   return requestCartJson<CartResponse>(`/cart/items/${itemId}`, options, {
     method: "DELETE",
   });
+}
+
+export async function createCheckoutSession(
+  token: string,
+  payload: CreateCheckoutSessionInput,
+  cartToken?: string | null,
+) {
+  return requestCartJson<CheckoutSessionResponse>("/checkout/sessions", { token, cartToken }, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+}
+
+export async function placeCheckoutOrder(token: string, payload: PlaceOrderInput) {
+  return sendJsonWithToken<CheckoutOrderResponse>("/checkout/orders", token, "POST", payload);
+}
+
+export async function fetchCheckoutOrder(token: string, orderId: string) {
+  return fetchJsonWithToken<CheckoutOrderResponse>(`/checkout/orders/${orderId}`, token);
 }
 
 export async function fetchAdminProducts(

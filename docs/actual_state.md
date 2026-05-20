@@ -212,6 +212,24 @@ Implemented Stage 4 capabilities:
 - frontend order confirmation page
 - backend checkout and reservation test coverage
 
+## 4.9 Stage 5 payment abstraction snapshot
+
+The fifth commerce stage is now implemented on top of the checkout foundation.
+
+Implemented Stage 5 capabilities:
+
+- `commerce_payments` table
+- payment provider adapter boundary with a mock provider implementation
+- payment intent creation for placed orders
+- mock payment success simulation
+- mock payment failure simulation
+- mock webhook endpoint skeleton with idempotent event handling
+- order status transition from `pending_payment` to `paid` on successful payment
+- inventory reservation capture into `sale` movements on successful payment
+- reservation release into `release` movements on failed payment
+- frontend payment state section on the order confirmation page
+- backend payment test coverage for success, failure, and idempotent webhook replay
+
 ## 5. What Changes in the New Product
 
 DataPulse Commerce adds transactional commerce behavior in front of the existing analytics system.

@@ -17,6 +17,7 @@ from app.models.commerce_inventory_movement import CommerceInventoryMovement
 from app.models.commerce_order import CommerceOrder
 from app.models.commerce_order_item import CommerceOrderItem
 from app.models.commerce_order_status_history import CommerceOrderStatusHistory
+from app.models.commerce_payment import CommercePayment
 from app.models.commerce_product import CommerceProduct
 from app.models.commerce_product_variant import CommerceProductVariant
 from app.schemas.checkout import (
@@ -26,6 +27,7 @@ from app.schemas.checkout import (
     CheckoutTotalsResponse,
     CreateCheckoutSessionRequest,
     OrderItemResponse,
+    OrderPaymentSummaryResponse,
     OrderResponse,
     PlaceOrderRequest,
 )
@@ -148,6 +150,9 @@ def _serialize_order(session: Session, order: CommerceOrder) -> OrderResponse:
         .where(CommerceOrderItem.order_id == order.id)
         .order_by(CommerceOrderItem.created_at.asc())
     ).all()
+    payment = session.scalar(
+        select(CommercePayment).where(CommercePayment.order_id == order.id)
+    )
     totals = order.totals_snapshot
     return OrderResponse(
         id=str(order.id),
@@ -184,6 +189,21 @@ def _serialize_order(session: Session, order: CommerceOrder) -> OrderResponse:
             )
             for item in items
         ],
+        payment=(
+            OrderPaymentSummaryResponse(
+                id=str(payment.id),
+                provider_name=payment.provider_name,
+                provider_payment_id=payment.provider_payment_id,
+                provider_session_token=payment.provider_session_token,
+                status=payment.status,
+                amount=to_float(payment.amount),
+                currency=payment.currency,
+                failure_reason=payment.failure_reason,
+                completed_at=payment.completed_at,
+            )
+            if payment is not None
+            else None
+        ),
         created_at=order.created_at,
         updated_at=order.updated_at,
     )

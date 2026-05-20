@@ -220,8 +220,37 @@ export type CheckoutOrderResponse = {
   billing_address: CheckoutAddressInput;
   totals: CheckoutTotalsResponse;
   items: OrderItemResponse[];
+  payment: OrderPaymentSummaryResponse | null;
   created_at: string;
   updated_at: string;
+};
+
+export type OrderPaymentSummaryResponse = {
+  id: string;
+  provider_name: string;
+  provider_payment_id: string;
+  provider_session_token: string;
+  status: "pending" | "succeeded" | "failed";
+  amount: number;
+  currency: string;
+  failure_reason: string | null;
+  completed_at: string | null;
+};
+
+export type PaymentResponse = {
+  id: string;
+  order_id: string;
+  provider_name: string;
+  provider_payment_id: string;
+  provider_session_token: string;
+  status: "pending" | "succeeded" | "failed";
+  amount: number;
+  currency: string;
+  failure_reason: string | null;
+  provider_payload: Record<string, unknown>;
+  created_at: string;
+  updated_at: string;
+  completed_at: string | null;
 };
 
 export type OrderListItem = {
@@ -757,6 +786,18 @@ export async function placeCheckoutOrder(token: string, payload: PlaceOrderInput
 
 export async function fetchCheckoutOrder(token: string, orderId: string) {
   return fetchJsonWithToken<CheckoutOrderResponse>(`/checkout/orders/${orderId}`, token);
+}
+
+export async function createOrderPayment(token: string, orderId: string) {
+  return sendJsonWithToken<PaymentResponse>(`/payments/orders/${orderId}`, token, "POST");
+}
+
+export async function simulateOrderPaymentSuccess(token: string, paymentId: string) {
+  return sendJsonWithToken<PaymentResponse>(`/payments/${paymentId}/simulate-success`, token, "POST");
+}
+
+export async function simulateOrderPaymentFailure(token: string, paymentId: string) {
+  return sendJsonWithToken<PaymentResponse>(`/payments/${paymentId}/simulate-failure`, token, "POST");
 }
 
 export async function fetchAdminProducts(

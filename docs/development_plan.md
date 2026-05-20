@@ -249,19 +249,19 @@ Deliverables:
 
 Tasks:
 
-- [ ] Add payment table
-- [ ] Add payment adapter interface
-- [ ] Add mock provider
-- [ ] Implement payment intent/session creation
-- [ ] Implement payment success simulation
-- [ ] Implement payment failure simulation
-- [ ] Implement webhook endpoint skeleton
-- [ ] Update order status on payment success
-- [ ] Release reservation on payment failure where appropriate
-- [ ] Add payment state to order confirmation
-- [ ] Add tests for payment success
-- [ ] Add tests for payment failure
-- [ ] Add tests for idempotent webhook handling
+- [x] Add payment table
+- [x] Add payment adapter interface
+- [x] Add mock provider
+- [x] Implement payment intent/session creation
+- [x] Implement payment success simulation
+- [x] Implement payment failure simulation
+- [x] Implement webhook endpoint skeleton
+- [x] Update order status on payment success
+- [x] Release reservation on payment failure where appropriate
+- [x] Add payment state to order confirmation
+- [x] Add tests for payment success
+- [x] Add tests for payment failure
+- [x] Add tests for idempotent webhook handling
 
 Agent command:
 

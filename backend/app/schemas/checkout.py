@@ -84,6 +84,18 @@ class OrderItemResponse(BaseModel):
     attributes_snapshot: dict[str, Any]
 
 
+class OrderPaymentSummaryResponse(BaseModel):
+    id: str
+    provider_name: str
+    provider_payment_id: str
+    provider_session_token: str
+    status: str
+    amount: float
+    currency: str
+    failure_reason: str | None
+    completed_at: datetime | None
+
+
 class OrderResponse(BaseModel):
     id: str
     checkout_session_id: str
@@ -99,5 +111,6 @@ class OrderResponse(BaseModel):
     billing_address: CheckoutAddressResponse
     totals: CheckoutTotalsResponse
     items: list[OrderItemResponse]
+    payment: OrderPaymentSummaryResponse | None
     created_at: datetime
     updated_at: datetime

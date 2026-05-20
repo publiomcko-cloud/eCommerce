@@ -3,6 +3,7 @@ from app.models.commerce_checkout_session import CommerceCheckoutSession
 from app.models.commerce_order import CommerceOrder
 from app.models.commerce_order_item import CommerceOrderItem
 from app.models.commerce_order_status_history import CommerceOrderStatusHistory
+from app.models.commerce_payment import CommercePayment
 from app.models.data_quality_issue import DataQualityIssue
 from app.models.commerce_cart import CommerceCart
 from app.models.commerce_cart_item import CommerceCartItem
@@ -40,6 +41,7 @@ __all__ = [
     "CommerceOrder",
     "CommerceOrderItem",
     "CommerceOrderStatusHistory",
+    "CommercePayment",
     "CommerceUser",
     "DataQualityIssue",
     "DimChannel",

@@ -1,3 +1,4 @@
+from app.api.routes_account import router as account_router
 from app.api.routes_admin import router as admin_router
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -23,6 +24,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 app.include_router(admin_router)
+app.include_router(account_router)
 app.include_router(auth_router)
 app.include_router(catalog_router)
 app.include_router(cart_router)

@@ -283,16 +283,16 @@ Deliverables:
 
 Tasks:
 
-- [ ] Implement customer profile endpoint
-- [ ] Implement address CRUD endpoints
-- [ ] Implement customer order list endpoint
-- [ ] Implement customer order detail endpoint
-- [ ] Protect customer data by ownership
-- [ ] Add account overview UI
-- [ ] Add address UI
-- [ ] Add order history UI
-- [ ] Add order detail UI
-- [ ] Add tests for customer ownership restrictions
+- [x] Implement customer profile endpoint
+- [x] Implement address CRUD endpoints
+- [x] Implement customer order list endpoint
+- [x] Implement customer order detail endpoint
+- [x] Protect customer data by ownership
+- [x] Add account overview UI
+- [x] Add address UI
+- [x] Add order history UI
+- [x] Add order detail UI
+- [x] Add tests for customer ownership restrictions
 
 Agent command:
 

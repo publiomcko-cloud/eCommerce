@@ -230,6 +230,20 @@ Implemented Stage 5 capabilities:
 - frontend payment state section on the order confirmation page
 - backend payment test coverage for success, failure, and idempotent webhook replay
 
+## 4.10 Stage 6 customer account snapshot
+
+The sixth commerce stage is now implemented on top of the payment foundation.
+
+Implemented Stage 6 capabilities:
+
+- protected account API for customer profile, address CRUD, order list, and order detail
+- server-side ownership checks for addresses and orders
+- frontend account overview backed by the dedicated account profile endpoint
+- frontend address management UI with add, edit, and delete flows
+- frontend order history list in the account area
+- frontend owned order detail panel with item and payment snapshot visibility
+- backend ownership and account flow test coverage
+
 ## 5. What Changes in the New Product
 
 DataPulse Commerce adds transactional commerce behavior in front of the existing analytics system.

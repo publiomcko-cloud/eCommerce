@@ -333,6 +333,8 @@ export type CustomerAddressResponse = {
   postal_code: string;
   country: string;
   is_default: boolean;
+  created_at: string;
+  updated_at: string;
 };
 
 export type CustomerProfileResponse = {
@@ -352,6 +354,52 @@ export type AuthUserResponse = {
   created_at: string;
   last_login_at: string | null;
   customer: CustomerProfileResponse | null;
+};
+
+export type CustomerAccountProfileResponse = {
+  user_id: string;
+  customer_id: string;
+  email: string;
+  role: string;
+  first_name: string | null;
+  last_name: string | null;
+  phone: string | null;
+  marketing_opt_in: boolean;
+  address_count: number;
+  order_count: number;
+  created_at: string;
+  last_login_at: string | null;
+};
+
+export type CustomerAddressInput = {
+  type: "shipping" | "billing" | "both";
+  recipient_name: string;
+  phone?: string;
+  line1: string;
+  line2?: string;
+  city: string;
+  region: string;
+  postal_code: string;
+  country: string;
+  is_default: boolean;
+};
+
+export type CustomerOrderListItemResponse = {
+  id: string;
+  order_number: string;
+  status: string;
+  payment_status: string | null;
+  total_amount: number;
+  currency: string;
+  item_count: number;
+  created_at: string;
+};
+
+export type CustomerOrderListResponse = {
+  total: number;
+  limit: number;
+  offset: number;
+  items: CustomerOrderListItemResponse[];
 };
 
 export type AuthTokenResponse = {
@@ -786,6 +834,37 @@ export async function placeCheckoutOrder(token: string, payload: PlaceOrderInput
 
 export async function fetchCheckoutOrder(token: string, orderId: string) {
   return fetchJsonWithToken<CheckoutOrderResponse>(`/checkout/orders/${orderId}`, token);
+}
+
+export async function fetchAccountProfile(token: string) {
+  return fetchJsonWithToken<CustomerAccountProfileResponse>("/account/profile", token);
+}
+
+export async function fetchAccountAddresses(token: string) {
+  return fetchJsonWithToken<CustomerAddressResponse[]>("/account/addresses", token);
+}
+
+export async function createAccountAddress(token: string, payload: CustomerAddressInput) {
+  return sendJsonWithToken<CustomerAddressResponse>("/account/addresses", token, "POST", payload);
+}
+
+export async function updateAccountAddress(token: string, addressId: string, payload: CustomerAddressInput) {
+  return sendJsonWithToken<CustomerAddressResponse>(`/account/addresses/${addressId}`, token, "PUT", payload);
+}
+
+export async function deleteAccountAddress(token: string, addressId: string) {
+  return sendJsonWithToken<void>(`/account/addresses/${addressId}`, token, "DELETE");
+}
+
+export async function fetchAccountOrders(
+  token: string,
+  params?: { limit?: number; offset?: number },
+) {
+  return fetchJsonWithTokenParams<CustomerOrderListResponse>("/account/orders", token, params);
+}
+
+export async function fetchAccountOrderDetail(token: string, orderId: string) {
+  return fetchJsonWithToken<CheckoutOrderResponse>(`/account/orders/${orderId}`, token);
 }
 
 export async function createOrderPayment(token: string, orderId: string) {

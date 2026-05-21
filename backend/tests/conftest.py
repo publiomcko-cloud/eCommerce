@@ -23,6 +23,7 @@ TRUNCATE TABLE
     commerce_order_items,
     commerce_orders,
     commerce_payments,
+    commerce_shipments,
     commerce_checkout_sessions,
     commerce_cart_items,
     commerce_carts,

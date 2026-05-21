@@ -15,6 +15,7 @@ from app.models.commerce_inventory_movement import CommerceInventoryMovement
 from app.models.commerce_product import CommerceProduct
 from app.models.commerce_product_image import CommerceProductImage
 from app.models.commerce_product_variant import CommerceProductVariant
+from app.models.commerce_shipment import CommerceShipment
 from app.models.commerce_user import CommerceUser
 from app.models.dim_channel import DimChannel
 from app.models.dim_customer import DimCustomer
@@ -38,6 +39,7 @@ __all__ = [
     "CommerceProduct",
     "CommerceProductImage",
     "CommerceProductVariant",
+    "CommerceShipment",
     "CommerceOrder",
     "CommerceOrderItem",
     "CommerceOrderStatusHistory",

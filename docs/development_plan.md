@@ -316,19 +316,19 @@ Deliverables:
 
 Tasks:
 
-- [ ] Add admin overview API
-- [ ] Add admin order list API
-- [ ] Add admin order detail API
-- [ ] Add admin status update API
-- [ ] Add inventory adjustment API
-- [ ] Add shipment table and API if not already added
+- [x] Add admin overview API
+- [x] Add admin order list API
+- [x] Add admin order detail API
+- [x] Add admin status update API
+- [x] Add inventory adjustment API
+- [x] Add shipment table and API if not already added
 - [ ] Add refund table and API if implementing refunds
-- [ ] Add admin dashboard page
-- [ ] Add admin order list page
-- [ ] Add admin order detail page
-- [ ] Add admin inventory page
-- [ ] Add tests for admin authorization
-- [ ] Add tests for order status transitions
+- [x] Add admin dashboard page
+- [x] Add admin order list page
+- [x] Add admin order detail page
+- [x] Add admin inventory page
+- [x] Add tests for admin authorization
+- [x] Add tests for order status transitions
 
 Agent command:
 

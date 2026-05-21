@@ -526,6 +526,116 @@ export type InventoryAdjustmentResponse = {
   created_at: string;
 };
 
+export type AdminOverviewResponse = {
+  total_products: number;
+  active_products: number;
+  total_orders: number;
+  pending_payment_orders: number;
+  paid_orders: number;
+  fulfilled_orders: number;
+  cancelled_orders: number;
+  low_stock_variants: number;
+  shipments_in_progress: number;
+};
+
+export type AdminShipmentResponse = {
+  id: string;
+  order_id: string;
+  carrier: string | null;
+  service_level: string | null;
+  tracking_number: string | null;
+  status: "pending" | "packed" | "shipped" | "delivered";
+  notes: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
+export type AdminOrderStatusHistoryResponse = {
+  id: string;
+  from_status: string | null;
+  to_status: string;
+  reason: string | null;
+  created_at: string;
+};
+
+export type AdminOrderListItemResponse = {
+  id: string;
+  order_number: string;
+  status: string;
+  customer_email: string;
+  payment_status: string | null;
+  shipment_status: string | null;
+  total_amount: number;
+  currency: string;
+  item_count: number;
+  created_at: string;
+};
+
+export type AdminOrderListResponse = {
+  total: number;
+  limit: number;
+  offset: number;
+  items: AdminOrderListItemResponse[];
+};
+
+export type AdminOrderDetailResponse = {
+  id: string;
+  checkout_session_id: string;
+  cart_id: string;
+  customer_id: string;
+  order_number: string;
+  status: string;
+  email: string;
+  currency: string;
+  subtotal_amount: number;
+  total_amount: number;
+  shipping_address: CheckoutAddressInput;
+  billing_address: CheckoutAddressInput;
+  items: OrderItemResponse[];
+  payment: OrderPaymentSummaryResponse | null;
+  shipment: AdminShipmentResponse | null;
+  status_history: AdminOrderStatusHistoryResponse[];
+  created_at: string;
+  updated_at: string;
+};
+
+export type AdminOrderStatusUpdateInput = {
+  status: "pending_payment" | "paid" | "cancelled" | "fulfilled";
+  reason?: string;
+};
+
+export type AdminShipmentUpsertInput = {
+  carrier?: string;
+  service_level?: string;
+  tracking_number?: string;
+  status: "pending" | "packed" | "shipped" | "delivered";
+  notes?: string;
+};
+
+export type AdminInventoryListItemResponse = {
+  variant_id: string;
+  product_id: string;
+  product_name: string;
+  product_slug: string;
+  category_name: string;
+  variant_name: string;
+  sku: string;
+  variant_status: string;
+  price: number;
+  stock_on_hand: number;
+  stock_reserved: number;
+  available_stock: number;
+  low_stock_threshold: number;
+  allow_backorder: boolean;
+};
+
+export type AdminInventoryListResponse = {
+  total: number;
+  limit: number;
+  offset: number;
+  items: AdminInventoryListItemResponse[];
+};
+
 type CartRequestOptions = {
   token?: string | null;
   cartToken?: string | null;
@@ -550,7 +660,7 @@ type OrdersParams = DashboardFilters & {
   offset?: number;
 };
 
-type ApiQueryParams = Record<string, string | number | undefined>;
+type ApiQueryParams = Record<string, string | number | boolean | undefined>;
 
 function toApiFilterParams(filters: DashboardFilters): ApiQueryParams {
   return {
@@ -570,7 +680,7 @@ function toApiOrdersParams(params: OrdersParams): ApiQueryParams {
   };
 }
 
-function buildQuery(params: Record<string, string | number | undefined>) {
+function buildQuery(params: Record<string, string | number | boolean | undefined>) {
   const searchParams = new URLSearchParams();
 
   for (const [key, value] of Object.entries(params)) {
@@ -584,7 +694,7 @@ function buildQuery(params: Record<string, string | number | undefined>) {
   return queryString ? `?${queryString}` : "";
 }
 
-async function fetchJson<T>(path: string, params?: Record<string, string | number | undefined>): Promise<T> {
+async function fetchJson<T>(path: string, params?: Record<string, string | number | boolean | undefined>): Promise<T> {
   const response = await fetch(`${API_URL}${path}${buildQuery(params ?? {})}`, {
     headers: {
       Accept: "application/json",
@@ -636,7 +746,7 @@ async function fetchJsonWithToken<T>(path: string, token: string): Promise<T> {
 async function fetchJsonWithTokenParams<T>(
   path: string,
   token: string,
-  params?: Record<string, string | number | undefined>,
+  params?: Record<string, string | number | boolean | undefined>,
 ): Promise<T> {
   const response = await fetch(`${API_URL}${path}${buildQuery(params ?? {})}`, {
     headers: {
@@ -884,6 +994,36 @@ export async function fetchAdminProducts(
   params?: { status?: string; category_id?: string; limit?: number; offset?: number },
 ) {
   return fetchJsonWithTokenParams<AdminProductListResponse>("/admin/products", token, params);
+}
+
+export async function fetchAdminOverview(token: string) {
+  return fetchJsonWithToken<AdminOverviewResponse>("/admin/overview", token);
+}
+
+export async function fetchAdminOrders(
+  token: string,
+  params?: { status?: string; payment_status?: string; shipment_status?: string; limit?: number; offset?: number },
+) {
+  return fetchJsonWithTokenParams<AdminOrderListResponse>("/admin/orders", token, params);
+}
+
+export async function fetchAdminOrderDetail(token: string, orderId: string) {
+  return fetchJsonWithToken<AdminOrderDetailResponse>(`/admin/orders/${orderId}`, token);
+}
+
+export async function updateAdminOrderStatus(token: string, orderId: string, payload: AdminOrderStatusUpdateInput) {
+  return sendJsonWithToken<AdminOrderDetailResponse>(`/admin/orders/${orderId}/status`, token, "POST", payload);
+}
+
+export async function upsertAdminShipment(token: string, orderId: string, payload: AdminShipmentUpsertInput) {
+  return sendJsonWithToken<AdminShipmentResponse>(`/admin/orders/${orderId}/shipment`, token, "PUT", payload);
+}
+
+export async function fetchAdminInventory(
+  token: string,
+  params?: { q?: string; low_stock_only?: boolean; limit?: number; offset?: number },
+) {
+  return fetchJsonWithTokenParams<AdminInventoryListResponse>("/admin/inventory", token, params);
 }
 
 export async function fetchAdminProduct(token: string, productId: string) {

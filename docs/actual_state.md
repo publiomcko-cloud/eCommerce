@@ -244,6 +244,24 @@ Implemented Stage 6 capabilities:
 - frontend owned order detail panel with item and payment snapshot visibility
 - backend ownership and account flow test coverage
 
+## 4.11 Stage 7 admin back office snapshot
+
+The seventh commerce stage is now implemented on top of the customer account foundation.
+
+Implemented Stage 7 capabilities:
+
+- admin overview API with product, order, shipment, and low-stock summary metrics
+- admin order list API with status, payment, and shipment filters
+- admin order detail API with payment, shipment, and status-history visibility
+- admin order status transition API with guarded lifecycle rules
+- `commerce_shipments` table and shipment upsert API
+- existing inventory adjustment API expanded into a dedicated admin inventory workspace
+- frontend admin dashboard page
+- frontend admin order list page
+- frontend admin order detail page
+- frontend admin inventory page
+- backend admin authorization and order transition test coverage
+
 ## 5. What Changes in the New Product
 
 DataPulse Commerce adds transactional commerce behavior in front of the existing analytics system.

@@ -14,7 +14,7 @@ export function SiteHeader() {
     { href: "/products", label: "Products" },
     { href: "/cart", label: `Cart${itemCount > 0 ? ` (${itemCount})` : ""}` },
     { href: "/orders/new", label: "Add Test Order" },
-    ...(user?.role === "admin" ? [{ href: "/admin/products", label: "Admin Products" }] : []),
+    ...(user?.role === "admin" ? [{ href: "/admin", label: "Admin" }] : []),
     ...(isAuthenticated ? [{ href: "/account", label: "Account" }] : []),
     ...(!isAuthenticated ? [{ href: "/login", label: "Login" }, { href: "/register", label: "Register" }] : []),
   ];
@@ -27,7 +27,7 @@ export function SiteHeader() {
             DataPulse BI
           </Link>
           <p className="mt-1 text-sm" style={{ color: "var(--muted)" }}>
-            Analytics dashboard, seeded catalog browsing, and the first commerce admin foundation.
+            Analytics dashboard, storefront flows, and an expanding commerce operations back office.
           </p>
         </div>
 

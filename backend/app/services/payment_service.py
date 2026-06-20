@@ -15,6 +15,7 @@ from app.models.commerce_order_status_history import CommerceOrderStatusHistory
 from app.models.commerce_payment import CommercePayment
 from app.schemas.payment import MockWebhookRequest, PaymentResponse
 from app.services.auth_service import AuthContext
+from app.services.commerce_event_service import emit_commerce_event
 from app.services.payment_provider import MockPaymentProvider, PaymentProviderEvent
 
 
@@ -246,6 +247,15 @@ def _apply_payment_event(
             to_status="paid",
             reason="Mock payment provider reported success.",
         )
+        emit_commerce_event(
+            session,
+            event_type="payment_succeeded",
+            auth_context=auth_context,
+            customer_id=order.customer_id,
+            order_id=order.id,
+            payment_id=payment.id,
+            payload={"amount": to_float(payment.amount), "currency": payment.currency},
+        )
     elif event.status == "failed":
         payment.status = "failed"
         _release_reserved_inventory(session, auth_context=auth_context, order=order)
@@ -254,6 +264,15 @@ def _apply_payment_event(
             order=order,
             to_status="cancelled",
             reason=event.failure_reason or "Mock payment provider reported failure.",
+        )
+        emit_commerce_event(
+            session,
+            event_type="payment_failed",
+            auth_context=auth_context,
+            customer_id=order.customer_id,
+            order_id=order.id,
+            payment_id=payment.id,
+            payload={"failure_reason": event.failure_reason},
         )
     else:
         raise ValueError("Unsupported payment event status.")

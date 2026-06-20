@@ -6,6 +6,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { useAuth } from "@/app/providers";
 import {
+  createAdminRefund,
   AdminShipmentUpsertInput,
   fetchAdminOrderDetail,
   upsertAdminShipment,
@@ -48,6 +49,8 @@ export function AdminOrderDetailPage({ orderId }: AdminOrderDetailPageProps) {
   const queryClient = useQueryClient();
   const [statusReason, setStatusReason] = useState("");
   const [shipmentForm, setShipmentForm] = useState<ShipmentFormState>(EMPTY_SHIPMENT_FORM);
+  const [refundAmount, setRefundAmount] = useState("");
+  const [refundReason, setRefundReason] = useState("");
 
   const orderQuery = useQuery({
     queryKey: ["admin-order-detail", orderId, token],
@@ -89,6 +92,22 @@ export function AdminOrderDetailPage({ orderId }: AdminOrderDetailPageProps) {
     },
   });
 
+  const refundMutation = useMutation({
+    mutationFn: async () =>
+      createAdminRefund(token ?? "", orderId, {
+        amount: refundAmount ? Number(refundAmount) : undefined,
+        reason: refundReason || undefined,
+      }),
+    onSuccess: async () => {
+      setRefundAmount("");
+      setRefundReason("");
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: ["admin-orders"] }),
+        queryClient.invalidateQueries({ queryKey: ["admin-order-detail", orderId, token] }),
+      ]);
+    },
+  });
+
   if (isLoading || orderQuery.isLoading) {
     return (
       <main className="bg-grid min-h-screen px-4 py-6 sm:px-6 lg:px-8">
@@ -119,7 +138,7 @@ export function AdminOrderDetailPage({ orderId }: AdminOrderDetailPageProps) {
             </p>
             <Link
               href="/login"
-              className="mt-6 inline-flex rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-[var(--background)]"
+              className="mt-6 inline-flex rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-white"
             >
               Login
             </Link>
@@ -142,7 +161,7 @@ export function AdminOrderDetailPage({ orderId }: AdminOrderDetailPageProps) {
             </p>
             <Link
               href="/admin/orders"
-              className="mt-6 inline-flex rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-[var(--background)]"
+              className="mt-6 inline-flex rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-white"
             >
               Back to orders
             </Link>
@@ -192,9 +211,31 @@ export function AdminOrderDetailPage({ orderId }: AdminOrderDetailPageProps) {
                 <p><strong>Status:</strong> {order.status}</p>
                 <p><strong>Payment:</strong> {order.payment?.status ?? "not created"}</p>
                 <p><strong>Shipment:</strong> {order.shipment?.status ?? "not created"}</p>
+                <p><strong>Refunds:</strong> {order.refunds.length}</p>
                 <p><strong>Customer:</strong> {order.email}</p>
                 <p><strong>Created:</strong> {formatDateTime(order.created_at)}</p>
                 <p><strong>Total:</strong> {formatCurrency(order.total_amount, order.currency)}</p>
+              </div>
+            </article>
+
+            <article className="glass-panel rounded-[32px] p-6">
+              <h2 className="font-[family-name:var(--font-heading)] text-2xl font-semibold tracking-tight">
+                Refunds
+              </h2>
+              <div className="mt-5 grid gap-3">
+                {order.refunds.length === 0 ? (
+                  <div className="rounded-[22px] border border-dashed border-[var(--line)] bg-white/60 p-4 text-sm" style={{ color: "var(--muted)" }}>
+                    No refunds have been recorded for this order.
+                  </div>
+                ) : (
+                  order.refunds.map((refund) => (
+                    <div key={refund.id} className="rounded-[22px] border border-[var(--line)] bg-white/70 p-4 text-sm">
+                      <p><strong>{formatCurrency(refund.amount, refund.currency)}</strong> • {refund.status}</p>
+                      <p className="mt-1" style={{ color: "var(--muted)" }}>{refund.reason ?? "No reason provided"}</p>
+                      <p className="mt-2" style={{ color: "var(--muted)" }}>{formatDateTime(refund.created_at)}</p>
+                    </div>
+                  ))
+                )}
               </div>
             </article>
 
@@ -219,6 +260,55 @@ export function AdminOrderDetailPage({ orderId }: AdminOrderDetailPageProps) {
                   </div>
                 ))}
               </div>
+            </article>
+
+            <article className="glass-panel rounded-[32px] p-6">
+              <h2 className="font-[family-name:var(--font-heading)] text-2xl font-semibold tracking-tight">
+                Refund action
+              </h2>
+              <p className="mt-2 text-sm leading-6" style={{ color: "var(--muted)" }}>
+                Mock refunds are recorded for paid orders and included in payment health metrics.
+              </p>
+              {refundMutation.error instanceof Error ? (
+                <p className="mt-4 rounded-[20px] border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+                  {refundMutation.error.message}
+                </p>
+              ) : null}
+              <form
+                onSubmit={(event) => {
+                  event.preventDefault();
+                  refundMutation.mutate();
+                }}
+                className="mt-5 grid gap-4"
+              >
+                <label className="grid gap-2">
+                  <span className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>Amount</span>
+                  <input
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value={refundAmount}
+                    onChange={(event) => setRefundAmount(event.target.value)}
+                    placeholder="Full remaining amount"
+                    className="rounded-[20px] border border-[var(--line)] bg-white/75 px-4 py-3 text-sm outline-none transition focus:border-[var(--teal)]"
+                  />
+                </label>
+                <label className="grid gap-2">
+                  <span className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>Reason</span>
+                  <textarea
+                    value={refundReason}
+                    onChange={(event) => setRefundReason(event.target.value)}
+                    className="min-h-24 rounded-[20px] border border-[var(--line)] bg-white/75 px-4 py-3 text-sm outline-none transition focus:border-[var(--teal)]"
+                  />
+                </label>
+                <button
+                  type="submit"
+                  disabled={refundMutation.isPending || order.payment?.status !== "succeeded"}
+                  className="rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  {refundMutation.isPending ? "Creating refund..." : "Create refund"}
+                </button>
+              </form>
             </article>
 
             <article className="glass-panel rounded-[32px] p-6">
@@ -271,7 +361,7 @@ export function AdminOrderDetailPage({ orderId }: AdminOrderDetailPageProps) {
                         type="button"
                         onClick={() => statusMutation.mutate(status)}
                         disabled={statusMutation.isPending}
-                        className="rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-[var(--background)] disabled:cursor-not-allowed disabled:opacity-60"
+                        className="rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-60"
                       >
                         {statusMutation.isPending ? "Saving..." : `Mark ${status}`}
                       </button>
@@ -330,7 +420,7 @@ export function AdminOrderDetailPage({ orderId }: AdminOrderDetailPageProps) {
                 <button
                   type="submit"
                   disabled={shipmentMutation.isPending}
-                  className="rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-[var(--background)] disabled:cursor-not-allowed disabled:opacity-60"
+                  className="rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {shipmentMutation.isPending ? "Saving shipment..." : "Save shipment"}
                 </button>

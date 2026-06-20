@@ -13,6 +13,7 @@ def test_health_endpoint_returns_application_and_database_status() -> None:
     assert response.json() == {
         "status": "ok",
         "database": "ok",
+        "commerce": "ok",
         "environment": "local",
     }
 

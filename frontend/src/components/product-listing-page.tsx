@@ -1,27 +1,29 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { startTransition, useDeferredValue, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import {
   fetchCatalogCategories,
   fetchCatalogProducts,
+  type ProductCardResponse,
 } from "@/lib/api";
 import { formatCompactNumber, formatCurrency } from "@/lib/format";
+import { ProductVisual } from "@/components/product-visual";
 
 function ProductListingSkeleton() {
   return (
-    <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+    <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
       {Array.from({ length: 6 }).map((_, index) => (
-        <div key={index} className="glass-panel overflow-hidden rounded-[30px]">
-          <div className="h-56 animate-pulse bg-[rgba(23,49,63,0.08)]" />
+        <div key={index} className="overflow-hidden rounded-lg border border-[var(--line)] bg-white">
+          <div className="aspect-[4/3] animate-pulse bg-[var(--ink-soft)]" />
           <div className="space-y-3 p-5">
-            <div className="h-3 w-24 animate-pulse rounded-full bg-[rgba(23,49,63,0.08)]" />
-            <div className="h-6 w-40 animate-pulse rounded-full bg-[rgba(23,49,63,0.08)]" />
-            <div className="h-3 w-full animate-pulse rounded-full bg-[rgba(23,49,63,0.08)]" />
-            <div className="h-3 w-2/3 animate-pulse rounded-full bg-[rgba(23,49,63,0.08)]" />
+            <div className="h-3 w-24 animate-pulse rounded-full bg-[var(--ink-soft)]" />
+            <div className="h-7 w-44 animate-pulse rounded-full bg-[var(--ink-soft)]" />
+            <div className="h-3 w-full animate-pulse rounded-full bg-[var(--ink-soft)]" />
+            <div className="h-3 w-2/3 animate-pulse rounded-full bg-[var(--ink-soft)]" />
           </div>
         </div>
       ))}
@@ -29,9 +31,85 @@ function ProductListingSkeleton() {
   );
 }
 
+function ProductMedia({ product }: { product: ProductCardResponse }) {
+  return (
+    <ProductVisual
+      name={product.name}
+      imageUrl={product.primary_image_url}
+      categoryName={product.category_name}
+      imageClassName="h-full w-full object-contain p-8 transition-transform duration-300 group-hover:scale-105"
+    />
+  );
+}
+
+function ProductCard({ product }: { product: ProductCardResponse }) {
+  return (
+    <Link
+      href={`/products/${product.slug}`}
+      className="group grid overflow-hidden rounded-lg border border-[var(--line)] bg-white shadow-[0_10px_30px_rgba(29,39,33,0.06)] transition hover:-translate-y-0.5 hover:shadow-[var(--shadow)]"
+    >
+      <div className="relative aspect-[4/3] border-b border-[var(--line)]">
+        <ProductMedia product={product} />
+        <div className="absolute left-4 top-4 rounded-full bg-white/92 px-3 py-1 text-xs font-semibold">
+          {product.category_name}
+        </div>
+        <div
+          className="absolute right-4 top-4 rounded-full px-3 py-1 text-xs font-semibold"
+          style={{
+            backgroundColor: product.is_in_stock ? "var(--teal-soft)" : "rgba(180, 35, 58, 0.1)",
+            color: product.is_in_stock ? "var(--teal)" : "var(--rose)",
+          }}
+        >
+          {product.is_in_stock ? "In stock" : "Out of stock"}
+        </div>
+      </div>
+
+      <div className="grid min-h-[260px] content-between gap-5 p-5">
+        <div>
+          <div className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em]" style={{ color: "var(--muted)" }}>
+            {product.brand ? <span>{product.brand}</span> : null}
+            <span>{product.variant_count} variant{product.variant_count === 1 ? "" : "s"}</span>
+          </div>
+          <h2 className="mt-3 font-[family-name:var(--font-heading)] text-2xl font-semibold tracking-tight">
+            {product.name}
+          </h2>
+          <p className="mt-2 line-clamp-2 text-sm leading-6" style={{ color: "var(--muted)" }}>
+            {product.short_description ?? "Inventory-backed demo product ready for checkout."}
+          </p>
+        </div>
+
+        <div className="grid gap-4">
+          <div className="flex items-end justify-between gap-4">
+            <div>
+              <p className="font-[family-name:var(--font-heading)] text-3xl font-semibold tracking-tight">
+                {formatCurrency(product.price, product.currency)}
+              </p>
+              {product.compare_at_price ? (
+                <p className="mt-1 text-sm line-through" style={{ color: "var(--muted)" }}>
+                  {formatCurrency(product.compare_at_price, product.currency)}
+                </p>
+              ) : null}
+            </div>
+            <p className="text-right text-xs font-semibold" style={{ color: "var(--muted)" }}>
+              {product.is_in_stock ? `${product.available_stock} available` : "Unavailable"}
+            </p>
+          </div>
+
+          <span className="rounded-full bg-[var(--foreground)] px-4 py-3 text-center text-sm font-semibold text-white transition group-hover:bg-[var(--teal)]">
+            View product
+          </span>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
 export function ProductListingPage() {
+  const searchParams = useSearchParams();
+  const initialCategory = searchParams.get("category") ?? "all";
   const [searchInput, setSearchInput] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedCategory, setSelectedCategory] = useState(initialCategory);
+  const [availability, setAvailability] = useState<"all" | "in-stock">("all");
   const deferredSearch = useDeferredValue(searchInput.trim());
 
   const categoriesQuery = useQuery({
@@ -45,67 +123,79 @@ export function ProductListingPage() {
       fetchCatalogProducts({
         q: deferredSearch || undefined,
         category: selectedCategory === "all" ? undefined : selectedCategory,
-        limit: 24,
+        limit: 48,
       }),
   });
 
   const categories = categoriesQuery.data ?? [];
-  const products = productsQuery.data?.items ?? [];
-  const productCountLabel = useMemo(() => {
-    const total = productsQuery.data?.total ?? 0;
-    return `${formatCompactNumber(total)} product${total === 1 ? "" : "s"}`;
-  }, [productsQuery.data?.total]);
+  const products = useMemo(() => {
+    const items = productsQuery.data?.items ?? [];
+    if (availability === "in-stock") {
+      return items.filter((product) => product.is_in_stock);
+    }
+    return items;
+  }, [availability, productsQuery.data?.items]);
+  const totalProducts = productsQuery.data?.total ?? 0;
+  const selectedCategoryName =
+    selectedCategory === "all"
+      ? "All departments"
+      : categories.find((category) => category.slug === selectedCategory)?.name ?? "Selected department";
+  const productCountLabel = `${formatCompactNumber(products.length)} product${products.length === 1 ? "" : "s"}`;
+
+  function clearFilters() {
+    setSearchInput("");
+    setSelectedCategory("all");
+    setAvailability("all");
+  }
 
   return (
-    <main className="bg-grid min-h-screen px-4 py-6 sm:px-6 lg:px-8">
-      <div className="mx-auto flex max-w-7xl flex-col gap-6">
-        <section className="glass-panel overflow-hidden rounded-[40px] p-6 sm:p-8">
-          <div className="grid gap-8 lg:grid-cols-[1.4fr_0.9fr] lg:items-end">
-            <div>
-              <div className="inline-flex rounded-full bg-[var(--brass-soft)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--brass)]">
-                Stage 2 storefront
-              </div>
-              <h1 className="mt-5 font-[family-name:var(--font-heading)] text-4xl font-semibold tracking-tight sm:text-5xl">
-                Browse the first real DataPulse Commerce catalog.
+    <main className="min-h-screen bg-[var(--background)] px-4 py-6 sm:px-6 lg:px-8">
+      <div className="mx-auto grid max-w-7xl gap-8">
+        <section className="overflow-hidden rounded-lg border border-[var(--line)] bg-white shadow-[var(--shadow)]">
+          <div className="grid gap-0 lg:grid-cols-[1.2fr_0.8fr]">
+            <div className="p-6 sm:p-8 lg:p-10">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em]" style={{ color: "var(--teal)" }}>
+                Store catalog
+              </p>
+              <h1 className="mt-4 max-w-3xl font-[family-name:var(--font-heading)] text-4xl font-semibold tracking-tight sm:text-5xl">
+                Find products ready for demo checkout.
               </h1>
-              <p className="mt-4 max-w-2xl text-base leading-7 sm:text-lg" style={{ color: "var(--muted)" }}>
-                This milestone adds categories, live stock-aware product cards, and product detail pages that sit beside
-                the existing BI dashboard without disrupting it.
+              <p className="mt-4 max-w-2xl text-base leading-7" style={{ color: "var(--muted)" }}>
+                Browse departments, compare prices, check availability, and open each product for variant selection and cart actions.
               </p>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              <article className="rounded-[28px] border border-[var(--line)] bg-white/60 p-5">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>
-                  Catalog status
+            <div className="grid border-t border-[var(--line)] bg-[var(--foreground)] p-6 text-white sm:grid-cols-3 lg:border-l lg:border-t-0 lg:p-8">
+              <div className="border-white/15 py-3 sm:border-r sm:px-4">
+                <p className="font-[family-name:var(--font-heading)] text-3xl font-semibold">{totalProducts}</p>
+                <p className="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-white/85">Products</p>
+              </div>
+              <div className="border-white/15 py-3 sm:border-r sm:px-4">
+                <p className="font-[family-name:var(--font-heading)] text-3xl font-semibold">{categories.length}</p>
+                <p className="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-white/85">Departments</p>
+              </div>
+              <div className="py-3 sm:px-4">
+                <p className="font-[family-name:var(--font-heading)] text-3xl font-semibold">
+                  {products.filter((product) => product.is_in_stock).length}
                 </p>
-                <p className="mt-3 font-[family-name:var(--font-heading)] text-3xl font-semibold tracking-tight">
-                  {productsQuery.data?.total ?? 0}
-                </p>
-                <p className="mt-2 text-sm leading-6" style={{ color: "var(--muted)" }}>
-                  Active products exposed by the public catalog API.
-                </p>
-              </article>
-              <article className="rounded-[28px] border border-[var(--line)] bg-white/60 p-5">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>
-                  Category map
-                </p>
-                <p className="mt-3 font-[family-name:var(--font-heading)] text-3xl font-semibold tracking-tight">
-                  {categories.length}
-                </p>
-                <p className="mt-2 text-sm leading-6" style={{ color: "var(--muted)" }}>
-                  Seeded departments ready for storefront filtering.
-                </p>
-              </article>
+                <p className="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-white/85">Available</p>
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="glass-panel rounded-[32px] p-5 sm:p-6">
-          <div className="grid gap-4 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
-            <label className="grid gap-2">
-              <span className="text-xs font-semibold uppercase tracking-[0.22em]" style={{ color: "var(--muted)" }}>
-                Search products
+        <section className="grid gap-6 lg:grid-cols-[280px_1fr] lg:items-start">
+          <aside className="rounded-lg border border-[var(--line)] bg-white p-5 shadow-[0_10px_30px_rgba(29,39,33,0.05)] lg:sticky lg:top-32">
+            <div className="flex items-center justify-between gap-4">
+              <h2 className="font-[family-name:var(--font-heading)] text-xl font-semibold tracking-tight">Filters</h2>
+              <button type="button" onClick={clearFilters} className="text-sm font-semibold text-[var(--teal)]">
+                Clear
+              </button>
+            </div>
+
+            <label className="mt-5 grid gap-2">
+              <span className="text-xs font-semibold uppercase tracking-[0.16em]" style={{ color: "var(--muted)" }}>
+                Search
               </span>
               <input
                 value={searchInput}
@@ -116,162 +206,119 @@ export function ProductListingPage() {
                   });
                 }}
                 placeholder="Projector, mug, coffee..."
-                className="rounded-[22px] border border-[var(--line)] bg-white/70 px-4 py-3 text-sm outline-none transition focus:border-[var(--teal)]"
+                className="rounded-lg border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--teal)]"
               />
             </label>
 
-            <label className="grid gap-2">
-              <span className="text-xs font-semibold uppercase tracking-[0.22em]" style={{ color: "var(--muted)" }}>
-                Category
-              </span>
-              <select
-                value={selectedCategory}
-                onChange={(event) => setSelectedCategory(event.target.value)}
-                className="rounded-[22px] border border-[var(--line)] bg-white/70 px-4 py-3 text-sm outline-none transition focus:border-[var(--teal)]"
-              >
-                <option value="all">All categories</option>
+            <div className="mt-6">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em]" style={{ color: "var(--muted)" }}>
+                Department
+              </p>
+              <div className="mt-3 grid gap-2">
+                <button
+                  type="button"
+                  onClick={() => setSelectedCategory("all")}
+                  className="flex items-center justify-between rounded-lg px-3 py-2 text-left text-sm font-semibold"
+                  style={{
+                    backgroundColor: selectedCategory === "all" ? "var(--foreground)" : "var(--background)",
+                    color: selectedCategory === "all" ? "white" : "var(--foreground)",
+                  }}
+                >
+                  All departments
+                  <span>{totalProducts}</span>
+                </button>
                 {categories.map((category) => (
-                  <option key={category.id} value={category.slug}>
+                  <button
+                    key={category.id}
+                    type="button"
+                    onClick={() => setSelectedCategory(category.slug)}
+                    className="flex items-center justify-between rounded-lg px-3 py-2 text-left text-sm font-semibold"
+                    style={{
+                      backgroundColor: selectedCategory === category.slug ? "var(--teal)" : "var(--background)",
+                      color: selectedCategory === category.slug ? "white" : "var(--foreground)",
+                    }}
+                  >
                     {category.name}
-                  </option>
+                    <span>{category.product_count}</span>
+                  </button>
                 ))}
-              </select>
-            </label>
-          </div>
+              </div>
+            </div>
 
-          <div className="mt-4 flex flex-wrap gap-2">
-            <button
-              type="button"
-              onClick={() => setSelectedCategory("all")}
-              className="rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em]"
-              style={{
-                backgroundColor: selectedCategory === "all" ? "var(--foreground)" : "rgba(255, 255, 255, 0.72)",
-                color: selectedCategory === "all" ? "var(--background)" : "var(--foreground)",
-                border: selectedCategory === "all" ? "none" : "1px solid var(--line)",
-              }}
-            >
-              All
-            </button>
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                type="button"
-                onClick={() => setSelectedCategory(category.slug)}
-                className="rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em]"
-                style={{
-                  backgroundColor: selectedCategory === category.slug ? "var(--teal)" : "rgba(255, 255, 255, 0.72)",
-                  color: selectedCategory === category.slug ? "#f9fbfb" : "var(--foreground)",
-                  border: selectedCategory === category.slug ? "none" : "1px solid var(--line)",
-                }}
-              >
-                {category.name}
-              </button>
-            ))}
-          </div>
-        </section>
+            <div className="mt-6">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em]" style={{ color: "var(--muted)" }}>
+                Availability
+              </p>
+              <div className="mt-3 grid grid-cols-2 gap-2">
+                {[
+                  { value: "all", label: "All" },
+                  { value: "in-stock", label: "In stock" },
+                ].map((option) => (
+                  <button
+                    key={option.value}
+                    type="button"
+                    onClick={() => setAvailability(option.value as "all" | "in-stock")}
+                    className="rounded-lg px-3 py-2 text-sm font-semibold"
+                    style={{
+                      backgroundColor: availability === option.value ? "var(--foreground)" : "var(--background)",
+                      color: availability === option.value ? "white" : "var(--foreground)",
+                    }}
+                  >
+                    {option.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </aside>
 
-        <section className="flex items-center justify-between gap-4">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>
-              Public listing
-            </p>
-            <p className="mt-1 text-sm leading-6" style={{ color: "var(--muted)" }}>
-              {productCountLabel}
-              {deferredSearch ? ` matching "${deferredSearch}"` : ""}
-            </p>
-          </div>
-          <Link
-            href="/admin/products"
-            className="rounded-full border border-[var(--line)] bg-white/65 px-4 py-2 text-sm font-semibold"
-          >
-            Open admin catalog
-          </Link>
-        </section>
-
-        {productsQuery.isLoading ? <ProductListingSkeleton /> : null}
-
-        {productsQuery.isError ? (
-          <section className="glass-panel rounded-[32px] p-8 text-center">
-            <h2 className="font-[family-name:var(--font-heading)] text-2xl font-semibold tracking-tight">
-              The catalog could not be loaded
-            </h2>
-            <p className="mt-3 text-sm leading-6" style={{ color: "var(--muted)" }}>
-              Check the backend catalog routes or seed script, then refresh this page.
-            </p>
-          </section>
-        ) : null}
-
-        {!productsQuery.isLoading && !productsQuery.isError && products.length === 0 ? (
-          <section className="glass-panel rounded-[32px] p-8 text-center">
-            <h2 className="font-[family-name:var(--font-heading)] text-2xl font-semibold tracking-tight">
-              No products match the current filters
-            </h2>
-            <p className="mt-3 text-sm leading-6" style={{ color: "var(--muted)" }}>
-              Try another category or clear the search term to see the seeded storefront catalog.
-            </p>
-          </section>
-        ) : null}
-
-        {!productsQuery.isLoading && !productsQuery.isError && products.length > 0 ? (
-          <section className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {products.map((product) => (
-              <Link
-                key={product.id}
-                href={`/products/${product.slug}`}
-                className="glass-panel group overflow-hidden rounded-[30px] transition-transform duration-200 hover:-translate-y-1"
-              >
-                <div className="relative h-56 overflow-hidden border-b border-[var(--line)] bg-[linear-gradient(135deg,rgba(15,118,110,0.12),rgba(183,121,31,0.12))]">
-                  {product.primary_image_url ? (
-                    <img
-                      src={product.primary_image_url}
-                      alt={product.name}
-                      className="h-full w-full object-contain p-10 transition-transform duration-300 group-hover:scale-105"
-                    />
-                  ) : (
-                    <div className="flex h-full items-center justify-center p-10 text-sm font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>
-                      No image
-                    </div>
-                  )}
-                  <div className="absolute left-4 top-4 rounded-full bg-white/88 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em]">
-                    {product.category_name}
-                  </div>
-                </div>
-
-                <div className="p-5">
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <h2 className="font-[family-name:var(--font-heading)] text-2xl font-semibold tracking-tight">
-                        {product.name}
-                      </h2>
-                      <p className="mt-2 text-sm leading-6" style={{ color: "var(--muted)" }}>
-                        {product.short_description ?? "Catalog item ready for later cart and checkout work."}
-                      </p>
-                    </div>
-                    <div className="rounded-full bg-[var(--teal-soft)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--teal)]">
-                      {product.variant_count} variants
-                    </div>
-                  </div>
-
-                  <div className="mt-5 flex items-end justify-between gap-4">
-                    <div>
-                      <p className="font-[family-name:var(--font-heading)] text-3xl font-semibold tracking-tight">
-                        {formatCurrency(product.price, product.currency)}
-                      </p>
-                      {product.compare_at_price ? (
-                        <p className="mt-1 text-sm line-through" style={{ color: "var(--muted)" }}>
-                          {formatCurrency(product.compare_at_price, product.currency)}
-                        </p>
-                      ) : null}
-                    </div>
-                    <div className="text-right text-xs font-semibold uppercase tracking-[0.18em]" style={{ color: product.is_in_stock ? "var(--teal)" : "var(--rose)" }}>
-                      {product.is_in_stock ? `${product.available_stock} ready` : "Out of stock"}
-                    </div>
-                  </div>
-                </div>
+          <div className="grid gap-5">
+            <div className="flex flex-col justify-between gap-4 rounded-lg border border-[var(--line)] bg-white p-5 sm:flex-row sm:items-center">
+              <div>
+                <p className="text-sm font-semibold text-[var(--teal)]">{selectedCategoryName}</p>
+                <p className="mt-1 text-sm leading-6" style={{ color: "var(--muted)" }}>
+                  Showing {productCountLabel}
+                  {deferredSearch ? ` matching "${deferredSearch}"` : ""}
+                  {availability === "in-stock" ? " with available inventory" : ""}
+                </p>
+              </div>
+              <Link href="/cart" className="rounded-full border border-[var(--line)] px-5 py-3 text-center text-sm font-semibold">
+                View cart
               </Link>
-            ))}
-          </section>
-        ) : null}
+            </div>
+
+            {productsQuery.isLoading ? <ProductListingSkeleton /> : null}
+
+            {productsQuery.isError || categoriesQuery.isError ? (
+              <section className="rounded-lg border border-[var(--line)] bg-white p-8 text-center">
+                <h2 className="font-[family-name:var(--font-heading)] text-2xl font-semibold tracking-tight">
+                  The catalog could not be loaded
+                </h2>
+                <p className="mt-3 text-sm leading-6" style={{ color: "var(--muted)" }}>
+                  Check the backend catalog routes or seed script, then refresh this page.
+                </p>
+              </section>
+            ) : null}
+
+            {!productsQuery.isLoading && !productsQuery.isError && products.length === 0 ? (
+              <section className="rounded-lg border border-[var(--line)] bg-white p-8 text-center">
+                <h2 className="font-[family-name:var(--font-heading)] text-2xl font-semibold tracking-tight">
+                  No products match these filters
+                </h2>
+                <p className="mt-3 text-sm leading-6" style={{ color: "var(--muted)" }}>
+                  Clear filters or choose another department to keep browsing.
+                </p>
+              </section>
+            ) : null}
+
+            {!productsQuery.isLoading && !productsQuery.isError && products.length > 0 ? (
+              <section className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+                {products.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </section>
+            ) : null}
+          </div>
+        </section>
       </div>
     </main>
   );

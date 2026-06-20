@@ -68,34 +68,24 @@ export function Providers({ children }: ProvidersProps) {
         },
       }),
   );
-  const [token, setToken] = useState<string | null>(() => {
-    if (typeof window === "undefined") {
-      return null;
-    }
-    return window.localStorage.getItem(AUTH_TOKEN_STORAGE_KEY);
-  });
+  const [token, setToken] = useState<string | null>(null);
   const [user, setUser] = useState<AuthUserResponse | null>(null);
-  const [isLoading, setIsLoading] = useState(() => {
-    if (typeof window === "undefined") {
-      return true;
-    }
-    return Boolean(window.localStorage.getItem(AUTH_TOKEN_STORAGE_KEY));
-  });
-  const [cartToken, setCartToken] = useState<string | null>(() => {
-    if (typeof window === "undefined") {
-      return null;
-    }
-    return window.localStorage.getItem(CART_TOKEN_STORAGE_KEY);
-  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [cartToken, setCartToken] = useState<string | null>(null);
   const [cart, setCart] = useState<CartResponse | null>(null);
-  const [isCartLoading, setIsCartLoading] = useState(() => {
-    if (typeof window === "undefined") {
-      return true;
-    }
-    return Boolean(
-      window.localStorage.getItem(CART_TOKEN_STORAGE_KEY) || window.localStorage.getItem(AUTH_TOKEN_STORAGE_KEY),
-    );
-  });
+  const [isCartLoading, setIsCartLoading] = useState(false);
+
+  useEffect(() => {
+    queueMicrotask(() => {
+      const savedToken = window.localStorage.getItem(AUTH_TOKEN_STORAGE_KEY);
+      const savedCartToken = window.localStorage.getItem(CART_TOKEN_STORAGE_KEY);
+
+      setToken(savedToken);
+      setCartToken(savedCartToken);
+      setIsLoading(Boolean(savedToken));
+      setIsCartLoading(Boolean(savedCartToken || savedToken));
+    });
+  }, []);
 
   const persistCart = useCallback((nextCart: CartResponse | null) => {
     if (nextCart?.cart_token) {
@@ -147,7 +137,9 @@ export function Providers({ children }: ProvidersProps) {
     let cancelled = false;
 
     async function hydrateCart() {
-      if (!token && !cartToken) {
+      const cartAccessToken = user?.customer ? token : null;
+
+      if (!cartAccessToken && !cartToken) {
         if (!cancelled) {
           setCart(null);
           setIsCartLoading(false);
@@ -156,7 +148,7 @@ export function Providers({ children }: ProvidersProps) {
       }
 
       try {
-        const nextCart = await fetchCart({ token, cartToken });
+        const nextCart = await fetchCart({ token: cartAccessToken, cartToken });
         if (cancelled) {
           return;
         }
@@ -165,7 +157,7 @@ export function Providers({ children }: ProvidersProps) {
         if (cancelled) {
           return;
         }
-        if (!token) {
+        if (!cartAccessToken) {
           window.localStorage.removeItem(CART_TOKEN_STORAGE_KEY);
           setCartToken(null);
         }
@@ -182,7 +174,7 @@ export function Providers({ children }: ProvidersProps) {
     return () => {
       cancelled = true;
     };
-  }, [cartToken, persistCart, token]);
+  }, [cartToken, persistCart, token, user?.customer]);
 
   const applyAuth = useCallback((response: AuthTokenResponse) => {
     window.localStorage.setItem(AUTH_TOKEN_STORAGE_KEY, response.access_token);
@@ -211,54 +203,58 @@ export function Providers({ children }: ProvidersProps) {
   const refreshCart = useCallback(async () => {
     setIsCartLoading(true);
     try {
-      const nextCart = await fetchCart({ token, cartToken });
+      const cartAccessToken = user?.customer ? token : null;
+      const nextCart = await fetchCart({ token: cartAccessToken, cartToken });
       persistCart(nextCart);
       return nextCart;
     } finally {
       setIsCartLoading(false);
     }
-  }, [cartToken, persistCart, token]);
+  }, [cartToken, persistCart, token, user?.customer]);
 
   const addItem = useCallback(
     async (payload: AddCartItemInput) => {
       setIsCartLoading(true);
       try {
-        const nextCart = await addCartItemRequest({ token, cartToken }, payload);
+        const cartAccessToken = user?.customer ? token : null;
+        const nextCart = await addCartItemRequest({ token: cartAccessToken, cartToken }, payload);
         persistCart(nextCart);
         return nextCart;
       } finally {
         setIsCartLoading(false);
       }
     },
-    [cartToken, persistCart, token],
+    [cartToken, persistCart, token, user?.customer],
   );
 
   const updateItem = useCallback(
     async (itemId: string, payload: UpdateCartItemInput) => {
       setIsCartLoading(true);
       try {
-        const nextCart = await updateCartItem({ token, cartToken }, itemId, payload);
+        const cartAccessToken = user?.customer ? token : null;
+        const nextCart = await updateCartItem({ token: cartAccessToken, cartToken }, itemId, payload);
         persistCart(nextCart);
         return nextCart;
       } finally {
         setIsCartLoading(false);
       }
     },
-    [cartToken, persistCart, token],
+    [cartToken, persistCart, token, user?.customer],
   );
 
   const removeItemFromCart = useCallback(
     async (itemId: string) => {
       setIsCartLoading(true);
       try {
-        const nextCart = await removeCartItem({ token, cartToken }, itemId);
+        const cartAccessToken = user?.customer ? token : null;
+        const nextCart = await removeCartItem({ token: cartAccessToken, cartToken }, itemId);
         persistCart(nextCart);
         return nextCart;
       } finally {
         setIsCartLoading(false);
       }
     },
-    [cartToken, persistCart, token],
+    [cartToken, persistCart, token, user?.customer],
   );
 
   const authValue = useMemo<AuthContextValue>(

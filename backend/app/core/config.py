@@ -11,7 +11,7 @@ ROOT_DIR = BACKEND_DIR.parent
 
 
 class Settings(BaseSettings):
-    project_name: str = "DataPulse BI API"
+    project_name: str = "DataPulse Commerce API"
     environment: str = "local"
     cors_origins: Annotated[list[str], NoDecode] = Field(
         default_factory=lambda: ["http://localhost:3000", "http://127.0.0.1:3000"]

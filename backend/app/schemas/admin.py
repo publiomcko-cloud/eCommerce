@@ -31,6 +31,19 @@ class AdminShipmentResponse(BaseModel):
     updated_at: datetime
 
 
+class AdminRefundResponse(BaseModel):
+    id: str
+    order_id: str
+    payment_id: str
+    provider_refund_id: str
+    status: str
+    amount: float
+    currency: str
+    reason: str | None
+    created_by_user_id: str | None
+    created_at: datetime
+
+
 class AdminOrderStatusHistoryResponse(BaseModel):
     id: str
     from_status: str | None
@@ -75,6 +88,7 @@ class AdminOrderDetailResponse(BaseModel):
     items: list[OrderItemResponse]
     payment: OrderPaymentSummaryResponse | None
     shipment: AdminShipmentResponse | None
+    refunds: list[AdminRefundResponse]
     status_history: list[AdminOrderStatusHistoryResponse]
     created_at: datetime
     updated_at: datetime
@@ -95,6 +109,13 @@ class AdminShipmentUpsertRequest(BaseModel):
     tracking_number: str | None = Field(default=None, max_length=120)
     status: str = Field(pattern="^(pending|packed|shipped|delivered)$")
     notes: str | None = Field(default=None, max_length=1000)
+
+
+class AdminRefundCreateRequest(BaseModel):
+    model_config = ConfigDict(str_strip_whitespace=True)
+
+    amount: float | None = Field(default=None, gt=0)
+    reason: str | None = Field(default=None, max_length=1000)
 
 
 class AdminInventoryListItemResponse(BaseModel):

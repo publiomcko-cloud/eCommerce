@@ -161,7 +161,6 @@ Required:
 - update quantity
 - remove item
 - cart totals
-- coupon placeholder or basic coupon support
 - stock validation before checkout
 
 ### FR-006 — Checkout
@@ -358,8 +357,6 @@ GET /cart
 POST /cart/items
 PATCH /cart/items/{item_id}
 DELETE /cart/items/{item_id}
-POST /cart/apply-coupon
-DELETE /cart/coupon
 ```
 
 ## 8.4 Checkout

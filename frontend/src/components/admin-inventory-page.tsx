@@ -41,8 +41,8 @@ export function AdminInventoryPage() {
 
   if (isLoading) {
     return (
-      <main className="bg-grid min-h-screen px-4 py-6 sm:px-6 lg:px-8">
-        <div className="glass-panel mx-auto flex min-h-[60vh] max-w-5xl items-center justify-center rounded-[40px] px-6 py-20 text-center">
+      <main className="min-h-screen bg-[var(--background)] px-4 py-6 sm:px-6 lg:px-8">
+        <div className="mx-auto flex min-h-[60vh] max-w-5xl items-center justify-center rounded-lg border border-[var(--line)] bg-white px-6 py-20 text-center shadow-[var(--shadow)]">
           <div>
             <p className="font-[family-name:var(--font-heading)] text-3xl font-semibold tracking-tight">
               Loading inventory workspace
@@ -58,8 +58,8 @@ export function AdminInventoryPage() {
 
   if (!isAuthenticated || user?.role !== "admin" || !token) {
     return (
-      <main className="bg-grid min-h-screen px-4 py-6 sm:px-6 lg:px-8">
-        <div className="glass-panel mx-auto flex min-h-[60vh] max-w-5xl items-center justify-center rounded-[40px] px-6 py-20 text-center">
+      <main className="min-h-screen bg-[var(--background)] px-4 py-6 sm:px-6 lg:px-8">
+        <div className="mx-auto flex min-h-[60vh] max-w-5xl items-center justify-center rounded-lg border border-[var(--line)] bg-white px-6 py-20 text-center shadow-[var(--shadow)]">
           <div className="max-w-xl">
             <p className="font-[family-name:var(--font-heading)] text-3xl font-semibold tracking-tight">
               Admin access required
@@ -69,7 +69,7 @@ export function AdminInventoryPage() {
             </p>
             <Link
               href="/login"
-              className="mt-6 inline-flex rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-[var(--background)]"
+              className="mt-6 inline-flex rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-white"
             >
               Login
             </Link>
@@ -80,12 +80,12 @@ export function AdminInventoryPage() {
   }
 
   return (
-    <main className="bg-grid min-h-screen px-4 py-6 sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-[var(--background)] px-4 py-6 sm:px-6 lg:px-8">
       <div className="mx-auto flex max-w-7xl flex-col gap-6">
-        <section className="glass-panel rounded-[40px] p-6 sm:p-8">
+        <section className="rounded-lg border border-[var(--line)] bg-white p-6 shadow-[var(--shadow)] sm:p-8">
           <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl">
-              <div className="inline-flex rounded-full bg-[var(--teal-soft)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--teal)]">
+              <div className="inline-flex rounded-full bg-[var(--teal-soft)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--teal)]">
                 Inventory management
               </div>
               <h1 className="mt-5 font-[family-name:var(--font-heading)] text-4xl font-semibold tracking-tight sm:text-5xl">
@@ -101,7 +101,7 @@ export function AdminInventoryPage() {
           </div>
         </section>
 
-        <section className="glass-panel rounded-[32px] p-5 sm:p-6">
+        <section className="rounded-lg border border-[var(--line)] bg-white p-5 shadow-[0_10px_30px_rgba(29,39,33,0.05)] sm:p-6">
           <div className="grid gap-4 lg:grid-cols-[1fr_auto]">
             <label className="grid gap-2">
               <span className="text-xs font-semibold uppercase tracking-[0.22em]" style={{ color: "var(--muted)" }}>
@@ -111,10 +111,10 @@ export function AdminInventoryPage() {
                 value={search}
                 onChange={(event) => setSearch(event.target.value)}
                 placeholder="Search by product, variant, or SKU"
-                className="rounded-[22px] border border-[var(--line)] bg-white/70 px-4 py-3 text-sm outline-none transition focus:border-[var(--teal)]"
+                className="rounded-lg border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--teal)]"
               />
             </label>
-            <label className="flex items-end gap-3 rounded-[22px] border border-[var(--line)] bg-white/70 px-4 py-3 text-sm">
+            <label className="flex items-end gap-3 rounded-lg border border-[var(--line)] bg-white px-4 py-3 text-sm">
               <input type="checkbox" checked={lowStockOnly} onChange={(event) => setLowStockOnly(event.target.checked)} />
               Low stock only
             </label>
@@ -122,7 +122,7 @@ export function AdminInventoryPage() {
         </section>
 
         {inventoryQuery.isError ? (
-          <section className="glass-panel rounded-[32px] p-8 text-center">
+          <section className="rounded-lg border border-[var(--line)] bg-white p-8 text-center shadow-[0_10px_30px_rgba(29,39,33,0.05)]">
             <h2 className="font-[family-name:var(--font-heading)] text-2xl font-semibold tracking-tight">
               Inventory data could not be loaded
             </h2>
@@ -134,7 +134,7 @@ export function AdminInventoryPage() {
             {(inventoryQuery.data?.items ?? []).map((item) => {
               const draft = drafts[item.variant_id] ?? { quantity_delta: "", reason: "" };
               return (
-                <article key={item.variant_id} className="glass-panel rounded-[30px] p-5">
+                <article key={item.variant_id} className="rounded-lg border border-[var(--line)] bg-white p-5 shadow-[0_10px_30px_rgba(29,39,33,0.05)]">
                   <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
                     <div>
                       <p className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>
@@ -154,7 +154,7 @@ export function AdminInventoryPage() {
                         <p><strong>Low stock threshold:</strong> {item.low_stock_threshold}</p>
                       </div>
                     </div>
-                    <div className="w-full max-w-xl rounded-[24px] border border-[var(--line)] bg-white/70 p-4">
+                    <div className="w-full max-w-xl rounded-lg border border-[var(--line)] bg-[var(--background)] p-4">
                       <p className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>
                         Quick adjustment
                       </p>
@@ -171,7 +171,7 @@ export function AdminInventoryPage() {
                             }))
                           }
                           placeholder="+10 or -2"
-                          className="rounded-[18px] border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--teal)]"
+                          className="rounded-lg border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--teal)]"
                         />
                         <input
                           value={draft.reason}
@@ -185,7 +185,7 @@ export function AdminInventoryPage() {
                             }))
                           }
                           placeholder="Reason for the adjustment"
-                          className="rounded-[18px] border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--teal)]"
+                          className="rounded-lg border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--teal)]"
                         />
                         <button
                           type="button"
@@ -197,7 +197,7 @@ export function AdminInventoryPage() {
                               reason: draft.reason || undefined,
                             })
                           }
-                          className="rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-[var(--background)] disabled:cursor-not-allowed disabled:opacity-60"
+                          className="rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-60"
                         >
                           Adjust
                         </button>

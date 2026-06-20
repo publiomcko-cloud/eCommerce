@@ -322,7 +322,7 @@ Tasks:
 - [x] Add admin status update API
 - [x] Add inventory adjustment API
 - [x] Add shipment table and API if not already added
-- [ ] Add refund table and API if implementing refunds
+- [x] Add refund table and API if implementing refunds
 - [x] Add admin dashboard page
 - [x] Add admin order list page
 - [x] Add admin order detail page
@@ -350,19 +350,19 @@ Deliverables:
 
 Tasks:
 
-- [ ] Add `commerce_events`
-- [ ] Emit events for cart, checkout, order, payment, shipment, and refund actions
-- [ ] Create projection script or service from commerce orders into analytics tables
-- [ ] Map products to dimensions
-- [ ] Map customers safely to dimensions
-- [ ] Map channels and regions
-- [ ] Add conversion funnel metric
-- [ ] Add cart abandonment metric
-- [ ] Add payment health metric
-- [ ] Add inventory risk metric
-- [ ] Update dashboard UI
-- [ ] Preserve existing summary metrics
-- [ ] Add tests for analytics projection correctness
+- [x] Add `commerce_events`
+- [x] Emit events for cart, checkout, order, payment, shipment, and refund actions
+- [x] Create projection script or service from commerce orders into analytics tables
+- [x] Map products to dimensions
+- [x] Map customers safely to dimensions
+- [x] Map channels and regions
+- [x] Add conversion funnel metric
+- [x] Add cart abandonment metric
+- [x] Add payment health metric
+- [x] Add inventory risk metric
+- [x] Update dashboard UI
+- [x] Preserve existing summary metrics
+- [x] Add tests for analytics projection correctness
 
 Agent command:
 
@@ -385,19 +385,19 @@ Deliverables:
 
 Tasks:
 
-- [ ] Add auth tests
-- [ ] Add catalog tests
-- [ ] Add cart tests
-- [ ] Add checkout tests
-- [ ] Add inventory tests
-- [ ] Add payment tests
-- [ ] Add order lifecycle tests
-- [ ] Add admin authorization tests
-- [ ] Add analytics projection tests
-- [ ] Add smoke script for commerce flow
-- [ ] Run frontend lint
-- [ ] Run frontend build
-- [ ] Update testing documentation
+- [x] Add auth tests
+- [x] Add catalog tests
+- [x] Add cart tests
+- [x] Add checkout tests
+- [x] Add inventory tests
+- [x] Add payment tests
+- [x] Add order lifecycle tests
+- [x] Add admin authorization tests
+- [x] Add analytics projection tests
+- [x] Add smoke script for commerce flow
+- [x] Run frontend lint
+- [x] Run frontend build
+- [x] Update testing documentation
 
 Agent command:
 
@@ -422,20 +422,22 @@ Deliverables:
 
 Tasks:
 
-- [ ] Update production environment variables
-- [ ] Validate production-like Docker stack
+- [x] Update production environment variables
+- [x] Validate production-like Docker stack configuration
 - [ ] Deploy database
 - [ ] Deploy backend
-- [ ] Run migrations
-- [ ] Seed demo commerce data
+- [x] Run migrations locally and document production migration command
+- [x] Seed demo commerce data locally and document production seed command
+- [x] Run local pre-deployment validation checklist
 - [ ] Deploy frontend
 - [ ] Validate public checkout
 - [ ] Validate admin demo
-- [ ] Validate dashboard
+- [x] Validate local dashboard
 - [ ] Add screenshots
 - [ ] Add live links
-- [ ] Add known limitations
-- [ ] Add roadmap
+- [x] Add known limitations
+- [x] Add roadmap
+- [x] Add customer and admin demo credential guidance
 
 Agent command:
 
@@ -445,7 +447,7 @@ Prepare DataPulse Commerce for public portfolio review. Deploy the storefront, b
 
 ## 4. Completion Criteria
 
-The commerce project is complete when:
+The local commerce MVP is complete when:
 
 - BI baseline remains functional
 - products can be browsed publicly
@@ -459,7 +461,9 @@ The commerce project is complete when:
 - tests pass
 - frontend lint/build pass
 - deployment documentation is updated
-- public demo is safe and usable
+
+The public portfolio demo is complete when the remaining Stage 10 deployment
+tasks are done and public links/screenshots are added.
 
 ## 5. Recommendations
 

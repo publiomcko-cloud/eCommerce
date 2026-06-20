@@ -33,6 +33,7 @@ from app.schemas.checkout import (
 )
 from app.services.auth_service import AuthContext
 from app.services.cart_service import resolve_cart
+from app.services.commerce_event_service import emit_commerce_event
 
 
 def to_float(value: Decimal | float | int | None) -> float:
@@ -233,6 +234,15 @@ def create_checkout_session(
         totals_snapshot=totals.model_dump(),
     )
     session.add(checkout_session)
+    session.flush()
+    emit_commerce_event(
+        session,
+        event_type="checkout_started",
+        auth_context=auth_context,
+        cart_id=resolved_cart.cart.id,
+        checkout_session_id=checkout_session.id,
+        payload={"item_count": totals.item_count, "total": totals.total, "currency": totals.currency},
+    )
     session.commit()
     session.refresh(checkout_session)
     return _serialize_checkout_session(checkout_session)
@@ -335,6 +345,15 @@ def place_order(
     )
     checkout_session.status = "converted"
     cart.status = "converted"
+    emit_commerce_event(
+        session,
+        event_type="order_created",
+        auth_context=auth_context,
+        cart_id=cart.id,
+        checkout_session_id=checkout_session.id,
+        order_id=order.id,
+        payload={"order_number": order.order_number, "total": totals.total, "currency": totals.currency},
+    )
     session.commit()
     return _serialize_order(session, order)
 

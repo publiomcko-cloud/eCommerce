@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Sans, Space_Grotesk } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
 import { Providers } from "./providers";
 import "./globals.css";
 
@@ -17,8 +18,8 @@ const bodyFont = IBM_Plex_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "DataPulse BI",
-  description: "Portfolio analytics dashboard and test-order sandbox for the DataPulse BI project.",
+  title: "DataPulse Commerce",
+  description: "Portfolio e-commerce storefront with admin operations and built-in business intelligence.",
 };
 
 export default function RootLayout({
@@ -35,6 +36,7 @@ export default function RootLayout({
         <Providers>
           <SiteHeader />
           {children}
+          <SiteFooter />
         </Providers>
       </body>
     </html>

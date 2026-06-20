@@ -14,6 +14,7 @@ from app.models.commerce_order_status_history import CommerceOrderStatusHistory
 from app.models.commerce_payment import CommercePayment
 from app.models.commerce_product import CommerceProduct
 from app.models.commerce_product_variant import CommerceProductVariant
+from app.models.commerce_refund import CommerceRefund
 from app.models.commerce_shipment import CommerceShipment
 from app.schemas.admin import (
     AdminInventoryListItemResponse,
@@ -23,10 +24,13 @@ from app.schemas.admin import (
     AdminOrderListResponse,
     AdminOrderStatusHistoryResponse,
     AdminOverviewResponse,
+    AdminRefundCreateRequest,
+    AdminRefundResponse,
     AdminShipmentResponse,
     AdminShipmentUpsertRequest,
 )
 from app.schemas.checkout import CheckoutAddressResponse, OrderItemResponse, OrderPaymentSummaryResponse
+from app.services.commerce_event_service import emit_commerce_event
 
 
 def to_float(value: Decimal | float | int | None) -> float:
@@ -77,6 +81,21 @@ def _serialize_shipment(shipment: CommerceShipment | None) -> AdminShipmentRespo
         notes=shipment.notes,
         created_at=shipment.created_at,
         updated_at=shipment.updated_at,
+    )
+
+
+def _serialize_refund(refund: CommerceRefund) -> AdminRefundResponse:
+    return AdminRefundResponse(
+        id=str(refund.id),
+        order_id=str(refund.order_id),
+        payment_id=str(refund.payment_id),
+        provider_refund_id=refund.provider_refund_id,
+        status=refund.status,
+        amount=to_float(refund.amount),
+        currency=refund.currency,
+        reason=refund.reason,
+        created_by_user_id=str(refund.created_by_user_id) if refund.created_by_user_id else None,
+        created_at=refund.created_at,
     )
 
 
@@ -198,6 +217,9 @@ def get_admin_order_detail(session: Session, order_id: str) -> AdminOrderDetailR
     ).all()
     payment = session.scalar(select(CommercePayment).where(CommercePayment.order_id == order.id))
     shipment = session.scalar(select(CommerceShipment).where(CommerceShipment.order_id == order.id))
+    refunds = session.scalars(
+        select(CommerceRefund).where(CommerceRefund.order_id == order.id).order_by(CommerceRefund.created_at.asc())
+    ).all()
     history_rows = session.scalars(
         select(CommerceOrderStatusHistory)
         .where(CommerceOrderStatusHistory.order_id == order.id)
@@ -234,6 +256,7 @@ def get_admin_order_detail(session: Session, order_id: str) -> AdminOrderDetailR
         ],
         payment=_serialize_payment(payment),
         shipment=_serialize_shipment(shipment),
+        refunds=[_serialize_refund(refund) for refund in refunds],
         status_history=[
             AdminOrderStatusHistoryResponse(
                 id=str(history.id),
@@ -328,9 +351,83 @@ def upsert_admin_shipment(
         )
         order.status = "fulfilled"
 
+    emit_commerce_event(
+        session,
+        event_type="shipment_updated",
+        order_id=order.id,
+        shipment_id=shipment.id,
+        payload={"status": shipment.status, "carrier": shipment.carrier},
+    )
     session.commit()
     session.refresh(shipment)
     return _serialize_shipment(shipment)
+
+
+def create_admin_refund(
+    session: Session,
+    *,
+    order_id: str,
+    payload: AdminRefundCreateRequest,
+    created_by_user_id: str,
+) -> AdminRefundResponse:
+    order = session.get(CommerceOrder, uuid.UUID(order_id))
+    if order is None:
+        raise ValueError("Order not found.")
+
+    payment = session.scalar(select(CommercePayment).where(CommercePayment.order_id == order.id))
+    if payment is None or payment.status != "succeeded":
+        raise ValueError("Only successfully paid orders can be refunded.")
+
+    refunded_amount = session.scalar(
+        select(func.coalesce(func.sum(CommerceRefund.amount), 0)).where(
+            CommerceRefund.order_id == order.id,
+            CommerceRefund.status == "succeeded",
+        )
+    ) or Decimal("0")
+    remaining_amount = Decimal(str(payment.amount)) - Decimal(str(refunded_amount))
+    requested_amount = remaining_amount if payload.amount is None else Decimal(str(payload.amount))
+
+    if requested_amount <= 0:
+        raise ValueError("Refund amount must be greater than zero.")
+    if requested_amount > remaining_amount:
+        raise ValueError("Refund amount cannot exceed the remaining paid amount.")
+
+    refund = CommerceRefund(
+        order_id=order.id,
+        payment_id=payment.id,
+        provider_refund_id=f"mock_refund_{uuid.uuid4().hex}",
+        status="succeeded",
+        amount=requested_amount,
+        currency=payment.currency,
+        reason=payload.reason,
+        created_by_user_id=uuid.UUID(created_by_user_id),
+    )
+    session.add(refund)
+    session.flush()
+
+    if requested_amount == remaining_amount and order.status != "cancelled":
+        previous_status = order.status
+        order.status = "cancelled"
+        session.add(
+            CommerceOrderStatusHistory(
+                order_id=order.id,
+                from_status=previous_status,
+                to_status="cancelled",
+                reason=payload.reason or "Order fully refunded from admin back office.",
+            )
+        )
+
+    emit_commerce_event(
+        session,
+        event_type="refund_created",
+        order_id=order.id,
+        payment_id=payment.id,
+        refund_id=refund.id,
+        payload={"amount": to_float(requested_amount), "currency": refund.currency, "reason": refund.reason},
+    )
+    session.commit()
+    session.refresh(refund)
+    return _serialize_refund(refund)
 
 
 def list_admin_inventory(

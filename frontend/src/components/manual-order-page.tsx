@@ -262,7 +262,7 @@ export function ManualOrderPage() {
               <button
                 type="submit"
                 disabled={mutation.isPending}
-                className="rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-[var(--background)] transition-transform duration-200 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
+                className="rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-white transition-transform duration-200 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {mutation.isPending ? "Submitting order..." : "Submit test order"}
               </button>

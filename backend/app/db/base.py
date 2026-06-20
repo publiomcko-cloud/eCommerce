@@ -9,12 +9,14 @@ from app.models.commerce_cart import CommerceCart
 from app.models.commerce_cart_item import CommerceCartItem
 from app.models.commerce_customer import CommerceCustomer
 from app.models.commerce_customer_address import CommerceCustomerAddress
+from app.models.commerce_event import CommerceEvent
 from app.models.commerce_category import CommerceCategory
 from app.models.commerce_inventory_item import CommerceInventoryItem
 from app.models.commerce_inventory_movement import CommerceInventoryMovement
 from app.models.commerce_product import CommerceProduct
 from app.models.commerce_product_image import CommerceProductImage
 from app.models.commerce_product_variant import CommerceProductVariant
+from app.models.commerce_refund import CommerceRefund
 from app.models.commerce_shipment import CommerceShipment
 from app.models.commerce_user import CommerceUser
 from app.models.dim_channel import DimChannel
@@ -34,11 +36,13 @@ __all__ = [
     "CommerceCheckoutSession",
     "CommerceCustomer",
     "CommerceCustomerAddress",
+    "CommerceEvent",
     "CommerceInventoryItem",
     "CommerceInventoryMovement",
     "CommerceProduct",
     "CommerceProductImage",
     "CommerceProductVariant",
+    "CommerceRefund",
     "CommerceShipment",
     "CommerceOrder",
     "CommerceOrderItem",

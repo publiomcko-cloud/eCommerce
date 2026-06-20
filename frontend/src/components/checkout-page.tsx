@@ -29,6 +29,16 @@ type CheckoutFormState = {
   billingCountry: string;
 };
 
+type FieldProps = {
+  label: string;
+  value: string;
+  required?: boolean;
+  type?: string;
+  className?: string;
+  autoComplete?: string;
+  onChange: (value: string) => void;
+};
+
 function createInitialFormState(
   email: string,
   firstName: string,
@@ -57,6 +67,32 @@ function createInitialFormState(
     billingPostalCode: "",
     billingCountry: "BR",
   };
+}
+
+function Field({
+  label,
+  value,
+  required,
+  type = "text",
+  className = "",
+  autoComplete,
+  onChange,
+}: FieldProps) {
+  return (
+    <label className={`grid gap-2 ${className}`}>
+      <span className="text-xs font-semibold uppercase tracking-[0.14em]" style={{ color: "var(--muted)" }}>
+        {label}
+      </span>
+      <input
+        type={type}
+        value={value}
+        required={required}
+        autoComplete={autoComplete}
+        onChange={(event) => onChange(event.target.value)}
+        className="rounded-lg border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--teal)]"
+      />
+    </label>
+  );
 }
 
 export function CheckoutPage() {
@@ -148,16 +184,10 @@ export function CheckoutPage() {
 
   if (isAuthLoading || isCartLoading) {
     return (
-      <main className="bg-grid min-h-screen px-4 py-6 sm:px-6 lg:px-8">
-        <div className="glass-panel mx-auto flex min-h-[60vh] max-w-5xl items-center justify-center rounded-[40px] px-6 py-20 text-center">
-          <div>
-            <p className="font-[family-name:var(--font-heading)] text-3xl font-semibold tracking-tight">
-              Preparing checkout
-            </p>
-            <p className="mt-4 text-base leading-7" style={{ color: "var(--muted)" }}>
-              Validating the authenticated customer cart and loading the current totals.
-            </p>
-          </div>
+      <main className="min-h-screen bg-[var(--background)] px-4 py-6 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[1fr_380px]">
+          <div className="h-[560px] animate-pulse rounded-lg bg-white" />
+          <div className="h-[560px] animate-pulse rounded-lg bg-white" />
         </div>
       </main>
     );
@@ -165,131 +195,119 @@ export function CheckoutPage() {
 
   if (!isAuthenticated || !token || !user) {
     return (
-      <main className="bg-grid min-h-screen px-4 py-6 sm:px-6 lg:px-8">
-        <div className="glass-panel mx-auto flex min-h-[60vh] max-w-5xl items-center justify-center rounded-[40px] px-6 py-20 text-center">
+      <main className="min-h-screen bg-[var(--background)] px-4 py-6 sm:px-6 lg:px-8">
+        <section className="mx-auto grid min-h-[60vh] max-w-5xl place-items-center rounded-lg border border-[var(--line)] bg-white p-8 text-center shadow-[var(--shadow)]">
           <div className="max-w-xl">
-            <p className="font-[family-name:var(--font-heading)] text-3xl font-semibold tracking-tight">
-              Sign in to place the order
+            <p className="text-xs font-semibold uppercase tracking-[0.18em]" style={{ color: "var(--teal)" }}>
+              Checkout
             </p>
+            <h1 className="mt-4 font-[family-name:var(--font-heading)] text-4xl font-semibold tracking-tight">
+              Sign in to checkout.
+            </h1>
             <p className="mt-4 text-base leading-7" style={{ color: "var(--muted)" }}>
-              Stage 4 currently converts authenticated customer carts into orders. Your guest cart will merge after you
-              sign in.
+              Create or access a customer account to place a demo order. Your cart will stay available after sign-in.
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-3">
-              <Link
-                href="/login"
-                className="rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-[var(--background)]"
-              >
+              <Link href="/login" className="rounded-full bg-[var(--foreground)] px-6 py-3 text-sm font-semibold text-white">
                 Login
               </Link>
-              <Link
-                href="/register"
-                className="rounded-full border border-[var(--line)] px-5 py-3 text-sm font-semibold"
-              >
+              <Link href="/register" className="rounded-full border border-[var(--line)] px-6 py-3 text-sm font-semibold">
                 Register
               </Link>
             </div>
           </div>
-        </div>
+        </section>
       </main>
     );
   }
 
   if (!cart || cart.items.length === 0 || !orderSummary) {
     return (
-      <main className="bg-grid min-h-screen px-4 py-6 sm:px-6 lg:px-8">
-        <div className="glass-panel mx-auto flex min-h-[60vh] max-w-5xl items-center justify-center rounded-[40px] px-6 py-20 text-center">
+      <main className="min-h-screen bg-[var(--background)] px-4 py-6 sm:px-6 lg:px-8">
+        <section className="mx-auto grid min-h-[60vh] max-w-5xl place-items-center rounded-lg border border-[var(--line)] bg-white p-8 text-center shadow-[var(--shadow)]">
           <div className="max-w-xl">
-            <p className="font-[family-name:var(--font-heading)] text-3xl font-semibold tracking-tight">
-              The cart is empty
-            </p>
+            <h1 className="font-[family-name:var(--font-heading)] text-4xl font-semibold tracking-tight">
+              Your cart is empty.
+            </h1>
             <p className="mt-4 text-base leading-7" style={{ color: "var(--muted)" }}>
-              Add products to the cart before opening the checkout flow.
+              Add products to the cart before opening checkout.
             </p>
             <Link
               href="/products"
-              className="mt-6 inline-flex rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-[var(--background)]"
+              className="mt-6 inline-flex rounded-full border border-[#111827] bg-[#111827] px-6 py-3 text-sm font-semibold !text-white shadow-[0_10px_24px_rgba(17,24,39,0.22)] transition hover:border-[#005f55] hover:bg-[#005f55]"
+              style={{ color: "#ffffff" }}
             >
-              Browse products
+              Shop products
             </Link>
           </div>
-        </div>
+        </section>
       </main>
     );
   }
 
   return (
-    <main className="bg-grid min-h-screen px-4 py-6 sm:px-6 lg:px-8">
-      <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-        <form onSubmit={(event) => void handleSubmit(event)} className="glass-panel rounded-[40px] p-6 sm:p-8">
-          <div className="inline-flex rounded-full bg-[var(--brass-soft)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--brass)]">
-            Stage 4 checkout
-          </div>
-          <h1 className="mt-5 font-[family-name:var(--font-heading)] text-4xl font-semibold tracking-tight sm:text-5xl">
-            Confirm addresses and place the order.
-          </h1>
-          <p className="mt-4 max-w-2xl text-base leading-7 sm:text-lg" style={{ color: "var(--muted)" }}>
-            This first checkout slice snapshots addresses and totals, creates an idempotent order, and reserves
-            inventory on the backend.
-          </p>
+    <main className="min-h-screen bg-[var(--background)] px-4 py-6 sm:px-6 lg:px-8">
+      <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[1fr_390px] lg:items-start">
+        <form onSubmit={(event) => void handleSubmit(event)} className="grid gap-5">
+          <section className="rounded-lg border border-[var(--line)] bg-white p-6 shadow-[var(--shadow)] sm:p-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em]" style={{ color: "var(--teal)" }}>
+              Checkout
+            </p>
+            <h1 className="mt-3 font-[family-name:var(--font-heading)] text-4xl font-semibold tracking-tight sm:text-5xl">
+              Complete your demo order.
+            </h1>
+            <p className="mt-3 max-w-2xl text-sm leading-6" style={{ color: "var(--muted)" }}>
+              Confirm contact and delivery details. Payment is simulated safely by the mock provider.
+            </p>
+          </section>
 
-          <div className="mt-8 grid gap-4 md:grid-cols-2">
-            <label className="grid gap-2 md:col-span-2">
-              <span className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>
-                Email
-              </span>
-              <input
+          <section className="rounded-lg border border-[var(--line)] bg-white p-6 shadow-[0_10px_30px_rgba(29,39,33,0.05)] sm:p-8">
+            <div className="flex items-center gap-3">
+              <span className="grid h-9 w-9 place-items-center rounded-full bg-[var(--foreground)] text-sm font-semibold text-white">1</span>
+              <h2 className="font-[family-name:var(--font-heading)] text-2xl font-semibold tracking-tight">
+                Contact
+              </h2>
+            </div>
+            <div className="mt-5 grid gap-4 md:grid-cols-2">
+              <Field
+                label="Email"
                 type="email"
                 value={form.email}
-                onChange={(event) => setForm((current) => ({ ...current, email: event.target.value }))}
-                className="rounded-[20px] border border-[var(--line)] bg-white/75 px-4 py-3 text-sm outline-none transition focus:border-[var(--teal)]"
                 required
+                autoComplete="email"
+                className="md:col-span-2"
+                onChange={(email) => setForm((current) => ({ ...current, email }))}
               />
-            </label>
-          </div>
-
-          <section className="mt-8">
-            <h2 className="font-[family-name:var(--font-heading)] text-2xl font-semibold tracking-tight">
-              Shipping address
-            </h2>
-            <div className="mt-4 grid gap-4 md:grid-cols-2">
-              <label className="grid gap-2">
-                <span className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>Recipient</span>
-                <input value={form.shippingRecipientName} onChange={(event) => setForm((current) => ({ ...current, shippingRecipientName: event.target.value }))} className="rounded-[20px] border border-[var(--line)] bg-white/75 px-4 py-3 text-sm outline-none transition focus:border-[var(--teal)]" required />
-              </label>
-              <label className="grid gap-2">
-                <span className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>Phone</span>
-                <input value={form.shippingPhone} onChange={(event) => setForm((current) => ({ ...current, shippingPhone: event.target.value }))} className="rounded-[20px] border border-[var(--line)] bg-white/75 px-4 py-3 text-sm outline-none transition focus:border-[var(--teal)]" />
-              </label>
-              <label className="grid gap-2 md:col-span-2">
-                <span className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>Address line 1</span>
-                <input value={form.shippingLine1} onChange={(event) => setForm((current) => ({ ...current, shippingLine1: event.target.value }))} className="rounded-[20px] border border-[var(--line)] bg-white/75 px-4 py-3 text-sm outline-none transition focus:border-[var(--teal)]" required />
-              </label>
-              <label className="grid gap-2 md:col-span-2">
-                <span className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>Address line 2</span>
-                <input value={form.shippingLine2} onChange={(event) => setForm((current) => ({ ...current, shippingLine2: event.target.value }))} className="rounded-[20px] border border-[var(--line)] bg-white/75 px-4 py-3 text-sm outline-none transition focus:border-[var(--teal)]" />
-              </label>
-              <label className="grid gap-2">
-                <span className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>City</span>
-                <input value={form.shippingCity} onChange={(event) => setForm((current) => ({ ...current, shippingCity: event.target.value }))} className="rounded-[20px] border border-[var(--line)] bg-white/75 px-4 py-3 text-sm outline-none transition focus:border-[var(--teal)]" required />
-              </label>
-              <label className="grid gap-2">
-                <span className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>Region</span>
-                <input value={form.shippingRegion} onChange={(event) => setForm((current) => ({ ...current, shippingRegion: event.target.value }))} className="rounded-[20px] border border-[var(--line)] bg-white/75 px-4 py-3 text-sm outline-none transition focus:border-[var(--teal)]" required />
-              </label>
-              <label className="grid gap-2">
-                <span className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>Postal code</span>
-                <input value={form.shippingPostalCode} onChange={(event) => setForm((current) => ({ ...current, shippingPostalCode: event.target.value }))} className="rounded-[20px] border border-[var(--line)] bg-white/75 px-4 py-3 text-sm outline-none transition focus:border-[var(--teal)]" required />
-              </label>
-              <label className="grid gap-2">
-                <span className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>Country</span>
-                <input value={form.shippingCountry} onChange={(event) => setForm((current) => ({ ...current, shippingCountry: event.target.value.toUpperCase() }))} className="rounded-[20px] border border-[var(--line)] bg-white/75 px-4 py-3 text-sm uppercase outline-none transition focus:border-[var(--teal)]" required />
-              </label>
             </div>
           </section>
 
-          <section className="mt-8">
-            <label className="flex items-center gap-3 rounded-[20px] border border-[var(--line)] bg-white/70 px-4 py-3 text-sm">
+          <section className="rounded-lg border border-[var(--line)] bg-white p-6 shadow-[0_10px_30px_rgba(29,39,33,0.05)] sm:p-8">
+            <div className="flex items-center gap-3">
+              <span className="grid h-9 w-9 place-items-center rounded-full bg-[var(--foreground)] text-sm font-semibold text-white">2</span>
+              <h2 className="font-[family-name:var(--font-heading)] text-2xl font-semibold tracking-tight">
+                Shipping address
+              </h2>
+            </div>
+            <div className="mt-5 grid gap-4 md:grid-cols-2">
+              <Field label="Recipient" value={form.shippingRecipientName} required autoComplete="name" onChange={(shippingRecipientName) => setForm((current) => ({ ...current, shippingRecipientName }))} />
+              <Field label="Phone" value={form.shippingPhone} autoComplete="tel" onChange={(shippingPhone) => setForm((current) => ({ ...current, shippingPhone }))} />
+              <Field label="Address line 1" value={form.shippingLine1} required autoComplete="address-line1" className="md:col-span-2" onChange={(shippingLine1) => setForm((current) => ({ ...current, shippingLine1 }))} />
+              <Field label="Address line 2" value={form.shippingLine2} autoComplete="address-line2" className="md:col-span-2" onChange={(shippingLine2) => setForm((current) => ({ ...current, shippingLine2 }))} />
+              <Field label="City" value={form.shippingCity} required autoComplete="address-level2" onChange={(shippingCity) => setForm((current) => ({ ...current, shippingCity }))} />
+              <Field label="Region" value={form.shippingRegion} required autoComplete="address-level1" onChange={(shippingRegion) => setForm((current) => ({ ...current, shippingRegion }))} />
+              <Field label="Postal code" value={form.shippingPostalCode} required autoComplete="postal-code" onChange={(shippingPostalCode) => setForm((current) => ({ ...current, shippingPostalCode }))} />
+              <Field label="Country" value={form.shippingCountry} required autoComplete="country" onChange={(shippingCountry) => setForm((current) => ({ ...current, shippingCountry: shippingCountry.toUpperCase() }))} />
+            </div>
+          </section>
+
+          <section className="rounded-lg border border-[var(--line)] bg-white p-6 shadow-[0_10px_30px_rgba(29,39,33,0.05)] sm:p-8">
+            <div className="flex items-center gap-3">
+              <span className="grid h-9 w-9 place-items-center rounded-full bg-[var(--foreground)] text-sm font-semibold text-white">3</span>
+              <h2 className="font-[family-name:var(--font-heading)] text-2xl font-semibold tracking-tight">
+                Billing
+              </h2>
+            </div>
+            <label className="mt-5 flex items-center gap-3 rounded-lg border border-[var(--line)] bg-[var(--background)] px-4 py-3 text-sm font-semibold">
               <input
                 type="checkbox"
                 checked={form.billingSameAsShipping}
@@ -299,90 +317,98 @@ export function CheckoutPage() {
             </label>
 
             {!form.billingSameAsShipping ? (
-              <div className="mt-4 grid gap-4 md:grid-cols-2">
-                <label className="grid gap-2">
-                  <span className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>Recipient</span>
-                  <input value={form.billingRecipientName} onChange={(event) => setForm((current) => ({ ...current, billingRecipientName: event.target.value }))} className="rounded-[20px] border border-[var(--line)] bg-white/75 px-4 py-3 text-sm outline-none transition focus:border-[var(--teal)]" required />
-                </label>
-                <label className="grid gap-2">
-                  <span className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>Phone</span>
-                  <input value={form.billingPhone} onChange={(event) => setForm((current) => ({ ...current, billingPhone: event.target.value }))} className="rounded-[20px] border border-[var(--line)] bg-white/75 px-4 py-3 text-sm outline-none transition focus:border-[var(--teal)]" />
-                </label>
-                <label className="grid gap-2 md:col-span-2">
-                  <span className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>Address line 1</span>
-                  <input value={form.billingLine1} onChange={(event) => setForm((current) => ({ ...current, billingLine1: event.target.value }))} className="rounded-[20px] border border-[var(--line)] bg-white/75 px-4 py-3 text-sm outline-none transition focus:border-[var(--teal)]" required />
-                </label>
-                <label className="grid gap-2 md:col-span-2">
-                  <span className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>Address line 2</span>
-                  <input value={form.billingLine2} onChange={(event) => setForm((current) => ({ ...current, billingLine2: event.target.value }))} className="rounded-[20px] border border-[var(--line)] bg-white/75 px-4 py-3 text-sm outline-none transition focus:border-[var(--teal)]" />
-                </label>
-                <label className="grid gap-2">
-                  <span className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>City</span>
-                  <input value={form.billingCity} onChange={(event) => setForm((current) => ({ ...current, billingCity: event.target.value }))} className="rounded-[20px] border border-[var(--line)] bg-white/75 px-4 py-3 text-sm outline-none transition focus:border-[var(--teal)]" required />
-                </label>
-                <label className="grid gap-2">
-                  <span className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>Region</span>
-                  <input value={form.billingRegion} onChange={(event) => setForm((current) => ({ ...current, billingRegion: event.target.value }))} className="rounded-[20px] border border-[var(--line)] bg-white/75 px-4 py-3 text-sm outline-none transition focus:border-[var(--teal)]" required />
-                </label>
-                <label className="grid gap-2">
-                  <span className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>Postal code</span>
-                  <input value={form.billingPostalCode} onChange={(event) => setForm((current) => ({ ...current, billingPostalCode: event.target.value }))} className="rounded-[20px] border border-[var(--line)] bg-white/75 px-4 py-3 text-sm outline-none transition focus:border-[var(--teal)]" required />
-                </label>
-                <label className="grid gap-2">
-                  <span className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>Country</span>
-                  <input value={form.billingCountry} onChange={(event) => setForm((current) => ({ ...current, billingCountry: event.target.value.toUpperCase() }))} className="rounded-[20px] border border-[var(--line)] bg-white/75 px-4 py-3 text-sm uppercase outline-none transition focus:border-[var(--teal)]" required />
-                </label>
+              <div className="mt-5 grid gap-4 md:grid-cols-2">
+                <Field label="Recipient" value={form.billingRecipientName} required onChange={(billingRecipientName) => setForm((current) => ({ ...current, billingRecipientName }))} />
+                <Field label="Phone" value={form.billingPhone} onChange={(billingPhone) => setForm((current) => ({ ...current, billingPhone }))} />
+                <Field label="Address line 1" value={form.billingLine1} required className="md:col-span-2" onChange={(billingLine1) => setForm((current) => ({ ...current, billingLine1 }))} />
+                <Field label="Address line 2" value={form.billingLine2} className="md:col-span-2" onChange={(billingLine2) => setForm((current) => ({ ...current, billingLine2 }))} />
+                <Field label="City" value={form.billingCity} required onChange={(billingCity) => setForm((current) => ({ ...current, billingCity }))} />
+                <Field label="Region" value={form.billingRegion} required onChange={(billingRegion) => setForm((current) => ({ ...current, billingRegion }))} />
+                <Field label="Postal code" value={form.billingPostalCode} required onChange={(billingPostalCode) => setForm((current) => ({ ...current, billingPostalCode }))} />
+                <Field label="Country" value={form.billingCountry} required onChange={(billingCountry) => setForm((current) => ({ ...current, billingCountry: billingCountry.toUpperCase() }))} />
               </div>
             ) : null}
           </section>
 
+          <section className="rounded-lg border border-[var(--line)] bg-white p-6 shadow-[0_10px_30px_rgba(29,39,33,0.05)] sm:p-8">
+            <div className="flex items-center gap-3">
+              <span className="grid h-9 w-9 place-items-center rounded-full bg-[var(--foreground)] text-sm font-semibold text-white">4</span>
+              <h2 className="font-[family-name:var(--font-heading)] text-2xl font-semibold tracking-tight">
+                Payment
+              </h2>
+            </div>
+            <div className="mt-5 rounded-lg bg-[var(--teal-soft)] p-5">
+              <p className="font-semibold text-[var(--teal)]">Mock payment provider</p>
+              <p className="mt-2 text-sm leading-6" style={{ color: "var(--muted)" }}>
+                This portfolio checkout creates an order and payment record without collecting card data.
+              </p>
+            </div>
+          </section>
+
           {feedback ? (
-            <p className="mt-6 rounded-[20px] border border-[rgba(180,83,79,0.2)] bg-[rgba(180,83,79,0.08)] px-4 py-3 text-sm" style={{ color: "var(--rose)" }}>
+            <p className="rounded-lg border border-[rgba(180,35,58,0.18)] bg-[rgba(180,35,58,0.08)] px-4 py-3 text-sm" style={{ color: "var(--rose)" }}>
               {feedback}
             </p>
           ) : null}
 
-          <div className="mt-6 flex flex-wrap items-center gap-3">
+          <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center">
+            <Link href="/cart" className="inline-flex min-h-[52px] items-center justify-center rounded-full border border-[var(--line)] px-6 py-3 text-sm font-semibold">
+              Back to cart
+            </Link>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="rounded-full bg-[var(--foreground)] px-6 py-3 text-sm font-semibold text-[var(--background)] disabled:cursor-not-allowed disabled:opacity-60"
+              className="inline-flex min-h-[56px] items-center justify-center rounded-full bg-[var(--foreground)] px-7 py-3 text-base font-semibold text-white transition hover:bg-[var(--teal)] disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {isSubmitting ? "Placing order..." : "Place order"}
+              {isSubmitting ? "Placing order..." : "Place demo order"}
             </button>
-            <Link href="/cart" className="rounded-full border border-[var(--line)] px-6 py-3 text-sm font-semibold">
-              Back to cart
-            </Link>
           </div>
         </form>
 
-        <aside className="glass-panel h-fit rounded-[40px] p-6 sm:p-8">
-          <div className="inline-flex rounded-full bg-[var(--teal-soft)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--teal)]">
+        <aside className="rounded-lg border border-[var(--line)] bg-white p-6 shadow-[var(--shadow)] lg:sticky lg:top-32">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em]" style={{ color: "var(--teal)" }}>
             Order summary
-          </div>
-          <h2 className="mt-5 font-[family-name:var(--font-heading)] text-3xl font-semibold tracking-tight">
-            Snapshot before order creation.
+          </p>
+          <h2 className="mt-3 font-[family-name:var(--font-heading)] text-3xl font-semibold tracking-tight">
+            {formatCurrency(orderSummary.subtotal, orderSummary.currency)}
           </h2>
-          <div className="mt-6 grid gap-4 text-sm">
-            <p><strong>Total units:</strong> {orderSummary.itemCount}</p>
-            <p><strong>Unique lines:</strong> {orderSummary.uniqueItemCount}</p>
-            <p><strong>Subtotal:</strong> {formatCurrency(orderSummary.subtotal, orderSummary.currency)}</p>
+
+          <div className="mt-6 grid gap-3 border-y border-[var(--line)] py-5 text-sm">
+            <div className="flex justify-between gap-4">
+              <span style={{ color: "var(--muted)" }}>Items</span>
+              <strong>{orderSummary.itemCount}</strong>
+            </div>
+            <div className="flex justify-between gap-4">
+              <span style={{ color: "var(--muted)" }}>Product lines</span>
+              <strong>{orderSummary.uniqueItemCount}</strong>
+            </div>
+            <div className="flex justify-between gap-4">
+              <span style={{ color: "var(--muted)" }}>Subtotal</span>
+              <strong>{formatCurrency(orderSummary.subtotal, orderSummary.currency)}</strong>
+            </div>
           </div>
 
-          <div className="mt-6 grid gap-3">
+          <div className="mt-5 grid gap-3">
             {cart.items.map((item) => (
-              <div key={item.id} className="rounded-[24px] border border-[var(--line)] bg-white/70 p-4">
+              <div key={item.id} className="rounded-lg border border-[var(--line)] bg-[var(--background)] p-4">
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <p className="font-semibold">{item.product_name}</p>
                     <p className="mt-1 text-sm" style={{ color: "var(--muted)" }}>
-                      {item.variant_name} • qty {item.quantity}
+                      {item.variant_name} / qty {item.quantity}
                     </p>
                   </div>
                   <p className="font-semibold">{formatCurrency(item.line_total, item.currency)}</p>
                 </div>
               </div>
             ))}
+          </div>
+
+          <div className="mt-5 rounded-lg bg-[var(--background)] p-4">
+            <p className="font-semibold">Inventory reservation</p>
+            <p className="mt-2 text-sm leading-6" style={{ color: "var(--muted)" }}>
+              Stock is reserved when the order is placed, then reflected in admin and analytics views.
+            </p>
           </div>
         </aside>
       </div>

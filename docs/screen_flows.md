@@ -185,9 +185,7 @@ Let user review selected items before checkout.
 - cart item list
 - quantity controls
 - remove item action
-- coupon input
 - subtotal
-- discount
 - shipping estimate placeholder
 - total
 - checkout button
@@ -196,8 +194,6 @@ Let user review selected items before checkout.
 
 - update quantity
 - remove item
-- apply coupon
-- remove coupon
 - continue shopping
 - proceed to checkout
 
@@ -207,7 +203,6 @@ Let user review selected items before checkout.
 - `POST /cart/items`
 - `PATCH /cart/items/{item_id}`
 - `DELETE /cart/items/{item_id}`
-- `POST /cart/apply-coupon`
 
 ## 4.5 Checkout Screen
 

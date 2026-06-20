@@ -196,7 +196,7 @@ python scripts/transform_data.py
 python scripts/run_smoke_checks.py
 ```
 
-New commerce scripts should be added:
+Commerce scripts:
 
 ```bash
 python scripts/seed_commerce_demo_data.py
@@ -223,6 +223,13 @@ STORE_CURRENCY=BRL
 DEMO_MODE=true
 ADMIN_DEMO_EMAIL=admin@datapulse.local
 ADMIN_DEMO_PASSWORD=admin123-local-only
+```
+
+The commerce seed also creates the customer demo account:
+
+```text
+customer@datapulse.local
+customer123-local-only
 ```
 
 Frontend `.env.local` example:

@@ -216,7 +216,7 @@ export function AdminProductEditorPage({ productId }: AdminProductEditorPageProp
             <div className="mt-6 flex flex-wrap justify-center gap-3">
               <Link
                 href="/login"
-                className="rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-[var(--background)]"
+                className="rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-white"
               >
                 Login
               </Link>
@@ -246,7 +246,7 @@ export function AdminProductEditorPage({ productId }: AdminProductEditorPageProp
             </p>
             <Link
               href="/admin/products"
-              className="mt-6 inline-flex rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-[var(--background)]"
+              className="mt-6 inline-flex rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-white"
             >
               Back to admin products
             </Link>
@@ -534,8 +534,8 @@ function AdminProductEditorForm({
                 {isEditing ? "Keep the catalog clean and stock-aware." : "Add the next product to the catalog."}
               </h1>
               <p className="mt-4 max-w-3xl text-base leading-7 sm:text-lg" style={{ color: "var(--muted)" }}>
-                Products can be draft or active, variants carry SKU-level inventory, and every save goes through the
-                protected admin API introduced in this milestone.
+                Products can be draft or active, variants carry SKU-level inventory, and every save updates the
+                protected admin catalog.
               </p>
             </div>
 
@@ -979,7 +979,7 @@ function AdminProductEditorForm({
             <button
               type="submit"
               disabled={saveMutation.isPending}
-              className="rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-[var(--background)] disabled:cursor-not-allowed disabled:opacity-60"
+              className="rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-60"
             >
               {saveMutation.isPending ? "Saving..." : isEditing ? "Save changes" : "Create product"}
             </button>

@@ -2,7 +2,9 @@
 
 ## 1. Purpose
 
-This document describes the implementation baseline for transforming the completed DataPulse BI project into a complete e-commerce platform.
+This document describes the current implementation state of DataPulse Commerce:
+a complete local e-commerce portfolio project built on top of the completed
+DataPulse BI foundation.
 
 It is intended to help:
 
@@ -12,7 +14,8 @@ It is intended to help:
 - portfolio evaluators
 - maintainers who need to understand what already exists and what must be built next
 
-This document is descriptive and directional. It separates the current implemented foundation from the new commerce layer that will be implemented on top of it.
+This document is descriptive and directional. It separates what is implemented
+locally from the remaining public deployment and roadmap work.
 
 ## 2. Baseline Assumption
 
@@ -44,7 +47,7 @@ The previous product can be understood as:
 
 > A portfolio-grade business intelligence system focused on order, product, revenue, region, channel, ingestion status, and data quality metrics.
 
-The new product will become:
+The current local product is:
 
 > A complete e-commerce platform with a public storefront, customer account area, cart, checkout, payment abstraction, inventory control, order management, admin back office, and integrated BI dashboard powered by the existing DataPulse analytics foundation.
 
@@ -131,7 +134,9 @@ Validated baseline checks:
 Current local baseline behavior after smoke validation:
 
 - the backend runs locally with PostgreSQL
-- the frontend runs locally against `NEXT_PUBLIC_API_URL=http://localhost:8000`
+- the frontend runs locally with `NEXT_PUBLIC_API_URL=http://localhost:8000`;
+  for browser calls in local/WSL development it proxies local API requests
+  through the Next.js rewrite at `/api/backend`
 - the sample pipeline dataset is available after smoke validation
 - `/metrics/summary` returns non-empty demo values
 - `/ingestion/runs/latest` returns a successful `transform_orders` run
@@ -166,7 +171,7 @@ Implemented Stage 2 capabilities:
 - public catalog endpoints for categories, product listing, and product detail by slug
 - protected admin endpoints for product create, product update, product detail, product list, and inventory adjustments
 - catalog and inventory service layer with slug, SKU, stock, and status rules
-- demo catalog seed script with admin demo user bootstrap
+- demo catalog seed script with admin and customer demo user bootstrap
 - frontend product listing page
 - frontend product detail page
 - frontend admin product list page
@@ -261,6 +266,109 @@ Implemented Stage 7 capabilities:
 - frontend admin order detail page
 - frontend admin inventory page
 - backend admin authorization and order transition test coverage
+- `commerce_refunds` table
+- protected admin refund creation API for successfully paid orders
+- refund visibility in admin order detail
+- refund amount validation against remaining paid balance
+
+## 4.12 Stage 8 commerce analytics integration snapshot
+
+The eighth commerce stage is now implemented on top of the admin back office.
+
+Implemented Stage 8 capabilities:
+
+- `commerce_events` table
+- commerce event emission for product views, cart item adds, checkout start, order creation, payment success/failure, shipment updates, and refund creation
+- commerce analytics projection service from paid commerce order items into the existing dimensional `fact_orders` analytics model
+- projection script at `backend/scripts/project_commerce_analytics.py`
+- product, customer, region, and channel dimension mapping for projected commerce facts
+- commerce revenue by category metric
+- conversion funnel metric
+- cart abandonment metric
+- payment health metric with refund impact
+- inventory risk metric
+- dashboard widgets for commerce GMV, payment success, cart abandonment, inventory risk, funnel counts, and revenue by category
+- backend tests for commerce events, operational metrics, and idempotent analytics projection
+
+## 4.13 Stage 9 testing, hardening, and validation snapshot
+
+The ninth commerce stage is now implemented as a validation layer over the completed transactional and analytics flows.
+
+Implemented Stage 9 capabilities:
+
+- backend test suite covering BI baseline, ingestion, transformation, metrics, auth, catalog, cart, checkout, payments, account ownership, admin operations, refunds, commerce events, and analytics projection
+- commerce smoke script at `backend/scripts/run_commerce_smoke_checks.py`
+- commerce smoke validates health, catalog seed, customer registration, product detail, cart, checkout, idempotent order placement, mock payment success, customer order visibility, operational metrics, and analytics projection
+- existing BI smoke script retained at `backend/scripts/run_smoke_checks.py`
+- frontend lint validation
+- frontend production build validation
+- testing documentation updated with current validation commands
+
+## 4.14 Stage 10 deployment and portfolio polish snapshot
+
+Stage 10 is partially implemented locally. External deployment tasks still require hosted service access and final public URLs.
+
+Implemented Stage 10 preparation:
+
+- README rewritten as a portfolio case study with local setup, validation commands, demo credentials, known limitations, and roadmap
+- production environment examples updated for commerce demo mode
+- Render blueprint renamed for DataPulse Commerce and expanded with commerce-related environment variables
+- frontend Docker build fixed for standalone Next.js output
+- production-like Docker compose configuration validated with `docker compose -f docker-compose.production.yml config`
+- backend healthcheck now reports commerce readiness with `commerce: ok`
+- deployment documentation updated with current seed, projection, healthcheck, and validation commands
+- local pre-deployment validation completed on June 1, 2026:
+  - frontend lint passed
+  - frontend production build passed
+  - Alembic migrations applied successfully
+  - backend test suite passed with 40 tests
+  - BI and commerce smoke checks passed
+  - local storefront, login, products, admin, and dashboard routes returned `200`
+- deterministic demo credentials are available:
+  - customer: `customer@datapulse.local` / `customer123-local-only`
+  - admin: `admin@datapulse.local` / `admin123-local-only`
+- login page includes demo-user autofill buttons for the customer and admin accounts
+
+Still pending for final public portfolio release:
+
+- hosted PostgreSQL deployment
+- hosted backend deployment
+- hosted frontend deployment
+- public checkout validation
+- public admin demo validation
+- public dashboard validation
+- screenshots
+- live links
+
+## 4.15 E-Commerce Redesign And Navigation Snapshot
+
+The ecommerce redesign plan in `docs/design_plan.md` is implemented locally.
+
+Implemented design and flow capabilities:
+
+- `/` is now a product-led storefront home rather than the analytics dashboard
+- `/dashboard` is the analytics route
+- product listing, product detail, cart, checkout, confirmation, login,
+  register, account, admin, and dashboard pages have been redesigned around the
+  ecommerce flow
+- header navigation changes by user state:
+  - guest: Store, Products, Cart, Login, Register
+  - customer: Store, Products, Cart, Account, Logout
+  - admin: Store, Products, Cart, Account, Admin, Analytics, Logout
+- cart count badge is shown in the header
+- admin routes include a compact admin subnav
+- footer utility links and a demo safety note are present
+- reusable product visual fallback prevents generic framework SVGs from reading
+  as product imagery
+- login page exposes customer/admin demo credential autofill buttons
+- contrast fixes were applied to affected CTA buttons such as `Shop products`,
+  `Continue shopping`, and the logged-out account `Login` action
+
+Still pending for portfolio presentation:
+
+- public deployment screenshots
+- live frontend/backend links
+- manual visual QA on the final hosted mobile, tablet, and desktop URLs
 
 ## 5. What Changes in the New Product
 
@@ -286,7 +394,6 @@ The new system must support:
 - refund representation
 - shipping method selection
 - shipment tracking representation
-- coupons and promotions
 - admin catalog management
 - admin inventory management
 - admin order management
@@ -360,7 +467,6 @@ Required capabilities:
 - update quantity
 - remove item
 - cart totals
-- coupon preview
 - stock validation before checkout
 
 ## 7.4 Checkout
@@ -391,19 +497,16 @@ The checkout design must not hardcode one provider into business logic.
 
 ## 7.6 Order lifecycle
 
-Required statuses:
+Implemented order statuses:
 
-- `draft`
 - `pending_payment`
 - `paid`
-- `payment_failed`
-- `processing`
-- `shipped`
-- `delivered`
 - `cancelled`
-- `refunded`
 
 Every status change must be recorded in an order status history table.
+
+Shipment and refund state are represented separately through shipment and
+refund records.
 
 ## 7.7 Inventory
 
@@ -466,20 +569,20 @@ The implementation must preserve:
 - existing Docker validation approach
 - existing documentation discipline
 
-## 9. Known Gaps After Stage 1
+## 9. Remaining Gaps After Stage 10 Local Prep
 
-The current foundation still does not yet include:
+The local portfolio MVP is complete, tested, and documented. Remaining gaps are
+publication or roadmap work:
 
-- product administration
-- real catalog model
-- cart persistence
-- checkout state machine
-- inventory reservation
-- payment provider integration
-- webhook handling
-- shipping method logic
-- customer order history
-- admin back office
+- public hosted database/backend/frontend deployment
+- public screenshots and live links in the README
+- real payment provider integration
+- coupon and promotion engine
+- tax calculation
+- live shipping-rate providers
+- email delivery provider
+- object storage for uploaded product media
+- broader browser E2E and load testing
 - production e-commerce security hardening
 
 ## 10. Implementation Strategy

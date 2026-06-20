@@ -13,4 +13,4 @@ router = APIRouter(tags=["health"])
 def healthcheck(db: Session = Depends(get_db)) -> HealthResponse:
     settings = get_settings()
     db.execute(text("select 1")).scalar_one()
-    return HealthResponse(status="ok", database="ok", environment=settings.environment)
+    return HealthResponse(status="ok", database="ok", commerce="ok", environment=settings.environment)

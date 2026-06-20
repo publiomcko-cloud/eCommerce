@@ -116,6 +116,20 @@ Commerce smoke should:
 9. verify inventory movement
 10. verify order appears in metrics
 
+The implemented commerce smoke script is:
+
+```bash
+cd backend
+source .venv/bin/activate
+python scripts/run_commerce_smoke_checks.py
+```
+
+The existing BI baseline smoke script remains:
+
+```bash
+python scripts/run_smoke_checks.py
+```
+
 ## 4.5 Frontend Validation
 
 Minimum frontend validation:
@@ -179,7 +193,7 @@ Test that:
 Test that:
 
 - mock payment success marks payment paid
-- mock payment success marks order paid or processing
+- mock payment success marks order paid
 - mock payment failure marks payment failed
 - payment failure does not produce duplicate order
 - webhook-style updates are idempotent
@@ -210,7 +224,7 @@ Test that:
 
 - paid orders appear in revenue metrics
 - failed payments do not count as paid revenue
-- cancelled/refunded orders are handled according to metric definition
+- cancelled orders and succeeded refund records are handled according to metric definition
 - top products match order item totals
 - payment health metric reflects payment statuses
 - inventory risk metric reflects low stock products
@@ -223,16 +237,45 @@ backend/tests/
 ├── test_foundation.py
 ├── test_auth.py
 ├── test_catalog.py
-├── test_inventory.py
 ├── test_cart.py
 ├── test_checkout.py
 ├── test_payments.py
-├── test_orders.py
+├── test_account.py
 ├── test_admin.py
-├── test_commerce_events.py
 ├── test_commerce_analytics.py
+├── test_api.py
+├── test_ingestion.py
 ├── test_metrics.py
-└── test_smoke.py
+├── test_smoke.py
+└── test_transformation.py
+```
+
+Inventory coverage currently lives in `test_catalog.py`, `test_admin.py`, `test_checkout.py`, `test_payments.py`, and `test_commerce_analytics.py`.
+
+## 6.1 Current Validation Commands
+
+Run backend migrations and tests:
+
+```bash
+cd backend
+source .venv/bin/activate
+alembic upgrade head
+python -m pytest -q
+```
+
+Run smoke checks:
+
+```bash
+python scripts/run_smoke_checks.py
+python scripts/run_commerce_smoke_checks.py
+```
+
+Run frontend validation:
+
+```bash
+cd ../frontend
+npm run lint
+npm run build
 ```
 
 ## 7. Example Test Cases
@@ -344,17 +387,21 @@ npm run build
 
 ## 9. Test Data Strategy
 
-Use deterministic synthetic data.
+Use deterministic synthetic data. The seed script provides the baseline catalog,
+admin account, and customer demo account; tests and smoke checks create orders
+and payment states as part of their own isolated flows.
 
-Minimum data set:
+Baseline catalog seed:
 
 - 1 admin user
-- 2 customer users
-- 3 categories
-- 5 products
-- 8 variants
+- 1 customer demo user
+- 4 categories
+- 4 products
+- 7 variants
 - inventory for every variant
-- 1 active coupon
+
+Test and smoke flows should exercise:
+
 - 1 paid order
 - 1 failed payment order
 - 1 cancelled order

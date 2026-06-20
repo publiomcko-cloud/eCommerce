@@ -17,7 +17,7 @@ The database must support:
 - payments
 - refunds
 - shipments
-- promotions
+- promotions are future roadmap work
 - admin operations
 - auditability
 - analytics projections
@@ -321,9 +321,8 @@ Stores active shopping carts.
 | id | UUID | Primary key |
 | customer_id | UUID | Nullable FK |
 | anonymous_token_hash | TEXT | Nullable |
-| status | VARCHAR(30) | active, converted, abandoned, expired |
+| status | VARCHAR(30) | active, converted, abandoned, merged |
 | currency | VARCHAR(3) | Required |
-| coupon_code | VARCHAR(80) | Nullable |
 | created_at | TIMESTAMP | Default now |
 | updated_at | TIMESTAMP | Default now |
 | expires_at | TIMESTAMP | Nullable |
@@ -354,30 +353,10 @@ Business rules:
 - duplicate variant lines in same cart should be merged
 - cart totals must be recalculated server-side
 
-## 5.12 commerce_coupons
+## 5.12 Coupon and Promotion Tables
 
-Stores coupon definitions.
-
-| Field | Type | Notes |
-|---|---:|---|
-| id | UUID | Primary key |
-| code | VARCHAR(80) | Unique uppercase |
-| description | TEXT | Nullable |
-| discount_type | VARCHAR(30) | fixed_amount, percentage |
-| discount_value | NUMERIC(12,2) | Required |
-| starts_at | TIMESTAMP | Nullable |
-| ends_at | TIMESTAMP | Nullable |
-| max_redemptions | INTEGER | Nullable |
-| redemptions_count | INTEGER | Default 0 |
-| is_active | BOOLEAN | Default true |
-| created_at | TIMESTAMP | Default now |
-| updated_at | TIMESTAMP | Default now |
-
-Business rules:
-
-- expired or inactive coupons cannot be applied
-- discount cannot reduce order total below zero
-- percentage discounts must be within safe limits
+Coupons and promotions are not part of the implemented local MVP. They remain a
+future roadmap area.
 
 ## 5.13 commerce_checkout_sessions
 
@@ -412,27 +391,24 @@ Stores finalized order headers.
 |---|---:|---|
 | id | UUID | Primary key |
 | order_number | VARCHAR(40) | Unique customer-facing number |
-| customer_id | UUID | Nullable FK |
-| cart_id | UUID | Nullable FK |
-| status | VARCHAR(40) | pending_payment, paid, processing, shipped, delivered, cancelled, refunded |
-| payment_status | VARCHAR(40) | unpaid, authorized, paid, failed, refunded, partially_refunded |
-| fulfillment_status | VARCHAR(40) | unfulfilled, processing, shipped, delivered, returned |
+| checkout_session_id | UUID | FK to commerce_checkout_sessions |
+| cart_id | UUID | FK to commerce_carts |
+| customer_id | UUID | FK to commerce_customers |
+| status | VARCHAR(40) | pending_payment, paid, fulfilled, cancelled |
 | currency | VARCHAR(3) | Required |
 | subtotal_amount | NUMERIC(12,2) | Required |
-| discount_amount | NUMERIC(12,2) | Default 0 |
-| shipping_amount | NUMERIC(12,2) | Default 0 |
-| tax_amount | NUMERIC(12,2) | Default 0 |
 | total_amount | NUMERIC(12,2) | Required |
 | email | VARCHAR(255) | Snapshot |
 | shipping_address_snapshot | JSONB | Required |
-| billing_address_snapshot | JSONB | Nullable |
-| placed_at | TIMESTAMP | Default now |
+| billing_address_snapshot | JSONB | Required |
+| totals_snapshot | JSONB | Required |
+| idempotency_key | VARCHAR(120) | Unique |
 | created_at | TIMESTAMP | Default now |
 | updated_at | TIMESTAMP | Default now |
 
 Business rules:
 
-- total amount must equal subtotal minus discounts plus shipping plus tax
+- total amount must be recomputed by the backend from cart line totals
 - order number must be unique and stable
 - order address data must be snapshotted
 - status changes must be tracked separately
@@ -470,17 +446,18 @@ Stores payment records and provider references.
 |---|---:|---|
 | id | UUID | Primary key |
 | order_id | UUID | FK to commerce_orders |
-| provider | VARCHAR(60) | mock, sandbox, production provider name |
-| provider_payment_id | VARCHAR(255) | Nullable |
-| status | VARCHAR(40) | pending, authorized, paid, failed, cancelled, refunded |
+| provider_name | VARCHAR(40) | mock |
+| provider_payment_id | VARCHAR(120) | Unique |
+| provider_session_token | VARCHAR(120) | Unique |
+| status | VARCHAR(40) | pending, succeeded, failed |
 | amount | NUMERIC(12,2) | Required |
 | currency | VARCHAR(3) | Required |
-| idempotency_key | VARCHAR(160) | Nullable unique |
-| failure_code | VARCHAR(120) | Nullable |
-| failure_message | TEXT | Nullable |
-| raw_provider_response | JSONB | Nullable and sanitized |
+| failure_reason | TEXT | Nullable |
+| provider_payload | JSONB | Sanitized provider payload |
+| processed_webhook_event_id | VARCHAR(120) | Nullable unique |
 | created_at | TIMESTAMP | Default now |
 | updated_at | TIMESTAMP | Default now |
+| completed_at | TIMESTAMP | Nullable |
 
 Business rules:
 
@@ -507,7 +484,7 @@ Stores refund records.
 Business rules:
 
 - refund amount cannot exceed paid amount minus previous refunds
-- refund should update order payment status
+- full refunds may move an order to `cancelled`
 
 ## 5.18 commerce_shipments
 
@@ -518,18 +495,17 @@ Stores shipment representation.
 | id | UUID | Primary key |
 | order_id | UUID | FK to commerce_orders |
 | carrier | VARCHAR(120) | Nullable |
-| service_name | VARCHAR(120) | Nullable |
-| tracking_code | VARCHAR(120) | Nullable |
-| status | VARCHAR(40) | pending, shipped, in_transit, delivered, failed, returned |
-| shipped_at | TIMESTAMP | Nullable |
-| delivered_at | TIMESTAMP | Nullable |
+| status | VARCHAR(40) | pending, packed, shipped, delivered |
+| service_level | VARCHAR(120) | Nullable |
+| tracking_number | VARCHAR(120) | Nullable |
+| notes | TEXT | Nullable |
 | created_at | TIMESTAMP | Default now |
 | updated_at | TIMESTAMP | Default now |
 
 Business rules:
 
-- shipment status should update fulfillment status when appropriate
-- tracking code is optional in MVP
+- delivered shipments move the order to `fulfilled`
+- tracking number is optional in MVP
 
 ## 5.19 commerce_order_status_history
 
@@ -636,11 +612,10 @@ Recommended migration order:
 3. create catalog/category/product/variant/image tables
 4. create inventory tables
 5. create cart tables
-6. create coupon tables
-7. create checkout and order tables
-8. create payment/refund/shipment tables
-9. create status history and event tables
-10. create analytics projection tables or extend existing dimensions/facts
+6. create checkout and order tables
+7. create payment/refund/shipment tables
+8. create status history and event tables
+9. create analytics projection tables or extend existing dimensions/facts
 
 ## 10. Database Acceptance Criteria
 

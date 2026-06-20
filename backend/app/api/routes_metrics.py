@@ -5,11 +5,23 @@ from sqlalchemy.orm import Session
 
 from app.db.session import get_db
 from app.schemas.metrics import (
+    CartAbandonmentResponse,
+    ConversionFunnelResponse,
+    InventoryRiskPoint,
+    PaymentHealthResponse,
+    RevenueByCategoryPoint,
     RevenueByChannelPoint,
     RevenueByRegionPoint,
     RevenueOverTimePoint,
     SummaryMetricResponse,
     TopProductPoint,
+)
+from app.services.commerce_analytics_service import (
+    get_cart_abandonment,
+    get_conversion_funnel,
+    get_inventory_risk,
+    get_payment_health,
+    get_revenue_by_category,
 )
 from app.schemas.orders import CreateOrderRequest, CreateOrderResponse, OrdersResponse
 from app.services.metrics_service import (
@@ -120,6 +132,42 @@ def revenue_by_channel(
         region=region,
         channel=channel,
     )
+
+
+@router.get("/metrics/revenue-by-category", response_model=list[RevenueByCategoryPoint])
+def revenue_by_category(
+    db: Session = Depends(get_db),
+) -> list[RevenueByCategoryPoint]:
+    return get_revenue_by_category(db)
+
+
+@router.get("/metrics/conversion-funnel", response_model=ConversionFunnelResponse)
+def conversion_funnel(
+    db: Session = Depends(get_db),
+) -> ConversionFunnelResponse:
+    return get_conversion_funnel(db)
+
+
+@router.get("/metrics/cart-abandonment", response_model=CartAbandonmentResponse)
+def cart_abandonment(
+    db: Session = Depends(get_db),
+) -> CartAbandonmentResponse:
+    return get_cart_abandonment(db)
+
+
+@router.get("/metrics/payment-health", response_model=PaymentHealthResponse)
+def payment_health(
+    db: Session = Depends(get_db),
+) -> PaymentHealthResponse:
+    return get_payment_health(db)
+
+
+@router.get("/metrics/inventory-risk", response_model=list[InventoryRiskPoint])
+def inventory_risk(
+    limit: int = Query(default=20, ge=1, le=100),
+    db: Session = Depends(get_db),
+) -> list[InventoryRiskPoint]:
+    return get_inventory_risk(db, limit=limit)
 
 
 @router.get("/orders", response_model=OrdersResponse)

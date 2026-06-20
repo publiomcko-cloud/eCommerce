@@ -18,6 +18,7 @@ from app.models.commerce_product_image import CommerceProductImage
 from app.models.commerce_product_variant import CommerceProductVariant
 from app.schemas.cart import AddCartItemRequest, CartItemResponse, CartResponse, UpdateCartItemRequest
 from app.services.auth_service import AuthContext
+from app.services.commerce_event_service import emit_commerce_event
 
 
 @dataclass
@@ -317,6 +318,14 @@ def add_cart_item(
     else:
         existing_item.quantity = desired_quantity
 
+    emit_commerce_event(
+        session,
+        event_type="cart_item_added",
+        auth_context=auth_context,
+        cart_id=resolved.cart.id,
+        product_id=variant.product_id,
+        payload={"variant_id": str(variant.id), "quantity": payload.quantity},
+    )
     session.commit()
     return _serialize_cart(session, resolved.cart)
 

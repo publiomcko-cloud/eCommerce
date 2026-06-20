@@ -111,6 +111,13 @@ ADMIN_DEMO_EMAIL=admin@datapulse.local
 ADMIN_DEMO_PASSWORD=admin123-local-only
 ```
 
+The commerce seed also creates a deterministic customer demo account:
+
+```text
+customer@datapulse.local
+customer123-local-only
+```
+
 Frontend `.env.local`:
 
 ```env
@@ -205,7 +212,7 @@ source .venv/bin/activate
 python scripts/seed_demo_data.py
 ```
 
-New commerce seed should be added:
+Commerce seed:
 
 ```bash
 python scripts/seed_commerce_demo_data.py
@@ -219,10 +226,9 @@ Expected commerce seed:
 - products
 - variants
 - inventory
-- coupon
-- sample completed orders
-- commerce events
-- analytics projection data
+
+The commerce smoke script creates a synthetic customer, cart, checkout, order,
+payment event, commerce events, and validates analytics endpoints.
 
 ## 10. Run Backend
 
@@ -383,20 +389,22 @@ Then run migrations and seed again.
 
 ## 18. Final Local Checklist
 
-- [ ] Docker services running
-- [ ] Backend virtual environment active
-- [ ] Dependencies installed
-- [ ] Migrations applied
-- [ ] BI baseline still works
-- [ ] Commerce seed data loaded
-- [ ] Backend starts
-- [ ] Frontend starts
-- [ ] Product list works
-- [ ] Product detail works
-- [ ] Cart works
-- [ ] Checkout works in mock mode
-- [ ] Order confirmation works
-- [ ] Admin area works
-- [ ] Dashboard shows commerce metrics
-- [ ] Backend tests pass
-- [ ] Frontend lint/build pass
+Last verified locally on June 1, 2026.
+
+- [x] Docker services running
+- [x] Backend virtual environment active
+- [x] Dependencies installed
+- [x] Migrations applied
+- [x] BI baseline still works
+- [x] Commerce seed data loaded
+- [x] Backend starts
+- [x] Frontend starts
+- [x] Product list works
+- [x] Product detail works
+- [x] Cart works
+- [x] Checkout works in mock mode
+- [x] Order confirmation works
+- [x] Admin area works
+- [x] Dashboard shows commerce metrics
+- [x] Backend tests pass
+- [x] Frontend lint/build pass

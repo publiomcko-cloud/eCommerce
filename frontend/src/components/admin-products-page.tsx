@@ -31,8 +31,8 @@ export function AdminProductsPage() {
 
   if (isLoading) {
     return (
-      <main className="bg-grid min-h-screen px-4 py-6 sm:px-6 lg:px-8">
-        <div className="glass-panel mx-auto flex min-h-[60vh] max-w-5xl items-center justify-center rounded-[40px] px-6 py-20 text-center">
+      <main className="min-h-screen bg-[var(--background)] px-4 py-6 sm:px-6 lg:px-8">
+        <div className="mx-auto flex min-h-[60vh] max-w-5xl items-center justify-center rounded-lg border border-[var(--line)] bg-white px-6 py-20 text-center shadow-[var(--shadow)]">
           <div>
             <p className="font-[family-name:var(--font-heading)] text-3xl font-semibold tracking-tight">
               Loading admin workspace
@@ -48,8 +48,8 @@ export function AdminProductsPage() {
 
   if (!isAuthenticated || user?.role !== "admin" || !token) {
     return (
-      <main className="bg-grid min-h-screen px-4 py-6 sm:px-6 lg:px-8">
-        <div className="glass-panel mx-auto flex min-h-[60vh] max-w-5xl items-center justify-center rounded-[40px] px-6 py-20 text-center">
+      <main className="min-h-screen bg-[var(--background)] px-4 py-6 sm:px-6 lg:px-8">
+        <div className="mx-auto flex min-h-[60vh] max-w-5xl items-center justify-center rounded-lg border border-[var(--line)] bg-white px-6 py-20 text-center shadow-[var(--shadow)]">
           <div className="max-w-xl">
             <p className="font-[family-name:var(--font-heading)] text-3xl font-semibold tracking-tight">
               Admin access required
@@ -61,7 +61,7 @@ export function AdminProductsPage() {
             <div className="mt-6 flex flex-wrap justify-center gap-3">
               <Link
                 href="/login"
-                className="rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-[var(--background)]"
+                className="rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-white"
               >
                 Login
               </Link>
@@ -79,32 +79,31 @@ export function AdminProductsPage() {
   }
 
   return (
-    <main className="bg-grid min-h-screen px-4 py-6 sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-[var(--background)] px-4 py-6 sm:px-6 lg:px-8">
       <div className="mx-auto flex max-w-7xl flex-col gap-6">
-        <section className="glass-panel rounded-[40px] p-6 sm:p-8">
+        <section className="rounded-lg border border-[var(--line)] bg-white p-6 shadow-[var(--shadow)] sm:p-8">
           <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl">
-              <div className="inline-flex rounded-full bg-[var(--teal-soft)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--teal)]">
-                Stage 2 admin
+              <div className="inline-flex rounded-full bg-[var(--teal-soft)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--teal)]">
+                Catalog management
               </div>
               <h1 className="mt-5 font-[family-name:var(--font-heading)] text-4xl font-semibold tracking-tight sm:text-5xl">
                 Manage products, variants, and stock from the commerce back office.
               </h1>
               <p className="mt-4 text-base leading-7 sm:text-lg" style={{ color: "var(--muted)" }}>
-                This view exercises the protected admin catalog APIs and keeps inventory logic close to the product data
-                model before cart and checkout arrive.
+                Manage storefront products, variants, publication status, and stock visibility from the back office.
               </p>
             </div>
             <Link
               href="/admin/products/new"
-              className="inline-flex rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-[var(--background)]"
+              className="inline-flex rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-white"
             >
               Create product
             </Link>
           </div>
         </section>
 
-        <section className="glass-panel rounded-[32px] p-5 sm:p-6">
+        <section className="rounded-lg border border-[var(--line)] bg-white p-5 shadow-[0_10px_30px_rgba(29,39,33,0.05)] sm:p-6">
           <div className="grid gap-4 lg:grid-cols-2">
             <label className="grid gap-2">
               <span className="text-xs font-semibold uppercase tracking-[0.22em]" style={{ color: "var(--muted)" }}>
@@ -113,7 +112,7 @@ export function AdminProductsPage() {
               <select
                 value={statusFilter}
                 onChange={(event) => setStatusFilter(event.target.value)}
-                className="rounded-[22px] border border-[var(--line)] bg-white/70 px-4 py-3 text-sm outline-none transition focus:border-[var(--teal)]"
+                className="rounded-lg border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--teal)]"
               >
                 <option value="all">All statuses</option>
                 <option value="draft">Draft</option>
@@ -129,7 +128,7 @@ export function AdminProductsPage() {
               <select
                 value={categoryFilter}
                 onChange={(event) => setCategoryFilter(event.target.value)}
-                className="rounded-[22px] border border-[var(--line)] bg-white/70 px-4 py-3 text-sm outline-none transition focus:border-[var(--teal)]"
+                className="rounded-lg border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--teal)]"
               >
                 <option value="all">All categories</option>
                 {(categoriesQuery.data ?? []).map((category) => (
@@ -143,7 +142,7 @@ export function AdminProductsPage() {
         </section>
 
         {productsQuery.isError ? (
-          <section className="glass-panel rounded-[32px] p-8 text-center">
+          <section className="rounded-lg border border-[var(--line)] bg-white p-8 text-center shadow-[0_10px_30px_rgba(29,39,33,0.05)]">
             <h2 className="font-[family-name:var(--font-heading)] text-2xl font-semibold tracking-tight">
               Admin products could not be loaded
             </h2>
@@ -156,7 +155,7 @@ export function AdminProductsPage() {
         {productsQuery.isLoading ? (
           <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {Array.from({ length: 6 }).map((_, index) => (
-              <div key={index} className="glass-panel rounded-[28px] p-5">
+              <div key={index} className="rounded-lg border border-[var(--line)] bg-white p-5 shadow-[0_10px_30px_rgba(29,39,33,0.05)]">
                 <div className="h-3 w-20 animate-pulse rounded-full bg-[rgba(23,49,63,0.08)]" />
                 <div className="mt-4 h-6 w-36 animate-pulse rounded-full bg-[rgba(23,49,63,0.08)]" />
                 <div className="mt-5 h-3 w-full animate-pulse rounded-full bg-[rgba(23,49,63,0.08)]" />
@@ -166,7 +165,7 @@ export function AdminProductsPage() {
         ) : null}
 
         {!productsQuery.isLoading && !productsQuery.isError && (productsQuery.data?.items.length ?? 0) === 0 ? (
-          <section className="glass-panel rounded-[32px] p-8 text-center">
+          <section className="rounded-lg border border-[var(--line)] bg-white p-8 text-center shadow-[0_10px_30px_rgba(29,39,33,0.05)]">
             <h2 className="font-[family-name:var(--font-heading)] text-2xl font-semibold tracking-tight">
               No products match this admin filter
             </h2>
@@ -182,7 +181,7 @@ export function AdminProductsPage() {
               <Link
                 key={product.id}
                 href={`/admin/products/${product.id}`}
-                className="glass-panel rounded-[30px] p-5 transition-transform duration-200 hover:-translate-y-1"
+                className="rounded-lg border border-[var(--line)] bg-white p-5 shadow-[0_10px_30px_rgba(29,39,33,0.05)] transition-transform duration-200 hover:-translate-y-0.5"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div>

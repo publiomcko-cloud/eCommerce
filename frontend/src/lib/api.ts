@@ -1,4 +1,24 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+const CONFIGURED_API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+
+function getApiUrl() {
+  if (typeof window === "undefined") {
+    return CONFIGURED_API_URL;
+  }
+
+  try {
+    const configuredUrl = new URL(CONFIGURED_API_URL);
+    const configuredIsLocal =
+      configuredUrl.hostname === "localhost" || configuredUrl.hostname === "127.0.0.1";
+
+    if (configuredIsLocal) {
+      return "/api/backend";
+    }
+  } catch {
+    return CONFIGURED_API_URL.replace(/\/$/, "");
+  }
+
+  return CONFIGURED_API_URL.replace(/\/$/, "");
+}
 
 export type DashboardFilters = {
   startDate?: string;
@@ -37,6 +57,54 @@ export type RevenueByChannelPoint = {
   channel: string;
   revenue: number;
   order_count: number;
+};
+
+export type RevenueByCategoryPoint = {
+  category: string;
+  revenue: number;
+  order_count: number;
+  quantity_sold: number;
+};
+
+export type ConversionFunnelResponse = {
+  product_views: number;
+  cart_adds: number;
+  checkouts_started: number;
+  orders_created: number;
+  payments_succeeded: number;
+  visit_to_cart_rate: number;
+  checkout_to_order_rate: number;
+  order_to_paid_rate: number;
+};
+
+export type CartAbandonmentResponse = {
+  active_carts: number;
+  converted_carts: number;
+  abandoned_carts: number;
+  abandonment_rate: number;
+};
+
+export type PaymentHealthResponse = {
+  total_payments: number;
+  pending_payments: number;
+  succeeded_payments: number;
+  failed_payments: number;
+  success_rate: number;
+  gross_paid_amount: number;
+  refunded_amount: number;
+  net_paid_amount: number;
+};
+
+export type InventoryRiskPoint = {
+  variant_id: string;
+  product_name: string;
+  category_name: string;
+  sku: string;
+  stock_on_hand: number;
+  stock_reserved: number;
+  available_stock: number;
+  low_stock_threshold: number;
+  allow_backorder: boolean;
 };
 
 export type CatalogCategoryResponse = {
@@ -550,6 +618,19 @@ export type AdminShipmentResponse = {
   updated_at: string;
 };
 
+export type AdminRefundResponse = {
+  id: string;
+  order_id: string;
+  payment_id: string;
+  provider_refund_id: string;
+  status: string;
+  amount: number;
+  currency: string;
+  reason: string | null;
+  created_by_user_id: string | null;
+  created_at: string;
+};
+
 export type AdminOrderStatusHistoryResponse = {
   id: string;
   from_status: string | null;
@@ -594,6 +675,7 @@ export type AdminOrderDetailResponse = {
   items: OrderItemResponse[];
   payment: OrderPaymentSummaryResponse | null;
   shipment: AdminShipmentResponse | null;
+  refunds: AdminRefundResponse[];
   status_history: AdminOrderStatusHistoryResponse[];
   created_at: string;
   updated_at: string;
@@ -610,6 +692,11 @@ export type AdminShipmentUpsertInput = {
   tracking_number?: string;
   status: "pending" | "packed" | "shipped" | "delivered";
   notes?: string;
+};
+
+export type AdminRefundCreateInput = {
+  amount?: number;
+  reason?: string;
 };
 
 export type AdminInventoryListItemResponse = {
@@ -695,7 +782,7 @@ function buildQuery(params: Record<string, string | number | boolean | undefined
 }
 
 async function fetchJson<T>(path: string, params?: Record<string, string | number | boolean | undefined>): Promise<T> {
-  const response = await fetch(`${API_URL}${path}${buildQuery(params ?? {})}`, {
+  const response = await fetch(`${getApiUrl()}${path}${buildQuery(params ?? {})}`, {
     headers: {
       Accept: "application/json",
     },
@@ -710,7 +797,7 @@ async function fetchJson<T>(path: string, params?: Record<string, string | numbe
 }
 
 async function postJson<T>(path: string, body: object): Promise<T> {
-  const response = await fetch(`${API_URL}${path}`, {
+  const response = await fetch(`${getApiUrl()}${path}`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -728,7 +815,7 @@ async function postJson<T>(path: string, body: object): Promise<T> {
 }
 
 async function fetchJsonWithToken<T>(path: string, token: string): Promise<T> {
-  const response = await fetch(`${API_URL}${path}`, {
+  const response = await fetch(`${getApiUrl()}${path}`, {
     headers: {
       Accept: "application/json",
       Authorization: `Bearer ${token}`,
@@ -748,7 +835,7 @@ async function fetchJsonWithTokenParams<T>(
   token: string,
   params?: Record<string, string | number | boolean | undefined>,
 ): Promise<T> {
-  const response = await fetch(`${API_URL}${path}${buildQuery(params ?? {})}`, {
+  const response = await fetch(`${getApiUrl()}${path}${buildQuery(params ?? {})}`, {
     headers: {
       Accept: "application/json",
       Authorization: `Bearer ${token}`,
@@ -769,7 +856,7 @@ async function sendJsonWithToken<T>(
   method: "POST" | "PUT" | "DELETE",
   body?: object,
 ): Promise<T> {
-  const response = await fetch(`${API_URL}${path}`, {
+  const response = await fetch(`${getApiUrl()}${path}`, {
     method,
     headers: {
       Accept: "application/json",
@@ -805,7 +892,7 @@ async function requestCartJson<T>(
     headers.set("X-Cart-Token", options.cartToken);
   }
 
-  const response = await fetch(`${API_URL}${path}`, {
+  const response = await fetch(`${getApiUrl()}${path}`, {
     ...init,
     headers,
   });
@@ -819,7 +906,7 @@ async function requestCartJson<T>(
 }
 
 export function getApiDocsUrl() {
-  return `${API_URL}/docs`;
+  return `${getApiUrl()}/docs`;
 }
 
 export async function fetchSummaryMetrics(filters: DashboardFilters) {
@@ -840,6 +927,26 @@ export async function fetchRevenueByRegion(filters: DashboardFilters) {
 
 export async function fetchRevenueByChannel(filters: DashboardFilters) {
   return fetchJson<RevenueByChannelPoint[]>("/metrics/revenue-by-channel", toApiFilterParams(filters));
+}
+
+export async function fetchRevenueByCategory() {
+  return fetchJson<RevenueByCategoryPoint[]>("/metrics/revenue-by-category");
+}
+
+export async function fetchConversionFunnel() {
+  return fetchJson<ConversionFunnelResponse>("/metrics/conversion-funnel");
+}
+
+export async function fetchCartAbandonment() {
+  return fetchJson<CartAbandonmentResponse>("/metrics/cart-abandonment");
+}
+
+export async function fetchPaymentHealth() {
+  return fetchJson<PaymentHealthResponse>("/metrics/payment-health");
+}
+
+export async function fetchInventoryRisk() {
+  return fetchJson<InventoryRiskPoint[]>("/metrics/inventory-risk");
 }
 
 export async function fetchOrders(params: OrdersParams) {
@@ -1017,6 +1124,10 @@ export async function updateAdminOrderStatus(token: string, orderId: string, pay
 
 export async function upsertAdminShipment(token: string, orderId: string, payload: AdminShipmentUpsertInput) {
   return sendJsonWithToken<AdminShipmentResponse>(`/admin/orders/${orderId}/shipment`, token, "PUT", payload);
+}
+
+export async function createAdminRefund(token: string, orderId: string, payload: AdminRefundCreateInput) {
+  return sendJsonWithToken<AdminRefundResponse>(`/admin/orders/${orderId}/refunds`, token, "POST", payload);
 }
 
 export async function fetchAdminInventory(

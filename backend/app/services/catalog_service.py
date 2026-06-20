@@ -27,6 +27,7 @@ from app.schemas.catalog import (
     ProductImageResponse,
     ProductListResponse,
 )
+from app.services.commerce_event_service import emit_commerce_event
 
 
 def to_float(value: Decimal | float | int | None) -> float:
@@ -272,11 +273,17 @@ def get_catalog_product_by_slug(session: Session, slug: str) -> ProductDetailRes
         raise ValueError("Product not found.")
 
     product, category = row
+    emit_commerce_event(
+        session,
+        event_type="product_viewed",
+        product_id=product.id,
+        payload={"slug": product.slug, "name": product.name},
+    )
     images = _load_images_by_product_id(session, [product.id]).get(product.id, [])
     variants = _load_variants_by_product_id(session, [product.id], active_only=True).get(product.id, [])
     serialized_variants = [_serialize_public_variant(product, variant, inventory) for variant, inventory in variants]
 
-    return ProductDetailResponse(
+    response = ProductDetailResponse(
         id=str(product.id),
         name=product.name,
         slug=product.slug,
@@ -290,6 +297,8 @@ def get_catalog_product_by_slug(session: Session, slug: str) -> ProductDetailRes
         images=[_serialize_image(image) for image in images],
         variants=serialized_variants,
     )
+    session.commit()
+    return response
 
 
 def list_admin_products(

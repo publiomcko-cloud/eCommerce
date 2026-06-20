@@ -162,7 +162,6 @@ backend/app/
 │   ├── order.py
 │   ├── payment.py
 │   ├── shipment.py
-│   ├── promotion.py
 │   ├── commerce_event.py
 │   └── analytics_existing_models.py
 ├── schemas/
@@ -184,7 +183,6 @@ backend/app/
 │   ├── payment_service.py
 │   ├── inventory_service.py
 │   ├── shipment_service.py
-│   ├── promotion_service.py
 │   ├── commerce_event_service.py
 │   ├── commerce_analytics_service.py
 │   ├── metrics_service.py
@@ -314,15 +312,14 @@ Recommended flow:
 2. backend validates cart items
 3. backend validates stock availability
 4. backend calculates totals
-5. backend applies coupon rules
-6. backend creates checkout session
-7. backend reserves inventory
-8. backend creates order with `pending_payment`
-9. backend creates payment intent through adapter
-10. payment provider confirms or fails payment
-11. backend updates payment and order status
-12. backend records status history
-13. backend emits commerce event
+5. backend creates checkout session
+6. backend reserves inventory
+7. backend creates order with `pending_payment`
+8. backend creates payment intent through adapter
+9. payment provider confirms or fails payment
+10. backend updates payment and order status
+11. backend records status history
+12. backend emits commerce event
 14. analytics projection updates BI tables
 
 ## 10. Idempotency
@@ -395,8 +392,7 @@ Important events:
 - `payment_failed`
 - `order_cancelled`
 - `refund_created`
-- `shipment_created`
-- `order_delivered`
+- `shipment_updated`
 
 Events can support:
 
@@ -440,8 +436,6 @@ GET /cart
 POST /cart/items
 PATCH /cart/items/{item_id}
 DELETE /cart/items/{item_id}
-POST /cart/apply-coupon
-DELETE /cart/coupon
 ```
 
 ### Checkout

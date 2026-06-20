@@ -26,8 +26,13 @@ import {
 import {
   DashboardFilters,
   fetchLatestIngestionRun,
+  fetchCartAbandonment,
+  fetchConversionFunnel,
+  fetchInventoryRisk,
   fetchOrders,
+  fetchPaymentHealth,
   fetchRevenueByChannel,
+  fetchRevenueByCategory,
   fetchRevenueByRegion,
   fetchRevenueOverTime,
   fetchSummaryMetrics,
@@ -122,9 +127,9 @@ const tooltipMetricValue: Formatter<ValueType, NameType> = (value, name) => {
 
 function MetricCard({ label, value, accent, helpText }: MetricCardProps) {
   return (
-    <article className="glass-panel rounded-[28px] p-5">
+    <article className="rounded-lg border border-[var(--line)] bg-white p-5 shadow-[0_10px_30px_rgba(29,39,33,0.05)]">
       <div
-        className="mb-5 inline-flex rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em]"
+        className="mb-5 inline-flex rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em]"
         style={{ backgroundColor: `${accent}1a`, color: accent }}
       >
         {label}
@@ -292,7 +297,7 @@ function formatGranularityTooltipLabel(value: string, granularity: TimeGranulari
 
 function ChartCard({ title, description, headerAction, children }: ChartCardProps) {
   return (
-    <section className="glass-panel rounded-[32px] p-6">
+    <section className="rounded-lg border border-[var(--line)] bg-white p-6 shadow-[0_10px_30px_rgba(29,39,33,0.05)]">
       <div className="mb-6 flex items-start justify-between gap-4">
         <div>
           <h2 className="font-[family-name:var(--font-heading)] text-xl font-semibold tracking-tight">
@@ -311,7 +316,7 @@ function ChartCard({ title, description, headerAction, children }: ChartCardProp
 
 function EmptyState({ title, description }: EmptyStateProps) {
   return (
-    <div className="flex min-h-[280px] flex-col items-center justify-center rounded-[24px] border border-dashed border-[var(--line)] px-6 text-center">
+    <div className="flex min-h-[280px] flex-col items-center justify-center rounded-lg border border-dashed border-[var(--line)] bg-[var(--background)] px-6 text-center">
       <p className="font-[family-name:var(--font-heading)] text-lg font-semibold">{title}</p>
       <p className="mt-2 max-w-md text-sm leading-6" style={{ color: "var(--muted)" }}>
         {description}
@@ -322,7 +327,7 @@ function EmptyState({ title, description }: EmptyStateProps) {
 
 function PanelMessage({ title, body }: PanelMessageProps) {
   return (
-    <div className="glass-panel mx-auto flex min-h-screen w-full max-w-6xl items-center justify-center rounded-[36px] px-6 py-20 text-center">
+    <div className="mx-auto flex min-h-screen w-full max-w-6xl items-center justify-center rounded-lg border border-[var(--line)] bg-white px-6 py-20 text-center shadow-[var(--shadow)]">
       <div className="max-w-xl">
         <p className="font-[family-name:var(--font-heading)] text-3xl font-semibold tracking-tight">
           {title}
@@ -361,6 +366,26 @@ export function Dashboard() {
     queryKey: ["revenue-by-channel", activeFilters],
     queryFn: () => fetchRevenueByChannel(activeFilters),
   });
+  const revenueByCategoryQuery = useQuery({
+    queryKey: ["commerce-revenue-by-category"],
+    queryFn: fetchRevenueByCategory,
+  });
+  const conversionFunnelQuery = useQuery({
+    queryKey: ["commerce-conversion-funnel"],
+    queryFn: fetchConversionFunnel,
+  });
+  const cartAbandonmentQuery = useQuery({
+    queryKey: ["commerce-cart-abandonment"],
+    queryFn: fetchCartAbandonment,
+  });
+  const paymentHealthQuery = useQuery({
+    queryKey: ["commerce-payment-health"],
+    queryFn: fetchPaymentHealth,
+  });
+  const inventoryRiskQuery = useQuery({
+    queryKey: ["commerce-inventory-risk"],
+    queryFn: fetchInventoryRisk,
+  });
   const ordersQuery = useQuery({
     queryKey: ["orders", activeFilters, 8, 0],
     queryFn: () => fetchOrders({ ...activeFilters, limit: 8, offset: 0 }),
@@ -380,6 +405,11 @@ export function Dashboard() {
     topProductsQuery,
     revenueByRegionQuery,
     revenueByChannelQuery,
+    revenueByCategoryQuery,
+    conversionFunnelQuery,
+    cartAbandonmentQuery,
+    paymentHealthQuery,
+    inventoryRiskQuery,
     ordersQuery,
     latestRunQuery,
   ];
@@ -422,25 +452,30 @@ export function Dashboard() {
   const topProducts = topProductsQuery.data ?? [];
   const revenueByRegion = revenueByRegionQuery.data ?? [];
   const revenueByChannel = revenueByChannelQuery.data ?? [];
+  const revenueByCategory = revenueByCategoryQuery.data ?? [];
+  const conversionFunnel = conversionFunnelQuery.data;
+  const cartAbandonment = cartAbandonmentQuery.data;
+  const paymentHealth = paymentHealthQuery.data;
+  const inventoryRisk = inventoryRiskQuery.data ?? [];
   const recentOrders = ordersQuery.data?.items ?? [];
   const totalOrders = ordersQuery.data?.total ?? 0;
   const chartRevenueTrend = aggregateRevenueTrend(revenueTrend, selectedGranularity);
 
   return (
-    <main className="bg-grid min-h-screen px-4 py-6 sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-[var(--background)] px-4 py-6 sm:px-6 lg:px-8">
       <div className="mx-auto flex max-w-7xl flex-col gap-6">
-        <section className="glass-panel overflow-hidden rounded-[40px] p-6 sm:p-8">
+        <section className="overflow-hidden rounded-lg border border-[var(--line)] bg-white p-6 shadow-[var(--shadow)] sm:p-8">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl">
-              <div className="inline-flex rounded-full bg-[var(--teal-soft)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--teal)]">
-                DataPulse BI
+              <div className="inline-flex rounded-full bg-[var(--teal-soft)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--teal)]">
+                Commerce intelligence
               </div>
               <h1 className="mt-5 font-[family-name:var(--font-heading)] text-4xl font-semibold tracking-tight sm:text-5xl">
-                Operational confidence on top, commercial signals underneath.
+                Track the store from checkout to revenue.
               </h1>
               <p className="mt-4 max-w-2xl text-base leading-7 sm:text-lg" style={{ color: "var(--muted)" }}>
-                This dashboard combines pipeline observability and business metrics from the DataPulse BI sample stack:
-                PostgreSQL, FastAPI, and Next.js working together in one local environment.
+                Commerce metrics connect storefront behavior, cart movement, mock payments, inventory risk, and
+                revenue into one business view.
               </p>
             </div>
 
@@ -449,13 +484,13 @@ export function Dashboard() {
                 href={getApiDocsUrl()}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex min-h-[60px] items-center justify-center rounded-full border border-[var(--teal)] bg-[var(--teal)] px-6 py-4 text-center text-base font-semibold leading-tight text-white shadow-[0_10px_30px_rgba(15,118,110,0.22)] transition-transform duration-200 hover:-translate-y-0.5 hover:bg-[#0c615a] sm:text-lg"
+                className="inline-flex min-h-[56px] items-center justify-center rounded-full border border-[var(--teal)] bg-[var(--teal)] px-6 py-3 text-center text-sm font-semibold leading-tight text-white shadow-[0_10px_30px_rgba(0,121,107,0.18)] transition-transform duration-200 hover:-translate-y-0.5"
               >
                 Open API docs
               </a>
-              <div className="min-w-0 rounded-[28px] border border-[var(--line)] bg-[var(--surface-strong)] px-5 py-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.22em]" style={{ color: "var(--muted)" }}>
-                  Latest job
+              <div className="min-w-0 rounded-lg border border-[var(--line)] bg-[var(--background)] px-5 py-4">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em]" style={{ color: "var(--muted)" }}>
+                  Data freshness
                 </p>
                 <p className="mt-2 break-words font-[family-name:var(--font-heading)] text-base font-semibold leading-6 sm:text-lg">
                   {latestRun?.job_name ?? "No runs yet"}
@@ -468,7 +503,7 @@ export function Dashboard() {
           </div>
         </section>
 
-        <section className="glass-panel rounded-[32px] p-6">
+        <section className="rounded-lg border border-[var(--line)] bg-white p-6 shadow-[0_10px_30px_rgba(29,39,33,0.05)]">
           <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <h2 className="font-[family-name:var(--font-heading)] text-xl font-semibold tracking-tight">
@@ -504,7 +539,7 @@ export function Dashboard() {
                   setManualGranularity(null);
                   setFilters((current) => ({ ...current, startDate: event.target.value }));
                 }}
-                className="rounded-2xl border border-[var(--line)] bg-[var(--surface-strong)] px-4 py-3 outline-none transition focus:border-[var(--teal)]"
+                className="rounded-lg border border-[var(--line)] bg-white px-4 py-3 outline-none transition focus:border-[var(--teal)]"
               />
             </label>
 
@@ -519,7 +554,7 @@ export function Dashboard() {
                   setManualGranularity(null);
                   setFilters((current) => ({ ...current, endDate: event.target.value }));
                 }}
-                className="rounded-2xl border border-[var(--line)] bg-[var(--surface-strong)] px-4 py-3 outline-none transition focus:border-[var(--teal)]"
+                className="rounded-lg border border-[var(--line)] bg-white px-4 py-3 outline-none transition focus:border-[var(--teal)]"
               />
             </label>
 
@@ -552,10 +587,37 @@ export function Dashboard() {
 
         <section className="dashboard-grid md:grid-cols-2 xl:grid-cols-4">
           <MetricCard
+            label="Paid GMV"
+            value={formatCurrency(paymentHealth?.gross_paid_amount ?? 0)}
+            accent="#0f766e"
+            helpText="Commerce payment volume captured by the mock provider."
+          />
+          <MetricCard
+            label="Payment success"
+            value={`${Math.round((paymentHealth?.success_rate ?? 0) * 100)}%`}
+            accent="#0f4c5c"
+            helpText={`${paymentHealth?.succeeded_payments ?? 0} succeeded of ${paymentHealth?.total_payments ?? 0} payments.`}
+          />
+          <MetricCard
+            label="Cart abandonment"
+            value={`${Math.round((cartAbandonment?.abandonment_rate ?? 0) * 100)}%`}
+            accent="#b7791f"
+            helpText={`${cartAbandonment?.abandoned_carts ?? 0} carts still active or abandoned.`}
+          />
+          <MetricCard
+            label="Inventory risk"
+            value={formatCompactNumber(inventoryRisk.length)}
+            accent="#b4534f"
+            helpText="Variants at or below their low-stock threshold."
+          />
+        </section>
+
+        <section className="dashboard-grid md:grid-cols-2 xl:grid-cols-4">
+          <MetricCard
             label="Revenue"
             value={formatCurrency(summary?.total_revenue ?? 0)}
             accent="#0f766e"
-            helpText="Recognized order value for the active slice."
+            helpText="Recognized order value for the active analytical slice."
           />
           <MetricCard
             label="Orders"
@@ -591,7 +653,7 @@ export function Dashboard() {
                   onChange={(event) => {
                     setManualGranularity(event.target.value as TimeGranularity);
                   }}
-                  className="rounded-2xl border border-[var(--line)] bg-[var(--surface-strong)] px-4 py-3 text-sm font-medium outline-none transition focus:border-[var(--teal)]"
+                  className="rounded-lg border border-[var(--line)] bg-white px-4 py-3 text-sm font-medium outline-none transition focus:border-[var(--teal)]"
                 >
                   {TIME_GRANULARITY_OPTIONS.map((option) => (
                     <option key={option.value} value={option.value}>
@@ -673,7 +735,7 @@ export function Dashboard() {
             description="The dashboard keeps one operational panel visible so reviewers can connect business output to ingestion and transformation activity."
           >
             <div className="flex flex-col gap-5">
-              <div className="rounded-[26px] bg-[var(--surface-strong)] p-5">
+              <div className="rounded-lg bg-[var(--background)] p-5">
                 <div className="flex items-center justify-between gap-3">
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>
@@ -694,7 +756,7 @@ export function Dashboard() {
                 </div>
               </div>
 
-              <div className="rounded-[26px] border border-[var(--line)] bg-white/60 p-5">
+              <div className="rounded-lg border border-[var(--line)] bg-white p-5">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>
                   Quality summary
                 </p>
@@ -706,7 +768,7 @@ export function Dashboard() {
                     {latestRun.quality_summary.issue_types.map((issue) => (
                       <li
                         key={issue.issue_type}
-                        className="flex items-center justify-between rounded-2xl border border-[var(--line)] px-4 py-3 text-sm"
+                        className="flex items-center justify-between rounded-lg border border-[var(--line)] px-4 py-3 text-sm"
                       >
                         <span>{issue.issue_type.replaceAll("_", " ")}</span>
                         <span className="font-semibold">{issue.count}</span>
@@ -714,7 +776,7 @@ export function Dashboard() {
                     ))}
                   </ul>
                 ) : (
-                  <div className="mt-4 rounded-2xl border border-dashed border-[var(--line)] px-4 py-5 text-sm" style={{ color: "var(--muted)" }}>
+                  <div className="mt-4 rounded-lg border border-dashed border-[var(--line)] bg-[var(--background)] px-4 py-5 text-sm" style={{ color: "var(--muted)" }}>
                     No recent quality issues were recorded for the latest run.
                   </div>
                 )}
@@ -829,6 +891,64 @@ export function Dashboard() {
           </ChartCard>
         </section>
 
+        <section className="dashboard-grid xl:grid-cols-[1fr_1fr]">
+          <ChartCard
+            title="Commerce funnel"
+            description="Event counts from product browsing through cart, checkout, order creation, and successful mock payment."
+          >
+            <div className="grid gap-3 sm:grid-cols-5">
+              {[
+                ["Views", conversionFunnel?.product_views ?? 0],
+                ["Cart adds", conversionFunnel?.cart_adds ?? 0],
+                ["Checkouts", conversionFunnel?.checkouts_started ?? 0],
+                ["Orders", conversionFunnel?.orders_created ?? 0],
+                ["Paid", conversionFunnel?.payments_succeeded ?? 0],
+              ].map(([label, value]) => (
+                <StatusStat key={String(label)} label={String(label)} value={formatCompactNumber(Number(value))} />
+              ))}
+            </div>
+            <div className="mt-5 grid gap-3 sm:grid-cols-3">
+              <StatusStat label="View to cart" value={`${Math.round((conversionFunnel?.visit_to_cart_rate ?? 0) * 100)}%`} />
+              <StatusStat label="Checkout to order" value={`${Math.round((conversionFunnel?.checkout_to_order_rate ?? 0) * 100)}%`} />
+              <StatusStat label="Order to paid" value={`${Math.round((conversionFunnel?.order_to_paid_rate ?? 0) * 100)}%`} />
+            </div>
+          </ChartCard>
+
+          <ChartCard
+            title="Revenue by category"
+            description="Paid commerce revenue grouped by catalog category, independent of the legacy CSV analytics filters."
+          >
+            {revenueByCategory.length === 0 ? (
+              <EmptyState
+                title="No paid commerce revenue"
+                description="Complete a mock payment to populate category revenue."
+              />
+            ) : (
+              <div className="h-[300px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={revenueByCategory}>
+                    <CartesianGrid vertical={false} />
+                    <XAxis
+                      dataKey="category"
+                      tick={{ fill: "#17313f", fontSize: 12 }}
+                      axisLine={false}
+                      tickLine={false}
+                    />
+                    <YAxis
+                      tickFormatter={(value: number) => formatCompactNumber(value)}
+                      tick={{ fill: "#58717c", fontSize: 12 }}
+                      axisLine={false}
+                      tickLine={false}
+                    />
+                    <Tooltip formatter={tooltipCurrency} />
+                    <Bar dataKey="revenue" name="Revenue" radius={[12, 12, 0, 0]} fill="#0f766e" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            )}
+          </ChartCard>
+        </section>
+
         <ChartCard
           title="Recent orders"
           description={`Showing ${recentOrders.length} of ${totalOrders} orders from the filtered analytical dataset.`}
@@ -854,8 +974,8 @@ export function Dashboard() {
                 </thead>
                 <tbody>
                   {recentOrders.map((order) => (
-                    <tr key={`${order.source_record_id}-${order.order_date}`} className="rounded-[22px] bg-[var(--surface-strong)]">
-                      <td className="rounded-l-[22px] px-4 py-4">
+                    <tr key={`${order.source_record_id}-${order.order_date}`} className="rounded-lg bg-[var(--background)]">
+                      <td className="rounded-l-lg px-4 py-4">
                         <div className="font-medium">{order.source_record_id ?? "unknown"}</div>
                         <div className="text-sm" style={{ color: "var(--muted)" }}>
                           {formatDateLabel(order.order_date)}
@@ -866,7 +986,7 @@ export function Dashboard() {
                       <td className="px-4 py-4">{order.region}</td>
                       <td className="px-4 py-4">{order.channel}</td>
                       <td className="px-4 py-4">{order.quantity}</td>
-                      <td className="rounded-r-[22px] px-4 py-4 font-semibold">
+                      <td className="rounded-r-lg px-4 py-4 font-semibold">
                         {formatCurrency(order.total_amount)}
                       </td>
                     </tr>
@@ -899,7 +1019,7 @@ function FilterSelect({ label, value, options, onChange }: FilterSelectProps) {
         onChange={(event) => {
           onChange(event.target.value);
         }}
-        className="rounded-2xl border border-[var(--line)] bg-[var(--surface-strong)] px-4 py-3 outline-none transition focus:border-[var(--teal)]"
+        className="rounded-lg border border-[var(--line)] bg-white px-4 py-3 outline-none transition focus:border-[var(--teal)]"
       >
         <option value="">All {label.toLowerCase()}s</option>
         {options.map((option) => (
@@ -919,8 +1039,8 @@ type StatusStatProps = {
 
 function StatusStat({ label, value }: StatusStatProps) {
   return (
-    <div className="rounded-2xl border border-[var(--line)] bg-white/70 px-4 py-3">
-      <p className="text-xs font-semibold uppercase tracking-[0.18em]" style={{ color: "var(--muted)" }}>
+    <div className="rounded-lg border border-[var(--line)] bg-white px-4 py-3">
+      <p className="text-xs font-semibold uppercase tracking-[0.14em]" style={{ color: "var(--muted)" }}>
         {label}
       </p>
       <p className="mt-2 font-[family-name:var(--font-heading)] text-xl font-semibold">{value}</p>

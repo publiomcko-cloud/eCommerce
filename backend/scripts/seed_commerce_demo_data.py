@@ -12,6 +12,7 @@ from app.core.config import get_settings
 from app.core.security import hash_password
 from app.db.session import SessionLocal
 from app.models.commerce_category import CommerceCategory
+from app.models.commerce_customer import CommerceCustomer
 from app.models.commerce_inventory_item import CommerceInventoryItem
 from app.models.commerce_inventory_movement import CommerceInventoryMovement
 from app.models.commerce_product import CommerceProduct
@@ -19,6 +20,8 @@ from app.models.commerce_product_image import CommerceProductImage
 from app.models.commerce_product_variant import CommerceProductVariant
 from app.models.commerce_user import CommerceUser
 
+DEMO_CUSTOMER_EMAIL = "customer@datapulse.local"
+DEMO_CUSTOMER_PASSWORD = "customer123-local-only"
 
 DEMO_CATALOG = [
     {
@@ -198,6 +201,36 @@ def upsert_admin_user(session: Session) -> CommerceUser:
     return user
 
 
+def upsert_customer_user(session: Session) -> CommerceUser:
+    existing_user = session.scalar(select(CommerceUser).where(CommerceUser.email == DEMO_CUSTOMER_EMAIL))
+    if existing_user is None:
+        existing_user = CommerceUser(
+            email=DEMO_CUSTOMER_EMAIL,
+            password_hash=hash_password(DEMO_CUSTOMER_PASSWORD),
+            role="customer",
+            is_active=True,
+        )
+        session.add(existing_user)
+        session.flush()
+    else:
+        existing_user.role = "customer"
+        existing_user.is_active = True
+        existing_user.password_hash = hash_password(DEMO_CUSTOMER_PASSWORD)
+        session.flush()
+
+    customer = session.scalar(select(CommerceCustomer).where(CommerceCustomer.user_id == existing_user.id))
+    if customer is None:
+        customer = CommerceCustomer(user_id=existing_user.id)
+        session.add(customer)
+
+    customer.first_name = "Demo"
+    customer.last_name = "Customer"
+    customer.phone = "+55 11 90000-0101"
+    customer.marketing_opt_in = True
+    session.flush()
+    return existing_user
+
+
 def get_or_create_category(session: Session, payload: dict) -> CommerceCategory:
     category = session.scalar(select(CommerceCategory).where(CommerceCategory.slug == payload["slug"]))
     if category is None:
@@ -322,6 +355,7 @@ def upsert_product_catalog(session: Session, admin_user: CommerceUser) -> None:
 def main() -> None:
     with SessionLocal() as session:
         admin_user = upsert_admin_user(session)
+        upsert_customer_user(session)
         upsert_product_catalog(session, admin_user)
         session.commit()
 
@@ -329,6 +363,8 @@ def main() -> None:
     print("seed_status= ok")
     print("admin_demo_email=", settings.admin_demo_email)
     print("admin_demo_password=", settings.admin_demo_password)
+    print("customer_demo_email=", DEMO_CUSTOMER_EMAIL)
+    print("customer_demo_password=", DEMO_CUSTOMER_PASSWORD)
     print("catalog_products=", len(DEMO_CATALOG))
 
 

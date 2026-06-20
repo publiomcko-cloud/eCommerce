@@ -28,7 +28,7 @@ The deployment must provide:
 - hosted PostgreSQL database
 - safe demo seed data
 - mock or sandbox payment mode
-- admin demo credentials stored securely
+- demo credentials stored securely
 - environment variable documentation
 - healthcheck validation
 - dashboard validation
@@ -101,6 +101,7 @@ PAYMENT_WEBHOOK_SECRET=
 STORE_CURRENCY=BRL
 ADMIN_DEMO_EMAIL=
 ADMIN_DEMO_PASSWORD=
+DEMO_MODE=true
 ```
 
 Recommended production command:
@@ -198,6 +199,90 @@ Recommended order:
 13. Validate dashboard metrics.
 14. Add live links and demo credentials guidance to README.
 
+## 9.1 Local Pre-Deployment Validation
+
+Run these checks before creating or updating the public deployment:
+
+```bash
+cd frontend
+npm run lint
+npm run build
+
+cd ../backend
+.venv/bin/alembic upgrade head
+.venv/bin/python -m pytest
+.venv/bin/python scripts/seed_demo_data.py
+.venv/bin/python scripts/seed_commerce_demo_data.py
+.venv/bin/python scripts/run_smoke_checks.py
+.venv/bin/python scripts/run_commerce_smoke_checks.py
+```
+
+Last local validation result, June 1, 2026:
+
+- frontend lint passed
+- frontend production build passed
+- Alembic migrations applied successfully
+- backend test suite passed: 40 tests
+- BI seed loaded 12 rows and transformed 12 rows
+- commerce seed loaded the demo catalog, admin demo user, and customer demo user
+- BI smoke check passed
+- commerce smoke check passed, including registration, cart, checkout, mock payment, account order visibility, metrics, and analytics projection
+- local route checks returned `200` for `/`, `/login`, `/products`, `/admin`, and `/dashboard`
+- backend `/health` returned `status=ok`, `database=ok`, and `commerce=ok`
+
+Demo credentials validated locally:
+
+- customer: `customer@datapulse.local` / `customer123-local-only`
+- admin: `admin@datapulse.local` / `admin123-local-only`
+
+## 9.2 During Deployment Checklist
+
+Use this checklist after choosing the hosting platform.
+
+- create a managed PostgreSQL database
+- configure backend environment variables:
+  - `DATABASE_URL`
+  - `SECRET_KEY`
+  - `CORS_ORIGINS`
+  - `ENVIRONMENT=production`
+  - `ADMIN_DEMO_EMAIL`
+  - `ADMIN_DEMO_PASSWORD`
+- deploy the backend API
+- run `alembic upgrade head` against the hosted database
+- run `python scripts/seed_demo_data.py`
+- run `python scripts/seed_commerce_demo_data.py`
+- if paid demo commerce orders are created during validation, run `python scripts/project_commerce_analytics.py`
+- validate the backend `/health` endpoint
+- configure frontend environment variables:
+  - `NEXT_PUBLIC_API_URL`
+- deploy the frontend
+- confirm the deployed frontend can call the deployed backend without CORS errors
+
+## 9.3 After Deployment Checklist
+
+Do these after the public URLs are live.
+
+- test customer registration and login
+- test admin login
+- test product listing and product detail pages
+- add a product to cart
+- complete checkout with mock payment success
+- confirm order confirmation renders
+- confirm customer account order history renders
+- confirm admin order list and order detail render
+- confirm admin product and inventory pages render
+- confirm dashboard metrics render
+- test mobile layout on the deployed URL
+- verify no secret values are visible in frontend source or browser network payloads
+- update `README.md` with:
+  - live frontend link
+  - live backend/API docs link if public
+  - demo credentials
+  - screenshots from the deployed app
+  - short feature list
+  - architecture explanation
+  - known limitations: mock payments and synthetic data
+
 ## 10. Migrations in Production
 
 After backend deployment, run:
@@ -221,17 +306,11 @@ Do not run seed commands before migrations succeed.
 The demo seed should create:
 
 - admin user
-- sample customers
+- customer demo user
 - categories
 - products
 - variants
 - inventory
-- coupons
-- sample carts if useful
-- sample completed orders
-- sample payment records
-- commerce events
-- analytics projections
 
 Example command:
 
@@ -239,7 +318,15 @@ Example command:
 python scripts/seed_commerce_demo_data.py
 ```
 
-The existing `seed_demo_data.py` may remain for the BI layer, but the commerce seed should become the main demo seed once commerce is implemented.
+The existing `seed_demo_data.py` remains for the BI layer. Use `project_commerce_analytics.py` after paid demo commerce orders exist to project commerce order items into the analytics model.
+
+Recommended demo data sequence:
+
+```bash
+python scripts/seed_demo_data.py
+python scripts/seed_commerce_demo_data.py
+python scripts/project_commerce_analytics.py
+```
 
 ## 12. Healthcheck
 
@@ -322,9 +409,12 @@ Recommended command once Docker files are updated:
 ```bash
 docker compose -p datapulse-commerce-prod -f docker-compose.production.yml up -d --build
 docker exec datapulse_backend_prod alembic upgrade head
+docker exec datapulse_backend_prod python scripts/seed_demo_data.py
 docker exec datapulse_backend_prod python scripts/seed_commerce_demo_data.py
+docker exec datapulse_backend_prod python scripts/project_commerce_analytics.py
 curl http://localhost:8000/health
 curl http://localhost:8000/catalog/products
+curl http://localhost:8000/metrics/payment-health
 curl http://localhost:8000/metrics/summary
 docker compose -p datapulse-commerce-prod -f docker-compose.production.yml down
 ```

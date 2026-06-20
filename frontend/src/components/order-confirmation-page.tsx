@@ -16,6 +16,21 @@ type OrderConfirmationPageProps = {
   orderId: string;
 };
 
+function StatusBadge({ label, tone = "neutral" }: { label: string; tone?: "neutral" | "success" | "warning" | "danger" }) {
+  const styles = {
+    neutral: { backgroundColor: "var(--background)", color: "var(--foreground)" },
+    success: { backgroundColor: "var(--teal-soft)", color: "var(--teal)" },
+    warning: { backgroundColor: "var(--brass-soft)", color: "var(--brass)" },
+    danger: { backgroundColor: "rgba(180,35,58,0.1)", color: "var(--rose)" },
+  };
+
+  return (
+    <span className="rounded-full px-3 py-1 text-xs font-semibold" style={styles[tone]}>
+      {label}
+    </span>
+  );
+}
+
 export function OrderConfirmationPage({ orderId }: OrderConfirmationPageProps) {
   const { token, isAuthenticated, isLoading } = useAuth();
   const queryClient = useQueryClient();
@@ -45,16 +60,10 @@ export function OrderConfirmationPage({ orderId }: OrderConfirmationPageProps) {
 
   if (isLoading || orderQuery.isLoading) {
     return (
-      <main className="bg-grid min-h-screen px-4 py-6 sm:px-6 lg:px-8">
-        <div className="glass-panel mx-auto flex min-h-[60vh] max-w-5xl items-center justify-center rounded-[40px] px-6 py-20 text-center">
-          <div>
-            <p className="font-[family-name:var(--font-heading)] text-3xl font-semibold tracking-tight">
-              Loading confirmation
-            </p>
-            <p className="mt-4 text-base leading-7" style={{ color: "var(--muted)" }}>
-              Pulling the placed order snapshot from the checkout API.
-            </p>
-          </div>
+      <main className="min-h-screen bg-[var(--background)] px-4 py-6 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[1fr_380px]">
+          <div className="h-[480px] animate-pulse rounded-lg bg-white" />
+          <div className="h-[480px] animate-pulse rounded-lg bg-white" />
         </div>
       </main>
     );
@@ -62,46 +71,44 @@ export function OrderConfirmationPage({ orderId }: OrderConfirmationPageProps) {
 
   if (!isAuthenticated || !token) {
     return (
-      <main className="bg-grid min-h-screen px-4 py-6 sm:px-6 lg:px-8">
-        <div className="glass-panel mx-auto flex min-h-[60vh] max-w-5xl items-center justify-center rounded-[40px] px-6 py-20 text-center">
+      <main className="min-h-screen bg-[var(--background)] px-4 py-6 sm:px-6 lg:px-8">
+        <section className="mx-auto grid min-h-[60vh] max-w-5xl place-items-center rounded-lg border border-[var(--line)] bg-white p-8 text-center shadow-[var(--shadow)]">
           <div className="max-w-xl">
-            <p className="font-[family-name:var(--font-heading)] text-3xl font-semibold tracking-tight">
-              Sign in to view the order
-            </p>
+            <h1 className="font-[family-name:var(--font-heading)] text-4xl font-semibold tracking-tight">
+              Sign in to view this order.
+            </h1>
             <p className="mt-4 text-base leading-7" style={{ color: "var(--muted)" }}>
-              Order confirmation is currently available to the authenticated customer who placed it.
+              Order receipts are available to the customer account that placed them.
             </p>
-            <Link
-              href="/login"
-              className="mt-6 inline-flex rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-[var(--background)]"
-            >
+            <Link href="/login" className="mt-6 inline-flex rounded-full bg-[var(--foreground)] px-6 py-3 text-sm font-semibold text-white">
               Login
             </Link>
           </div>
-        </div>
+        </section>
       </main>
     );
   }
 
   if (orderQuery.isError || !orderQuery.data) {
     return (
-      <main className="bg-grid min-h-screen px-4 py-6 sm:px-6 lg:px-8">
-        <div className="glass-panel mx-auto flex min-h-[60vh] max-w-5xl items-center justify-center rounded-[40px] px-6 py-20 text-center">
+      <main className="min-h-screen bg-[var(--background)] px-4 py-6 sm:px-6 lg:px-8">
+        <section className="mx-auto grid min-h-[60vh] max-w-5xl place-items-center rounded-lg border border-[var(--line)] bg-white p-8 text-center shadow-[var(--shadow)]">
           <div className="max-w-xl">
-            <p className="font-[family-name:var(--font-heading)] text-3xl font-semibold tracking-tight">
-              Order not available
-            </p>
+            <h1 className="font-[family-name:var(--font-heading)] text-4xl font-semibold tracking-tight">
+              Order not available.
+            </h1>
             <p className="mt-4 text-base leading-7" style={{ color: "var(--muted)" }}>
-              The order could not be loaded for this account.
+              This order could not be loaded for the current account.
             </p>
             <Link
-              href="/cart"
-              className="mt-6 inline-flex rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-[var(--background)]"
+              href="/products"
+              className="mt-6 inline-flex rounded-full border border-[#111827] bg-[#111827] px-6 py-3 text-sm font-semibold !text-white shadow-[0_10px_24px_rgba(17,24,39,0.22)] transition hover:border-[#005f55] hover:bg-[#005f55]"
+              style={{ color: "#ffffff" }}
             >
-              Back to cart
+              Continue shopping
             </Link>
           </div>
-        </div>
+        </section>
       </main>
     );
   }
@@ -115,91 +122,143 @@ export function OrderConfirmationPage({ orderId }: OrderConfirmationPageProps) {
     null;
   const isMutatingPayment =
     createPaymentMutation.isPending || simulateSuccessMutation.isPending || simulateFailureMutation.isPending;
+  const paymentTone =
+    payment?.status === "succeeded" ? "success" : payment?.status === "failed" ? "danger" : payment ? "warning" : "neutral";
 
   return (
-    <main className="bg-grid min-h-screen px-4 py-6 sm:px-6 lg:px-8">
-      <div className="mx-auto flex max-w-7xl flex-col gap-6">
-        <section className="glass-panel rounded-[40px] p-6 sm:p-8">
-          <div className="inline-flex rounded-full bg-[var(--teal-soft)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--teal)]">
-            Stage 5 payment flow
+    <main className="min-h-screen bg-[var(--background)] px-4 py-6 sm:px-6 lg:px-8">
+      <div className="mx-auto grid max-w-7xl gap-6">
+        <section className="rounded-lg border border-[var(--line)] bg-white p-6 shadow-[var(--shadow)] sm:p-8 lg:p-10">
+          <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-start">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em]" style={{ color: "var(--teal)" }}>
+                Order confirmation
+              </p>
+              <h1 className="mt-4 font-[family-name:var(--font-heading)] text-4xl font-semibold tracking-tight sm:text-5xl">
+                Thanks, your order was created.
+              </h1>
+              <p className="mt-4 max-w-2xl text-base leading-7" style={{ color: "var(--muted)" }}>
+                Order {order.order_number} is saved with reserved inventory and a locked checkout snapshot.
+              </p>
+            </div>
+            <div className="grid gap-2 rounded-lg bg-[var(--background)] p-5 lg:min-w-[280px]">
+              <div className="flex justify-between gap-4 text-sm">
+                <span style={{ color: "var(--muted)" }}>Order</span>
+                <strong>{order.order_number}</strong>
+              </div>
+              <div className="flex justify-between gap-4 text-sm">
+                <span style={{ color: "var(--muted)" }}>Created</span>
+                <strong>{formatDateTime(order.created_at)}</strong>
+              </div>
+              <div className="flex justify-between gap-4 text-sm">
+                <span style={{ color: "var(--muted)" }}>Status</span>
+                <StatusBadge label={order.status} tone={order.status === "paid" ? "success" : order.status === "cancelled" ? "danger" : "warning"} />
+              </div>
+            </div>
           </div>
-          <h1 className="mt-5 font-[family-name:var(--font-heading)] text-4xl font-semibold tracking-tight sm:text-5xl">
-            Order {order.order_number} is ready for payment.
-          </h1>
-          <p className="mt-4 max-w-2xl text-base leading-7 sm:text-lg" style={{ color: "var(--muted)" }}>
-            The order snapshot is locked, inventory is reserved, and the mock provider can now drive success or
-            failure without introducing real payment credentials.
-          </p>
+
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link
+              href="/products"
+              className="rounded-full border border-[#111827] bg-[#111827] px-6 py-3 text-sm font-semibold !text-white shadow-[0_10px_24px_rgba(17,24,39,0.22)] transition hover:border-[#005f55] hover:bg-[#005f55]"
+              style={{ color: "#ffffff" }}
+            >
+              Continue shopping
+            </Link>
+            <Link href="/account" className="rounded-full border border-[var(--line)] px-6 py-3 text-sm font-semibold">
+              View account orders
+            </Link>
+          </div>
         </section>
 
-        <section className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="glass-panel rounded-[32px] p-6">
-            <h2 className="font-[family-name:var(--font-heading)] text-2xl font-semibold tracking-tight">
-              Order details
-            </h2>
-            <div className="mt-5 grid gap-3 text-sm">
-              <p><strong>Status:</strong> {order.status}</p>
-              <p><strong>Email:</strong> {order.email}</p>
-              <p><strong>Created:</strong> {formatDateTime(order.created_at)}</p>
-              <p><strong>Subtotal:</strong> {formatCurrency(order.subtotal_amount, order.currency)}</p>
-              <p><strong>Total:</strong> {formatCurrency(order.total_amount, order.currency)}</p>
-            </div>
-
-            <div className="mt-6 grid gap-4">
-              {order.items.map((item) => (
-                <div key={item.id} className="rounded-[24px] border border-[var(--line)] bg-white/70 p-4">
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <Link href={`/products/${item.product_slug}`} className="font-semibold">
-                        {item.product_name}
-                      </Link>
-                      <p className="mt-1 text-sm" style={{ color: "var(--muted)" }}>
-                        {item.variant_name} • SKU {item.sku} • qty {item.quantity}
-                      </p>
-                    </div>
-                    <p className="font-semibold">{formatCurrency(item.line_total, order.currency)}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
+        <section className="grid gap-6 lg:grid-cols-[1fr_390px] lg:items-start">
           <div className="grid gap-6">
-            <article className="glass-panel rounded-[32px] p-6">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <h2 className="font-[family-name:var(--font-heading)] text-2xl font-semibold tracking-tight">
-                    Payment state
-                  </h2>
-                  <p className="mt-2 text-sm leading-6" style={{ color: "var(--muted)" }}>
-                    Mock payments update the order lifecycle and inventory reservation in real time.
-                  </p>
-                </div>
-                <div className="rounded-full border border-[var(--line)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em]">
-                  {payment?.status ?? "not created"}
+            <article className="rounded-lg border border-[var(--line)] bg-white p-6 shadow-[0_10px_30px_rgba(29,39,33,0.05)] sm:p-8">
+              <h2 className="font-[family-name:var(--font-heading)] text-2xl font-semibold tracking-tight">
+                Items
+              </h2>
+              <div className="mt-5 grid gap-3">
+                {order.items.map((item) => (
+                  <div key={item.id} className="rounded-lg border border-[var(--line)] bg-[var(--background)] p-4">
+                    <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-start">
+                      <div>
+                        <Link href={`/products/${item.product_slug}`} className="font-semibold">
+                          {item.product_name}
+                        </Link>
+                        <p className="mt-1 text-sm" style={{ color: "var(--muted)" }}>
+                          {item.variant_name} / SKU {item.sku} / qty {item.quantity}
+                        </p>
+                      </div>
+                      <p className="font-semibold">{formatCurrency(item.line_total, order.currency)}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </article>
+
+            <article className="grid gap-4 rounded-lg border border-[var(--line)] bg-white p-6 shadow-[0_10px_30px_rgba(29,39,33,0.05)] sm:p-8 md:grid-cols-2">
+              <div>
+                <h2 className="font-[family-name:var(--font-heading)] text-2xl font-semibold tracking-tight">
+                  Shipping
+                </h2>
+                <div className="mt-4 grid gap-2 text-sm" style={{ color: "var(--muted)" }}>
+                  <p className="font-semibold text-[var(--foreground)]">{order.shipping_address.recipient_name}</p>
+                  <p>{order.shipping_address.line1}</p>
+                  {order.shipping_address.line2 ? <p>{order.shipping_address.line2}</p> : null}
+                  <p>{order.shipping_address.city}, {order.shipping_address.region}</p>
+                  <p>{order.shipping_address.postal_code}</p>
+                  <p>{order.shipping_address.country}</p>
                 </div>
               </div>
+              <div>
+                <h2 className="font-[family-name:var(--font-heading)] text-2xl font-semibold tracking-tight">
+                  Billing
+                </h2>
+                <div className="mt-4 grid gap-2 text-sm" style={{ color: "var(--muted)" }}>
+                  <p className="font-semibold text-[var(--foreground)]">{order.billing_address.recipient_name}</p>
+                  <p>{order.billing_address.line1}</p>
+                  {order.billing_address.line2 ? <p>{order.billing_address.line2}</p> : null}
+                  <p>{order.billing_address.city}, {order.billing_address.region}</p>
+                  <p>{order.billing_address.postal_code}</p>
+                  <p>{order.billing_address.country}</p>
+                </div>
+              </div>
+            </article>
+          </div>
 
-              <div className="mt-5 grid gap-3 text-sm">
-                <p><strong>Order status:</strong> {order.status}</p>
-                {payment ? (
-                  <>
-                    <p><strong>Provider:</strong> {payment.provider_name}</p>
-                    <p><strong>Provider payment ID:</strong> {payment.provider_payment_id}</p>
-                    <p><strong>Session token:</strong> {payment.provider_session_token}</p>
-                    <p><strong>Amount:</strong> {formatCurrency(payment.amount, payment.currency)}</p>
-                    <p><strong>Completed:</strong> {formatDateTime(payment.completed_at)}</p>
-                    {payment.failure_reason ? <p><strong>Failure reason:</strong> {payment.failure_reason}</p> : null}
-                  </>
-                ) : (
-                  <p style={{ color: "var(--muted)" }}>
-                    No payment intent exists yet for this order.
+          <aside className="grid gap-6 lg:sticky lg:top-32">
+            <article className="rounded-lg border border-[var(--line)] bg-white p-6 shadow-[var(--shadow)]">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em]" style={{ color: "var(--teal)" }}>
+                    Payment
                   </p>
-                )}
+                  <h2 className="mt-3 font-[family-name:var(--font-heading)] text-3xl font-semibold tracking-tight">
+                    Mock payment
+                  </h2>
+                </div>
+                <StatusBadge label={payment?.status ?? "not created"} tone={paymentTone} />
+              </div>
+
+              <div className="mt-6 grid gap-3 border-y border-[var(--line)] py-5 text-sm">
+                <div className="flex justify-between gap-4">
+                  <span style={{ color: "var(--muted)" }}>Subtotal</span>
+                  <strong>{formatCurrency(order.subtotal_amount, order.currency)}</strong>
+                </div>
+                <div className="flex justify-between gap-4">
+                  <span style={{ color: "var(--muted)" }}>Total</span>
+                  <strong>{formatCurrency(order.total_amount, order.currency)}</strong>
+                </div>
+                {payment ? (
+                  <div className="flex justify-between gap-4">
+                    <span style={{ color: "var(--muted)" }}>Provider</span>
+                    <strong>{payment.provider_name}</strong>
+                  </div>
+                ) : null}
               </div>
 
               {paymentFeedback ? (
-                <p className="mt-5 rounded-[20px] border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+                <p className="mt-5 rounded-lg bg-[rgba(180,35,58,0.08)] px-4 py-3 text-sm" style={{ color: "var(--rose)" }}>
                   {paymentFeedback}
                 </p>
               ) : null}
@@ -209,78 +268,46 @@ export function OrderConfirmationPage({ orderId }: OrderConfirmationPageProps) {
                   type="button"
                   onClick={() => createPaymentMutation.mutate()}
                   disabled={isMutatingPayment}
-                  className="mt-6 inline-flex rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-[var(--background)] disabled:cursor-not-allowed disabled:opacity-60"
+                  className="mt-6 inline-flex min-h-[52px] w-full items-center justify-center rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  {createPaymentMutation.isPending ? "Creating mock payment..." : "Create mock payment"}
+                  {createPaymentMutation.isPending ? "Creating payment..." : "Create mock payment"}
                 </button>
               ) : null}
 
               {payment?.status === "pending" ? (
-                <div className="mt-6 flex flex-wrap gap-3">
+                <div className="mt-6 grid gap-3">
                   <button
                     type="button"
                     onClick={() => simulateSuccessMutation.mutate(payment.id)}
                     disabled={isMutatingPayment}
-                    className="inline-flex rounded-full bg-[var(--teal)] px-5 py-3 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-60"
+                    className="inline-flex min-h-[52px] items-center justify-center rounded-full bg-[var(--teal)] px-5 py-3 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-60"
                   >
-                    {simulateSuccessMutation.isPending ? "Processing success..." : "Simulate success"}
+                    {simulateSuccessMutation.isPending ? "Processing..." : "Simulate payment success"}
                   </button>
                   <button
                     type="button"
                     onClick={() => simulateFailureMutation.mutate(payment.id)}
                     disabled={isMutatingPayment}
-                    className="inline-flex rounded-full border border-[var(--line)] px-5 py-3 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-60"
+                    className="inline-flex min-h-[52px] items-center justify-center rounded-full border border-[var(--line)] px-5 py-3 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-60"
                   >
-                    {simulateFailureMutation.isPending ? "Processing failure..." : "Simulate failure"}
+                    {simulateFailureMutation.isPending ? "Processing..." : "Simulate payment failure"}
                   </button>
                 </div>
               ) : null}
 
               {payment?.status === "succeeded" ? (
-                <p className="mt-6 rounded-[20px] border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-900">
-                  Payment is captured and the order is marked as paid.
+                <p className="mt-5 rounded-lg bg-[var(--teal-soft)] px-4 py-3 text-sm font-semibold text-[var(--teal)]">
+                  Payment captured. The order is paid.
                 </p>
               ) : null}
 
               {payment?.status === "failed" ? (
-                <p className="mt-6 rounded-[20px] border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-900">
-                  Payment failed, the order is cancelled, and the reservation was released back to inventory.
+                <p className="mt-5 rounded-lg bg-[rgba(180,35,58,0.08)] px-4 py-3 text-sm font-semibold" style={{ color: "var(--rose)" }}>
+                  Payment failed and the order was cancelled.
                 </p>
               ) : null}
             </article>
-
-            <article className="glass-panel rounded-[32px] p-6">
-              <h2 className="font-[family-name:var(--font-heading)] text-2xl font-semibold tracking-tight">
-                Shipping snapshot
-              </h2>
-              <div className="mt-5 grid gap-3 text-sm">
-                <p><strong>Recipient:</strong> {order.shipping_address.recipient_name}</p>
-                <p><strong>Phone:</strong> {order.shipping_address.phone ?? "Not provided"}</p>
-                <p><strong>Address:</strong> {order.shipping_address.line1}</p>
-                {order.shipping_address.line2 ? <p><strong>Complement:</strong> {order.shipping_address.line2}</p> : null}
-                <p><strong>City:</strong> {order.shipping_address.city}</p>
-                <p><strong>Region:</strong> {order.shipping_address.region}</p>
-                <p><strong>Postal code:</strong> {order.shipping_address.postal_code}</p>
-                <p><strong>Country:</strong> {order.shipping_address.country}</p>
-              </div>
-            </article>
-
-            <article className="glass-panel rounded-[32px] p-6">
-              <h2 className="font-[family-name:var(--font-heading)] text-2xl font-semibold tracking-tight">
-                Billing snapshot
-              </h2>
-              <div className="mt-5 grid gap-3 text-sm">
-                <p><strong>Recipient:</strong> {order.billing_address.recipient_name}</p>
-                <p><strong>Phone:</strong> {order.billing_address.phone ?? "Not provided"}</p>
-                <p><strong>Address:</strong> {order.billing_address.line1}</p>
-                {order.billing_address.line2 ? <p><strong>Complement:</strong> {order.billing_address.line2}</p> : null}
-                <p><strong>City:</strong> {order.billing_address.city}</p>
-                <p><strong>Region:</strong> {order.billing_address.region}</p>
-                <p><strong>Postal code:</strong> {order.billing_address.postal_code}</p>
-                <p><strong>Country:</strong> {order.billing_address.country}</p>
-              </div>
-            </article>
-          </div>
+          </aside>
         </section>
       </div>
     </main>

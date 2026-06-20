@@ -5,6 +5,8 @@ from app.db.session import get_db
 from app.schemas.admin import (
     AdminInventoryListResponse,
     AdminOrderDetailResponse,
+    AdminRefundCreateRequest,
+    AdminRefundResponse,
     AdminOrderListResponse,
     AdminOrderStatusUpdateRequest,
     AdminOverviewResponse,
@@ -18,6 +20,7 @@ from app.services.admin_service import (
     get_admin_overview,
     list_admin_inventory,
     list_admin_orders,
+    create_admin_refund,
     update_admin_order_status,
     upsert_admin_shipment,
 )
@@ -167,6 +170,26 @@ def admin_upsert_order_shipment(
 ) -> AdminShipmentResponse:
     try:
         return upsert_admin_shipment(db, order_id=order_id, payload=payload)
+    except ValueError as exc:
+        message = str(exc)
+        status_code = 404 if "not found" in message.lower() else 400
+        raise HTTPException(status_code=status_code, detail=message) from exc
+
+
+@router.post("/orders/{order_id}/refunds", response_model=AdminRefundResponse, status_code=status.HTTP_201_CREATED)
+def admin_create_order_refund(
+    order_id: str,
+    payload: AdminRefundCreateRequest,
+    context: AuthContext = Depends(require_roles("admin")),
+    db: Session = Depends(get_db),
+) -> AdminRefundResponse:
+    try:
+        return create_admin_refund(
+            db,
+            order_id=order_id,
+            payload=payload,
+            created_by_user_id=str(context.user.id),
+        )
     except ValueError as exc:
         message = str(exc)
         status_code = 404 if "not found" in message.lower() else 400

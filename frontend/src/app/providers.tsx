@@ -73,7 +73,8 @@ export function Providers({ children }: ProvidersProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [cartToken, setCartToken] = useState<string | null>(null);
   const [cart, setCart] = useState<CartResponse | null>(null);
-  const [isCartLoading, setIsCartLoading] = useState(false);
+  const [isCartLoading, setIsCartLoading] = useState(true);
+  const [hasHydratedStorage, setHasHydratedStorage] = useState(false);
 
   useEffect(() => {
     queueMicrotask(() => {
@@ -84,6 +85,7 @@ export function Providers({ children }: ProvidersProps) {
       setCartToken(savedCartToken);
       setIsLoading(Boolean(savedToken));
       setIsCartLoading(Boolean(savedCartToken || savedToken));
+      setHasHydratedStorage(true);
     });
   }, []);
 
@@ -137,11 +139,15 @@ export function Providers({ children }: ProvidersProps) {
     let cancelled = false;
 
     async function hydrateCart() {
+      if (!hasHydratedStorage) {
+        return;
+      }
+
       const cartAccessToken = user?.customer ? token : null;
 
       if (!cartAccessToken && !cartToken) {
         if (!cancelled) {
-          setCart(null);
+          setCart((currentCart) => (currentCart?.cart_token ? currentCart : null));
           setIsCartLoading(false);
         }
         return;
@@ -174,7 +180,7 @@ export function Providers({ children }: ProvidersProps) {
     return () => {
       cancelled = true;
     };
-  }, [cartToken, persistCart, token, user?.customer]);
+  }, [cartToken, hasHydratedStorage, persistCart, token, user?.customer]);
 
   const applyAuth = useCallback((response: AuthTokenResponse) => {
     window.localStorage.setItem(AUTH_TOKEN_STORAGE_KEY, response.access_token);

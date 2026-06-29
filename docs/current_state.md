@@ -35,16 +35,32 @@ Historical planning notes are kept in `docs/archive/`.
 - Commerce analytics dashboard
 - Commerce events and projection into the BI metrics layer
 
-## Current Validation
+## Current Validation Commands
 
-- Backend pytest suite
-- Backend smoke checks
-- Commerce smoke checks
-- Frontend lint
-- Frontend production build
-- Manual Playwright E2E test for customer login
-- Manual GitHub Actions E2E workflow for the deployed demo
-- Public demo video
+Backend validation:
+
+```bash
+cd backend
+source .venv/bin/activate
+python -m pytest
+python scripts/run_smoke_checks.py
+python scripts/run_commerce_smoke_checks.py
+```
+
+Frontend validation:
+
+```bash
+cd frontend
+npm run lint
+npm run build
+npm run test:e2e
+```
+
+The repository also includes a manual GitHub Actions E2E workflow in
+`.github/workflows/e2e.yml` for validating the deployed Vercel frontend against
+the Render backend.
+
+The public demo video is available at https://youtu.be/hUUpPVHVA40.
 
 ## Current Limitations
 

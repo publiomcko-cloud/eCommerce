@@ -1,5 +1,7 @@
 # DataPulse Commerce
 
+[![CI](https://github.com/publiomcko-cloud/eCommerce/actions/workflows/ci.yml/badge.svg)](https://github.com/publiomcko-cloud/eCommerce/actions/workflows/ci.yml)
+
 Full-stack e-commerce platform with built-in business intelligence.
 
 DataPulse Commerce extends a completed BI project into a transactional commerce system: storefront, catalog, cart, checkout, mock payments, customer accounts, admin operations, inventory, refunds, commerce events, and analytics projection.
@@ -15,6 +17,45 @@ Full-stack e-commerce portfolio app with FastAPI, Next.js, PostgreSQL, mock chec
 - API docs: https://ecommerce-8ngt.onrender.com/docs
 
 The public demo runs on Vercel, Render, and Supabase using synthetic data and a mock payment provider. Render's free tier may take a short moment to wake the API after inactivity.
+
+Demo users:
+
+```text
+Customer
+customer@datapulse.local
+customer123-local-only
+
+Admin
+admin@datapulse.local
+admin123-local-only
+```
+
+The login page includes buttons that autofill these demo credentials.
+
+## For Recruiters
+
+DataPulse Commerce is designed to show end-to-end product engineering judgment, not only isolated screens. It demonstrates backend domain modeling, transactional workflows, authentication, admin operations, analytics, deployment, documentation, and browser-verified portfolio polish in one cohesive project.
+
+Recommended review path:
+
+1. Open the storefront and browse products.
+2. Add a product to the cart and open checkout.
+3. Sign in with the customer demo account and inspect account/order behavior.
+4. Sign in with the admin demo account and review orders, products, inventory, and analytics.
+5. Inspect the backend API docs and repository documentation for architecture and trade-offs.
+
+## For Clients
+
+This project models how a small commerce business could connect storefront activity, operations, and business intelligence without starting from a generic landing page. The demo shows the practical flow from product discovery to cart, checkout, customer account, admin management, and dashboard visibility.
+
+Client-facing value:
+
+- clear storefront and checkout experience
+- protected back office for operations
+- inventory-aware product management
+- synthetic but realistic order and analytics flow
+- safe mock payments for demos, training, and validation
+- deployment-ready structure that can later grow into real payment, email, image storage, and shipping integrations
 
 ## What It Demonstrates
 
@@ -101,20 +142,6 @@ Backend health: http://127.0.0.1:8000/health
 API docs: http://127.0.0.1:8000/docs
 ```
 
-Demo users:
-
-```text
-Customer
-customer@datapulse.local
-customer123-local-only
-
-Admin
-admin@datapulse.local
-admin123-local-only
-```
-
-The login page includes buttons that autofill these demo credentials.
-
 ## Validation
 
 Backend:
@@ -172,12 +199,20 @@ docker compose -p datapulse-commerce-prod -f docker-compose.production.yml down
 
 ## Documentation
 
+- [Changelog](CHANGELOG.md)
 - [Current state](docs/actual_state.md)
 - [Development plan](docs/development_plan.md)
 - [Architecture](docs/architecture.md)
+- [Case study](docs/case_study.md)
 - [Database modeling](docs/database_modeling.md)
+- [Demo script](docs/demo_script.md)
 - [Deployment](docs/deployment.md)
+- [Portfolio readiness](docs/portfolio_readiness.md)
 - [Testing](docs/testing.md)
+
+## License
+
+This project is available under the [MIT License](LICENSE).
 
 ## Demo Safety
 

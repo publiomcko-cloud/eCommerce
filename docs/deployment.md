@@ -28,11 +28,24 @@ The deployment must provide:
 - hosted PostgreSQL database
 - safe demo seed data
 - mock or sandbox payment mode
-- demo credentials stored securely
+- demo credentials configured for synthetic public portfolio review
 - environment variable documentation
 - healthcheck validation
 - dashboard validation
 - README links
+
+## 2.1 Current Public Deployment
+
+Current portfolio deployment:
+
+- Frontend: https://e-commerce-omega-nine-82.vercel.app
+- Backend health: https://ecommerce-8ngt.onrender.com/health
+- API docs: https://ecommerce-8ngt.onrender.com/docs
+- Frontend hosting: Vercel
+- Backend hosting: Render
+- Database hosting: Supabase PostgreSQL
+- Payment mode: mock payment flow only
+- Demo data: synthetic portfolio data
 
 ## 3. Recommended Deployment Architecture
 
@@ -65,8 +78,6 @@ Required environment variables:
 
 ```env
 NEXT_PUBLIC_API_URL=https://your-backend-url
-NEXT_PUBLIC_STORE_NAME=DataPulse Commerce
-NEXT_PUBLIC_DEMO_MODE=true
 ```
 
 Deployment steps:
@@ -95,13 +106,16 @@ ENVIRONMENT=production
 CORS_ORIGINS=https://your-frontend-url
 SECRET_KEY=
 ACCESS_TOKEN_EXPIRE_MINUTES=30
-REFRESH_TOKEN_EXPIRE_DAYS=7
-PAYMENT_PROVIDER=mock
-PAYMENT_WEBHOOK_SECRET=
 STORE_CURRENCY=BRL
 ADMIN_DEMO_EMAIL=
 ADMIN_DEMO_PASSWORD=
-DEMO_MODE=true
+```
+
+Future production variables, once the matching code exists:
+
+```env
+REFRESH_TOKEN_EXPIRE_DAYS=7
+PAYMENT_WEBHOOK_SECRET=
 ```
 
 Recommended production command:
@@ -217,18 +231,12 @@ cd ../backend
 .venv/bin/python scripts/run_commerce_smoke_checks.py
 ```
 
-Last local validation result, June 1, 2026:
+Latest documentation cleanup validation, June 29, 2026:
 
+- backend test suite passed: 40 tests
 - frontend lint passed
 - frontend production build passed
-- Alembic migrations applied successfully
-- backend test suite passed: 40 tests
-- BI seed loaded 12 rows and transformed 12 rows
-- commerce seed loaded the demo catalog, admin demo user, and customer demo user
-- BI smoke check passed
-- commerce smoke check passed, including registration, cart, checkout, mock payment, account order visibility, metrics, and analytics projection
-- local route checks returned `200` for `/`, `/login`, `/products`, `/admin`, and `/dashboard`
-- backend `/health` returned `status=ok`, `database=ok`, and `commerce=ok`
+- Playwright customer-login E2E passed against the deployed demo
 
 Demo credentials validated locally:
 
@@ -258,9 +266,9 @@ Use this checklist after choosing the hosting platform.
 - deploy the frontend
 - confirm the deployed frontend can call the deployed backend without CORS errors
 
-## 9.3 After Deployment Checklist
+## 9.3 Redeployment Validation Checklist
 
-Do these after the public URLs are live.
+Use this checklist after future public deployment changes.
 
 - test customer registration and login
 - test admin login
@@ -404,7 +412,9 @@ Logs must not expose:
 
 ## 16. Production-Like Local Validation
 
-Recommended command once Docker files are updated:
+This compose file is for local validation only. Do not use it as real production infrastructure.
+
+Current command:
 
 ```bash
 docker compose -p datapulse-commerce-prod -f docker-compose.production.yml up -d --build

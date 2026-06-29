@@ -355,23 +355,25 @@ GET /catalog/search
 ```http
 GET /cart
 POST /cart/items
-PATCH /cart/items/{item_id}
+PUT /cart/items/{item_id}
 DELETE /cart/items/{item_id}
 ```
 
 ## 8.4 Checkout
 
 ```http
-POST /checkout/session
-GET /checkout/session/{id}
-POST /checkout/place-order
+POST /checkout/sessions
+POST /checkout/orders
+GET /checkout/orders/{order_id}
 ```
 
 ## 8.5 Payments
 
 ```http
-POST /payments/webhook
-GET /payments/{payment_id}
+POST /payments/orders/{order_id}
+POST /payments/{payment_id}/simulate-success
+POST /payments/{payment_id}/simulate-failure
+POST /payments/webhooks/mock
 ```
 
 ## 8.6 Customer orders

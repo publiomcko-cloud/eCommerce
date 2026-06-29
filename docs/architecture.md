@@ -128,7 +128,7 @@ Responsibilities:
 
 ## 5. Main Backend Domains
 
-Recommended backend domain modules:
+Planned/reference backend domain modules:
 
 ```text
 backend/app/
@@ -202,7 +202,7 @@ backend/app/
 
 ## 6. Frontend Structure
 
-Recommended frontend structure:
+Current frontend route structure:
 
 ```text
 frontend/src/
@@ -213,17 +213,17 @@ frontend/src/
 │   │   └── [slug]/page.tsx
 │   ├── cart/page.tsx
 │   ├── checkout/page.tsx
-│   ├── order-confirmation/[orderNumber]/page.tsx
-│   ├── account/
-│   │   ├── page.tsx
-│   │   ├── orders/page.tsx
-│   │   └── orders/[orderNumber]/page.tsx
+│   ├── checkout/confirmation/[orderId]/page.tsx
+│   ├── account/page.tsx
 │   ├── admin/
 │   │   ├── page.tsx
+│   │   ├── orders/page.tsx
+│   │   ├── orders/[id]/page.tsx
 │   │   ├── products/page.tsx
+│   │   ├── products/new/page.tsx
 │   │   ├── products/[id]/page.tsx
-│   │   ├── inventory/page.tsx
-│   │   └── orders/[orderNumber]/page.tsx
+│   │   └── inventory/page.tsx
+│   ├── orders/new/page.tsx
 │   └── dashboard/page.tsx
 ├── components/
 │   ├── layout/
@@ -306,7 +306,7 @@ metrics endpoints
 
 Checkout must be treated as a controlled workflow.
 
-Recommended flow:
+Current flow:
 
 1. customer opens checkout from cart
 2. backend validates cart items
@@ -320,6 +320,7 @@ Recommended flow:
 10. backend updates payment and order status
 11. backend records status history
 12. backend emits commerce event
+13. order confirmation/account/admin views read the resulting order state
 14. analytics projection updates BI tables
 
 ## 10. Idempotency
@@ -434,23 +435,25 @@ GET /catalog/search
 ```http
 GET /cart
 POST /cart/items
-PATCH /cart/items/{item_id}
+PUT /cart/items/{item_id}
 DELETE /cart/items/{item_id}
 ```
 
 ### Checkout
 
 ```http
-POST /checkout/session
-GET /checkout/session/{id}
-POST /checkout/place-order
+POST /checkout/sessions
+POST /checkout/orders
+GET /checkout/orders/{order_id}
 ```
 
 ### Payments
 
 ```http
-POST /payments/webhook
-GET /payments/{payment_id}
+POST /payments/orders/{order_id}
+POST /payments/{payment_id}/simulate-success
+POST /payments/{payment_id}/simulate-failure
+POST /payments/webhooks/mock
 ```
 
 ### Orders

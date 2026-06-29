@@ -95,7 +95,7 @@ Examples:
 - `/auth/login`
 - `/catalog/products`
 - `/cart`
-- `/checkout/place-order`
+- `/checkout/orders`
 - `/admin/orders`
 - `/metrics/summary`
 
@@ -136,11 +136,31 @@ Minimum frontend validation:
 
 - lint passes
 - production build passes
+- browser E2E customer login passes
 - important screens render without type errors
 
-Optional later:
+Run local frontend checks with:
 
-- browser E2E for catalog/cart/checkout
+```bash
+cd frontend
+npm run lint
+npm run build
+npm run test:e2e
+```
+
+## 4.6 Browser E2E
+
+The project includes a minimal Playwright E2E test for customer login:
+
+```bash
+cd frontend
+npm run test:e2e
+```
+
+The repository also includes a manual GitHub Actions E2E workflow in
+`.github/workflows/e2e.yml`. Run it with `workflow_dispatch` when validating
+the deployed Vercel frontend and Render backend after deployment-sensitive
+changes.
 
 ## 5. Critical Flows to Test
 
@@ -431,10 +451,9 @@ The MVP should not be considered ready unless:
 
 Future versions may add:
 
-- Playwright browser tests
 - payment provider sandbox tests
 - load tests for catalog and checkout
 - concurrency tests for inventory
 - security scanning
-- CI/CD test workflow
+- broader checkout/admin/dashboard browser E2E coverage
 - visual regression tests for storefront

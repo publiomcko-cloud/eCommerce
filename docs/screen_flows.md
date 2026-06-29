@@ -201,7 +201,7 @@ Let user review selected items before checkout.
 
 - `GET /cart`
 - `POST /cart/items`
-- `PATCH /cart/items/{item_id}`
+- `PUT /cart/items/{item_id}`
 - `DELETE /cart/items/{item_id}`
 
 ## 4.5 Checkout Screen
@@ -232,9 +232,9 @@ Collect checkout data and place the order.
 
 ### Data loaded from API
 
-- `POST /checkout/session`
-- `GET /checkout/session/{id}`
-- `POST /checkout/place-order`
+- `POST /checkout/sessions`
+- `POST /checkout/orders`
+- `GET /checkout/orders/{order_id}`
 
 ## 4.6 Order Confirmation Screen
 

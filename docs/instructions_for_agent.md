@@ -51,11 +51,11 @@ The commerce implementation must extend this foundation without breaking it.
 In case of conflict, follow this order:
 
 1. `docs/mvp_scope.md`
-2. `docs/actual_state.md`
+2. `docs/current_state.md`
 3. `docs/architecture.md`
 4. `docs/database_modeling.md`
-5. `docs/development_plan.md`
-6. `docs/mvp_backlog.md`
+5. `docs/archive/development_plan.md`
+6. `docs/archive/mvp_backlog.md`
 7. `docs/technical_specification.md`
 8. `docs/screen_flows.md`
 9. `docs/testing.md`
@@ -213,13 +213,17 @@ GET /catalog/products
 GET /catalog/products/{slug}
 GET /cart
 POST /cart/items
-PATCH /cart/items/{item_id}
+PUT /cart/items/{item_id}
 DELETE /cart/items/{item_id}
-POST /checkout/session
-POST /checkout/place-order
+POST /checkout/sessions
+POST /checkout/orders
+GET /checkout/orders/{order_id}
 GET /orders
 GET /orders/{order_number}
-POST /payments/webhook
+POST /payments/orders/{order_id}
+POST /payments/{payment_id}/simulate-success
+POST /payments/{payment_id}/simulate-failure
+POST /payments/webhooks/mock
 GET /admin/overview
 GET /admin/products
 POST /admin/products

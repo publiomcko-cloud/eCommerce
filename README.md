@@ -69,6 +69,7 @@ Client-facing value:
 - Commerce event logging and operational analytics metrics
 - Projection from commerce orders into the existing BI dimensional model
 - Backend tests, smoke scripts, frontend lint, and production build validation
+- Manual browser E2E validation with Playwright and GitHub Actions
 
 ## Core Demo Flow
 
@@ -193,8 +194,11 @@ docker compose -p datapulse-commerce-prod -f docker-compose.production.yml down
 - `POST /cart/items`
 - `POST /checkout/sessions`
 - `POST /checkout/orders`
+- `GET /checkout/orders/{order_id}`
 - `POST /payments/orders/{order_id}`
 - `POST /payments/{payment_id}/simulate-success`
+- `POST /payments/{payment_id}/simulate-failure`
+- `POST /payments/webhooks/mock`
 - `GET /account/orders`
 - `GET /admin/overview`
 - `POST /admin/orders/{order_id}/refunds`
@@ -205,8 +209,7 @@ docker compose -p datapulse-commerce-prod -f docker-compose.production.yml down
 ## Documentation
 
 - [Changelog](CHANGELOG.md)
-- [Current state](docs/actual_state.md)
-- [Development plan](docs/development_plan.md)
+- [Current state](docs/current_state.md)
 - [Architecture](docs/architecture.md)
 - [Case study](docs/case_study.md)
 - [Database modeling](docs/database_modeling.md)
@@ -214,6 +217,14 @@ docker compose -p datapulse-commerce-prod -f docker-compose.production.yml down
 - [Deployment](docs/deployment.md)
 - [Portfolio readiness](docs/portfolio_readiness.md)
 - [Testing](docs/testing.md)
+
+Archive:
+
+- [Build history](docs/archive/build_history.md)
+- [Development plan](docs/archive/development_plan.md)
+- [Design history](docs/archive/design_history.md)
+- [MVP backlog](docs/archive/mvp_backlog.md)
+- [Complete historical documentation bundle](docs/archive/complete_documentation.md)
 
 ## License
 

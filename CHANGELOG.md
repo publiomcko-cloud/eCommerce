@@ -2,6 +2,16 @@
 
 All notable changes to DataPulse Commerce will be documented in this file.
 
+## [Unreleased]
+
+### Changed
+
+- Consolidated current portfolio documentation in `docs/current_state.md`.
+- Moved historical planning and build-history documents into `docs/archive/`.
+- Updated architecture, testing, deployment, and support docs to match current checkout, payment, and E2E workflows.
+- Removed unused demo/payment configuration variables from environment examples, Render config, and CI.
+- Marked the production-like Docker Compose file as local validation only.
+
 ## [0.1.0] - 2026-06-29
 
 ### Added

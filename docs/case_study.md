@@ -58,7 +58,7 @@ Main application layers:
 
 - `frontend/`: Next.js App Router, TypeScript, Tailwind CSS, TanStack Query, and Recharts.
 - `backend/`: FastAPI, SQLAlchemy, Alembic, PostgreSQL access through `psycopg`, service-layer business rules, and pytest coverage.
-- `docs/`: architecture, testing, deployment, actual state, design plan, screenshots, and this case study.
+- `docs/`: current state, architecture, testing, deployment, screenshots, and this case study.
 
 Main backend domains:
 

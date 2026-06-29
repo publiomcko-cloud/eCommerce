@@ -103,10 +103,7 @@ ENVIRONMENT=local
 CORS_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
 SECRET_KEY=local-dev-change-me
 ACCESS_TOKEN_EXPIRE_MINUTES=30
-REFRESH_TOKEN_EXPIRE_DAYS=7
-PAYMENT_PROVIDER=mock
 STORE_CURRENCY=BRL
-DEMO_MODE=true
 ADMIN_DEMO_EMAIL=admin@datapulse.local
 ADMIN_DEMO_PASSWORD=admin123-local-only
 ```
@@ -122,8 +119,6 @@ Frontend `.env.local`:
 
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:8000
-NEXT_PUBLIC_STORE_NAME=DataPulse Commerce
-NEXT_PUBLIC_DEMO_MODE=true
 ```
 
 ## 6. Docker Compose

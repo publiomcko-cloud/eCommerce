@@ -15,6 +15,7 @@ Full-stack e-commerce portfolio app with FastAPI, Next.js, PostgreSQL, mock chec
 - Frontend: https://e-commerce-omega-nine-82.vercel.app
 - Backend health: https://ecommerce-8ngt.onrender.com/health
 - API docs: https://ecommerce-8ngt.onrender.com/docs
+- Demo video: [MP4 walkthrough](docs/demo_video/datapulse-commerce-demo.mp4)
 
 The public demo runs on Vercel, Render, and Supabase using synthetic data and a mock payment provider. Render's free tier may take a short moment to wake the API after inactivity.
 
@@ -237,5 +238,5 @@ This project is available under the [MIT License](LICENSE).
 
 - Add optional sandbox payment adapter
 - Add coupon/promotion support
-- Add browser E2E tests for checkout and admin workflows
+- Expand browser E2E tests for checkout and admin workflows
 - Add richer commerce analytics such as cohort and funnel timelines

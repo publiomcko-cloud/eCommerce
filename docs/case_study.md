@@ -136,8 +136,8 @@ Current live links:
 Recommended next portfolio improvements:
 
 - Add a short demo video using `docs/demo_script.md`.
-- Add GitHub Actions CI for backend tests, frontend lint, and frontend build.
-- Add minimal Playwright E2E coverage for customer login and cart checkout.
+- Expand CI with optional/manual E2E.
+- Expand Playwright coverage for checkout/admin/dashboard.
 - Add a custom domain for the Vercel frontend.
 - Replace fallback product visuals with hosted product images.
 - Add a sandbox payment adapter.

@@ -19,18 +19,20 @@
 - [x] Browser screenshots captured for portfolio review.
 - [x] Minimal Playwright customer login test added.
 - [x] GitHub Actions CI workflow added for backend pytest, frontend lint, and frontend build.
+- [x] E2E strategy selected: manual GitHub Actions `workflow_dispatch` against the deployed demo.
 - [x] README screenshot references verified against local files.
 - [x] README public links verified to use deployed URLs.
 - [x] Environment examples warn that real secrets must never be committed.
 - [x] MIT license added.
 - [x] Changelog added with the first public portfolio release.
+- [x] Silent 60-120 second demo video recorded and converted to MP4.
+- [x] Demo video link added to the README.
 
 ## Pending
 
-- [ ] Commit and push the latest portfolio documentation and workflow changes.
 - [ ] Confirm the GitHub Actions CI badge resolves after the first workflow run.
-- [ ] Record and publish the 60-120 second demo video.
-- [ ] Add the demo video link to the README.
+- [ ] Run the manual E2E workflow after future deployment-sensitive changes.
+- [ ] Publish the latest repository changes so the GitHub README can serve the demo video link.
 - [ ] Add a custom domain if desired.
 - [ ] Replace styled fallback product visuals with hosted product images if desired.
 - [ ] Add sandbox payment provider integration if desired.
@@ -44,6 +46,7 @@
 - [x] Products load.
 - [x] Cart persists after add-to-cart.
 - [x] Customer login works.
+- [x] Minimal customer login E2E can run locally with `npm run test:e2e`.
 - [x] Admin login works.
 - [x] Dashboard loads.
 - [x] README avoids production links pointing to localhost.

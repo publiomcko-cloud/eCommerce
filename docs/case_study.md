@@ -135,7 +135,6 @@ Current live links:
 
 Recommended next portfolio improvements:
 
-- Add a short demo video using `docs/demo_script.md`.
 - Expand CI with optional/manual E2E.
 - Expand Playwright coverage for checkout/admin/dashboard.
 - Add a custom domain for the Vercel frontend.

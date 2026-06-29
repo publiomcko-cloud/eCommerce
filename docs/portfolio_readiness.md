@@ -27,12 +27,12 @@
 - [x] Changelog added with the first public portfolio release.
 - [x] Silent 60-120 second demo video recorded and converted to MP4.
 - [x] Demo video link added to the README.
+- [x] Publish the latest repository changes so the GitHub README can serve the demo video link.
 
 ## Pending
 
 - [ ] Confirm the GitHub Actions CI badge resolves after the first workflow run.
 - [ ] Run the manual E2E workflow after future deployment-sensitive changes.
-- [ ] Publish the latest repository changes so the GitHub README can serve the demo video link.
 - [ ] Add a custom domain if desired.
 - [ ] Replace styled fallback product visuals with hosted product images if desired.
 - [ ] Add sandbox payment provider integration if desired.

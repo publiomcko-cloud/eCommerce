@@ -163,7 +163,10 @@ Frontend:
 cd frontend
 npm run lint
 npm run build
+npm run test:e2e
 ```
+
+The repository also includes a manual GitHub Actions E2E workflow (`.github/workflows/e2e.yml`) that can be run with `workflow_dispatch` to test the deployed Vercel demo against the Render API.
 
 Production-like Docker configuration check:
 

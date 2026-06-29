@@ -15,7 +15,8 @@ Full-stack e-commerce portfolio app with FastAPI, Next.js, PostgreSQL, mock chec
 - Frontend: https://e-commerce-omega-nine-82.vercel.app
 - Backend health: https://ecommerce-8ngt.onrender.com/health
 - API docs: https://ecommerce-8ngt.onrender.com/docs
-- Demo video: [MP4 walkthrough](docs/demo_video/datapulse-commerce-demo.mp4)
+- Demo video: https://youtu.be/hUUpPVHVA40
+- Downloadable walkthrough: [MP4](docs/demo_video/datapulse-commerce-demo.mp4)
 
 The public demo runs on Vercel, Render, and Supabase using synthetic data and a mock payment provider. Render's free tier may take a short moment to wake the API after inactivity.
 

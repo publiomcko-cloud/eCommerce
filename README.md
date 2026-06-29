@@ -4,6 +4,18 @@ Full-stack e-commerce platform with built-in business intelligence.
 
 DataPulse Commerce extends a completed BI project into a transactional commerce system: storefront, catalog, cart, checkout, mock payments, customer accounts, admin operations, inventory, refunds, commerce events, and analytics projection.
 
+## Portfolio Description
+
+Full-stack e-commerce portfolio app with FastAPI, Next.js, PostgreSQL, mock checkout, admin operations, and an analytics dashboard.
+
+## Live Portfolio Demo
+
+- Frontend: https://e-commerce-omega-nine-82.vercel.app
+- Backend health: https://ecommerce-8ngt.onrender.com/health
+- API docs: https://ecommerce-8ngt.onrender.com/docs
+
+The public demo runs on Vercel, Render, and Supabase using synthetic data and a mock payment provider. Render's free tier may take a short moment to wake the API after inactivity.
+
 ## What It Demonstrates
 
 - FastAPI backend with SQLAlchemy, Alembic, PostgreSQL, and service-layer business rules
@@ -21,6 +33,35 @@ DataPulse Commerce extends a completed BI project into a transactional commerce 
 storefront -> product detail -> cart -> checkout -> mock payment -> order history
          -> admin order management -> refunds/shipments -> commerce analytics dashboard
 ```
+
+## Screenshots
+
+| Storefront | Product listing |
+| --- | --- |
+| ![Storefront home](docs/screenshots/01-storefront-home.png) | ![Product listing](docs/screenshots/02-product-listing.png) |
+
+| Product detail | Cart |
+| --- | --- |
+| ![Product detail](docs/screenshots/03-product-detail.png) | ![Shopping cart](docs/screenshots/04-cart.png) |
+
+| Checkout | Customer account |
+| --- | --- |
+| ![Checkout](docs/screenshots/05-checkout.png) | ![Customer account](docs/screenshots/06-customer-account.png) |
+
+| Admin back office | Analytics dashboard |
+| --- | --- |
+| ![Admin overview](docs/screenshots/07-admin-overview.png) | ![Analytics dashboard](docs/screenshots/08-analytics-dashboard.png) |
+
+## Deployment Architecture
+
+```text
+Browser
+  -> Vercel Next.js frontend
+  -> Render FastAPI backend
+  -> Supabase PostgreSQL
+```
+
+The backend exposes catalog, cart, checkout, account, admin, and metrics APIs. The frontend consumes those APIs through `NEXT_PUBLIC_API_URL`, while Render CORS is restricted to the deployed Vercel origin.
 
 ## Local Quick Start
 
@@ -143,23 +184,22 @@ docker compose -p datapulse-commerce-prod -f docker-compose.production.yml down
 - Payments use a mock provider only.
 - Demo data is synthetic.
 - No card data is collected or stored.
-- Demo credentials are for local/portfolio use only.
+- Demo credentials are for portfolio demonstration only.
 - Public deployment should use dedicated synthetic seed data and non-sensitive credentials.
 
 ## Known Limitations
 
-- No real payment provider adapter is enabled yet.
+- Payments are mocked; no real payment provider adapter is enabled yet.
+- Product data is synthetic.
 - Refunds are represented as successful mock refund records.
 - Seeded products use styled fallback visuals; production product media would
   need real uploaded assets or hosted image storage.
-- Email, tax, shipping-rate, and promotion engines are not implemented.
+- No real email, shipping-rate, tax, or promotion engines are implemented yet.
 - Concurrency hardening is covered by transactional design but not load-tested.
-- Public live links and screenshots should be added after deployment.
+- Render free-tier hosting may cold start after inactivity.
 
 ## Roadmap
 
-- Deploy hosted frontend, backend, and PostgreSQL
-- Add public demo screenshots and live links
 - Add optional sandbox payment adapter
 - Add coupon/promotion support
 - Add browser E2E tests for checkout and admin workflows

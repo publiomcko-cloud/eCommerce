@@ -257,7 +257,8 @@ export function CartPage() {
           {isAuthenticated ? (
             <Link
               href="/checkout"
-              className="mt-6 inline-flex min-h-[54px] w-full items-center justify-center rounded-full bg-[var(--foreground)] px-6 py-3 text-base font-semibold text-white transition hover:bg-[var(--teal)]"
+              className="mt-6 inline-flex min-h-[54px] w-full items-center justify-center rounded-full bg-[var(--foreground)] px-6 py-3 text-base font-semibold !text-white transition hover:bg-[var(--teal)]"
+              style={{ color: "#ffffff" }}
             >
               Checkout
             </Link>
@@ -265,7 +266,8 @@ export function CartPage() {
             <div className="mt-6 grid gap-3">
               <Link
                 href="/login"
-                className="inline-flex min-h-[54px] w-full items-center justify-center rounded-full bg-[var(--foreground)] px-6 py-3 text-base font-semibold text-white transition hover:bg-[var(--teal)]"
+                className="inline-flex min-h-[54px] w-full items-center justify-center rounded-full bg-[var(--foreground)] px-6 py-3 text-base font-semibold !text-white transition hover:bg-[var(--teal)]"
+                style={{ color: "#ffffff" }}
               >
                 Sign in to checkout
               </Link>

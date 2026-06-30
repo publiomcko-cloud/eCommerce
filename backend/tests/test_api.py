@@ -1,5 +1,6 @@
 from fastapi.testclient import TestClient
 
+from app.core.config import get_settings
 from app.main import app
 from app.services.ingestion_service import ingest_csv_file
 
@@ -14,7 +15,7 @@ def test_health_endpoint_returns_application_and_database_status() -> None:
         "status": "ok",
         "database": "ok",
         "commerce": "ok",
-        "environment": "local",
+        "environment": get_settings().environment,
     }
 
 
